@@ -1,0 +1,159 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "sap.pp.wcare.wmd.workmanagerapp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.12.3",
+      "toolsId": "8f07bec9-3b1a-437f-883a-2d60272a770f"
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "WorkManager-App": {
+          "semanticObject": "WorkManager",
+          "action": "App",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        },
+        "zpp-WorkManage": {
+          "semanticObject": "zpp",
+          "action": "WorkManage",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    },
+    "dataSources": {
+      "ZPP_WORKMANAGER_APP_SRV": {
+        "uri": "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "zpp_workmanager_app_srv"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "zpp_workmanager_app_srv": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/zpp_workmanager_app_srv.xml",
+        "settings": {
+          "localUri": "annotations/zpp_workmanager_app_srv.xml"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.6",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sap.pp.wcare.wmd.workmanagerapp.i18n.i18n"
+        }
+      },
+      "": {
+        "preload": true,
+        "dataSource": "ZPP_WORKMANAGER_APP_SRV",
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false,
+          "metadataUrlParams": {
+            "sap-value-list": "none"
+          }
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "sap.pp.wcare.wmd.workmanagerapp.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteInitial_01",
+          "pattern": ":?query:",
+          "target": [
+            "TargetInitial_01"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetInitial_01": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Initial_01",
+          "viewName": "Initial_01"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "sap.pp.wcare.wmd.workmanagerapp.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

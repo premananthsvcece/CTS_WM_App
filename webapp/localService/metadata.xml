@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZPP_WORKMANAGER_APP_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="Order_InProgress" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Key01"/>
+                    <PropertyRef Name="Key02"/>
+                    <PropertyRef Name="Key03"/>
+                    <PropertyRef Name="Key04"/>
+                    <PropertyRef Name="Key05"/>
+                </Key>
+                <Property Name="Key01" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY01"/>
+                <Property Name="Key02" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY02"/>
+                <Property Name="Key03" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY03"/>
+                <Property Name="Key04" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY04"/>
+                <Property Name="Key05" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY05"/>
+                <Property Name="Data01" Type="Edm.String" sap:unicode="false" sap:label="DATA01"/>
+                <Property Name="Data02" Type="Edm.String" sap:unicode="false" sap:label="DATA02"/>
+                <Property Name="Data03" Type="Edm.String" sap:unicode="false" sap:label="DATA03"/>
+                <Property Name="Data04" Type="Edm.String" sap:unicode="false" sap:label="DATA04"/>
+                <Property Name="Data05" Type="Edm.String" sap:unicode="false" sap:label="DATA05"/>
+                <Property Name="Data06" Type="Edm.String" sap:unicode="false" sap:label="DATA06"/>
+                <Property Name="Data07" Type="Edm.String" sap:unicode="false" sap:label="DATA07"/>
+                <Property Name="Data08" Type="Edm.String" sap:unicode="false" sap:label="DATA08"/>
+                <Property Name="Data09" Type="Edm.String" sap:unicode="false" sap:label="DATA09"/>
+                <Property Name="Data10" Type="Edm.String" sap:unicode="false" sap:label="DATA10"/>
+                <Property Name="Data11" Type="Edm.String" sap:unicode="false" sap:label="DATA11"/>
+                <Property Name="Data12" Type="Edm.String" sap:unicode="false" sap:label="DATA12"/>
+                <Property Name="Data13" Type="Edm.String" sap:unicode="false" sap:label="DATA13"/>
+                <Property Name="Data14" Type="Edm.String" sap:unicode="false" sap:label="DATA14"/>
+                <Property Name="Data15" Type="Edm.String" sap:unicode="false" sap:label="DATA15"/>
+                <Property Name="Data16" Type="Edm.String" sap:unicode="false" sap:label="DATA16"/>
+                <Property Name="Data17" Type="Edm.String" sap:unicode="false" sap:label="DATA17"/>
+                <Property Name="Data18" Type="Edm.String" sap:unicode="false" sap:label="DATA18"/>
+                <Property Name="Data19" Type="Edm.String" sap:unicode="false" sap:label="DATA19"/>
+                <Property Name="Data20" Type="Edm.String" sap:unicode="false" sap:label="DATA20"/>
+            </EntityType>
+            <EntityType Name="Order_Queue_Progress" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Key01"/>
+                    <PropertyRef Name="Key02"/>
+                    <PropertyRef Name="Key03"/>
+                    <PropertyRef Name="Key04"/>
+                    <PropertyRef Name="Key05"/>
+                </Key>
+                <Property Name="Key01" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY01"/>
+                <Property Name="Key02" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY02"/>
+                <Property Name="Key03" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY03"/>
+                <Property Name="Key04" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY04"/>
+                <Property Name="Key05" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY05"/>
+                <Property Name="Data01" Type="Edm.String" sap:unicode="false" sap:label="DATA01"/>
+                <Property Name="Data02" Type="Edm.String" sap:unicode="false" sap:label="DATA02"/>
+                <Property Name="Data03" Type="Edm.String" sap:unicode="false" sap:label="DATA03"/>
+                <Property Name="Data04" Type="Edm.String" sap:unicode="false" sap:label="DATA04"/>
+                <Property Name="Data05" Type="Edm.String" sap:unicode="false" sap:label="DATA05"/>
+                <Property Name="Data06" Type="Edm.String" sap:unicode="false" sap:label="DATA06"/>
+                <Property Name="Data07" Type="Edm.String" sap:unicode="false" sap:label="DATA07"/>
+                <Property Name="Data08" Type="Edm.String" sap:unicode="false" sap:label="DATA08"/>
+                <Property Name="Data09" Type="Edm.String" sap:unicode="false" sap:label="DATA09"/>
+                <Property Name="Data10" Type="Edm.String" sap:unicode="false" sap:label="DATA10"/>
+                <Property Name="Data11" Type="Edm.String" sap:unicode="false" sap:label="DATA11"/>
+                <Property Name="Data12" Type="Edm.String" sap:unicode="false" sap:label="DATA12"/>
+                <Property Name="Data13" Type="Edm.String" sap:unicode="false" sap:label="DATA13"/>
+                <Property Name="Data14" Type="Edm.String" sap:unicode="false" sap:label="DATA14"/>
+                <Property Name="Data15" Type="Edm.String" sap:unicode="false" sap:label="DATA15"/>
+                <Property Name="Data16" Type="Edm.String" sap:unicode="false" sap:label="DATA16"/>
+                <Property Name="Data17" Type="Edm.String" sap:unicode="false" sap:label="DATA17"/>
+                <Property Name="Data18" Type="Edm.String" sap:unicode="false" sap:label="DATA18"/>
+                <Property Name="Data19" Type="Edm.String" sap:unicode="false" sap:label="DATA19"/>
+                <Property Name="Data20" Type="Edm.String" sap:unicode="false" sap:label="DATA20"/>
+            </EntityType>
+            <EntityType Name="Order_Future_Process" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Key01"/>
+                    <PropertyRef Name="Key02"/>
+                    <PropertyRef Name="Key03"/>
+                    <PropertyRef Name="Key04"/>
+                    <PropertyRef Name="Key05"/>
+                </Key>
+                <Property Name="Key01" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY01"/>
+                <Property Name="Key02" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY02"/>
+                <Property Name="Key03" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY03"/>
+                <Property Name="Key04" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY04"/>
+                <Property Name="Key05" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="KEY05"/>
+                <Property Name="Data01" Type="Edm.String" sap:unicode="false" sap:label="DATA01"/>
+                <Property Name="Data02" Type="Edm.String" sap:unicode="false" sap:label="DATA02"/>
+                <Property Name="Data03" Type="Edm.String" sap:unicode="false" sap:label="DATA03"/>
+                <Property Name="Data04" Type="Edm.String" sap:unicode="false" sap:label="DATA04"/>
+                <Property Name="Data05" Type="Edm.String" sap:unicode="false" sap:label="DATA05"/>
+                <Property Name="Data06" Type="Edm.String" sap:unicode="false" sap:label="DATA06"/>
+                <Property Name="Data07" Type="Edm.String" sap:unicode="false" sap:label="DATA07"/>
+                <Property Name="Data08" Type="Edm.String" sap:unicode="false" sap:label="DATA08"/>
+                <Property Name="Data09" Type="Edm.String" sap:unicode="false" sap:label="DATA09"/>
+                <Property Name="Data10" Type="Edm.String" sap:unicode="false" sap:label="DATA10"/>
+                <Property Name="Data11" Type="Edm.String" sap:unicode="false" sap:label="DATA11"/>
+                <Property Name="Data12" Type="Edm.String" sap:unicode="false" sap:label="DATA12"/>
+                <Property Name="Data13" Type="Edm.String" sap:unicode="false" sap:label="DATA13"/>
+                <Property Name="Data14" Type="Edm.String" sap:unicode="false" sap:label="DATA14"/>
+                <Property Name="Data15" Type="Edm.String" sap:unicode="false" sap:label="DATA15"/>
+                <Property Name="Data16" Type="Edm.String" sap:unicode="false" sap:label="DATA16"/>
+                <Property Name="Data17" Type="Edm.String" sap:unicode="false" sap:label="DATA17"/>
+                <Property Name="Data18" Type="Edm.String" sap:unicode="false" sap:label="DATA18"/>
+                <Property Name="Data19" Type="Edm.String" sap:unicode="false" sap:label="DATA19"/>
+                <Property Name="Data20" Type="Edm.String" sap:unicode="false" sap:label="DATA20"/>
+            </EntityType>
+            <EntityType Name="WorkCenter_AreaOrder" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Key01"/>
+                    <PropertyRef Name="Key02"/>
+                    <PropertyRef Name="Key03"/>
+                    <PropertyRef Name="Key04"/>
+                    <PropertyRef Name="Key05"/>
+                    <PropertyRef Name="WorkCenterArea"/>
+                </Key>
+                <Property Name="Key01" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Key01"/>
+                <Property Name="Key02" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Key02"/>
+                <Property Name="Key03" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Key03"/>
+                <Property Name="Key04" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Key04"/>
+                <Property Name="Key05" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Key05"/>
+                <Property Name="WorkCenterArea" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="WorkCenterArea"/>
+                <NavigationProperty Name="NavWC_InProgress" Relationship="ZPP_WORKMANAGER_APP_SRV.AssoWCArea_InProgessOrder" FromRole="FromRole_AssoWCArea_InProgessOrder" ToRole="ToRole_AssoWCArea_InProgessOrder"/>
+                <NavigationProperty Name="NavWC_Queue" Relationship="ZPP_WORKMANAGER_APP_SRV.AssoWCArea_QueueOrder" FromRole="FromRole_AssoWCArea_QueueOrder" ToRole="ToRole_AssoWCArea_QueueOrder"/>
+                <NavigationProperty Name="NavWC_Future" Relationship="ZPP_WORKMANAGER_APP_SRV.AssoWCArea_FutureOrder" FromRole="FromRole_AssoWCArea_FutureOrder" ToRole="ToRole_AssoWCArea_FutureOrder"/>
+            </EntityType>
+            <EntityType Name="ZshArbpl" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Workcenter"/>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Workcenter" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Work Center" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Plant" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <Association Name="AssoWCArea_QueueOrder" sap:content-version="1">
+                <End Type="ZPP_WORKMANAGER_APP_SRV.WorkCenter_AreaOrder" Multiplicity="1" Role="FromRole_AssoWCArea_QueueOrder"/>
+                <End Type="ZPP_WORKMANAGER_APP_SRV.Order_Queue_Progress" Multiplicity="*" Role="ToRole_AssoWCArea_QueueOrder"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_AssoWCArea_QueueOrder">
+                        <PropertyRef Name="Key05"/>
+                        <PropertyRef Name="Key04"/>
+                        <PropertyRef Name="Key03"/>
+                        <PropertyRef Name="Key02"/>
+                        <PropertyRef Name="Key01"/>
+                        <PropertyRef Name="WorkCenterArea"/>
+                    </Principal>
+                    <Dependent Role="ToRole_AssoWCArea_QueueOrder">
+                        <PropertyRef Name="Key05"/>
+                        <PropertyRef Name="Key04"/>
+                        <PropertyRef Name="Key03"/>
+                        <PropertyRef Name="Key02"/>
+                        <PropertyRef Name="Key01"/>
+                        <PropertyRef Name="Data01"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssoWCArea_FutureOrder" sap:content-version="1">
+                <End Type="ZPP_WORKMANAGER_APP_SRV.WorkCenter_AreaOrder" Multiplicity="1" Role="FromRole_AssoWCArea_FutureOrder"/>
+                <End Type="ZPP_WORKMANAGER_APP_SRV.Order_Future_Process" Multiplicity="*" Role="ToRole_AssoWCArea_FutureOrder"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_AssoWCArea_FutureOrder">
+                        <PropertyRef Name="Key05"/>
+                        <PropertyRef Name="Key04"/>
+                        <PropertyRef Name="Key03"/>
+                        <PropertyRef Name="Key02"/>
+                        <PropertyRef Name="Key01"/>
+                        <PropertyRef Name="WorkCenterArea"/>
+                    </Principal>
+                    <Dependent Role="ToRole_AssoWCArea_FutureOrder">
+                        <PropertyRef Name="Key05"/>
+                        <PropertyRef Name="Key04"/>
+                        <PropertyRef Name="Key03"/>
+                        <PropertyRef Name="Key02"/>
+                        <PropertyRef Name="Key01"/>
+                        <PropertyRef Name="Data01"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssoWCArea_InProgessOrder" sap:content-version="1">
+                <End Type="ZPP_WORKMANAGER_APP_SRV.WorkCenter_AreaOrder" Multiplicity="1" Role="FromRole_AssoWCArea_InProgessOrder"/>
+                <End Type="ZPP_WORKMANAGER_APP_SRV.Order_InProgress" Multiplicity="*" Role="ToRole_AssoWCArea_InProgessOrder"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_AssoWCArea_InProgessOrder">
+                        <PropertyRef Name="Key04"/>
+                        <PropertyRef Name="Key05"/>
+                        <PropertyRef Name="Key03"/>
+                        <PropertyRef Name="Key02"/>
+                        <PropertyRef Name="Key01"/>
+                        <PropertyRef Name="WorkCenterArea"/>
+                    </Principal>
+                    <Dependent Role="ToRole_AssoWCArea_InProgessOrder">
+                        <PropertyRef Name="Key04"/>
+                        <PropertyRef Name="Key05"/>
+                        <PropertyRef Name="Key03"/>
+                        <PropertyRef Name="Key02"/>
+                        <PropertyRef Name="Key01"/>
+                        <PropertyRef Name="Data01"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZPP_WORKMANAGER_APP_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Order_InProgressSet" EntityType="ZPP_WORKMANAGER_APP_SRV.Order_InProgress" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Order_Queue_ProgressSet" EntityType="ZPP_WORKMANAGER_APP_SRV.Order_Queue_Progress" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Order_Future_ProcessSet" EntityType="ZPP_WORKMANAGER_APP_SRV.Order_Future_Process" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="WorkCenter_AreaOrderSet" EntityType="ZPP_WORKMANAGER_APP_SRV.WorkCenter_AreaOrder" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ZshArbplSet" EntityType="ZPP_WORKMANAGER_APP_SRV.ZshArbpl" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="AssoWCArea_InProgessOrderSet" Association="ZPP_WORKMANAGER_APP_SRV.AssoWCArea_InProgessOrder" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkCenter_AreaOrderSet" Role="FromRole_AssoWCArea_InProgessOrder"/>
+                    <End EntitySet="Order_InProgressSet" Role="ToRole_AssoWCArea_InProgessOrder"/>
+                </AssociationSet>
+                <AssociationSet Name="AssoWCArea_FutureOrderSet" Association="ZPP_WORKMANAGER_APP_SRV.AssoWCArea_FutureOrder" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkCenter_AreaOrderSet" Role="FromRole_AssoWCArea_FutureOrder"/>
+                    <End EntitySet="Order_Future_ProcessSet" Role="ToRole_AssoWCArea_FutureOrder"/>
+                </AssociationSet>
+                <AssociationSet Name="AssoWCArea_QueueOrderSet" Association="ZPP_WORKMANAGER_APP_SRV.AssoWCArea_QueueOrder" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkCenter_AreaOrderSet" Role="FromRole_AssoWCArea_QueueOrder"/>
+                    <End EntitySet="Order_Queue_ProgressSet" Role="ToRole_AssoWCArea_QueueOrder"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://us100dfi01new.cts.ctscorp.com:8000/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://us100dfi01new.cts.ctscorp.com:8000/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

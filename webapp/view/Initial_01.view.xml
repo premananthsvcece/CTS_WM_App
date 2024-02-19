@@ -1,0 +1,369 @@
+<mvc:View
+    controllerName="sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:Dynamic="sap.f"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+>
+    <Dynamic:DynamicPage
+        id="dynamicPage"
+        fitContent="true"
+    >
+        <Dynamic:title>
+            <Dynamic:DynamicPageTitle>
+                <Dynamic:actions>
+                    <ToolbarSpacer />
+                    <Button
+                        text="{i18n>BOM}"
+                        icon="sap-icon://machine"
+                        type="Emphasized"
+                        press="onBOMPressed"
+                    />
+                    <Button
+                        text="{i18n>Route}"
+                        type="Emphasized"
+                        icon="sap-icon://bus-public-transport"
+                        press="onRoutePressed"
+                    />
+                    <Button
+                        text="{i18n>Drawing}"
+                        type="Emphasized"
+                        icon="sap-icon://draw-rectangle"
+                        press="onDrawingPressed"
+                    />
+                    <Button
+                        text="{i18n>OrderNote}"
+                        type="Emphasized"
+                        icon="sap-icon://notes"
+                        press="onDrawingPressed"
+                    />
+                </Dynamic:actions>
+            </Dynamic:DynamicPageTitle>
+        </Dynamic:title>
+        <Dynamic:header>
+            <Dynamic:DynamicPageHeader>
+                <smartFilterBar:SmartFilterBar
+                    id="smartFilterBar"
+                    entitySet="ZshArbplSet"
+                    enableBasicSearch="false"
+                    showAllFilters="true"
+                    persistencyKey="SmartFilter_Explained"
+                >
+                    <smartFilterBar:controlConfiguration
+                        key="Workcenter"
+                        visibleInAdvancedArea="true"
+                        groupId="_BASIC"
+                    />
+                    <smartFilterBar:controlConfiguration
+                        key="Plant"
+                        visibleInAdvancedArea="true"
+                        groupId="_BASIC"
+                    />
+                </smartFilterBar:SmartFilterBar>
+            </Dynamic:DynamicPageHeader>
+        </Dynamic:header>
+        <Dynamic:content>
+            <IconTabBar
+                expanded="{device>/isNoPhone}"
+                class="sapUiSmallMarginBottom sapUiResponsiveContentPadding"
+            >
+                <items>
+                    <IconTabFilter
+                        key="InProgress"
+                        icon="sap-icon://in-progress"
+                        text="{i18n>InProgressTab}"
+                    >
+                        <Table
+                            id="idInprogressOrderList"
+                            width="auto"
+                            inset="false"
+                            class="sapUiResponsiveMargin"
+                            items="{InProgressModel>/InProgressData}"
+                        >
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <ToolbarSpacer />
+                                    <Button
+                                        text="{i18n>StartJob}"
+                                        type="Critical"
+                                        icon="sap-icon://restart"
+                                        press="onStartPressed"
+                                    />
+                                    <Button
+                                        text="{i18n>StopJob}"
+                                        type="Attention"
+                                        icon="sap-icon://stop"
+                                        press="onStopPressed"
+                                    />
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column width="auto">
+                                    <Text text="{i18n>StomerField1}" />
+                                </Column>
+                                <Column demandPopin="true">
+                                    <Text text="{i18n>ProdOrdNo}" />
+                                </Column>
+                                <Column
+                                    demandPopin="true"
+                                    hAlign="End"
+                                >
+                                    <Text text="{i18n>ProdItmNo}" />
+                                </Column>
+                                <Column
+                                    demandPopin="true"
+                                    hAlign="Center"
+                                >
+                                    <Text text="{i18n>Description}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>OperNo}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>Quantity}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>Priority}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>OperEndTime}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>OperEndDate}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>QuanReady}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>QuanComp}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>ScarpQuan}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>TotalTime}" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem vAlign="Middle">
+                                    <cells>
+                                        <ObjectIdentifier
+                                            title="{InProgressModel>Data01}"
+                                        />
+                                        <Text text="{InProgressModel>Data02}" />
+                                        <Text text="{InProgressModel>Data03}" />
+                                        <Text text="{InProgressModel>Data04}" />
+                                        <Text text="{InProgressModel>Data05}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        key="QueueOrder"
+                        icon="sap-icon://sys-next-page"
+                        text="{i18n>QueueOrder}"
+                    >
+                        <Table
+                            id="idQueueOrderList"
+                            width="auto"
+                            class="sapUiResponsiveMargin"
+                            items="{InQueueModel>/InQueueData}"
+                        >
+                            <columns>
+                                <Column width="auto">
+                                    <Text text="{i18n>StomerField1}" />
+                                </Column>
+                                <Column demandPopin="true">
+                                    <Text text="{i18n>ProdOrdNo}" />
+                                </Column>
+                                <Column
+                                    demandPopin="true"
+                                    hAlign="End"
+                                >
+                                    <Text text="{i18n>ProdItmNo}" />
+                                </Column>
+                                <Column
+                                    demandPopin="true"
+                                    hAlign="Center"
+                                >
+                                    <Text text="{i18n>Description}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>OperNo}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>Quantity}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>Priority}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>OperEndTime}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>OperEndDate}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>QuanReady}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>QuanComp}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>ScarpQuan}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>TotalTime}" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem vAlign="Middle">
+                                    <cells>
+                                        <ObjectIdentifier
+                                            title="{InQueueModel>Data01}"
+                                        />
+                                        <Text text="{InQueueModel>Data02}" />
+                                        <Text text="{InQueueModel>Data03}" />
+                                        <Text text="{InQueueModel>Data04}" />
+                                        <Text text="{InQueueModel>Data05}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        key="FutureOrder"
+                        icon="sap-icon://future"
+                        text="{i18n>FutureOrder}"
+                    >
+                        <Table
+                            id="idFutureOrderList"
+                            width="auto"
+                            text="{i18n>FutureOrderTable}"
+                            class="sapUiResponsiveMargin"
+                            items="{InFutureModel>/InFutureData}"
+                        >
+                            <columns>
+                                <Column width="auto">
+                                    <Text text="{i18n>StomerField1}" />
+                                </Column>
+                                <Column demandPopin="true">
+                                    <Text text="{i18n>ProdOrdNo}" />
+                                </Column>
+                                <Column
+                                    demandPopin="true"
+                                    hAlign="End"
+                                >
+                                    <Text text="{i18n>ProdItmNo}" />
+                                </Column>
+                                <Column
+                                    demandPopin="true"
+                                    hAlign="Center"
+                                >
+                                    <Text text="{i18n>Description}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>OperNo}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>Quantity}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>Priority}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>OperEndTime}" />
+                                </Column>
+                                <Column hAlign="Center">
+                                    <Text text="{i18n>OperEndDate}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>QuanReady}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>QuanComp}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>ScarpQuan}" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="{i18n>TotalTime}" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem vAlign="Middle">
+                                    <cells>
+                                        <ObjectIdentifier
+                                            title="{InFutureModel>Data01}"
+                                        />
+                                        <Text text="{InFutureModel>Data02}" />
+                                        <Text text="{InFutureModel>Data03}" />
+                                        <Text text="{InFutureModel>Data04}" />
+                                        <Text text="{InFutureModel>Data05}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </Dynamic:content>
+        <Dynamic:footer>
+            <OverflowToolbar id="otbFooter">
+                <ToolbarSpacer />
+                <Button
+                    type="Accept"
+                    text="Accept"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+                <Button
+                    type="Reject"
+                    text="Reject"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+                <OverflowToolbarButton
+                    tooltip="Delete"
+                    text="Delete"
+                    icon="sap-icon://delete"
+                />
+                <OverflowToolbarButton
+                    tooltip="Edit"
+                    text="Edit"
+                    icon="sap-icon://edit"
+                />
+                <OverflowToolbarButton
+                    tooltip="Add"
+                    text="Add"
+                    icon="sap-icon://add"
+                />
+                <OverflowToolbarButton
+                    tooltip="Favorite"
+                    text="Favorite"
+                    icon="sap-icon://favorite"
+                />
+                <OverflowToolbarButton
+                    tooltip="Flag"
+                    text="Flag"
+                    icon="sap-icon://flag"
+                />
+                <OverflowToolbarToggleButton
+                    tooltip="Toggle"
+                    text="Toggle"
+                    icon="sap-icon://touch"
+                    press="onTogglePress"
+                />
+            </OverflowToolbar>
+        </Dynamic:footer>
+    </Dynamic:DynamicPage>
+</mvc:View>
