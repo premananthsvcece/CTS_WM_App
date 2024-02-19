@@ -1,12 +1,9 @@
 <mvc:View
     controllerName="sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns:form="sap.ui.layout.form"
-    xmlns:core="sap.ui.core"
     displayBlock="true"
     xmlns="sap.m"
     xmlns:Dynamic="sap.f"
-    xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 >
     <Dynamic:DynamicPage
@@ -39,6 +36,12 @@
                         text="{i18n>OrderNote}"
                         type="Emphasized"
                         icon="sap-icon://notes"
+                        press="onDrawingPressed"
+                    />
+                    <Button
+                        text="{i18n>PalLabel}"
+                        type="Emphasized"
+                        icon="sap-icon://print"
                         press="onDrawingPressed"
                     />
                 </Dynamic:actions>
@@ -98,6 +101,18 @@
                                         type="Attention"
                                         icon="sap-icon://stop"
                                         press="onStopPressed"
+                                    />
+                                    <Button
+                                        text="{i18n>Save}"
+                                        type="Emphasized"
+                                        icon="sap-icon://save"
+                                        press="onSavePressed"
+                                    />
+                                    <Button
+                                        text="{i18n>Post}"
+                                        type="Accept"
+                                        icon="sap-icon://post"
+                                        press="onPostPressed"
                                     />
                                 </OverflowToolbar>
                             </headerToolbar>
@@ -313,57 +328,5 @@
                 </items>
             </IconTabBar>
         </Dynamic:content>
-        <Dynamic:footer>
-            <OverflowToolbar id="otbFooter">
-                <ToolbarSpacer />
-                <Button
-                    type="Accept"
-                    text="Accept"
-                >
-                    <layoutData>
-                        <OverflowToolbarLayoutData priority="NeverOverflow" />
-                    </layoutData>
-                </Button>
-                <Button
-                    type="Reject"
-                    text="Reject"
-                >
-                    <layoutData>
-                        <OverflowToolbarLayoutData priority="NeverOverflow" />
-                    </layoutData>
-                </Button>
-                <OverflowToolbarButton
-                    tooltip="Delete"
-                    text="Delete"
-                    icon="sap-icon://delete"
-                />
-                <OverflowToolbarButton
-                    tooltip="Edit"
-                    text="Edit"
-                    icon="sap-icon://edit"
-                />
-                <OverflowToolbarButton
-                    tooltip="Add"
-                    text="Add"
-                    icon="sap-icon://add"
-                />
-                <OverflowToolbarButton
-                    tooltip="Favorite"
-                    text="Favorite"
-                    icon="sap-icon://favorite"
-                />
-                <OverflowToolbarButton
-                    tooltip="Flag"
-                    text="Flag"
-                    icon="sap-icon://flag"
-                />
-                <OverflowToolbarToggleButton
-                    tooltip="Toggle"
-                    text="Toggle"
-                    icon="sap-icon://touch"
-                    press="onTogglePress"
-                />
-            </OverflowToolbar>
-        </Dynamic:footer>
     </Dynamic:DynamicPage>
 </mvc:View>

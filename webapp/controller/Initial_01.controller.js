@@ -12,7 +12,7 @@ sap.ui.define([
             onInit: function () {
                 var othis = this;
 
-                othis.showBusyIndicator();npm
+                othis.showBusyIndicator();
                 var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
                 var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
                 var IEntry = {};
