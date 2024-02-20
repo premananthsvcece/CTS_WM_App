@@ -21,11 +21,11 @@
 							<Collection >
 								<Record Type="Common.ValueListParameterInOut">
 									<PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
-									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;TotalTime}"/>
+									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;Plant}"/>
 								</Record>
 								<Record Type="Common.ValueListParameterOut">
 									<PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
-									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;TotalTime}"/>
+									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;Plant}"/>
 								</Record>
 							</Collection>
 						</PropertyValue>
@@ -40,11 +40,11 @@
 							<Collection >
 								<Record Type="Common.ValueListParameterInOut">
 									<PropertyValue Property="LocalDataProperty" PropertyPath="Workcenter"/>
-									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;Priority}"/>
+									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;WorkCenter}"/>
 								</Record>
 								<Record Type="Common.ValueListParameterInOut">
 									<PropertyValue Property="LocalDataProperty" PropertyPath="Workcenter"/>
-									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;Priority}"/>
+									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;WorkCenter}"/>
 								</Record>
 							</Collection>
 						</PropertyValue>
