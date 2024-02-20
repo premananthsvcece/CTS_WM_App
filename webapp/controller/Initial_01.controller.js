@@ -41,11 +41,12 @@ sap.ui.define([
                                 // In Progress
                                 var InProgressData = oData.NavWC_InProgress.results;
                                 var InProgressModel = new sap.ui.model.json.JSONModel();
+                                var Path = othis.getView().getId();
 
                                 InProgressModel.setData({
                                     "InProgressData": InProgressData
                                 });
-                                var InProgressTable = sap.ui.getCore().byId("application-sapppwcarewmdworkmanagerapp-display-component---Initial_01--idInprogressOrderList");
+                                var InProgressTable = sap.ui.getCore().byId(Path+"--idInprogressOrderList");
 
                                 InProgressTable.setModel(
                                     InProgressModel,
@@ -58,7 +59,7 @@ sap.ui.define([
                                 InQueueModel.setData({
                                     "InQueueData": InQueueData
                                 });
-                                var InQueueTable = sap.ui.getCore().byId("application-sapppwcarewmdworkmanagerapp-display-component---Initial_01--idQueueOrderList");
+                                var InQueueTable = sap.ui.getCore().byId(Path+"--idQueueOrderList");
 
                                 InQueueTable.setModel(
                                     InQueueModel,
@@ -71,7 +72,7 @@ sap.ui.define([
                                 InFutureModel.setData({
                                     "InFutureData": InFutureData
                                 });
-                                var InFutureTable = sap.ui.getCore().byId("application-sapppwcarewmdworkmanagerapp-display-component---Initial_01--idFutureOrderList");
+                                var InFutureTable = sap.ui.getCore().byId(Path+"--idFutureOrderList");
 
                                 InFutureTable.setModel(
                                     InFutureModel,

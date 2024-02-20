@@ -61,14 +61,14 @@
                         <Button
                             id="_IDGenButton4"
                             text="{i18n>OrderNote}"
-                            type="Default"
+                            type="Negative"
                             icon="sap-icon://notes"
                             press="onDrawingPressed"
                         />
                         <Button
                             id="_IDGenButton5"
                             text="{i18n>PalLabel}"
-                            type="Default"
+                            type="Negative"
                             icon="sap-icon://print"
                             press="onPalLabelPressed"
                         />
