@@ -4,6 +4,7 @@
     displayBlock="true"
     xmlns="sap.m"
     xmlns:Dynamic="sap.f"
+    xmlns:Table="sap.ui.table"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 >
     <Dynamic:DynamicPage
@@ -11,44 +12,49 @@
         fitContent="true"
     >
         <Dynamic:title>
-            <Dynamic:DynamicPageTitle>
+            <Dynamic:DynamicPageTitle id="_IDGenDynamicPageTitle1">
                 <Dynamic:actions>
-                    <ToolbarSpacer />
+                    <ToolbarSpacer id="_IDGenToolbarSpacer1" />
                     <Button
+                        id="_IDGenButton1"
                         text="{i18n>BOM}"
                         icon="sap-icon://machine"
                         type="Emphasized"
                         press="onBOMPressed"
                     />
                     <Button
+                        id="_IDGenButton2"
                         text="{i18n>Route}"
                         type="Emphasized"
                         icon="sap-icon://bus-public-transport"
                         press="onRoutePressed"
                     />
                     <Button
+                        id="_IDGenButton3"
                         text="{i18n>Drawing}"
                         type="Emphasized"
                         icon="sap-icon://draw-rectangle"
                         press="onDrawingPressed"
                     />
                     <Button
+                        id="_IDGenButton4"
                         text="{i18n>OrderNote}"
                         type="Emphasized"
                         icon="sap-icon://notes"
                         press="onDrawingPressed"
                     />
                     <Button
+                        id="_IDGenButton5"
                         text="{i18n>PalLabel}"
                         type="Emphasized"
                         icon="sap-icon://print"
-                        press="onDrawingPressed"
+                        press="onPalLabelPressed"
                     />
                 </Dynamic:actions>
             </Dynamic:DynamicPageTitle>
         </Dynamic:title>
         <Dynamic:header>
-            <Dynamic:DynamicPageHeader>
+            <Dynamic:DynamicPageHeader id="_IDGenDynamicPageHeader1">
                 <smartFilterBar:SmartFilterBar
                     id="smartFilterBar"
                     entitySet="ZshArbplSet"
@@ -71,259 +77,918 @@
         </Dynamic:header>
         <Dynamic:content>
             <IconTabBar
+                id="_IDGenIconTabBar1"
+                tabDensityMode="Cozy"
                 expanded="{device>/isNoPhone}"
                 class="sapUiSmallMarginBottom sapUiResponsiveContentPadding"
             >
                 <items>
                     <IconTabFilter
+                        id="_IDGenIconTabFilter1"
                         key="InProgress"
+                        count="10"
+                        design="Vertical"
+                        iconColor="Critical"
+                        iconDensityAware="true"
+                        showAll="true"
+                        visible="true"
                         icon="sap-icon://in-progress"
                         text="{i18n>InProgressTab}"
                     >
-                        <Table
+                        <Table:Table
                             id="idInprogressOrderList"
                             width="auto"
-                            inset="false"
                             class="sapUiResponsiveMargin"
-                            items="{InProgressModel>/InProgressData}"
+                            rows="{InProgressModel>/InProgressData}"
                         >
-                            <headerToolbar>
-                                <OverflowToolbar>
-                                    <ToolbarSpacer />
+                            <Table:noData>
+                                <BusyIndicator
+                                    id="_IDGenBusyIndicator1"
+                                    class="sapUiMediumMargin"
+                                />
+                            </Table:noData>
+                            <Table:extension>
+                                <OverflowToolbar id="_IDGenOverflowToolbar1">
+                                    <ToolbarSpacer id="_IDGenToolbarSpacer2" />
                                     <Button
+                                        id="_IDGenButton6"
                                         text="{i18n>StartJob}"
                                         type="Critical"
                                         icon="sap-icon://restart"
                                         press="onStartPressed"
                                     />
                                     <Button
+                                        id="_IDGenButton7"
                                         text="{i18n>StopJob}"
                                         type="Attention"
                                         icon="sap-icon://stop"
                                         press="onStopPressed"
                                     />
                                     <Button
+                                        id="_IDGenButton8"
                                         text="{i18n>Save}"
                                         type="Emphasized"
                                         icon="sap-icon://save"
                                         press="onSavePressed"
                                     />
                                     <Button
+                                        id="_IDGenButton9"
                                         text="{i18n>Post}"
                                         type="Accept"
-                                        icon="sap-icon://post"
+                                        icon="sap-icon://repost"
                                         press="onPostPressed"
                                     />
                                 </OverflowToolbar>
-                            </headerToolbar>
-                            <columns>
-                                <Column width="auto">
-                                    <Text text="{i18n>StomerField1}" />
-                                </Column>
-                                <Column demandPopin="true">
-                                    <Text text="{i18n>ProdOrdNo}" />
-                                </Column>
-                                <Column
-                                    demandPopin="true"
-                                    hAlign="End"
+                            </Table:extension>
+                            <Table:columns>
+                                <Table:Column
+                                    id="_IDGenColumn1"
+                                    width="auto"
+                                    sortProperty="Data01"
+                                    filterProperty="Data01"
+                                    autoResizable="true"
                                 >
-                                    <Text text="{i18n>ProdItmNo}" />
-                                </Column>
-                                <Column
-                                    demandPopin="true"
-                                    hAlign="Center"
-                                >
-                                    <Text text="{i18n>Description}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>OperNo}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>Quantity}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>Priority}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>OperEndTime}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>OperEndDate}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>QuanReady}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>QuanComp}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>ScarpQuan}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>TotalTime}" />
-                                </Column>
-                            </columns>
-                            <items>
-                                <ColumnListItem vAlign="Middle">
-                                    <cells>
-                                        <ObjectIdentifier
-                                            title="{InProgressModel>Data01}"
+                                    <Label
+                                        id="_IDGenLabel1"
+                                        text="{i18n>StomerField1}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText1"
+                                            text="{InProgressModel>Data01}"
+                                            wrapping="false"
                                         />
-                                        <Text text="{InProgressModel>Data02}" />
-                                        <Text text="{InProgressModel>Data03}" />
-                                        <Text text="{InProgressModel>Data04}" />
-                                        <Text text="{InProgressModel>Data05}" />
-                                    </cells>
-                                </ColumnListItem>
-                            </items>
-                        </Table>
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn2"
+                                    width="auto"
+                                    sortProperty="Data02"
+                                    filterProperty="Data02"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel2"
+                                        text="{i18n>ProdOrdNo}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText2"
+                                            text="{InProgressModel>Data02}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn3"
+                                    width="auto"
+                                    sortProperty="Data03"
+                                    filterProperty="Data03"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel3"
+                                        text="{i18n>ProdItmNo}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText3"
+                                            text="{InProgressModel>Data03}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn4"
+                                    width="auto"
+                                    sortProperty="Data04"
+                                    filterProperty="Data04"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel4"
+                                        text="{i18n>Description}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText4"
+                                            text="{InProgressModel>Data04}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn5"
+                                    width="auto"
+                                    sortProperty="Data05"
+                                    filterProperty="Data05"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel5"
+                                        text="{i18n>OperNo}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText5"
+                                            text="{InProgressModel>Data05}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn6"
+                                    width="auto"
+                                    sortProperty="Data06"
+                                    filterProperty="Data06"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel6"
+                                        text="{i18n>Quantity}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText6"
+                                            text="{InProgressModel>Data06}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn7"
+                                    width="auto"
+                                    sortProperty="Data07"
+                                    filterProperty="Data07"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel7"
+                                        text="{i18n>Priority}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText7"
+                                            text="{InProgressModel>Data07}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn8"
+                                    width="auto"
+                                    sortProperty="Data08"
+                                    filterProperty="Data08"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel8"
+                                        text="{i18n>OperEndDate}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText8"
+                                            text="{InProgressModel>Data08}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn9"
+                                    width="auto"
+                                    sortProperty="Data09"
+                                    filterProperty="Data09"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel9"
+                                        text="{i18n>OperEndTime}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText9"
+                                            text="{InProgressModel>Data09}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn10"
+                                    width="auto"
+                                    sortProperty="Data10"
+                                    filterProperty="Data10"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel10"
+                                        text="{i18n>QuanReady}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText10"
+                                            text="{InProgressModel>Data10}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn11"
+                                    width="auto"
+                                    sortProperty="Data11"
+                                    filterProperty="Data11"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel11"
+                                        text="{i18n>QuanComp}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText11"
+                                            text="{InProgressModel>Data11}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn12"
+                                    width="auto"
+                                    sortProperty="Data12"
+                                    filterProperty="Data12"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel12"
+                                        text="{i18n>ScarpQuan}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText12"
+                                            text="{InProgressModel>Data12}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn13"
+                                    width="auto"
+                                    sortProperty="Data13"
+                                    filterProperty="Data13"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel13"
+                                        text="{i18n>TotalTime}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText13"
+                                            text="{InProgressModel>Data13}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+                            </Table:columns>
+                        </Table:Table>
                     </IconTabFilter>
                     <IconTabFilter
+                        id="_IDGenIconTabFilter2"
                         key="QueueOrder"
+                        count="10"
+                        design="Vertical"
+                        iconColor="Negative"
+                        iconDensityAware="true"
+                        showAll="true"
+                        visible="true"
                         icon="sap-icon://sys-next-page"
                         text="{i18n>QueueOrder}"
                     >
-                        <Table
+                        <Table:Table
                             id="idQueueOrderList"
                             width="auto"
                             class="sapUiResponsiveMargin"
-                            items="{InQueueModel>/InQueueData}"
+                            rows="{InQueueModel>/InQueueData}"
                         >
-                            <columns>
-                                <Column width="auto">
-                                    <Text text="{i18n>StomerField1}" />
-                                </Column>
-                                <Column demandPopin="true">
-                                    <Text text="{i18n>ProdOrdNo}" />
-                                </Column>
-                                <Column
-                                    demandPopin="true"
-                                    hAlign="End"
+                            <Table:noData>
+                                <BusyIndicator
+                                    id="_IDGenBusyIndicator2"
+                                    class="sapUiMediumMargin"
+                                />
+                            </Table:noData>
+                            <Table:extension>
+                                <OverflowToolbar id="_IDGenOverflowToolbar2">
+                                    <ToolbarSpacer id="_IDGenToolbarSpacer3" />
+                                    <Button
+                                        id="_IDGenButton10"
+                                        text="{i18n>StartJob}"
+                                        type="Critical"
+                                        icon="sap-icon://restart"
+                                        press="onStartPressed"
+                                    />
+                                </OverflowToolbar>
+                            </Table:extension>
+                            <Table:columns>
+                                <Table:Column
+                                    id="_IDGenColumn14"
+                                    width="auto"
+                                    sortProperty="Data01"
+                                    filterProperty="Data01"
+                                    autoResizable="true"
                                 >
-                                    <Text text="{i18n>ProdItmNo}" />
-                                </Column>
-                                <Column
-                                    demandPopin="true"
-                                    hAlign="Center"
-                                >
-                                    <Text text="{i18n>Description}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>OperNo}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>Quantity}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>Priority}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>OperEndTime}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>OperEndDate}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>QuanReady}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>QuanComp}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>ScarpQuan}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>TotalTime}" />
-                                </Column>
-                            </columns>
-                            <items>
-                                <ColumnListItem vAlign="Middle">
-                                    <cells>
-                                        <ObjectIdentifier
-                                            title="{InQueueModel>Data01}"
+                                    <Label
+                                        id="_IDGenLabel14"
+                                        text="{i18n>StomerField1}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText14"
+                                            text="{InQueueModel>Data01}"
+                                            wrapping="false"
                                         />
-                                        <Text text="{InQueueModel>Data02}" />
-                                        <Text text="{InQueueModel>Data03}" />
-                                        <Text text="{InQueueModel>Data04}" />
-                                        <Text text="{InQueueModel>Data05}" />
-                                    </cells>
-                                </ColumnListItem>
-                            </items>
-                        </Table>
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn15"
+                                    width="auto"
+                                    sortProperty="Data02"
+                                    filterProperty="Data02"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel15"
+                                        text="{i18n>ProdOrdNo}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText15"
+                                            text="{InQueueModel>Data02}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn16"
+                                    width="auto"
+                                    sortProperty="Data03"
+                                    filterProperty="Data03"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel16"
+                                        text="{i18n>ProdItmNo}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText16"
+                                            text="{InQueueModel>Data03}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn17"
+                                    width="auto"
+                                    sortProperty="Data04"
+                                    filterProperty="Data04"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel17"
+                                        text="{i18n>Description}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText17"
+                                            text="{InQueueModel>Data04}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn18"
+                                    width="auto"
+                                    sortProperty="Data05"
+                                    filterProperty="Data05"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel18"
+                                        text="{i18n>OperNo}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText18"
+                                            text="{InQueueModel>Data05}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn19"
+                                    width="auto"
+                                    sortProperty="Data06"
+                                    filterProperty="Data06"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel19"
+                                        text="{i18n>Quantity}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText19"
+                                            text="{InQueueModel>Data06}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn20"
+                                    width="auto"
+                                    sortProperty="Data07"
+                                    filterProperty="Data07"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel20"
+                                        text="{i18n>Priority}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText20"
+                                            text="{InQueueModel>Data07}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn21"
+                                    width="auto"
+                                    sortProperty="Data08"
+                                    filterProperty="Data08"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel21"
+                                        text="{i18n>OperEndDate}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText21"
+                                            text="{InQueueModel>Data08}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn22"
+                                    width="auto"
+                                    sortProperty="Data09"
+                                    filterProperty="Data09"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel22"
+                                        text="{i18n>OperEndTime}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText22"
+                                            text="{InQueueModel>Data09}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn23"
+                                    width="auto"
+                                    sortProperty="Data10"
+                                    filterProperty="Data10"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel23"
+                                        text="{i18n>QuanReady}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText23"
+                                            text="{InQueueModel>Data10}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn24"
+                                    width="auto"
+                                    sortProperty="Data11"
+                                    filterProperty="Data11"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel24"
+                                        text="{i18n>QuanComp}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText24"
+                                            text="{InQueueModel>Data11}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn25"
+                                    width="auto"
+                                    sortProperty="Data12"
+                                    filterProperty="Data12"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel25"
+                                        text="{i18n>ScarpQuan}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText25"
+                                            text="{InQueueModel>Data12}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn26"
+                                    width="auto"
+                                    sortProperty="Data13"
+                                    filterProperty="Data13"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel26"
+                                        text="{i18n>TotalTime}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText26"
+                                            text="{InQueueModel>Data13}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+                            </Table:columns>
+                        </Table:Table>
                     </IconTabFilter>
                     <IconTabFilter
+                        id="_IDGenIconTabFilter3"
                         key="FutureOrder"
+                        count="10"
+                        design="Vertical"
+                        iconColor="Positive"
+                        iconDensityAware="true"
+                        showAll="true"
+                        visible="true"
                         icon="sap-icon://future"
                         text="{i18n>FutureOrder}"
                     >
-                        <Table
+                        <Table:Table
                             id="idFutureOrderList"
                             width="auto"
-                            text="{i18n>FutureOrderTable}"
                             class="sapUiResponsiveMargin"
-                            items="{InFutureModel>/InFutureData}"
+                            rows="{InFutureModel>/InFutureData}"
                         >
-                            <columns>
-                                <Column width="auto">
-                                    <Text text="{i18n>StomerField1}" />
-                                </Column>
-                                <Column demandPopin="true">
-                                    <Text text="{i18n>ProdOrdNo}" />
-                                </Column>
-                                <Column
-                                    demandPopin="true"
-                                    hAlign="End"
+                            <Table:noData>
+                                <BusyIndicator
+                                    id="_IDGenBusyIndicator3"
+                                    class="sapUiMediumMargin"
+                                />
+                            </Table:noData>
+                            <Table:extension />
+                            <Table:columns>
+                                <Table:Column
+                                    id="_IDGenColumn27"
+                                    width="auto"
+                                    sortProperty="Data01"
+                                    filterProperty="Data01"
+                                    autoResizable="true"
                                 >
-                                    <Text text="{i18n>ProdItmNo}" />
-                                </Column>
-                                <Column
-                                    demandPopin="true"
-                                    hAlign="Center"
-                                >
-                                    <Text text="{i18n>Description}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>OperNo}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>Quantity}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>Priority}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>OperEndTime}" />
-                                </Column>
-                                <Column hAlign="Center">
-                                    <Text text="{i18n>OperEndDate}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>QuanReady}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>QuanComp}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>ScarpQuan}" />
-                                </Column>
-                                <Column hAlign="End">
-                                    <Text text="{i18n>TotalTime}" />
-                                </Column>
-                            </columns>
-                            <items>
-                                <ColumnListItem vAlign="Middle">
-                                    <cells>
-                                        <ObjectIdentifier
-                                            title="{InFutureModel>Data01}"
+                                    <Label
+                                        id="_IDGenLabel27"
+                                        text="{i18n>StomerField1}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText27"
+                                            text="{InFutureModel>Data01}"
+                                            wrapping="false"
                                         />
-                                        <Text text="{InFutureModel>Data02}" />
-                                        <Text text="{InFutureModel>Data03}" />
-                                        <Text text="{InFutureModel>Data04}" />
-                                        <Text text="{InFutureModel>Data05}" />
-                                    </cells>
-                                </ColumnListItem>
-                            </items>
-                        </Table>
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn28"
+                                    width="auto"
+                                    sortProperty="Data02"
+                                    filterProperty="Data02"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel28"
+                                        text="{i18n>ProdOrdNo}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText28"
+                                            text="{InFutureModel>Data02}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn29"
+                                    width="auto"
+                                    sortProperty="Data03"
+                                    filterProperty="Data03"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel29"
+                                        text="{i18n>ProdItmNo}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText29"
+                                            text="{InFutureModel>Data03}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn30"
+                                    width="auto"
+                                    sortProperty="Data04"
+                                    filterProperty="Data04"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel30"
+                                        text="{i18n>Description}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText30"
+                                            text="{InFutureModel>Data04}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn31"
+                                    width="auto"
+                                    sortProperty="Data05"
+                                    filterProperty="Data05"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel31"
+                                        text="{i18n>OperNo}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText31"
+                                            text="{InFutureModel>Data05}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn32"
+                                    width="auto"
+                                    sortProperty="Data06"
+                                    filterProperty="Data06"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel32"
+                                        text="{i18n>Quantity}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText32"
+                                            text="{InFutureModel>Data06}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn33"
+                                    width="auto"
+                                    sortProperty="Data07"
+                                    filterProperty="Data07"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel33"
+                                        text="{i18n>Priority}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText33"
+                                            text="{InFutureModel>Data07}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn34"
+                                    width="auto"
+                                    sortProperty="Data08"
+                                    filterProperty="Data08"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel34"
+                                        text="{i18n>OperEndDate}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText34"
+                                            text="{InFutureModel>Data08}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn35"
+                                    width="auto"
+                                    sortProperty="Data09"
+                                    filterProperty="Data09"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel35"
+                                        text="{i18n>OperEndTime}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText35"
+                                            text="{InFutureModel>Data09}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn36"
+                                    width="auto"
+                                    sortProperty="Data10"
+                                    filterProperty="Data10"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel36"
+                                        text="{i18n>QuanReady}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText36"
+                                            text="{InFutureModel>Data10}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn37"
+                                    width="auto"
+                                    sortProperty="Data11"
+                                    filterProperty="Data11"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel37"
+                                        text="{i18n>QuanComp}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText37"
+                                            text="{InFutureModel>Data11}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn38"
+                                    width="auto"
+                                    sortProperty="Data12"
+                                    filterProperty="Data12"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel38"
+                                        text="{i18n>ScarpQuan}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText38"
+                                            text="{InFutureModel>Data12}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+
+                                <Table:Column
+                                    id="_IDGenColumn39"
+                                    width="auto"
+                                    sortProperty="Data13"
+                                    filterProperty="Data13"
+                                    autoResizable="true"
+                                >
+                                    <Label
+                                        id="_IDGenLabel39"
+                                        text="{i18n>TotalTime}"
+                                    />
+                                    <Table:template>
+                                        <Text
+                                            id="_IDGenText39"
+                                            text="{InFutureModel>Data13}"
+                                            wrapping="false"
+                                        />
+                                    </Table:template>
+                                </Table:Column>
+                            </Table:columns>
+                        </Table:Table>
                     </IconTabFilter>
                 </items>
             </IconTabBar>
