@@ -42,9 +42,7 @@
         "uri": "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV",
         "type": "OData",
         "settings": {
-          "annotations": [
-            "zpp_workmanager_app_srv"
-          ],
+          "annotations": ["zpp_workmanager_app_srv"],
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
@@ -133,9 +131,7 @@
         {
           "name": "RouteInitial_01",
           "pattern": ":?query:",
-          "target": [
-            "TargetInitial_01"
-          ]
+          "target": ["TargetInitial_01"]
         }
       ],
       "targets": {
@@ -154,5 +150,9 @@
       "async": true,
       "id": "App"
     }
+  },
+  "sap.platform.abap": {
+    "uri": "/sap/bc/ui5_ui5/sap/zpp_workmanager/webapp",
+    "_version": "1.1.0"
   }
 }
