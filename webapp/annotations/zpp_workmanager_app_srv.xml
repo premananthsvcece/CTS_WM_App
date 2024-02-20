@@ -17,7 +17,18 @@
 				<Annotation Term="Common.ValueList">
 					<Record Type="Common.ValueListType">
 						<PropertyValue Property="CollectionPath" Path="Plant"/>
-						<PropertyValue Property="Parameters"/>
+						<PropertyValue Property="Parameters">
+							<Collection >
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
+									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;TotalTime}"/>
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
+									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;TotalTime}"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
 					</Record>
 				</Annotation>
 			</Annotations>
@@ -25,7 +36,18 @@
 				<Annotation Term="Common.ValueList">
 					<Record Type="Common.ValueListType">
 						<PropertyValue Property="CollectionPath" Path="Workcenter"/>
-						<PropertyValue Property="Parameters"/>
+						<PropertyValue Property="Parameters">
+							<Collection >
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Workcenter"/>
+									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;Priority}"/>
+								</Record>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Workcenter"/>
+									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;Priority}"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
 					</Record>
 				</Annotation>
 			</Annotations>
