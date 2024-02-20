@@ -15,7 +15,7 @@
             <Dynamic:DynamicPageHeader id="_IDGenDynamicPageHeader1">
                 <smartFilterBar:SmartFilterBar
                     id="smartFilterBar"
-                    entitySet="/ZshArbplSet"
+                    entitySet="ZshArbplSet"
                     enableBasicSearch="true"
                     showAllFilters="true"
                     persistencyKey="SmartFilter_Explained"

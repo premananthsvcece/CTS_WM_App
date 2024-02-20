@@ -13,44 +13,6 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
-        <Annotations Target="SAP.ZshArbpl/Plant">
-				<Annotation Term="Common.ValueList">
-					<Record Type="Common.ValueListType">
-						<PropertyValue Property="CollectionPath" Path="Plant"/>
-						<PropertyValue Property="Parameters">
-							<Collection >
-								<Record Type="Common.ValueListParameterInOut">
-									<PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
-									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;Plant}"/>
-								</Record>
-								<Record Type="Common.ValueListParameterOut">
-									<PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
-									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;Plant}"/>
-								</Record>
-							</Collection>
-						</PropertyValue>
-					</Record>
-				</Annotation>
-			</Annotations>
-			<Annotations Target="SAP.ZshArbpl/Workcenter">
-				<Annotation Term="Common.ValueList">
-					<Record Type="Common.ValueListType">
-						<PropertyValue Property="CollectionPath" Path="Workcenter"/>
-						<PropertyValue Property="Parameters">
-							<Collection >
-								<Record Type="Common.ValueListParameterInOut">
-									<PropertyValue Property="LocalDataProperty" PropertyPath="Workcenter"/>
-									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;WorkCenter}"/>
-								</Record>
-								<Record Type="Common.ValueListParameterInOut">
-									<PropertyValue Property="LocalDataProperty" PropertyPath="Workcenter"/>
-									<PropertyValue Property="ValueListProperty" String="{@i18n&gt;WorkCenter}"/>
-								</Record>
-							</Collection>
-						</PropertyValue>
-					</Record>
-				</Annotation>
-			</Annotations>
         </Schema>
     </edmx:DataServices>
 
