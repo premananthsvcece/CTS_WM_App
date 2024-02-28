@@ -12,7 +12,7 @@ sap.ui.define([
 
         return UIComponent.extend("sap.pp.wcare.wmd.workmanagerapp.Component", {
             metadata: {
-                manifest: "json"
+                manifest: "json", config: { fullWidth: true }
             },
 
             /**

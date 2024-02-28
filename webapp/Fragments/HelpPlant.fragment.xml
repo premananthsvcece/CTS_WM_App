@@ -1,0 +1,23 @@
+<c:FragmentDefinition
+    id="HelpPlant"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <SelectDialog
+        id="idPlantDialog"
+        noDataText="No Plant Found"
+        growing="true"
+        title="Select Plant"
+        search=".onPlantSearch"
+        confirm=".onDialogClose"
+        cancel=".onDialogClose"
+        items="{PlantModel>/PlantData}"
+    >
+        <StandardListItem
+            title="{PlantModel>Plant}"
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active"
+        />
+    </SelectDialog>
+</c:FragmentDefinition>

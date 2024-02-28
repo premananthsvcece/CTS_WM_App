@@ -1,0 +1,21 @@
+<c:FragmentDefinition
+    id="BOMOutput"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <SelectDialog
+        id="idBOMDialog"
+        noDataText="No BOM Found"
+        growing="true"
+        title="Display BOM"
+        cancel=".onDialogClose"
+        items="{BOMModel>/BOMData}"
+    >
+        <StandardListItem
+            title="{BOMModel>Workcenter}"
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active"
+        />
+    </SelectDialog>
+</c:FragmentDefinition>

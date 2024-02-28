@@ -1,0 +1,23 @@
+<c:FragmentDefinition
+    id="HelpWorkCenter"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <SelectDialog
+        id="idWorkCenterDialog"
+        noDataText="No Work Center Found"
+        growing="true"
+        title="Select Work Center"
+        search=".onWorkCenterSearch"
+        confirm=".onDialogClose"
+        cancel=".onDialogClose"
+        items="{WorkCenterModel>/WorkCenterData}"
+    >
+        <StandardListItem
+            title="{WorkCenterModel>Workcenter}"
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active"
+        />
+    </SelectDialog>
+</c:FragmentDefinition>

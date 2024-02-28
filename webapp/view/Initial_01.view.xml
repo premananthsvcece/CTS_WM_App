@@ -1,4 +1,5 @@
 <mvc:View
+    xmlns:smartfield="sap.ui.comp.smartfield"
     controllerName="sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
@@ -6,6 +7,7 @@
     xmlns:Dynamic="sap.f"
     xmlns:Table="sap.ui.table"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:form="sap.ui.layout.form"
     xmlns:uxap="sap.uxap"
 >
     <Dynamic:DynamicPage
@@ -14,26 +16,73 @@
     >
         <Dynamic:header>
             <Dynamic:DynamicPageHeader id="_IDGenDynamicPageHeader1">
-                <smartFilterBar:SmartFilterBar
-                    id="smartFilterBar"
-                    entitySet="ZshArbplSet"
-                    enableBasicSearch="true"
-                    showAllFilters="true"
-                    persistencyKey="SmartFilter_Explained"
+                <form:SimpleForm
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    title="Address"
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="12"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="2"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false"
                 >
-                    <smartFilterBar:controlConfiguration
-                        key="Workcenter"
-                        visibleInAdvancedArea="true"
-                        groupId="_BASIC"
-                    />
-                    <smartFilterBar:controlConfiguration
-                        key="Plant"
-                        visibleInAdvancedArea="true"
-                        groupId="_BASIC"
-                    />
-                </smartFilterBar:SmartFilterBar>
+                    <form:content>
+                        <VBox>
+                            <Label
+                                text="{i18n>Plant}"
+                                labelFor="idInputPlant"
+                            />
+                            <MultiInput
+                                id="idInputPlant"
+                                showValueHelp="true"
+                                width="50%"
+                                valueHelpRequest="_onPlantHelp"
+                            >
+                                <suggestionColumns>
+                                    <Column>
+                                        <Label text="Plant" />
+                                    </Column>
+                                </suggestionColumns>
+                                <suggestionRows>
+                                    <ColumnListItem>
+                                        <Label text="{Data02}" />
+                                    </ColumnListItem>
+                                </suggestionRows>
+                            </MultiInput>
+                        </VBox>
+                        <VBox>
+                            <Label
+                                text="{i18n>WorkCenter}"
+                                labelFor="idInputWorkCenter"
+                            />
+                            <MultiInput
+                                id="idInputWorkCenter"
+                                showValueHelp="true"
+                                width="50%"
+                                valueHelpRequest="_onWorkCenterHelp"
+                            />
+                        </VBox>
+                    </form:content>
+                </form:SimpleForm>
+                <ToolbarSpacer />
+                <Button
+                    id="idGO"
+                    text="{i18n>Go}"
+                    icon="sap-icon://process"
+                    type="Accept"
+                    press="onButtonPress"
+                />
                 <ToolbarSpacer id="_IDGenToolbarSpacer1" />
                 <Bar
+                    id="_IDGenBar1"
                     design="Auto"
                     titleAlignment="None"
                 >
@@ -84,12 +133,13 @@
             >
                 <uxap:sections>
                     <uxap:ObjectPageSection
+                        id="_IDGenObjectPageSection1"
                         titleUppercase="false"
                         title="{i18n>InProgressTab}"
                     >
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection
-                                title="{i18n>InProgressTab}"
+                                id="InProgressOrderSubSection"
                                 titleUppercase="false"
                             >
                                 <uxap:blocks>
@@ -98,6 +148,10 @@
                                         width="auto"
                                         class="sapUiResponsiveMargin"
                                         rows="{InProgressModel>/InProgressData}"
+                                        alternateRowColors="true"
+                                        enableSelectAll="false"
+                                        selectionBehavior="RowOnly"
+                                        selectionMode="Single"
                                     >
                                         <Table:noData>
                                             <BusyIndicator
@@ -145,7 +199,7 @@
                                         <Table:columns>
                                             <Table:Column
                                                 id="_IDGenColumn1"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data01"
                                                 filterProperty="Data01"
                                                 autoResizable="true"
@@ -162,10 +216,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn2"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data02"
                                                 filterProperty="Data02"
                                                 autoResizable="true"
@@ -182,10 +235,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn3"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data03"
                                                 filterProperty="Data03"
                                                 autoResizable="true"
@@ -202,10 +254,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn4"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data04"
                                                 filterProperty="Data04"
                                                 autoResizable="true"
@@ -222,10 +273,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn5"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data05"
                                                 filterProperty="Data05"
                                                 autoResizable="true"
@@ -242,13 +292,13 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn6"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data06"
                                                 filterProperty="Data06"
                                                 autoResizable="true"
+                                                hAlign="End"
                                             >
                                                 <Label
                                                     id="_IDGenLabel6"
@@ -262,10 +312,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn8"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data08"
                                                 filterProperty="Data08"
                                                 autoResizable="true"
@@ -282,10 +331,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn9"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data09"
                                                 filterProperty="Data09"
                                                 autoResizable="true"
@@ -302,10 +350,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn10"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data10"
                                                 filterProperty="Data10"
                                                 autoResizable="true"
@@ -322,10 +369,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn11"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data11"
                                                 filterProperty="Data11"
                                                 autoResizable="true"
@@ -342,10 +388,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn12"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data12"
                                                 filterProperty="Data12"
                                                 autoResizable="true"
@@ -362,10 +407,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn13"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data13"
                                                 filterProperty="Data13"
                                                 autoResizable="true"
@@ -388,15 +432,14 @@
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
-
                     <uxap:ObjectPageSection
+                        id="_IDGenObjectPageSection2"
                         title="{i18n>QueueOrder}"
                         titleUppercase="false"
                     >
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection
                                 id="QueueOrderSubSection"
-                                title="{i18n>QueueOrder}"
                                 titleUppercase="false"
                             >
                                 <uxap:blocks>
@@ -405,6 +448,10 @@
                                         width="auto"
                                         class="sapUiResponsiveMargin"
                                         rows="{InQueueModel>/InQueueData}"
+                                        alternateRowColors="true"
+                                        enableSelectAll="false"
+                                        selectionBehavior="RowOnly"
+                                        selectionMode="Single"
                                     >
                                         <Table:noData>
                                             <BusyIndicator
@@ -431,7 +478,7 @@
                                         <Table:columns>
                                             <Table:Column
                                                 id="_IDGenColumn14"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data01"
                                                 filterProperty="Data01"
                                                 autoResizable="true"
@@ -448,10 +495,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn15"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data02"
                                                 filterProperty="Data02"
                                                 autoResizable="true"
@@ -468,10 +514,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn16"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data03"
                                                 filterProperty="Data03"
                                                 autoResizable="true"
@@ -488,10 +533,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn17"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data04"
                                                 filterProperty="Data04"
                                                 autoResizable="true"
@@ -508,10 +552,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn18"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data05"
                                                 filterProperty="Data05"
                                                 autoResizable="true"
@@ -528,12 +571,12 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn19"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data06"
                                                 filterProperty="Data06"
+                                                hAlign="End"
                                                 autoResizable="true"
                                             >
                                                 <Label
@@ -548,10 +591,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn21"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data08"
                                                 filterProperty="Data08"
                                                 autoResizable="true"
@@ -568,10 +610,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn22"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data09"
                                                 filterProperty="Data09"
                                                 autoResizable="true"
@@ -588,10 +629,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn23"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data10"
                                                 filterProperty="Data10"
                                                 autoResizable="true"
@@ -608,10 +648,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn24"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data11"
                                                 filterProperty="Data11"
                                                 autoResizable="true"
@@ -628,10 +667,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn25"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data12"
                                                 filterProperty="Data12"
                                                 autoResizable="true"
@@ -648,10 +686,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn26"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data13"
                                                 filterProperty="Data13"
                                                 autoResizable="true"
@@ -674,23 +711,25 @@
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
-
                     <uxap:ObjectPageSection
+                        id="_IDGenObjectPageSection3"
                         title="{i18n>FutureOrder}"
                         titleUppercase="false"
                     >
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection
                                 id="FutureOrderSubSection"
-                                title="{i18n>FutureOrder}"
                                 titleUppercase="false"
                             >
                                 <uxap:blocks>
                                     <Table:Table
                                         id="idFutureOrderList"
-                                        width="auto"
                                         class="sapUiResponsiveMargin"
                                         rows="{InFutureModel>/InFutureData}"
+                                        alternateRowColors="true"
+                                        enableSelectAll="false"
+                                        selectionBehavior="RowOnly"
+                                        selectionMode="Single"
                                     >
                                         <Table:noData>
                                             <BusyIndicator
@@ -699,10 +738,11 @@
                                             />
                                         </Table:noData>
                                         <Table:extension />
-                                        <Table:columns>
+                                        <Table:columns autoResizable="true">
                                             <Table:Column
                                                 id="_IDGenColumn27"
-                                                width="auto"
+                                                resizable="true"
+                                                width="10rem"
                                                 sortProperty="Data01"
                                                 filterProperty="Data01"
                                                 autoResizable="true"
@@ -719,10 +759,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn28"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data02"
                                                 filterProperty="Data02"
                                                 autoResizable="true"
@@ -739,10 +778,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn29"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data03"
                                                 filterProperty="Data03"
                                                 autoResizable="true"
@@ -759,10 +797,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn30"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data04"
                                                 filterProperty="Data04"
                                                 autoResizable="true"
@@ -779,10 +816,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn31"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data05"
                                                 filterProperty="Data05"
                                                 autoResizable="true"
@@ -799,12 +835,12 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn32"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data06"
                                                 filterProperty="Data06"
+                                                hAlign="End"
                                                 autoResizable="true"
                                             >
                                                 <Label
@@ -819,10 +855,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn34"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data08"
                                                 filterProperty="Data08"
                                                 autoResizable="true"
@@ -839,10 +874,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn35"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data09"
                                                 filterProperty="Data09"
                                                 autoResizable="true"
@@ -859,10 +893,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn36"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data10"
                                                 filterProperty="Data10"
                                                 autoResizable="true"
@@ -879,10 +912,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn37"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data11"
                                                 filterProperty="Data11"
                                                 autoResizable="true"
@@ -899,10 +931,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn38"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data12"
                                                 filterProperty="Data12"
                                                 autoResizable="true"
@@ -919,10 +950,9 @@
                                                     />
                                                 </Table:template>
                                             </Table:Column>
-
                                             <Table:Column
                                                 id="_IDGenColumn39"
-                                                width="auto"
+                                                width="10rem"
                                                 sortProperty="Data13"
                                                 filterProperty="Data13"
                                                 autoResizable="true"
