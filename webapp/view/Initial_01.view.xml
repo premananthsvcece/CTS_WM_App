@@ -73,55 +73,59 @@
                     </form:content>
                 </form:SimpleForm>
                 <ToolbarSpacer />
-                <Button
-                    id="idGO"
-                    text="{i18n>Go}"
-                    icon="sap-icon://process"
-                    type="Accept"
-                    press="onButtonPress"
-                />
-                <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-                <Bar
-                    id="_IDGenBar1"
-                    design="Auto"
-                    titleAlignment="None"
-                >
+                <Bar>
                     <contentRight>
                         <Button
-                            id="_IDGenButton1"
-                            text="{i18n>BOM}"
-                            icon="sap-icon://machine"
-                            type="Emphasized"
-                            press="onBOMPressed"
+                            id="idGO"
+                            text="{i18n>Go}"
+                            icon="sap-icon://process"
+                            type="Accept"
+                            press="onButtonPress"
                         />
-                        <Button
-                            id="_IDGenButton2"
-                            text="{i18n>Route}"
+
+                        <MenuButton
+                            text="Navigation"
                             type="Emphasized"
-                            icon="sap-icon://bus-public-transport"
-                            press="onRoutePressed"
-                        />
-                        <Button
-                            id="_IDGenButton3"
-                            text="{i18n>Drawing}"
-                            type="Emphasized"
-                            icon="sap-icon://draw-rectangle"
-                            press="onDrawingPressed"
-                        />
-                        <Button
-                            id="_IDGenButton4"
-                            text="{i18n>OrderNote}"
+                        >
+                            <menu>
+                                <Menu>
+                                    <MenuItem
+                                        text="{i18n>BOM}"
+                                        icon="sap-icon://machine"
+                                        press="onBOMPressed"
+                                    />
+                                    <MenuItem
+                                        text="{i18n>Route}"
+                                        icon="sap-icon://bus-public-transport"
+                                        press="onRoutePressed"
+                                    />
+                                    <MenuItem
+                                        text="{i18n>Drawing}"
+                                        icon="sap-icon://draw-rectangle"
+                                        press="onDrawingPressed"
+                                    />
+                                </Menu>
+                            </menu>
+                        </MenuButton>
+                        <MenuButton
+                            text="Print"
                             type="Negative"
-                            icon="sap-icon://notes"
-                            press="onDrawingPressed"
-                        />
-                        <Button
-                            id="_IDGenButton5"
-                            text="{i18n>PalLabel}"
-                            type="Negative"
-                            icon="sap-icon://print"
-                            press="onPalLabelPressed"
-                        />
+                        >
+                            <menu>
+                                <Menu>
+                                    <MenuItem
+                                        text="{i18n>OrderNote}"
+                                        icon="sap-icon://notes"
+                                        press="onDrawingPressed"
+                                    />
+                                    <MenuItem
+                                        text="{i18n>PalLabel}"
+                                        icon="sap-icon://print"
+                                        press="onPalLabelPressed"
+                                    />
+                                </Menu>
+                            </menu>
+                        </MenuButton>
                     </contentRight>
                 </Bar>
             </Dynamic:DynamicPageHeader>
@@ -153,12 +157,7 @@
                                         selectionBehavior="RowOnly"
                                         selectionMode="Single"
                                     >
-                                        <Table:noData>
-                                            <BusyIndicator
-                                                id="_IDGenBusyIndicator1"
-                                                class="sapUiMediumMargin"
-                                            />
-                                        </Table:noData>
+                                        <Table:noData text="{i18n>NoData}" />
                                         <Table:extension>
                                             <OverflowToolbar
                                                 id="_IDGenOverflowToolbar1"
@@ -453,12 +452,7 @@
                                         selectionBehavior="RowOnly"
                                         selectionMode="Single"
                                     >
-                                        <Table:noData>
-                                            <BusyIndicator
-                                                id="_IDGenBusyIndicator2"
-                                                class="sapUiMediumMargin"
-                                            />
-                                        </Table:noData>
+                                        <Table:noData text="{i18n>NoData}" />
                                         <Table:extension>
                                             <OverflowToolbar
                                                 id="_IDGenOverflowToolbar2"
@@ -731,12 +725,7 @@
                                         selectionBehavior="RowOnly"
                                         selectionMode="Single"
                                     >
-                                        <Table:noData>
-                                            <BusyIndicator
-                                                id="_IDGenBusyIndicator3"
-                                                class="sapUiMediumMargin"
-                                            />
-                                        </Table:noData>
+                                        <Table:noData text="{i18n>NoData}" />
                                         <Table:extension />
                                         <Table:columns autoResizable="true">
                                             <Table:Column

@@ -8,9 +8,9 @@
         noDataText="No Work Center Found"
         growing="true"
         title="Select Work Center"
-        search=".onWorkCenterSearch"
-        confirm=".onDialogClose"
-        cancel=".onDialogClose"
+        search="_onWorkCenterSearch"
+        confirm="_WorkCenterSelect"
+        cancel="_onDialogClose"
         items="{WorkCenterModel>/WorkCenterData}"
     >
         <StandardListItem

@@ -1,17 +1,18 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    'sap/ui/model/odata/v2/ODataModel'
+    'sap/ui/model/odata/v2/ODataModel',
+    "sap/m/MessageBox",
+    "sap/m/MessageToast"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, ODataModel) {
+    function (Controller, ODataModel, MessageBox, MessageToast) {
         "use strict";
 
         return Controller.extend("sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01", {
             onInit: function () {
                 var that = this;
-                that.showBusyIndicator();
                 var Plant = " ";
                 var Workcenter = " ";
                 var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
@@ -24,6 +25,7 @@ sap.ui.define([
                             urlParameters: null,
                             async: false,
                             success: function (oData, oResponse) {
+                                // that.showBusyIndicator();
                                 try {
                                     console.log(oData);
                                     // Future
@@ -31,23 +33,23 @@ sap.ui.define([
                                         var Plant = oData.results[0].Data01;
                                         var Workcenter = oData.results[0].Data02;
                                         var Path = that.getView().getId();
-                                        sap.ui.getCore().byId(Path + "--idInputPlant").setSelectedKey(Plant);
-                                        sap.ui.getCore().byId(Path + "--idInputWorkCenter").setSelectedKey(Workcenter);;
-                                        that.hideBusyIndicator();
+                                        sap.ui.getCore().byId(Path + "--idInputPlant").setValue(Plant);
+                                        sap.ui.getCore().byId(Path + "--idInputWorkCenter").setValue(Workcenter);
+                                        // that.hideBusyIndicator();
+                                        if (Plant != " ") {
+                                            that.onLoadData(that, Plant, Workcenter);
+                                        }
                                     }
                                 } catch (e) {
+                                    // that.hideBusyIndicator();
                                     alert(e.message);
                                 }
                             },
 
                         });
-                if (Plant != " ") {
-                    that.onLoadData(Plant, Workcenter);
-                }
-                that.hideBusyIndicator();
             },
-            onLoadData: function (Plant, Workcenter) {
-                var othis = this;
+            onLoadData: function (that, Plant, Workcenter) {
+                var othis = that;
 
                 othis.showBusyIndicator();
                 var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
@@ -74,46 +76,49 @@ sap.ui.define([
                             try {
                                 console.log(oData);
                                 othis.hideBusyIndicator();
-
+                                var Path = othis.getView().getId();
                                 // In Progress
                                 var InProgressData = oData.NavWC_InProgress.results;
-                                var InProgressModel = new sap.ui.model.json.JSONModel();
-                                var Path = othis.getView().getId();
+                                if (InProgressData.length != 0) {
+                                    var InProgressModel = new sap.ui.model.json.JSONModel();
 
-                                InProgressModel.setData({
-                                    "InProgressData": InProgressData
-                                });
-                                var InProgressTable = sap.ui.getCore().byId(Path + "--idInprogressOrderList");
+                                    InProgressModel.setData({
+                                        "InProgressData": InProgressData
+                                    });
+                                    var InProgressTable = sap.ui.getCore().byId(Path + "--idInprogressOrderList");
 
-                                InProgressTable.setModel(
-                                    InProgressModel,
-                                    'InProgressModel');
-
+                                    InProgressTable.setModel(
+                                        InProgressModel,
+                                        'InProgressModel');
+                                }
                                 // Queue
                                 var InQueueData = oData.NavWC_Queue.results;
-                                var InQueueModel = new sap.ui.model.json.JSONModel();
+                                if (InQueueData.length != 0) {
+                                    var InQueueModel = new sap.ui.model.json.JSONModel();
 
-                                InQueueModel.setData({
-                                    "InQueueData": InQueueData
-                                });
-                                var InQueueTable = sap.ui.getCore().byId(Path + "--idQueueOrderList");
+                                    InQueueModel.setData({
+                                        "InQueueData": InQueueData
+                                    });
+                                    var InQueueTable = sap.ui.getCore().byId(Path + "--idQueueOrderList");
 
-                                InQueueTable.setModel(
-                                    InQueueModel,
-                                    'InQueueModel');
-
+                                    InQueueTable.setModel(
+                                        InQueueModel,
+                                        'InQueueModel');
+                                }
                                 // Future
                                 var InFutureData = oData.NavWC_Future.results;
-                                var InFutureModel = new sap.ui.model.json.JSONModel();
+                                if (InFutureData.length != 0) {
+                                    var InFutureModel = new sap.ui.model.json.JSONModel();
 
-                                InFutureModel.setData({
-                                    "InFutureData": InFutureData
-                                });
-                                var InFutureTable = sap.ui.getCore().byId(Path + "--idFutureOrderList");
+                                    InFutureModel.setData({
+                                        "InFutureData": InFutureData
+                                    });
+                                    var InFutureTable = sap.ui.getCore().byId(Path + "--idFutureOrderList");
 
-                                InFutureTable.setModel(
-                                    InFutureModel,
-                                    'InFutureModel');
+                                    InFutureTable.setModel(
+                                        InFutureModel,
+                                        'InFutureModel');
+                                }
 
                             }
                             catch (e) {
@@ -133,10 +138,11 @@ sap.ui.define([
                 sap.ui.core.BusyIndicator.hide();
             },
             onButtonPress: function () {
+                var that = this;
                 var Path = that.getView().getId();
-                var Plant = sap.ui.getCore().byId(Path + "--idInputPlant").getSelectedItem();
-                var Workcenter = sap.ui.getCore().byId(Path + "--idInputWorkCenter").getSelectedItem();
-                that.onLoadData(Plant, Workcenter);
+                var Plant = sap.ui.getCore().byId(Path + "--idInputPlant").getValue();
+                var Workcenter = sap.ui.getCore().byId(Path + "--idInputWorkCenter").getValue();
+                that.onLoadData(that, Plant, Workcenter);
             },
 
             onValueHelpRequested: function () {
@@ -145,7 +151,7 @@ sap.ui.define([
             _onPlantHelp: function (oEvent) {
                 var that = this;
                 var Path = that.getView().getId();
-                var SelPlant = sap.ui.getCore().byId(Path + "--idInputPlant").getSelectedItem();
+                var SelPlant = sap.ui.getCore().byId(Path + "--idInputPlant").getValue();
                 if (SelPlant === null) {
                     SelPlant = "MQTC";
                 }
@@ -194,7 +200,7 @@ sap.ui.define([
             _onWorkCenterHelp: function (oEvent) {
                 var that = this;
                 var Path = that.getView().getId();
-                var SelPlant = sap.ui.getCore().byId(`${Path}--idInputPlant`).getSelectedItem();
+                var SelPlant = sap.ui.getCore().byId(`${Path}--idInputPlant`).getValue();
                 if (SelPlant === null) {
                     SelPlant = "MQTC";
                 }
@@ -240,10 +246,26 @@ sap.ui.define([
             },
             onBOMPressed: function (oEvent) {
                 var that = this;
+                var index;
                 var Path = that.getView().getId();
-                var SelAufnr = sap.ui.getCore().byId(`${Path}--idInputPlant`).getSelectedItem();
-                if (SelAufnr === null) {
-                    SelAufnr = "MQTC";
+                var TabsArray = sap.ui.getCore().byId(`${Path}--ObjectPageLayout`).getSections(); // All Tab Details
+                var TabSelect = sap.ui.getCore().byId(`${Path}--ObjectPageLayout`).getSelectedSection(); // Selected Tab Details
+                for (i = 0; i in TabsArray; i++) {
+                    if (TabSelect === TabsArray[i].sId) {
+                        index = i; // Getting Selected Tab validating Id
+                    }
+                }
+                var Tableindex;
+                if (index === 1) {
+                    TableIndex = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getSelectedIndices;
+                }
+                elseif(index === 2){
+                    TableIndex = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getSelectedIndices;
+                } elseif(index === 3){
+                    TableIndex = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getSelectedIndices;
+                }elseif{
+                    // Raise Message
+                    MessageBox.information("Select any line to view BOM Details for the Production Order.");
                 }
                 if (!that.BOMDialog) {
                     that.BOMDialog = sap.ui.xmlfragment(
@@ -258,7 +280,7 @@ sap.ui.define([
 
                 oModel
                     .read(
-                        "/ValueHelpSet?$filter=Key01 eq 'BOM' and key02 eq '" + SelAufnr + "'",
+                        "/ValueHelpSet?$filter=Key01 eq 'BOM' and key02 eq '" + TabSelect + "'",
                         {
                             context: null,
                             urlParameters: null,
@@ -285,8 +307,9 @@ sap.ui.define([
 
                         });
             },
-            onButtonPress: function (oEVent) {
 
+            _WorkCenterSelect: function (oEvent) {
+                var SelectWC = oEvent;
             }
         });
     });
