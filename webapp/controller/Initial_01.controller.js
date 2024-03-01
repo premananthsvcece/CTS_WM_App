@@ -489,7 +489,7 @@ sap.ui.define([
                     return;
                 }
 
-                window.open("http://ftp://sbs.ferro.local/server/Fælles/Tegning" + SelMatnr + ".pdf");
+                window.open("http://ftp://sbs.ferro.local/server/Fælles/Tegning/" + SelMatnr + ".pdf");
             }
 
 
