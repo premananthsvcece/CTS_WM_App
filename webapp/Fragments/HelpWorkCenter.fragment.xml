@@ -10,7 +10,7 @@
         title="Select Work Center"
         search="_onWorkCenterSearch"
         confirm="_WorkCenterSelect"
-        cancel="_onDialogClose"
+        cancel="_WorkCenterSelect"
         items="{WorkCenterModel>/WorkCenterData}"
     >
         <StandardListItem

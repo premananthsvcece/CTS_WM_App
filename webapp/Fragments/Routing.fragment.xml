@@ -1,0 +1,98 @@
+<c:FragmentDefinition
+    id="RoutingOutput"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <TableSelectDialog
+        id="idRoutingDialog"
+        noDataText="No BOM Found"
+        growing="true"
+        title="Display BOM"
+        cancel=".onDialogClose"
+        items="{RoutingModel>/RoutingData}"
+    >
+        <columns>
+            <Column width="auto">
+                <header>
+                    <Text text="{i18n>OprShrTxt}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Tablet"
+                demandPopin="true"
+            >
+                <header>
+                    <Text text="{i18n>OrdOpr}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                hAlign="End"
+            >
+                <header>
+                    <Text text="{i18n>WorkCenter}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                hAlign="Center"
+            >
+                <header>
+                    <Text text="{i18n>OprQty}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                hAlign="Center"
+            >
+                <header>
+                    <Text text="{i18n>TotQty}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                hAlign="Center"
+            >
+                <header>
+                    <Text text="{i18n>CnfScrap}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                hAlign="Center"
+            >
+                <header>
+                    <Text text="{i18n>LbrTime}" />
+                </header>
+            </Column>
+            <Column hAlign="End">
+                <header>
+                    <Text text="{i18n>StrtDate}" />
+                </header>
+            </Column>
+            <Column hAlign="End">
+                <header>
+                    <Text text="{i18n>EndDate}" />
+                </header>
+            </Column>
+        </columns>
+        <ColumnListItem vAlign="Middle">
+            <cells>
+                <ObjectIdentifier title="{RoutingModel>Data04}" />
+                <Text text="{RoutingModel>Data01} X {RoutingModel>Data02}" />
+                <Text text="{RoutingModel>Data03}" />
+                <Text text="{RoutingModel>Data05}" />
+                <Text text="{RoutingModel>Data06}" />
+                <Text text="{RoutingModel>Data07}" />
+                <Text text="{RoutingModel>Data08}" />
+                <Text text="{RoutingModel>Data09} / {RoutingModel>Data10}" />
+                <Text text="{RoutingModel>Data11} / {RoutingModel>Data12}" />
+            </cells>
+        </ColumnListItem>
+    </TableSelectDialog>
+</c:FragmentDefinition>

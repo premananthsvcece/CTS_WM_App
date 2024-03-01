@@ -8,13 +8,14 @@
         noDataText="No Plant Found"
         growing="true"
         title="Select Plant"
-        search=".onPlantSearch"
-        confirm=".onDialogClose"
-        cancel=".onDialogClose"
+        search="_onPlantSearch"
+        confirm="_onPlantDialogClose"
+        cancel="_onPlantDialogClose"
         items="{PlantModel>/PlantData}"
     >
         <StandardListItem
-            title="{PlantModel>Plant}"
+            title="{PlantModel>Werks}"
+            description="{PlantModel>McName1}"
             iconDensityAware="false"
             iconInset="false"
             type="Active"
