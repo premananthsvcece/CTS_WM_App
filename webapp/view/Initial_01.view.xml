@@ -17,26 +17,38 @@
         <Dynamic:header>
             <Dynamic:DynamicPageHeader id="_IDGenDynamicPageHeader1">
                 <form:SimpleForm
+                    id="_IDGenSimpleForm1"
                     editable="true"
                     layout="ResponsiveGridLayout"
-                    title="Address"
-                    labelSpanXL="4"
-                    labelSpanL="4"
-                    labelSpanM="12"
-                    labelSpanS="12"
+                    labelSpanXL="2"
+                    labelSpanL="2"
+                    labelSpanM="2"
+                    labelSpanS="2"
                     adjustLabelSpan="false"
                     emptySpanXL="0"
                     emptySpanL="0"
                     emptySpanM="0"
                     emptySpanS="0"
-                    columnsXL="2"
-                    columnsL="2"
-                    columnsM="2"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
                     singleContainerFullSize="false"
                 >
                     <form:content>
-                        <VBox>
+                        <Toolbar
+                            id="_IDGenToolbar1"
+                            ariaLabelledBy="Title2"
+                        >
+                            <ToolbarSpacer id="_IDGenToolbarSpacer4" />
+                            <Button
+                                id="_IDGenButton11"
+                                icon="sap-icon://refresh"
+                                press="onButtonPress"
+                            />
+                        </Toolbar>
+                        <VBox id="_IDGenVBox1">
                             <Label
+                                id="_IDGenLabel231"
                                 text="{i18n>Plant}"
                                 labelFor="idInputPlant"
                             />
@@ -47,19 +59,26 @@
                                 valueHelpRequest="_onPlantHelp"
                             >
                                 <suggestionColumns>
-                                    <Column>
-                                        <Label text="Plant" />
+                                    <Column id="_IDGenColumn231">
+                                        <Label
+                                            id="_IDGenLabel232"
+                                            text="Plant"
+                                        />
                                     </Column>
                                 </suggestionColumns>
                                 <suggestionRows>
-                                    <ColumnListItem>
-                                        <Label text="{Data02}" />
+                                    <ColumnListItem id="_IDGenColumnListItem1">
+                                        <Label
+                                            id="_IDGenLabel33"
+                                            text="{Data02}"
+                                        />
                                     </ColumnListItem>
                                 </suggestionRows>
                             </MultiInput>
                         </VBox>
-                        <VBox>
+                        <VBox id="_IDGenVBox2">
                             <Label
+                                id="_IDGenLabel234"
                                 text="{i18n>WorkCenter}"
                                 labelFor="idInputWorkCenter"
                             />
@@ -70,10 +89,19 @@
                                 valueHelpRequest="_onWorkCenterHelp"
                             />
                         </VBox>
+                        <VBox>
+                            <ProgressIndicator
+                                id="_IDGenProgressIndicator1"
+                                class="sapUiSmallMarginBottom"
+                                state="none"
+                                showValue="true"
+                                width="60%"
+                            />
+                        </VBox>
                     </form:content>
                 </form:SimpleForm>
-                <ToolbarSpacer />
-                <Bar>
+                <ToolbarSpacer id="_IDGenToolbarSpacer5" />
+                <Bar id="_IDGenBar1">
                     <contentRight>
                         <Button
                             id="idGO"
@@ -84,22 +112,26 @@
                         />
 
                         <MenuButton
+                            id="_IDGenMenuButton1"
                             text="Navigation"
                             type="Emphasized"
                         >
                             <menu>
-                                <Menu>
+                                <Menu id="_IDGenMenu1">
                                     <MenuItem
+                                        id="_IDGenMenuItem1"
                                         text="{i18n>BOM}"
                                         icon="sap-icon://machine"
                                         press="onBOMPressed"
                                     />
                                     <MenuItem
+                                        id="_IDGenMenuItem2"
                                         text="{i18n>Route}"
                                         icon="sap-icon://bus-public-transport"
                                         press="onRoutePressed"
                                     />
                                     <MenuItem
+                                        id="_IDGenMenuItem3"
                                         text="{i18n>Drawing}"
                                         icon="sap-icon://draw-rectangle"
                                         press="onDrawingPressed"
@@ -108,17 +140,20 @@
                             </menu>
                         </MenuButton>
                         <MenuButton
+                            id="_IDGenMenuButton2"
                             text="Print"
                             type="Negative"
                         >
                             <menu>
-                                <Menu>
+                                <Menu id="_IDGenMenu2">
                                     <MenuItem
+                                        id="_IDGenMenuItem4"
                                         text="{i18n>OrderNote}"
                                         icon="sap-icon://notes"
-                                        press="onDrawingPressed"
+                                        press="onOrderNotePressed"
                                     />
                                     <MenuItem
+                                        id="_IDGenMenuItem5"
                                         text="{i18n>PalLabel}"
                                         icon="sap-icon://print"
                                         press="onPalLabelPressed"
