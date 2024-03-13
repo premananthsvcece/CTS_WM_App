@@ -303,6 +303,53 @@ sap.ui.define([
 
                         });
             },
+            _onWorkAreaHelp: function () {
+                var that = this;
+                var Path = that.getView().getId();
+                var SelPlant = sap.ui.getCore().byId(`${Path}--idInputPlant`).getValue();
+                if (SelPlant === null) {
+                    SelPlant = "MQTC";
+                }
+                if (!that.WAreaDialog) {
+                    that.WAreaDialog = sap.ui.xmlfragment(
+                        "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpWorkArea", that);
+                    that.getView().addDependent(
+                        that.WAreaDialog);
+                }
+                // open value help dialog
+                that.WAreaDialog.open();
+                var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+                var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+                oModel
+                    .read(
+                        "/ZshArbplSet?$filter=Plant eq '" + SelPlant + "'",
+                        {
+                            context: null,
+                            urlParameters: null,
+                            success: function (oData, oResponse) {
+                                try {
+                                    // console.log(oData);
+                                    // Future
+                                    var Path = that.getView().getId();
+                                    var WorkAreaData = oData.results;
+                                    var WorkAreaModel = new sap.ui.model.json.JSONModel();
+
+                                    WorkAreaModel.setData({
+                                        "WorkAreaData": WorkAreaData
+                                    });
+                                    var WorkAreaTable = sap.ui.getCore().byId("idWorkAreaDialog");
+
+                                    WorkAreaTable.setModel(
+                                        WorkAreaModel,
+                                        'WorkAreaModel');
+                                } catch (e) {
+                                    alert(e.message);
+                                }
+                            },
+
+                        });
+            },
             onBOMPressed: function (oEvent) {
                 var that = this;
                 var index;
@@ -321,20 +368,26 @@ sap.ui.define([
                 if (index === 0) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getSelectedIndices()[0];
                     // Get Order No & Opr No
-                    SelAufnr = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data02;
-                    SelOprNo = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data05;
+                    if (Tableindex != undefined) {
+                        SelAufnr = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data02;
+                        SelOprNo = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data05;
+                    }
                 }
                 if (index === 1) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getSelectedIndices()[0];
                     // Get Order No & Opr No
-                    SelAufnr = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data02;
-                    SelOprNo = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data05;
+                    if (Tableindex != undefined) {
+                        SelAufnr = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data02;
+                        SelOprNo = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data05;
+                    }
                 }
                 if (index === 2) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getSelectedIndices()[0];
                     // Get Order No & Opr No
-                    SelAufnr = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getModel("InFutureModel").getData().InFutureData[Tableindex].Data02;
-                    SelOprNo = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getModel("InFutureModel").getData().InFutureData[Tableindex].Data05;
+                    if (Tableindex != undefined) {
+                        SelAufnr = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getModel("InFutureModel").getData().InFutureData[Tableindex].Data02;
+                        SelOprNo = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getModel("InFutureModel").getData().InFutureData[Tableindex].Data05;
+                    }
                 }
                 if (Tableindex === undefined) {
                     // Raise Message
@@ -399,20 +452,26 @@ sap.ui.define([
                 if (index === 0) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getSelectedIndices()[0];
                     // Get Order No & Opr No
-                    SelAufnr = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data02;
-                    SelOprNo = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data05;
+                    if (Tableindex != undefined) {
+                        SelAufnr = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data02;
+                        SelOprNo = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data05;
+                    }
                 }
                 if (index === 1) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getSelectedIndices()[0];
                     // Get Order No & Opr No
-                    SelAufnr = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data02;
-                    SelOprNo = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data05;
+                    if (Tableindex != undefined) {
+                        SelAufnr = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data02;
+                        SelOprNo = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data05;
+                    }
                 }
                 if (index === 2) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getSelectedIndices()[0];
                     // Get Order No & Opr No
-                    SelAufnr = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getModel("InFutureModel").getData().InFutureData[Tableindex].Data02;
-                    SelOprNo = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getModel("InFutureModel").getData().InFutureData[Tableindex].Data05;
+                    if (Tableindex != undefined) {
+                        SelAufnr = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getModel("InFutureModel").getData().InFutureData[Tableindex].Data02;
+                        SelOprNo = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getModel("InFutureModel").getData().InFutureData[Tableindex].Data05;
+                    }
                 }
                 if (Tableindex === undefined) {
                     // Raise Message
@@ -499,17 +558,23 @@ sap.ui.define([
                 if (index === 0) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getSelectedIndices()[0];
                     // Get Material
-                    SelMatnr = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data03;
+                    if (Tableindex != undefined) {
+                        SelMatnr = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data03;
+                    }
                 }
                 if (index === 1) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getSelectedIndices()[0];
                     // Get Material
-                    SelMatnr = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data03;
+                    if (Tableindex != undefined) {
+                        SelMatnr = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data03;
+                    }
                 }
                 if (index === 2) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getSelectedIndices()[0];
                     // Get Material
-                    SelMatnr = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getModel("InFutureModel").getData().InFutureData[Tableindex].Data03;
+                    if (Tableindex != undefined) {
+                        SelMatnr = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getModel("InFutureModel").getData().InFutureData[Tableindex].Data03;
+                    }
                 }
                 if (Tableindex === undefined) {
                     // Raise Message
@@ -557,14 +622,29 @@ sap.ui.define([
                 if (index === 0) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getSelectedIndices()[0];
                     // Get Order No & Opr No
-                    SelAufnr = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data02;
-                    SelOprNo = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data05;
+                    if (Tableindex != undefined) {
+                        SelAufnr = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data02;
+                        SelOprNo = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData[Tableindex].Data05;
+                    } else {
+                        Tableindex = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getSelectedIndices()[0];
+                        // Get Order No & Opr No
+                        if (Tableindex != undefined) {
+                            SelAufnr = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data02;
+                            SelOprNo = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data05;
+                        } else {
+                            // Raise Message
+                            MessageBox.error("Select Only Lines from In Progress and In Queue section to Proceed");
+                            return;
+                        }
+                    }
                 }
                 if (index === 1) {
                     Tableindex = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getSelectedIndices()[0];
                     // Get Order No & Opr No
-                    SelAufnr = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data02;
-                    SelOprNo = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data05;
+                    if (sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData != undefined) {
+                        SelAufnr = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data02;
+                        SelOprNo = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData[Tableindex].Data05;
+                    }
                 }
                 if (index === 2) {
                     // Raise Message
@@ -577,102 +657,109 @@ sap.ui.define([
                     return;
                 }
 
-                var othis = that;
+                var SelPlant = sap.ui.getCore().byId(`${Path}--idInputPlant`).getValue();
+                // that.showBusyIndicator();
 
-                othis.showBusyIndicator();
+                if (!that.StartDialog) {
+                    that.StartDialog = sap.ui.xmlfragment(
+                        "sap.pp.wcare.wmd.workmanagerapp.Fragments.StartAction", that);
+                    that.getView().addDependent(
+                        that.StartDialog);
+
+                }
+
+                // open value help dialog
+                that.StartDialog.open();
+
                 var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
                 var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
                 var IEntry = {};
                 IEntry.Key01 = "START";
                 IEntry.Key02 = SelAufnr;
                 IEntry.Key03 = SelOprNo;
-                IEntry.Key04 = " ";
+                IEntry.Key04 = SelPlant;
                 IEntry.Key05 = " ";
                 IEntry.WorkCenterArea = " ";
-                if (index = 1) {
+                if (index === 1) {
                     IEntry.NavWC_InProgress = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getModel("InProgressModel").getData().InProgressData;
                 }
-                if (index = 2) {
+                if (index === 2) {
                     IEntry.NavWC_Queue = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getModel("InQueueModel").getData().InQueueData;
                 }
-                if (!that.StartDialog) {
-                    that.StartDialog = sap.ui.xmlfragment(
-                        "sap.pp.wcare.wmd.workmanagerapp.Fragments.Start", that);
-                    that.getView().addDependent(
-                        that.StartDialog);
-                }
+
+
                 // Just Blank Entry
                 IEntry.NavWC_Future = [{}];
 
                 // console.log(IEntry);
-                oDataModel
-                    .create(
-                        '/WorkCenter_AreaOrderSet',
-                        IEntry,
-                        null,
-                        function (oData, Response) {
+                // oDataModel
+                //     .create(
+                //         '/WorkCenter_AreaOrderSet',
+                //         IEntry,
+                //         null,
+                //         function (oData, Response) {
 
-                            try {
-                                // console.log(oData);
-                                othis.hideBusyIndicator();
-                                var Path = othis.getView().getId();
-                                // In Progress
-                                var InProgressData = oData.NavWC_InProgress.results;
-                                if (InProgressData.length === 0) {
-                                    InProgressData = [{}];
-                                }
-                                var InProgressModel = new sap.ui.model.json.JSONModel();
+                //             try {
+                //                 // console.log(oData);
+                //                 othis.hideBusyIndicator();
+                //                 var Path = othis.getView().getId();
+                //                 // In Progress
+                //                 var InProgressData = oData.NavWC_InProgress.results;
+                //                 if (InProgressData.length === 0) {
+                //                     InProgressData = [{}];
+                //                 }
+                //                 var InProgressModel = new sap.ui.model.json.JSONModel();
 
-                                InProgressModel.setData({
-                                    "InProgressData": InProgressData
-                                });
-                                var InProgressTable = sap.ui.getCore().byId(Path + "--idInprogressOrderList");
+                //                 InProgressModel.setData({
+                //                     "InProgressData": InProgressData
+                //                 });
+                //                 var InProgressTable = sap.ui.getCore().byId(Path + "--idInprogressOrderList");
 
-                                InProgressTable.setModel(
-                                    InProgressModel,
-                                    'InProgressModel');
-                                // }
-                                // Queue
-                                var InQueueData = oData.NavWC_Queue.results;
-                                if (InQueueData.length === 0) {
-                                    InQueueData = [{}];
-                                }
-                                var InQueueModel = new sap.ui.model.json.JSONModel();
+                //                 InProgressTable.setModel(
+                //                     InProgressModel,
+                //                     'InProgressModel');
+                //                 // }
+                //                 // Queue
+                //                 var InQueueData = oData.NavWC_Queue.results;
+                //                 if (InQueueData.length === 0) {
+                //                     InQueueData = [{}];
+                //                 }
+                //                 var InQueueModel = new sap.ui.model.json.JSONModel();
 
-                                InQueueModel.setData({
-                                    "InQueueData": InQueueData
-                                });
-                                var InQueueTable = sap.ui.getCore().byId(Path + "--idQueueOrderList");
+                //                 InQueueModel.setData({
+                //                     "InQueueData": InQueueData
+                //                 });
+                //                 var InQueueTable = sap.ui.getCore().byId(Path + "--idQueueOrderList");
 
-                                InQueueTable.setModel(
-                                    InQueueModel,
-                                    'InQueueModel');
-                                // }
-                                // Future
-                                var InFutureData = oData.NavWC_Future.results;
-                                if (InFutureData.length === 0) {
-                                    InFutureData = [{}];
-                                }
-                                var InFutureModel = new sap.ui.model.json.JSONModel();
+                //                 InQueueTable.setModel(
+                //                     InQueueModel,
+                //                     'InQueueModel');
+                //                 // }
+                //                 // Future
+                //                 var InFutureData = oData.NavWC_Future.results;
+                //                 if (InFutureData.length === 0) {
+                //                     InFutureData = [{}];
+                //                 }
+                //                 var InFutureModel = new sap.ui.model.json.JSONModel();
 
-                                InFutureModel.setData({
-                                    "InFutureData": InFutureData
-                                });
-                                var InFutureTable = sap.ui.getCore().byId(Path + "--idFutureOrderList");
+                //                 InFutureModel.setData({
+                //                     "InFutureData": InFutureData
+                //                 });
+                //                 var InFutureTable = sap.ui.getCore().byId(Path + "--idFutureOrderList");
 
-                                InFutureTable.setModel(
-                                    InFutureModel,
-                                    'InFutureModel');
-                                // }
+                //                 InFutureTable.setModel(
+                //                     InFutureModel,
+                //                     'InFutureModel');
+                //                 // }
 
-                            }
-                            catch (e) {
-                                alert(e.message);
-                                othis.hideBusyIndicator();
-                            }
+                //             }
+                //             catch (e) {
+                //                 alert(e.message);
+                that.hideBusyIndicator();
+                //             }
 
 
-                        });
+                //         });
 
             }
 
