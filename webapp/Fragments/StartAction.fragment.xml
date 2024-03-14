@@ -19,7 +19,27 @@
                 >
                     <InputListItem label="{i18n>OprDetails}">
                         <Input
+                            id="idStartOperator"
                             placeholder="Operator No"
+                            type="Text"
+                            change="OnOperatorfill"
+                        />
+                    </InputListItem>
+                    <InputListItem label="{i18n>FirstName}">
+                        <Input
+                        id="idStartFName"
+                            type="Text"
+                        />
+                    </InputListItem>
+                    <InputListItem label="{i18n>LastName}">
+                        <Input
+                        id="idStartLName"
+                            type="Text"
+                        />
+                    </InputListItem>
+                    <InputListItem label="{i18n>Plant}">
+                        <Input
+                        id="idSelectPlant"
                             type="Text"
                         />
                     </InputListItem>
@@ -47,10 +67,12 @@
         <Button
             icon="sap-icon://accept"
             text="{i18n>Confirm}"
+            press="onConfirmStartPress"
         />
         <Button
             icon="sap-icon://cancel"
             text="{i18n>Cancel}"
+            press="onCancelStartPress"
         />
     </Dialog>
 </c:FragmentDefinition>

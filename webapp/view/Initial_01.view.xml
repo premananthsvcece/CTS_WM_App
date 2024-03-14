@@ -107,7 +107,7 @@
                             <ProgressIndicator
                                 id="_IDGenProgressIndicator1"
                                 class="sapUiSmallMarginBottom"
-                                state="none"
+                                state="Success"
                                 showValue="true"
                                 width="60%"
                             />
@@ -362,33 +362,33 @@
 
                                             <Table:Column
                                                 width="10rem"
-                                                sortProperty="Data08"
-                                                filterProperty="Data08"
+                                                sortProperty="Data14"
+                                                filterProperty="Data14"
                                                 autoResizable="true"
                                             >
                                                 <Label
                                                     text="{i18n>OperStrtDate}"
                                                 />
                                                 <Table:template>
-                                                    <Text
-                                                        text="{InProgressModel>Data14}"
-                                                        wrapping="false"
+                                                    <DatePicker
+                                                        value="{InProgressModel>Data14}"
+                                                        enabled="false"
                                                     />
                                                 </Table:template>
                                             </Table:Column>
                                             <Table:Column
                                                 width="10rem"
-                                                sortProperty="Data09"
-                                                filterProperty="Data09"
+                                                sortProperty="Data15"
+                                                filterProperty="Data15"
                                                 autoResizable="true"
                                             >
                                                 <Label
                                                     text="{i18n>OperStrtTime}"
                                                 />
                                                 <Table:template>
-                                                    <Text
-                                                        text="{InProgressModel>Data15}"
-                                                        wrapping="false"
+                                                    <TimePicker
+                                                        value="{InProgressModel>Data15}"
+                                                        enabled="false"
                                                     />
                                                 </Table:template>
                                             </Table:Column>
@@ -675,34 +675,35 @@
 
                                             <Table:Column
                                                 width="10rem"
-                                                sortProperty="Data08"
-                                                filterProperty="Data08"
+                                                sortProperty="Data14"
+                                                filterProperty="Data14"
                                                 autoResizable="true"
                                             >
                                                 <Label
                                                     text="{i18n>OperStrtDate}"
                                                 />
                                                 <Table:template>
-                                                    <Text
-                                                        text="{InQueueModel>Data14}"
-                                                        wrapping="false"
+                                                    <DatePicker
+                                                        value="{InQueueModel>Data14}"
+                                                        enabled="false"
                                                     />
                                                 </Table:template>
                                             </Table:Column>
                                             <Table:Column
                                                 width="10rem"
-                                                sortProperty="Data09"
-                                                filterProperty="Data09"
+                                                sortProperty="Data15"
+                                                filterProperty="Data15"
                                                 autoResizable="true"
                                             >
                                                 <Label
                                                     text="{i18n>OperStrtTime}"
                                                 />
                                                 <Table:template>
-                                                    <Text
-                                                        text="{InQueueModel>Data15}"
-                                                        wrapping="false"
+                                                    <TimePicker
+                                                        value="{InQueueModel>Data15}"
+                                                        enabled="false"
                                                     />
+                                                    
                                                 </Table:template>
                                             </Table:Column>
 
@@ -973,33 +974,33 @@
 
                                             <Table:Column
                                                 width="10rem"
-                                                sortProperty="Data08"
-                                                filterProperty="Data08"
+                                                sortProperty="Data14"
+                                                filterProperty="Data14"
                                                 autoResizable="true"
                                             >
                                                 <Label
                                                     text="{i18n>OperStrtDate}"
                                                 />
                                                 <Table:template>
-                                                    <Text
-                                                        text="{InFutureModel>Data14}"
-                                                        wrapping="false"
+                                                    <DatePicker
+                                                        value="{InFutureModel>Data14}"
+                                                        enabled="false"
                                                     />
                                                 </Table:template>
                                             </Table:Column>
                                             <Table:Column
                                                 width="10rem"
-                                                sortProperty="Data09"
-                                                filterProperty="Data09"
+                                                sortProperty="Data15"
+                                                filterProperty="Data15"
                                                 autoResizable="true"
                                             >
                                                 <Label
                                                     text="{i18n>OperStrtTime}"
                                                 />
                                                 <Table:template>
-                                                    <Text
-                                                        text="{InFutureModel>Data15}"
-                                                        wrapping="false"
+                                                    <TimePicker
+                                                        value="{InFutureModel>Data15}"
+                                                        enabled="false"
                                                     />
                                                 </Table:template>
                                             </Table:Column>
