@@ -3,40 +3,46 @@
     xmlns="sap.m"
     xmlns:c="sap.ui.core"
     xmlns:l="sap.ui.layout"
-    xmlns:f="sap.ui.layout.form"
+    xmlns:sf="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
 >
-    <Dialog>
-        <List
-            headerText="{i18n>StartAction}"
-            class=""
+    <Dialog id="idDialogStart">
+        <l:VerticalLayout
+            id="idVerticalLayoutStart"
+            class="sapUiContentPadding"
+            width="100%"
         >
-            <InputListItem label="{i18n>OprDetails}">
-                <Input
-                    placeholder="Operation No"
-                    type="Text"
-                />
-            </InputListItem>
-            <InputListItem label="{i18n>StartDate}">
-                <DatePicker
-                    id="DP8"
-                    placeholder="Select Date"
-                    change="handleChange"
-                    class="sapUiSmallMarginBottom"
-                    showFooter="true"
-                    enabled="false"
-                />
-            </InputListItem>
-            <InputListItem label="{i18n>StartTime}">
-                <Label text="Time" />
-                <TimePicker
-                    enabled="false"
-                    value="{
-				path: '/time',
-				type: 'sap.ui.model.type.Time'}"
-                />
-            </InputListItem>
-        </List>
+            <l:content>
+                <List id="idStartList"
+                    headerText="{i18n>StartAction}"
+                    class="sapUiContentPadding"
+                >
+                    <InputListItem label="{i18n>OprDetails}">
+                        <Input
+                            placeholder="Operator No"
+                            type="Text"
+                        />
+                    </InputListItem>
+                    <InputListItem label="{i18n>StartDate}">
+                        <DatePicker
+                            id="idStartDate"
+                            placeholder="Select Date"
+                            class="sapUiSmallMarginBottom"
+                            showFooter="false"
+                            enabled="false"
+                        />
+                    </InputListItem>
+                    <InputListItem label="{i18n>StartTime}" >
+                        <TimePicker
+                            id="idStartTime"
+                            placeholder="Select Time"
+                            class="sapUiSmallMarginBottom"
+                            enabled="false"
+                        />
+                    </InputListItem>
+                </List>
+            </l:content>
+        </l:VerticalLayout>
         <ToolbarSpacer />
         <Button
             icon="sap-icon://accept"

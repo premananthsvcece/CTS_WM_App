@@ -14,7 +14,8 @@
         items="{WorkAreaModel>/WorkAreaData}"
     >
         <StandardListItem
-            title="{WorkAreaModel>Workarea}"
+            title="{WorkAreaModel>Data01}"
+            description="{WorkCenterModel>Data02}"
             iconDensityAware="false"
             iconInset="false"
             type="Active"
