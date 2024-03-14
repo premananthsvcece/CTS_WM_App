@@ -1152,6 +1152,7 @@ sap.ui.define(
               try {
                 // console.log(oData);
                 that.hideBusyIndicator();
+                that.onButtonPress();
                 MessageBox.confirm("Update Successful");
                 return;
               } catch (e) {
