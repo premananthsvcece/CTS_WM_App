@@ -79,7 +79,7 @@ sap.ui.define(
           setInterval(function () {
             i = i + 1;
             ProgressIndicator.setPercentValue(i + "%");
-            ProgressIndicator.setDisplayValue(`Refresh Progress: ${i}%`);
+            ProgressIndicator.setDisplayValue("Refresh Progress: " + i + " %");
             if (i === 100) {
               i = 1;
               var Plant = sap.ui
