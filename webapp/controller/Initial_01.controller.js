@@ -8,6 +8,7 @@ sap.ui.define(
     "sap/ui/core/URI",
     "sap/m/ProgressIndicator",
     "sap/ui/model/type/Date",
+    "sap/ui/core/date/UI5Date"
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -20,7 +21,8 @@ sap.ui.define(
     FilterOperator,
     URI,
     ProgressIndicator,
-    Date
+    Date,
+    UI5Date
   ) {
     "use strict";
 
@@ -899,7 +901,7 @@ sap.ui.define(
           // open value help dialog
           that.StartDialog.open();
 
-          var oDateTime = new sap.ui.core.date.UI5Date.getInstance();
+          var oDateTime = UI5Date.getInstance();
           if (oDateTime.getMonth() < 10) {
             var Month = "0" + (oDateTime.getMonth() + 1);
           }
