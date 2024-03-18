@@ -1,1 +1,8 @@
 /* Enter your custom styles here */
+
+.sapUiSizeCompact .sapMBtnInner.sapMBtnText {
+  padding-left: 0.4375rem;
+  padding-right: 0.4375rem;
+  text-align: center;
+  font-size: 16px;
+}

@@ -1,29 +1,25 @@
 sap.ui.define(
   [
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/odata/v2/ODataModel",
     "sap/m/MessageBox",
     "sap/m/MessageToast",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/ui/core/URI",
     "sap/m/ProgressIndicator",
-    "sap/ui/core/date/UI5Date",
-    "sap/ui/model/odata/type/Date",
+    "sap/ui/model/type/Date",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
    */
   function (
     Controller,
-    ODataModel,
     MessageBox,
     MessageToast,
     Filter,
     FilterOperator,
     URI,
     ProgressIndicator,
-    UI5Date,
     Date
   ) {
     "use strict";
@@ -97,7 +93,7 @@ sap.ui.define(
 
               that.onLoadData(that, Plant, SelWCGrp, Workcenter);
             }
-          }, 5000);
+          }, 1000);
         },
         onLoadData: function (that, Plant, SelWCGrp, Workcenter) {
           var othis = that;
@@ -758,15 +754,18 @@ sap.ui.define(
             return;
           }
           // Get the path to the Windows shared folder
-          const sharedFolderPath =
-            "file:////sbs.ferro.local/server/Fælles/Tegning/";
+          //const sharedFolderPath =
+          //  "file:////sbs.ferro.local/server/Fælles/Tegning/";
 
           // Get the name of the file to open
-          var fileName = sharedFolderPath + SelMatnr + ".pdf";
+          // var fileName = sharedFolderPath + SelMatnr + ".pdf";
 
           // Open the file
           // var oFile = URI(sharedFolderPath).append(fileName).toURI();
-          window.open(fileName);
+          // window.open(fileName);
+          // Raise Message
+          MessageBox.information("Drawing setup is under intergration");
+          return;
         },
 
         onOrderNotePressed: function (oEvent) {
@@ -900,7 +899,7 @@ sap.ui.define(
           // open value help dialog
           that.StartDialog.open();
 
-          var oDateTime = UI5Date.getInstance();
+          var oDateTime = new sap.ui.core.date.UI5Date.getInstance();
           if (oDateTime.getMonth() < 10) {
             var Month = "0" + (oDateTime.getMonth() + 1);
           }
