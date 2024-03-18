@@ -211,7 +211,7 @@ sap.ui.define(
             .byId(Path + "--idInputPlant")
             .getValue();
           if (SelPlant === null) {
-            SelPlant = "MQTC";
+            SelPlant = "DKKV";
           }
           if (!that.PlantDialog) {
             that.PlantDialog = sap.ui.xmlfragment(
@@ -280,7 +280,7 @@ sap.ui.define(
             .byId(`${Path}--idInputPlant`)
             .getValue();
           if (SelPlant === null) {
-            SelPlant = "MQTC";
+            SelPlant = "DKKV";
           }
 
           var SelWCGrp = sap.ui
@@ -339,7 +339,7 @@ sap.ui.define(
             .byId(`${Path}--idInputPlant`)
             .getValue();
           if (SelPlant === null) {
-            SelPlant = "MQTC";
+            SelPlant = "DKKV";
           }
           if (!that.WAreaDialog) {
             that.WAreaDialog = sap.ui.xmlfragment(
@@ -674,7 +674,7 @@ sap.ui.define(
             } else {
               return;
             }
-            // this.onButtonPress();
+            this.onButtonPress();
           }
         },
 

@@ -26,8 +26,8 @@
                         textAlign="Center"
                         titleStyle="H2"
                         width="150%"
-                        wrapping="false"
-                        wrappingType="Normal"
+                        wrapping="true"
+                        wrappingType="Hyphenated"
                     />
                 </uxap:heading>
             </uxap:ObjectPageDynamicHeaderTitle>
@@ -107,11 +107,9 @@
                 <uxap:heading>
                     <Toolbar
                         active="false"
-                        ariaHasPopup=""
-                        design="Auto"
+                        design="Transparent"
                         enabled="true"
                         style="Standard"
-                        width=""
                     >
                         <content>
                             <ToolbarSpacer />
@@ -192,11 +190,6 @@
                                 selectionMode="Single"
                             >
                                 <Table:noData text="{i18n>NoData}" />
-                                <Table:extension>
-                                    <OverflowToolbar id="_IDGenOverflowToolbar1">
-                                        <ToolbarSpacer id="_IDGenToolbarSpacer2" />
-                                    </OverflowToolbar>
-                                </Table:extension>
                                 <Table:columns>
                                     <Table:Column
                                         id="_IDGenColumn1"
@@ -470,7 +463,59 @@
                 id="_IDGenObjectPageSection2"
                 title="{i18n>QueueOrder}"
                 titleUppercase="false"
+                wrapTitle="false"
             >
+                <uxap:heading>
+                    <Toolbar active="false"
+                    design="Transparent"
+                    enabled="true"
+                    style="Standard">
+                        <content>
+                            <ToolbarSpacer />
+                            <ToolbarSeparator />
+                            <Button
+                                class="sapUiSizeCompact"
+                                text="{i18n>BOM}"
+                                icon="sap-icon://machine"
+                                press="onBOMPressed"
+                                type="Emphasized"
+                                width="120px"
+                            />
+                            <Button
+                                text="{i18n>Route}"
+                                icon="sap-icon://bus-public-transport"
+                                type="Emphasized"
+                                press="onRoutePressed"
+                            />
+                            <Button
+                                text="{i18n>Drawing}"
+                                icon="sap-icon://draw-rectangle"
+                                type="Emphasized"
+                                press="onDrawingPressed"
+                            />
+                            <ToolbarSeparator />
+                            <Button
+                                text="{i18n>OrderNote}"
+                                icon="sap-icon://notes"
+                                type="Emphasized"
+                                press="onOrderNotePressed"
+                            />
+                            <Button
+                                text="{i18n>PalLabel}"
+                                icon="sap-icon://print"
+                                type="Emphasized"
+                                press="onPalLabelPressed"
+                            />
+                            <ToolbarSeparator />
+                            <Button
+                                text="{i18n>StartJob}"
+                                type="Critical"
+                                icon="sap-icon://restart"
+                                press="onStartPressed"
+                            />
+                        </content>
+                    </Toolbar>
+                </uxap:heading>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection
                         id="QueueOrderSubSection"
@@ -489,18 +534,6 @@
                                 selectionMode="Single"
                             >
                                 <Table:noData text="{i18n>NoData}" />
-                                <Table:extension>
-                                    <OverflowToolbar id="_IDGenOverflowToolbar2">
-                                        <ToolbarSpacer id="_IDGenToolbarSpacer3" />
-                                        <Button
-                                            id="_IDGenButton10"
-                                            text="{i18n>StartJob}"
-                                            type="Critical"
-                                            icon="sap-icon://restart"
-                                            press="onStartPressed"
-                                        />
-                                    </OverflowToolbar>
-                                </Table:extension>
                                 <Table:columns>
                                     <Table:Column
                                         id="_IDGenColumn14"
@@ -774,7 +807,52 @@
                 id="_IDGenObjectPageSection3"
                 title="{i18n>FutureOrder}"
                 titleUppercase="false"
+                wrapTitle="false"
             >
+                <uxap:heading>
+                    <Toolbar active="false"
+                    design="Transparent"
+                    enabled="true"
+                    style="Standard">
+                        <content>
+                            <ToolbarSpacer />
+                            <ToolbarSeparator />
+                            <Button
+                                class="sapUiSizeCompact"
+                                text="{i18n>BOM}"
+                                icon="sap-icon://machine"
+                                press="onBOMPressed"
+                                type="Emphasized"
+                                width="120px"
+                            />
+                            <Button
+                                text="{i18n>Route}"
+                                icon="sap-icon://bus-public-transport"
+                                type="Emphasized"
+                                press="onRoutePressed"
+                            />
+                            <Button
+                                text="{i18n>Drawing}"
+                                icon="sap-icon://draw-rectangle"
+                                type="Emphasized"
+                                press="onDrawingPressed"
+                            />
+                            <ToolbarSeparator />
+                            <Button
+                                text="{i18n>OrderNote}"
+                                icon="sap-icon://notes"
+                                type="Emphasized"
+                                press="onOrderNotePressed"
+                            />
+                            <Button
+                                text="{i18n>PalLabel}"
+                                icon="sap-icon://print"
+                                type="Emphasized"
+                                press="onPalLabelPressed"
+                            />
+                        </content>
+                    </Toolbar>
+                </uxap:heading>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection
                         id="FutureOrderSubSection"
@@ -793,7 +871,6 @@
                                 selectionMode="Single"
                             >
                                 <Table:noData text="{i18n>NoData}" />
-                                <Table:extension />
                                 <Table:columns autoResizable="true">
                                     <Table:Column
                                         id="_IDGenColumn27"
