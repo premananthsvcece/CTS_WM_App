@@ -43,7 +43,7 @@
                     <MultiInput
                         id="idInputPlant"
                         showValueHelp="true"
-                        width="50%"
+                        width="75%"
                         valueHelpRequest="_onPlantHelp"
                     />
                 </VBox>
@@ -55,7 +55,7 @@
                     <MultiInput
                         id="idInputWorkArea"
                         showValueHelp="true"
-                        width="50%"
+                        width="75%"
                         valueHelpRequest="_onWorkAreaHelp"
                     />
                 </VBox>
@@ -68,7 +68,7 @@
                     <MultiInput
                         id="idInputWorkCenter"
                         showValueHelp="true"
-                        width="50%"
+                        width="75%"
                         valueHelpRequest="_onWorkCenterHelp"
                     />
                 </VBox>

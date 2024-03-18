@@ -8,7 +8,6 @@ sap.ui.define(
     "sap/ui/core/URI",
     "sap/m/ProgressIndicator",
     "sap/ui/model/type/Date",
-    "sap/ui/core/date/UI5Date"
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -21,14 +20,12 @@ sap.ui.define(
     FilterOperator,
     URI,
     ProgressIndicator,
-    Date,
-    UI5Date
+    Dates
   ) {
     "use strict";
 
     return Controller.extend(
-      "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
-      {
+      "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01", {
         onInit: function () {
           var that = this;
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
@@ -305,11 +302,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WorkCenter' and Key04 eq '" +
-              SelPlant +
-              "' and Key05 eq '" +
-              SelWCGrp +
-              "'",
-            {
+            SelPlant +
+            "' and Key05 eq '" +
+            SelWCGrp +
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -359,9 +355,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WCGroup' and Key04 eq '" +
-              SelPlant +
-              "'",
-            {
+            SelPlant +
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -482,11 +477,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BOM' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "'",
-            {
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -609,11 +603,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Routing' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "'",
-            {
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -852,10 +845,10 @@ sap.ui.define(
             // Get Order No & Opr No
             if (
               sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getModel("InQueueModel")
-                .getData().InQueueData != undefined
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getModel("InQueueModel")
+              .getData().InQueueData != undefined
             ) {
               SelAufnr = sap.ui
                 .getCore()
@@ -900,8 +893,13 @@ sap.ui.define(
 
           // open value help dialog
           that.StartDialog.open();
-
-          var oDateTime = UI5Date.getInstance();
+          
+          var oDateTime = new Date();
+          // .toLocaleDateString('en-US', {
+          //   year: 'numeric',
+          //   month: 'numeric',
+          //   day: 'numeric',
+          // });;
           if (oDateTime.getMonth() < 10) {
             var Month = "0" + (oDateTime.getMonth() + 1);
           }
@@ -941,11 +939,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-              sValue +
-              "' and Key03 eq '" +
-              SelPlant +
-              "'",
-            {
+            sValue +
+            "' and Key03 eq '" +
+            SelPlant +
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -1054,10 +1051,10 @@ sap.ui.define(
             // Get Order No & Opr No
             if (
               sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getModel("InQueueModel")
-                .getData().InQueueData != undefined
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getModel("InQueueModel")
+              .getData().InQueueData != undefined
             ) {
               SelAufnr = sap.ui
                 .getCore()
