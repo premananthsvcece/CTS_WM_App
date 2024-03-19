@@ -42,7 +42,7 @@
                     </InputListItem>
                     <InputListItem label="{i18n>Plant}">
                         <Input
-                        id="idSelectPlant"
+                        id="idSelectStartPlant"
                             type="Text"
                             width="15rem"
                         />

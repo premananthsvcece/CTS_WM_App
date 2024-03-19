@@ -44,7 +44,7 @@
                     </InputListItem>
                     <InputListItem label="{i18n>Plant}">
                         <Input
-                        id="idSelectPlant"
+                        id="idSelectStopPlant"
                             type="Text"
                             enabled="false"
                             width="15rem"

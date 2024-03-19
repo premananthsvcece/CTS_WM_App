@@ -875,7 +875,7 @@ sap.ui.define(
 
           sap.ui.getCore().byId("idStartDate").setValue(oDateFormat);
           sap.ui.getCore().byId("idStartTime").setValue(oTimeFormat);
-          sap.ui.getCore().byId("idSelectPlant").setValue(SelPlant);
+          sap.ui.getCore().byId("idSelectStartPlant").setValue(SelPlant);
 
           that.hideBusyIndicator();
         },
@@ -1208,7 +1208,7 @@ sap.ui.define(
           sap.ui.getCore().byId("idStartTime").setValue(SelStartTime);
           sap.ui.getCore().byId("idStopDate").setValue(oDateFormat);
           sap.ui.getCore().byId("idStopTime").setValue(oTimeFormat);
-          sap.ui.getCore().byId("idSelectPlant").setValue(SelPlant);
+          sap.ui.getCore().byId("idSelectStopPlant").setValue(SelPlant);
           sap.ui.getCore().byId("idStopOperator").setValue(SelOpratorNo);
           that.OnStopOperatorGet(SelOpratorNo);
           that.hideBusyIndicator();
