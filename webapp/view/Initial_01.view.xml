@@ -12,14 +12,11 @@
 >
     <uxap:ObjectPageLayout
         id="ObjectPageLayout"
-        preserveHeaderStateOnScroll="true"
-        alwaysShowContentHeader="false"
-        enableLazyLoading="true"
-        upperCaseAnchorBar="false"
+        toggleHeaderOnTitleClick="true"
     >
-        <uxap:headerTitle>
+    <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
-                <uxap:heading>
+                <uxap:heading >
                     <Title
                         level="Auto"
                         text="{i18n>appDescription}"
@@ -32,6 +29,7 @@
                 </uxap:heading>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
+        
         <uxap:headerContent>
             <HBox>
                 <VBox>
@@ -82,20 +80,22 @@
                         visible="false"
                     />
                 </VBox>
-                <VBox>
-                    <Button
-                        id="idGO"
-                        width="100px"
-                        text="{i18n>Go}"
-                        icon="sap-icon://process"
-                        type="Accept"
-                        press="onButtonPress"
-                    />
-                </VBox>
             </HBox>
-            <Toolbar>
-                <ToolbarSpacer />
-            </Toolbar>
+            <OverflowToolbar
+                asyncMode="false"
+            > <content>
+                <ToolbarSpacer
+                />
+                <Button
+                id="idGO"
+                width="100px"
+                text="{i18n>Go}"
+                icon="sap-icon://process"
+                type="Accept"
+                press="onButtonPress"
+            />    
+            </content>
+            </OverflowToolbar>
         </uxap:headerContent>
         <uxap:sections>
             <uxap:ObjectPageSection
@@ -128,13 +128,14 @@
                                 type="Emphasized"
                                 press="onRoutePressed"
                             />
+                            
+                            <ToolbarSeparator />
                             <Button
                                 text="{i18n>Drawing}"
                                 icon="sap-icon://draw-rectangle"
                                 type="Emphasized"
                                 press="onDrawingPressed"
                             />
-                            <ToolbarSeparator />
                             <Button
                                 text="{i18n>OrderNote}"
                                 icon="sap-icon://notes"
@@ -146,10 +147,11 @@
                                 icon="sap-icon://print"
                                 type="Emphasized"
                                 press="onPalLabelPressed"
+                                visible="false"
                             />
                             <ToolbarSeparator />
                             <Button
-                                text="{i18n>ReStartJob}"
+                                text="{i18n>StartJob}"
                                 type="Critical"
                                 icon="sap-icon://restart"
                                 press="onStartPressed"
@@ -487,13 +489,16 @@
                                 type="Emphasized"
                                 press="onRoutePressed"
                             />
+                            
+                            <ToolbarSeparator />
+
                             <Button
                                 text="{i18n>Drawing}"
                                 icon="sap-icon://draw-rectangle"
                                 type="Emphasized"
                                 press="onDrawingPressed"
                             />
-                            <ToolbarSeparator />
+
                             <Button
                                 text="{i18n>OrderNote}"
                                 icon="sap-icon://notes"
@@ -505,6 +510,7 @@
                                 icon="sap-icon://print"
                                 type="Emphasized"
                                 press="onPalLabelPressed"
+                                visible="false"
                             />
                             <ToolbarSeparator />
                             <Button
@@ -831,13 +837,16 @@
                                 type="Emphasized"
                                 press="onRoutePressed"
                             />
+                            
+                            <ToolbarSeparator />
+
                             <Button
                                 text="{i18n>Drawing}"
                                 icon="sap-icon://draw-rectangle"
                                 type="Emphasized"
                                 press="onDrawingPressed"
                             />
-                            <ToolbarSeparator />
+                            
                             <Button
                                 text="{i18n>OrderNote}"
                                 icon="sap-icon://notes"
@@ -849,6 +858,7 @@
                                 icon="sap-icon://print"
                                 type="Emphasized"
                                 press="onPalLabelPressed"
+                                visible="false"
                             />
                         </content>
                     </Toolbar>

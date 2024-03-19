@@ -25,7 +25,8 @@ sap.ui.define(
     "use strict";
 
     return Controller.extend(
-      "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01", {
+      "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
+      {
         onInit: function () {
           var that = this;
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
@@ -124,7 +125,7 @@ sap.ui.define(
                 // In Progress
                 var InProgressData = oData.NavWC_InProgress.results;
                 if (InProgressData.length === 0) {
-                  InProgressData = [{}];
+                  // InProgressData = [{}]; Do Nothing
                 }
                 var InProgressModel = new sap.ui.model.json.JSONModel();
 
@@ -140,7 +141,7 @@ sap.ui.define(
                 // Queue
                 var InQueueData = oData.NavWC_Queue.results;
                 if (InQueueData.length === 0) {
-                  InQueueData = [{}];
+                  // InQueueData = [{}]; Do Nothing
                 }
                 var InQueueModel = new sap.ui.model.json.JSONModel();
 
@@ -156,7 +157,7 @@ sap.ui.define(
                 // Future
                 var InFutureData = oData.NavWC_Future.results;
                 if (InFutureData.length === 0) {
-                  InFutureData = [{}];
+                  // InFutureData = [{}]; Do Nothing
                 }
                 var InFutureModel = new sap.ui.model.json.JSONModel();
 
@@ -302,10 +303,11 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WorkCenter' and Key04 eq '" +
-            SelPlant +
-            "' and Key05 eq '" +
-            SelWCGrp +
-            "'", {
+              SelPlant +
+              "' and Key05 eq '" +
+              SelWCGrp +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -355,8 +357,9 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WCGroup' and Key04 eq '" +
-            SelPlant +
-            "'", {
+              SelPlant +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -477,10 +480,11 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BOM' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "'", {
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -603,10 +607,11 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Routing' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "'", {
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -777,79 +782,33 @@ sap.ui.define(
           var that = this;
           var index;
           var Path = that.getView().getId();
-          var TabsArray = sap.ui
-            .getCore()
-            .byId(`${Path}--ObjectPageLayout`)
-            .getSections(); // All Tab Details
-          var TabSelect = sap.ui
-            .getCore()
-            .byId(`${Path}--ObjectPageLayout`)
-            .getSelectedSection(); // Selected Tab Details
-          for (var i = 0; i < TabsArray.length; i++) {
-            if (TabSelect === TabsArray[i].sId) {
-              index = i; // Getting Selected Tab validating Id
-              break;
-            }
-          }
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
-          if (index === 0) {
-            Tableindex = sap.ui
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data05;
+          } else {
+            Tableindex = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-              SelAufnr = sap.ui
-                .getCore()
-                .byId(`${Path}--idInprogressOrderList`)
-                .getModel("InProgressModel")
-                .getData().InProgressData[Tableindex].Data02;
-              SelOprNo = sap.ui
-                .getCore()
-                .byId(`${Path}--idInprogressOrderList`)
-                .getModel("InProgressModel")
-                .getData().InProgressData[Tableindex].Data05;
-            } else {
-              Tableindex = sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getSelectedIndices()[0];
-              // Get Order No & Opr No
-              if (Tableindex != undefined) {
-                SelAufnr = sap.ui
-                  .getCore()
-                  .byId(`${Path}--idQueueOrderList`)
-                  .getModel("InQueueModel")
-                  .getData().InQueueData[Tableindex].Data02;
-                SelOprNo = sap.ui
-                  .getCore()
-                  .byId(`${Path}--idQueueOrderList`)
-                  .getModel("InQueueModel")
-                  .getData().InQueueData[Tableindex].Data05;
-              } else {
-                // Raise Message
-                MessageBox.error(
-                  "Select Only Lines from In Progress and In Queue section to Proceed"
-                );
-                return;
-              }
-            }
-          }
-          if (index === 1) {
-            Tableindex = sap.ui
-              .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getSelectedIndices()[0];
-            // Get Order No & Opr No
-            if (
-              sap.ui
-              .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData != undefined
-            ) {
               SelAufnr = sap.ui
                 .getCore()
                 .byId(`${Path}--idQueueOrderList`)
@@ -860,14 +819,13 @@ sap.ui.define(
                 .byId(`${Path}--idQueueOrderList`)
                 .getModel("InQueueModel")
                 .getData().InQueueData[Tableindex].Data05;
+            } else {
+              // Raise Message
+              MessageBox.error(
+                "Select Only Lines from In Progress and In Queue section to Proceed"
+              );
+              return;
             }
-          }
-          if (index === 2) {
-            // Raise Message
-            MessageBox.error(
-              "Select Only Lines from In Progress and In Queue section"
-            );
-            return;
           }
           if (Tableindex === undefined) {
             // Raise Message
@@ -881,7 +839,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-          that.showBusyIndicator();
+          that.showBusyIndicator(1000, 0);
 
           if (!that.StartDialog) {
             that.StartDialog = sap.ui.xmlfragment(
@@ -893,13 +851,8 @@ sap.ui.define(
 
           // open value help dialog
           that.StartDialog.open();
-          
+
           var oDateTime = new Date();
-          // .toLocaleDateString('en-US', {
-          //   year: 'numeric',
-          //   month: 'numeric',
-          //   day: 'numeric',
-          // });;
           if (oDateTime.getMonth() < 10) {
             var Month = "0" + (oDateTime.getMonth() + 1);
           }
@@ -939,10 +892,11 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-            sValue +
-            "' and Key03 eq '" +
-            SelPlant +
-            "'", {
+              sValue +
+              "' and Key03 eq '" +
+              SelPlant +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -976,86 +930,35 @@ sap.ui.define(
           var LastName = sap.ui.getCore().byId("idStartLName").getValue();
           var StartDate = sap.ui.getCore().byId("idStartDate").getValue();
           var StartTime = sap.ui.getCore().byId("idStartTime").getValue();
-          // sap.ui.getCore().byId("idStartTime").setValue();
-          // sap.ui.getCore().byId("idStartDate").setValue();
-          // sap.ui.getCore().byId("idStartLName").setValue();
-          // sap.ui.getCore().byId("idStartFName").setValue();
-          // sap.ui.getCore().byId("idStartOperator").setValue();
 
-          var TabsArray = sap.ui
-            .getCore()
-            .byId(`${Path}--ObjectPageLayout`)
-            .getSections(); // All Tab Details
-          var TabSelect = sap.ui
-            .getCore()
-            .byId(`${Path}--ObjectPageLayout`)
-            .getSelectedSection(); // Selected Tab Details
-          for (var i = 0; i < TabsArray.length; i++) {
-            if (TabSelect === TabsArray[i].sId) {
-              index = i; // Getting Selected Tab validating Id
-              break;
-            }
-          }
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
-          if (index === 0) {
-            Tableindex = sap.ui
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data05;
+          } else {
+            Tableindex = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-              SelAufnr = sap.ui
-                .getCore()
-                .byId(`${Path}--idInprogressOrderList`)
-                .getModel("InProgressModel")
-                .getData().InProgressData[Tableindex].Data02;
-              SelOprNo = sap.ui
-                .getCore()
-                .byId(`${Path}--idInprogressOrderList`)
-                .getModel("InProgressModel")
-                .getData().InProgressData[Tableindex].Data05;
-            } else {
-              Tableindex = sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getSelectedIndices()[0];
-              // Get Order No & Opr No
-              if (Tableindex != undefined) {
-                index = 1;
-                SelAufnr = sap.ui
-                  .getCore()
-                  .byId(`${Path}--idQueueOrderList`)
-                  .getModel("InQueueModel")
-                  .getData().InQueueData[Tableindex].Data02;
-                SelOprNo = sap.ui
-                  .getCore()
-                  .byId(`${Path}--idQueueOrderList`)
-                  .getModel("InQueueModel")
-                  .getData().InQueueData[Tableindex].Data05;
-              } else {
-                // Raise Message
-                MessageBox.error(
-                  "Select Only Lines from In Progress and In Queue section to Proceed"
-                );
-                return;
-              }
-            }
-          }
-          if (index === 1) {
-            Tableindex = sap.ui
-              .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getSelectedIndices()[0];
-            // Get Order No & Opr No
-            if (
-              sap.ui
-              .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData != undefined
-            ) {
+              index = 1;
               SelAufnr = sap.ui
                 .getCore()
                 .byId(`${Path}--idQueueOrderList`)
@@ -1066,15 +969,15 @@ sap.ui.define(
                 .byId(`${Path}--idQueueOrderList`)
                 .getModel("InQueueModel")
                 .getData().InQueueData[Tableindex].Data05;
+            } else {
+              // Raise Message
+              MessageBox.error(
+                "Select Only Lines from In Progress and In Queue section to Proceed"
+              );
+              return;
             }
           }
-          if (index === 2) {
-            // Raise Message
-            MessageBox.error(
-              "Select Only Lines from In Progress and In Queue section"
-            );
-            return;
-          }
+
           if (Tableindex === undefined) {
             // Raise Message
             MessageBox.error(
@@ -1087,7 +990,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-          that.showBusyIndicator();
+          that.showBusyIndicator(1000, 0);
 
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
@@ -1164,9 +1067,200 @@ sap.ui.define(
           this.StartDialog.close();
           MessageBox.confirm("No Update Performed");
         },
-        onStopPressed: function () {
-          MessageBox.information("STOP Activity Development inprogress");
-          return;
+        onStopPressed: function (oEvent) {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var SelAufnr = " ";
+          var SelOprNo = " ";
+          var SelOpratorNo = " ";
+          var SelStartDate = " ";
+          var SelStartTime = " ";
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            SelAufnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data05;
+
+            SelOpratorNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data16;
+
+            SelStartDate = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data14;
+
+            SelStartTime = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data15;
+          } else {
+            Tableindex = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getSelectedIndices()[0];
+            // Get Order No & Opr No
+            if (Tableindex != undefined) {
+              SelAufnr = sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .getModel("InQueueModel")
+                .getData().InQueueData[Tableindex].Data02;
+              SelOprNo = sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .getModel("InQueueModel")
+                .getData().InQueueData[Tableindex].Data05;
+
+              SelOpratorNo = sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .getModel("InQueueModel")
+                .getData().InQueueData[Tableindex].Data16;
+
+              SelStartDate = sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .getModel("InQueueModel")
+                .getData().InQueueData[Tableindex].Data14;
+
+              SelStartTime = sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .getModel("InQueueModel")
+                .getData().InQueueData[Tableindex].Data15;
+            } else {
+              // Raise Message
+              MessageBox.error(
+                "Select only Lines from In Progress and In Queue section to Proceed"
+              );
+              return;
+            }
+          }
+
+          if (Tableindex === undefined) {
+            // Raise Message
+            MessageBox.error(
+              "Select Only Lines from In Progress and In Queue section to Proceed"
+            );
+            return;
+          }
+
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          that.showBusyIndicator(100, 0);
+
+          if (!that.StopDialog) {
+            that.StopDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.StopAction",
+              that
+            );
+            that.getView().addDependent(that.StopDialog);
+          }
+
+          // open value help dialog
+          that.StopDialog.open();
+
+          var oDateTime = new Date();
+
+          if (oDateTime.getMonth() < 10) {
+            var Month = "0" + (oDateTime.getMonth() + 1);
+          }
+          if (oDateTime.getMonth() > 9) {
+            var Month = oDateTime.getMonth() + 1;
+          }
+          if (oDateTime.getDate() < 10) {
+            var Day = "0" + oDateTime.getDate();
+          }
+          if (oDateTime.getDate() > 9) {
+            var Day = oDateTime.getDate();
+          }
+          var Year = oDateTime.getFullYear();
+          var oDateFormat = Day + "/" + Month + "/" + Year;
+
+          var hr = oDateTime.getHours();
+          var mm = oDateTime.getMinutes();
+          var sec = +oDateTime.getSeconds();
+          var oTimeFormat = hr + ":" + mm + ":" + sec;
+
+          sap.ui.getCore().byId("idStartDate").setValue(SelStartDate);
+          sap.ui.getCore().byId("idStartTime").setValue(SelStartTime);
+          sap.ui.getCore().byId("idStopDate").setValue(oDateFormat);
+          sap.ui.getCore().byId("idStopTime").setValue(oTimeFormat);
+          sap.ui.getCore().byId("idSelectPlant").setValue(SelPlant);
+          sap.ui.getCore().byId("idStopOperator").setValue(SelOpratorNo);
+          that.OnStopOperatorGet(SelOpratorNo);
+          that.hideBusyIndicator();
+        },
+
+        OnStopOperatorGet: function (SelOpratorNo) {
+          var that = this;
+          var sValue = SelOpratorNo;
+          var Path = that.getView().getId();
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
+              sValue +
+              "' and Key03 eq '" +
+              SelPlant +
+              "'",
+            {
+              context: null,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  var sPath = that.getView().getId();
+                  if (oData.results.length != 0) {
+                    var emparray = oData.results[0];
+                    sap.ui
+                      .getCore()
+                      .byId(`idStopFName`)
+                      .setValue(emparray.Data03);
+                    sap.ui
+                      .getCore()
+                      .byId(`idStopLName`)
+                      .setValue(emparray.Data04);
+                  }
+                } catch (e) {
+                  alert(e.message);
+                }
+              },
+            }
+          );
+        },
+        onConfirmStopPress: function(){
+
+        },
+        onCancelStopPress: function () {
+          this.StopDialog.close();
+          MessageBox.confirm("No Update Performed");
         },
         onScrapPressed: function () {
           MessageBox.information("SCARP Activity Development inprogress");

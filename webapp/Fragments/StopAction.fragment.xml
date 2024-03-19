@@ -1,42 +1,44 @@
 <c:FragmentDefinition
-    id="idStartAction"
+    id="idStopAction"
     xmlns="sap.m"
     xmlns:c="sap.ui.core"
     xmlns:l="sap.ui.layout"
     xmlns:sf="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
 >
-    <Dialog id="idDialogStart">
+    <Dialog id="idDialogStop">
         <l:VerticalLayout
-            id="idVerticalLayoutStart"
+            id="idVerticalLayoutStop"
             class="sapUiContentPadding"
             width="100%"
         >
             <l:content>
-                <List id="idStartList"
-                    headerText="{i18n>StartAction}"
+                <List id="idStopList"
+                    headerText="{i18n>StopAction}"
                     class="sapUiContentPadding"
                 >
                     <InputListItem label="{i18n>OprDetails}">
                         <Input
-                            id="idStartOperator"
+                            id="idStopOperator"
                             placeholder="Operator No"
                             type="Text"
-                            change="OnOperatorfill"
+                            enabled="false"
                             width="15rem"
                         />
                     </InputListItem>
                     <InputListItem label="{i18n>FirstName}">
                         <Input
-                        id="idStartFName"
+                        id="idStopFName"
                             type="Text"
+                            enabled="false"
                             width="15rem"
                         />
                     </InputListItem>
                     <InputListItem label="{i18n>LastName}">
                         <Input
-                        id="idStartLName"
+                        id="idStopLName"
                             type="Text"
+                            enabled="false"
                             width="15rem"
                         />
                     </InputListItem>
@@ -44,6 +46,7 @@
                         <Input
                         id="idSelectPlant"
                             type="Text"
+                            enabled="false"
                             width="15rem"
                         />
                     </InputListItem>
@@ -66,6 +69,25 @@
                             width="15rem"
                         />
                     </InputListItem>
+                    <InputListItem label="{i18n>StopDate}">
+                        <DatePicker
+                            id="idStopDate"
+                            placeholder="Select Date"
+                            class="sapUiSmallMarginBottom"
+                            showFooter="false"
+                            enabled="false"
+                            width="15rem"
+                        />
+                    </InputListItem>
+                    <InputListItem label="{i18n>StopTime}" >
+                        <TimePicker
+                            id="idStopTime"
+                            placeholder="Select Time"
+                            class="sapUiSmallMarginBottom"
+                            enabled="false"
+                            width="15rem"
+                        />
+                    </InputListItem>
                 </List>
             </l:content>
         </l:VerticalLayout>
@@ -73,12 +95,12 @@
         <Button
             icon="sap-icon://accept"
             text="{i18n>Confirm}"
-            press="onConfirmStartPress"
+            press="onConfirmStopPress"
         />
         <Button
             icon="sap-icon://cancel"
             text="{i18n>Cancel}"
-            press="onCancelStartPress"
+            press="onCancelStopPress"
         />
     </Dialog>
 </c:FragmentDefinition>
