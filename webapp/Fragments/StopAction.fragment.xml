@@ -52,7 +52,7 @@
                     </InputListItem>
                     <InputListItem label="{i18n>StartDate}">
                         <DatePicker
-                            id="idStartDate"
+                            id="idStartEndDate"
                             placeholder="Select Date"
                             class="sapUiSmallMarginBottom"
                             showFooter="false"
@@ -62,7 +62,7 @@
                     </InputListItem>
                     <InputListItem label="{i18n>StartTime}" >
                         <TimePicker
-                            id="idStartTime"
+                            id="idStartEndTime"
                             placeholder="Select Time"
                             class="sapUiSmallMarginBottom"
                             enabled="false"
@@ -71,7 +71,7 @@
                     </InputListItem>
                     <InputListItem label="{i18n>StopDate}">
                         <DatePicker
-                            id="idStopDate"
+                            id="idStopEndDate"
                             placeholder="Select Date"
                             class="sapUiSmallMarginBottom"
                             showFooter="false"
@@ -81,7 +81,7 @@
                     </InputListItem>
                     <InputListItem label="{i18n>StopTime}" >
                         <TimePicker
-                            id="idStopTime"
+                            id="idStopEndTime"
                             placeholder="Select Time"
                             class="sapUiSmallMarginBottom"
                             enabled="false"

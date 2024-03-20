@@ -316,8 +316,10 @@
                                     >
                                         <Label text="{i18n>OperStrtDate}" />
                                         <Table:template>
+                                            
                                             <DatePicker
                                                 value="{InProgressModel>Data14}"
+                                                valueFormat="dd/MM/yyyy"
                                                 enabled="false"
                                             />
                                         </Table:template>
@@ -348,10 +350,10 @@
                                             text="{i18n>OperEndDate}"
                                         />
                                         <Table:template>
-                                            <Text
-                                                id="_IDGenText8"
-                                                text="{InProgressModel>Data08}"
-                                                wrapping="false"
+                                            <DatePicker
+                                                value="{InProgressModel>Data08}"
+                                                valueFormat="dd/MM/yyyy"
+                                                enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -367,10 +369,9 @@
                                             text="{i18n>OperEndTime}"
                                         />
                                         <Table:template>
-                                            <Text
-                                                id="_IDGenText9"
-                                                text="{InProgressModel>Data09}"
-                                                wrapping="false"
+                                            <TimePicker
+                                                value="{InProgressModel>Data09}"
+                                                enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -666,6 +667,7 @@
                                         <Table:template>
                                             <DatePicker
                                                 value="{InQueueModel>Data14}"
+                                                valueFormat="dd/MM/yyyy"
                                                 enabled="false"
                                             />
                                         </Table:template>
@@ -696,10 +698,10 @@
                                             text="{i18n>OperEndDate}"
                                         />
                                         <Table:template>
-                                            <Text
-                                                id="_IDGenText21"
-                                                text="{InQueueModel>Data08}"
-                                                wrapping="false"
+                                            <DatePicker
+                                                value="{InQueueModel>Data08}"
+                                                valueFormat="dd/MM/yyyy"
+                                                enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -715,10 +717,9 @@
                                             text="{i18n>OperEndTime}"
                                         />
                                         <Table:template>
-                                            <Text
-                                                id="_IDGenText22"
-                                                text="{InQueueModel>Data09}"
-                                                wrapping="false"
+                                            <TimePicker
+                                                value="{InQueueModel>Data09}"
+                                                enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -1008,6 +1009,7 @@
                                         <Table:template>
                                             <DatePicker
                                                 value="{InFutureModel>Data14}"
+                                                valueFormat="dd/MM/yyyy"
                                                 enabled="false"
                                             />
                                         </Table:template>
@@ -1038,10 +1040,10 @@
                                             text="{i18n>OperEndDate}"
                                         />
                                         <Table:template>
-                                            <Text
-                                                id="_IDGenText34"
-                                                text="{InFutureModel>Data08}"
-                                                wrapping="false"
+                                            <DatePicker
+                                                value="{InFutureModel>Data08}"
+                                                valueFormat="dd/MM/yyyy"
+                                                enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -1057,10 +1059,9 @@
                                             text="{i18n>OperEndTime}"
                                         />
                                         <Table:template>
-                                            <Text
-                                                id="_IDGenText35"
-                                                text="{InFutureModel>Data09}"
-                                                wrapping="false"
+                                            <TimePicker
+                                                value="{InFutureModel>Data09}"
+                                                enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>

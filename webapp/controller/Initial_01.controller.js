@@ -5,7 +5,6 @@ sap.ui.define(
     "sap/m/MessageToast",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/URI",
     "sap/m/ProgressIndicator",
     "sap/ui/model/type/Date",
   ],
@@ -18,7 +17,6 @@ sap.ui.define(
     MessageToast,
     Filter,
     FilterOperator,
-    URI,
     ProgressIndicator,
     Dates
   ) {
@@ -866,12 +864,12 @@ sap.ui.define(
             var Day = oDateTime.getDate();
           }
           var Year = oDateTime.getFullYear();
-          var oDateFormat = Day + "/" + Month + "/" + Year;
+          var oDateFormat = Year + Month + Day; // Day + "/" + Month + "/" + Year;
 
-          var hr = oDateTime.getHours();
-          var mm = oDateTime.getMinutes();
-          var sec = +oDateTime.getSeconds();
-          var oTimeFormat = hr + ":" + mm + ":" + sec;
+          var hr = oDateTime.getHours().toString();
+          var mm = oDateTime.getMinutes().toString();
+          var sec = oDateTime.getSeconds().toString();
+          var oTimeFormat = hr + mm + sec;
 
           sap.ui.getCore().byId("idStartDate").setValue(oDateFormat);
           sap.ui.getCore().byId("idStartTime").setValue(oTimeFormat);
@@ -941,6 +939,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
+            index = 0;
             SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
@@ -1007,7 +1006,7 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData;
-            for (var ind = 1; ind < IEntry.NavWC_InProgress.length; ind++) {
+            for (var ind = 0; ind < IEntry.NavWC_InProgress.length; ind++) {
               if (ind === Tableindex) {
                 IEntry.NavWC_InProgress[ind].Data16 = OperatorNo;
                 IEntry.NavWC_InProgress[ind].Data14 = StartDate;
@@ -1019,6 +1018,8 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .setData("InProgressData", IEntry.NavWC_InProgress);
+
+            IEntry.NavWC_Queue = [{}];
           }
           if (index === 1) {
             IEntry.NavWC_Queue = sap.ui
@@ -1027,7 +1028,7 @@ sap.ui.define(
               .getModel("InQueueModel")
               .getData().InQueueData;
 
-            for (var ind = 1; ind < IEntry.NavWC_Queue.length; ind++) {
+            for (var ind = 0; ind < IEntry.NavWC_Queue.length; ind++) {
               if (ind === Tableindex) {
                 IEntry.NavWC_Queue[ind].Data16 = OperatorNo;
                 IEntry.NavWC_Queue[ind].Data14 = StartDate;
@@ -1039,6 +1040,8 @@ sap.ui.define(
               .byId(`${Path}--idQueueOrderList`)
               .getModel("InQueueModel")
               .setData("InQueueData", IEntry.NavWC_Queue);
+
+            IEntry.NavWC_InProgress = [{}];
           }
 
           IEntry.NavWC_Future = [{}];
@@ -1113,54 +1116,11 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data15;
-          } else {
-            Tableindex = sap.ui
-              .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getSelectedIndices()[0];
-            // Get Order No & Opr No
-            if (Tableindex != undefined) {
-              SelAufnr = sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getModel("InQueueModel")
-                .getData().InQueueData[Tableindex].Data02;
-              SelOprNo = sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getModel("InQueueModel")
-                .getData().InQueueData[Tableindex].Data05;
-
-              SelOpratorNo = sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getModel("InQueueModel")
-                .getData().InQueueData[Tableindex].Data16;
-
-              SelStartDate = sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getModel("InQueueModel")
-                .getData().InQueueData[Tableindex].Data14;
-
-              SelStartTime = sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getModel("InQueueModel")
-                .getData().InQueueData[Tableindex].Data15;
-            } else {
-              // Raise Message
-              MessageBox.error(
-                "Select only Lines from In Progress and In Queue section to Proceed"
-              );
-              return;
-            }
           }
-
           if (Tableindex === undefined) {
             // Raise Message
             MessageBox.error(
-              "Select Only Lines from In Progress and In Queue section to Proceed"
+              "Select Only Lines from In Progress section to Stop Operation"
             );
             return;
           }
@@ -1197,17 +1157,17 @@ sap.ui.define(
             var Day = oDateTime.getDate();
           }
           var Year = oDateTime.getFullYear();
-          var oDateFormat = Day + "/" + Month + "/" + Year;
+          var oDateFormat = Year + Month + Day; // Day + "/" + Month + "/" + Year;
 
-          var hr = oDateTime.getHours();
-          var mm = oDateTime.getMinutes();
-          var sec = +oDateTime.getSeconds();
-          var oTimeFormat = hr + ":" + mm + ":" + sec;
+          var hr = oDateTime.getHours().toString();
+          var mm = oDateTime.getMinutes().toString();
+          var sec = +oDateTime.getSeconds().toString();
+          var oTimeFormat = hr + mm + sec;
 
-          sap.ui.getCore().byId("idStartDate").setValue(SelStartDate);
-          sap.ui.getCore().byId("idStartTime").setValue(SelStartTime);
-          sap.ui.getCore().byId("idStopDate").setValue(oDateFormat);
-          sap.ui.getCore().byId("idStopTime").setValue(oTimeFormat);
+          sap.ui.getCore().byId("idStartEndDate").setValue(SelStartDate);
+          sap.ui.getCore().byId("idStartEndTime").setValue(SelStartTime);
+          sap.ui.getCore().byId("idStopEndDate").setValue(oDateFormat);
+          sap.ui.getCore().byId("idStopEndTime").setValue(oTimeFormat);
           sap.ui.getCore().byId("idSelectStopPlant").setValue(SelPlant);
           sap.ui.getCore().byId("idStopOperator").setValue(SelOpratorNo);
           that.OnStopOperatorGet(SelOpratorNo);
@@ -1255,8 +1215,103 @@ sap.ui.define(
             }
           );
         },
-        onConfirmStopPress: function(){
+        onConfirmStopPress: function () {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
 
+          var OperatorNo = sap.ui.getCore().byId("idStopOperator").getValue();
+          var FirstName = sap.ui.getCore().byId("idStopFName").getValue();
+          var LastName = sap.ui.getCore().byId("idStopLName").getValue();
+          var EndDate = sap.ui.getCore().byId("idStopEndDate").getValue();
+          var EndTime = sap.ui.getCore().byId("idStopEndTime").getValue();
+
+          var Tableindex = "X";
+          var SelAufnr = " ";
+          var SelOprNo = " ";
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            index = 0;
+            SelAufnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data05;
+          }
+          if (Tableindex === undefined) {
+            // Raise Message
+            MessageBox.error(
+              "Select Only Lines from In Progress section to Stop Operation"
+            );
+            return;
+          }
+
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          that.showBusyIndicator(1000, 0);
+
+          var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+          var IEntry = {};
+          IEntry.Key01 = "STOP";
+          IEntry.Key02 = SelAufnr;
+          IEntry.Key03 = SelOprNo;
+          IEntry.Key04 = SelPlant;
+          IEntry.Key05 = OperatorNo;
+          IEntry.WorkCenterArea = " ";
+          if (index === 0) {
+            IEntry.NavWC_InProgress = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData;
+            for (var ind = 0; ind < IEntry.NavWC_InProgress.length; ind++) {
+              if (ind === Tableindex) {
+                IEntry.NavWC_InProgress[ind].Data08 = EndDate;
+                IEntry.NavWC_InProgress[ind].Data09 = EndTime;
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .setData("InProgressData", IEntry.NavWC_InProgress);
+          }
+
+          IEntry.NavWC_Queue = [{}];
+          IEntry.NavWC_Future = [{}];
+          that.StopDialog.close();
+
+          console.log(IEntry);
+          oDataModel.create(
+            "/WorkCenter_AreaOrderSet",
+            IEntry,
+            null,
+            function (oData, Response) {
+              try {
+                // console.log(oData);
+                that.hideBusyIndicator();
+                that.onButtonPress();
+                MessageBox.confirm("Update Successful");
+                return;
+              } catch (e) {
+                alert(e.message);
+                that.hideBusyIndicator();
+              }
+            }
+          );
         },
         onCancelStopPress: function () {
           this.StopDialog.close();
