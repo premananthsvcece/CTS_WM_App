@@ -1317,6 +1317,48 @@ sap.ui.define(
           this.StopDialog.close();
           MessageBox.confirm("No Update Performed");
         },
+        onOrderNotePressed: function () {
+          // var that = this;
+          // var index;
+          // var Path = that.getView().getId();
+
+          // var Tableindex = "X";
+          // var SelAufnr = " ";
+          // var SelOprNo = " ";
+
+          // Tableindex = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getSelectedIndices()[0];
+          // // Get Order No & Opr No
+          // if (Tableindex != undefined) {
+          //   index = 0;
+          // }
+          // if (Tableindex === undefined) {
+          //   // Raise Message
+          //   MessageBox.error(
+          //     "Select Only Lines from In Progress section to Stop Operation"
+          //   );
+          //   return;
+          // }
+          // if (!that.TextBoxDialog) {
+          //   that.TextBoxDialog = sap.ui.xmlfragment(
+          //     "sap.pp.wcare.wmd.workmanagerapp.Fragments.TextBox",
+          //     that
+          //   );
+          //   that.getView().addDependent(that.TextBoxDialog);
+          // }
+
+          // // open value help dialog
+          // that.TextBoxDialog.open();
+          MessageBox.confirm("Development in Progress");
+        },
+        onConfirmTextPress: function () {
+          this.TextBoxDialog.close();
+        },
+        onCancelTextPress: function () {
+          this.TextBoxDialog.close();
+        },
         onScrapPressed: function () {
           MessageBox.information("SCARP Activity Development inprogress");
           return;

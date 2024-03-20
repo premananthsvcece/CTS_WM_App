@@ -209,6 +209,7 @@
                                                 id="_IDGenText1"
                                                 text="{InProgressModel>Data01}"
                                                 wrapping="false"
+                                                visible="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -558,6 +559,7 @@
                                                 id="_IDGenText14"
                                                 text="{InQueueModel>Data01}"
                                                 wrapping="false"
+                                                visible="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -900,6 +902,7 @@
                                                 id="_IDGenText27"
                                                 text="{InFutureModel>Data01}"
                                                 wrapping="false"
+                                                visible="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
