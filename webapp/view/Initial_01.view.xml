@@ -199,10 +199,12 @@
                                         sortProperty="Data01"
                                         filterProperty="Data01"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel1"
                                             text="{i18n>StomerField1}"
+                                            visible="false"
                                         />
                                         <Table:template>
                                             <Text
@@ -549,10 +551,12 @@
                                         sortProperty="Data01"
                                         filterProperty="Data01"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel14"
                                             text="{i18n>StomerField1}"
+                                            visible="false"
                                         />
                                         <Table:template>
                                             <Text
@@ -892,10 +896,12 @@
                                         sortProperty="Data01"
                                         filterProperty="Data01"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel27"
                                             text="{i18n>StomerField1}"
+                                            visible="false"
                                         />
                                         <Table:template>
                                             <Text
