@@ -1009,6 +1009,7 @@ sap.ui.define(
             for (var ind = 0; ind < IEntry.NavWC_InProgress.length; ind++) {
               if (ind === Tableindex) {
                 IEntry.NavWC_InProgress[ind].Data16 = OperatorNo;
+                IEntry.NavWC_InProgress[ind].Data17 = 'Success';
                 IEntry.NavWC_InProgress[ind].Data14 = StartDate;
                 IEntry.NavWC_InProgress[ind].Data15 = StartTime;
               }

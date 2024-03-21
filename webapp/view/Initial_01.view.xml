@@ -14,9 +14,9 @@
         id="ObjectPageLayout"
         toggleHeaderOnTitleClick="true"
     >
-    <uxap:headerTitle>
+        <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
-                <uxap:heading >
+                <uxap:heading>
                     <Title
                         level="Auto"
                         text="{i18n>appDescription}"
@@ -29,7 +29,7 @@
                 </uxap:heading>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
-        
+
         <uxap:headerContent>
             <HBox>
                 <VBox>
@@ -83,18 +83,18 @@
             </HBox>
             <OverflowToolbar
                 asyncMode="false"
-            > <content>
-                <ToolbarSpacer
-                />
-                <Button
-                id="idGO"
-                width="100px"
-                text="{i18n>Go}"
-                icon="sap-icon://process"
-                type="Accept"
-                press="onButtonPress"
-            />    
-            </content>
+            >
+                <content>
+                    <ToolbarSpacer />
+                    <Button
+                        id="idGO"
+                        width="100px"
+                        text="{i18n>Go}"
+                        icon="sap-icon://process"
+                        type="Accept"
+                        press="onButtonPress"
+                    />
+                </content>
             </OverflowToolbar>
         </uxap:headerContent>
         <uxap:sections>
@@ -128,7 +128,7 @@
                                 type="Emphasized"
                                 press="onRoutePressed"
                             />
-                            
+
                             <ToolbarSeparator />
                             <Button
                                 text="{i18n>Drawing}"
@@ -196,10 +196,9 @@
                                     <Table:Column
                                         id="_IDGenColumn1"
                                         width="10rem"
-                                        sortProperty="Data01"
-                                        filterProperty="Data01"
+                                        sortProperty="Data16"
+                                        filterProperty="Data16"
                                         autoResizable="true"
-                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel1"
@@ -207,12 +206,9 @@
                                             visible="false"
                                         />
                                         <Table:template>
-                                            <Text
-                                                id="_IDGenText1"
-                                                text="{InProgressModel>Data01}"
-                                                wrapping="false"
-                                                visible="false"
-                                            />
+                                            <Button type="{InProgressModel>Data17}"
+                                                icon="sap-icon://person-placeholder"
+                                                text="{InProgressModel>Data16}" />
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
@@ -319,7 +315,7 @@
                                     >
                                         <Label text="{i18n>OperStrtDate}" />
                                         <Table:template>
-                                            
+
                                             <DatePicker
                                                 value="{InProgressModel>Data14}"
                                                 valueFormat="dd/MM/yyyy"
@@ -447,15 +443,10 @@
                                             text="{i18n>TotalTime}"
                                         />
                                         <Table:template>
-                                            <Text
+                                            <TimePicker
                                                 id="_IDGenText13"
-                                                text="{InProgressModel>Data13}"
-                                                wrapping="false"
-                                            />
-                                            <Text
-                                                text="{InProgressModel>Data16}"
-                                                wrapping="false"
-                                                visible="false"
+                                                value="{InProgressModel>Data13}"
+                                                enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -473,9 +464,9 @@
             >
                 <uxap:heading>
                     <Toolbar active="false"
-                    design="Transparent"
-                    enabled="true"
-                    style="Standard">
+                        design="Transparent"
+                        enabled="true"
+                        style="Standard">
                         <content>
                             <ToolbarSpacer />
                             <ToolbarSeparator />
@@ -493,7 +484,7 @@
                                 type="Emphasized"
                                 press="onRoutePressed"
                             />
-                            
+
                             <ToolbarSeparator />
 
                             <Button
@@ -561,7 +552,7 @@
                                         <Table:template>
                                             <Text
                                                 id="_IDGenText14"
-                                                text="{InQueueModel>Data01}"
+                                                text="{InQueueModel>Data16}"
                                                 wrapping="false"
                                                 visible="false"
                                             />
@@ -798,15 +789,10 @@
                                             text="{i18n>TotalTime}"
                                         />
                                         <Table:template>
-                                            <Text
+                                            <TimePicker
                                                 id="_IDGenText26"
-                                                text="{InQueueModel>Data13}"
-                                                wrapping="false"
-                                            />
-                                            <Text
-                                                text="{InQueueModel>Data16}"
-                                                wrapping="false"
-                                                visible="false"
+                                                value="{InQueueModel>Data13}"
+                                                enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -824,9 +810,9 @@
             >
                 <uxap:heading>
                     <Toolbar active="false"
-                    design="Transparent"
-                    enabled="true"
-                    style="Standard">
+                        design="Transparent"
+                        enabled="true"
+                        style="Standard">
                         <content>
                             <ToolbarSpacer />
                             <ToolbarSeparator />
@@ -844,7 +830,7 @@
                                 type="Emphasized"
                                 press="onRoutePressed"
                             />
-                            
+
                             <ToolbarSeparator />
 
                             <Button
@@ -853,7 +839,7 @@
                                 type="Emphasized"
                                 press="onDrawingPressed"
                             />
-                            
+
                             <Button
                                 text="{i18n>OrderNote}"
                                 icon="sap-icon://notes"
@@ -906,7 +892,7 @@
                                         <Table:template>
                                             <Text
                                                 id="_IDGenText27"
-                                                text="{InFutureModel>Data01}"
+                                                text="{InFutureModel>Data16}"
                                                 wrapping="false"
                                                 visible="false"
                                             />
@@ -1143,15 +1129,10 @@
                                             text="{i18n>TotalTime}"
                                         />
                                         <Table:template>
-                                            <Text
+                                            <TimePicker
                                                 id="_IDGenText39"
-                                                text="{InFutureModel>Data13}"
-                                                wrapping="false"
-                                            />
-                                            <Text
-                                                text="{InFutureModel>Data16}"
-                                                wrapping="false"
-                                                visible="false"
+                                                value="{InFutureModel>Data13}"
+                                                enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
