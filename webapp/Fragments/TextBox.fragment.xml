@@ -1,22 +1,44 @@
-<c:FragmentDefinition id="idTextBox"
-	xmlns="sap.m"
-	xmlns:c="sap.ui.core"
-	xmlns:l="sap.ui.layout"
-	xmlns:sf="sap.ui.layout.form"
-	xmlns:core="sap.ui.core">
-	<Dialog id="idDialogTextBox" resizable="true" stretch="true" contentHeight="1500px"
-		contentWidth="1500px">
-		<l:VerticalLayout width="100%">
-			<l:content>
-				<TextArea id="idHeaderText" value="{/value}" showExceededText="true"
-					maxLength="2000" width="100%" growing="true" growingMaxLines="20"
-					valueState="{= ${/value}.length > 225 ? 'Warning' : 'None' }"
-					valueLiveUpdate="false" liveChange="handleLiveChange" />
-
-			</l:content>
-		</l:VerticalLayout>
-		<ToolbarSpacer />
-		<Button icon="sap-icon://accept" text="{i18n>Confirm}" press="onConfirmTextPress" />
-		<Button icon="sap-icon://cancel" text="{i18n>Cancel}" press="onCancelTextPress" />
-	</Dialog>
+<c:FragmentDefinition
+    id="idTextBox"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:sf="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="idDialogTextBox"
+        resizable="false"
+        draggable="false"
+        state="Information"
+        stretch="false"
+		contentHeight="500px"
+		contentWidth="500px"
+		title="Order Header Text"
+		titleAlignment="Center"
+    >
+            <content>
+                <TextArea
+                    id="idHeaderText"
+                    showExceededText="true"
+                    width="450px"
+					height="450px"
+                    growing="true"
+                    growingMaxLines="20"
+                    valueLiveUpdate="false"
+                    liveChange="handleLiveChange"
+                />
+            </content>
+        <ToolbarSpacer />
+        <Button
+            icon="sap-icon://accept"
+            text="{i18n>Save}"
+            press="onConfirmTextPress"
+        />
+        <Button
+            icon="sap-icon://cancel"
+            text="{i18n>Cancel}"
+            press="onCancelTextPress"
+        />
+    </Dialog>
 </c:FragmentDefinition>
