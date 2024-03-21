@@ -753,14 +753,14 @@ sap.ui.define(
           }
           // Get the path to the Windows shared folder
           //const sharedFolderPath =
-          //  "file:////sbs.ferro.local/server/Fælles/Tegning/";
+           var fileName = "file:\\\//sbs.ferro.local/server/Fælles/Tegning/";
 
           // Get the name of the file to open
           // var fileName = sharedFolderPath + SelMatnr + ".pdf";
 
           // Open the file
           // var oFile = URI(sharedFolderPath).append(fileName).toURI();
-          // window.open(fileName);
+          window.open(fileName);
           // Raise Message
           MessageBox.information("Drawing setup is under intergration");
           return;
