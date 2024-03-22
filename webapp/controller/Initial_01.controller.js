@@ -48,10 +48,21 @@ sap.ui.define(
                     .getCore()
                     .byId(Path + "--idInputPlant")
                     .setValue(Plant);
+
+                  sap.ui
+                    .getCore()
+                    .byId(Path + "--idTextPlant")
+                    .setText(Plant);
+
                   sap.ui
                     .getCore()
                     .byId(Path + "--idInputWorkCenter")
                     .setValue(Workcenter);
+
+                  sap.ui
+                    .getCore()
+                    .byId(Path + "--idTextWorkCenter")
+                    .setText(Workcenter);
 
                   if (Plant != " ") {
                     that.onLoadData(that, Plant, SelWCGrp, Workcenter);
@@ -263,6 +274,7 @@ sap.ui.define(
             if (Plant != undefined) {
               var Path = this.getView().getId();
               sap.ui.getCore().byId(`${Path}--idInputPlant`).setValue(Plant);
+              sap.ui.getCore().byId(`${Path}--idTextPlant`).setText(Plant);
               oEvent.getSource().getBinding("items").filter([]);
             } else {
               // Raise Message
@@ -664,6 +676,12 @@ sap.ui.define(
                 .getCore()
                 .byId(`${Path}--idInputWorkCenter`)
                 .setValue(Workcenter);
+
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idTextWorkCenter`)
+                .setText(Workcenter);
+
               oEvent.getSource().getBinding("items").filter([]);
             } else {
               return;
@@ -680,6 +698,12 @@ sap.ui.define(
                 .getCore()
                 .byId(`${Path}--idInputWorkArea`)
                 .setValue(Workcenter);
+
+                sap.ui
+                .getCore()
+                .byId(`${Path}--idTextWorkArea`)
+                .setText(Workcenter);
+
               oEvent.getSource().getBinding("items").filter([]);
             } else {
               return;

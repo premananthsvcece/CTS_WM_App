@@ -16,7 +16,52 @@
     >
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
-                <uxap:heading>
+                <uxap:snappedHeading>
+                    <HBox>
+                        <VBox>
+                            <Title
+                                text="{i18n>appDescription}"
+                                level="H6"
+                                class="sapUiLargeMarginBeginEnd"
+                            />
+                        </VBox>
+                        <VBox>
+                            <Label
+                                text="{i18n>Plant}"
+                                labelFor="idTextPlant"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Text
+                                id="idTextPlant"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </VBox>
+                        <VBox />
+                        <VBox>
+                            <Label
+                                text="{i18n>WorkArea}"
+                                labelFor="idTextWorkArea"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Text
+                                id="idTextWorkArea"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </VBox>
+                        <VBox>
+                            <Label
+                                text="{i18n>WorkCenter}"
+                                labelFor="idTextWorkCenter"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Text
+                                id="idTextWorkCenter"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </VBox>
+                    </HBox>
+                </uxap:snappedHeading>
+                <uxap:expandedHeading>
                     <Title
                         level="Auto"
                         text="{i18n>appDescription}"
@@ -26,7 +71,7 @@
                         wrapping="true"
                         wrappingType="Hyphenated"
                     />
-                </uxap:heading>
+                </uxap:expandedHeading>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
         <uxap:headerContent>
