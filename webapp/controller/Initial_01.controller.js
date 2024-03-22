@@ -699,7 +699,7 @@ sap.ui.define(
                 .byId(`${Path}--idInputWorkArea`)
                 .setValue(Workcenter);
 
-                sap.ui
+              sap.ui
                 .getCore()
                 .byId(`${Path}--idTextWorkArea`)
                 .setText(Workcenter);
@@ -784,14 +784,8 @@ sap.ui.define(
             return;
           }
 
-          if (!that.DrawingDialog) {
-            that.DrawingDialog = sap.ui.xmlfragment(
-              "sap.pp.wcare.wmd.workmanagerapp.Fragments.PopupPDF",
-              that
-            );
-            that.getView().addDependent(that.DrawingDialog);
-          }
 
+          window.open("C:\Temp\Test.pdf");
           // Get the path to the Windows shared folder
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -807,16 +801,8 @@ sap.ui.define(
                 try {
                   if (oData.results.length != 0) {
                     var DrawingURl = oData.results[0];
-                    that.DrawingDialog.open();
-                    var oHtml = sap.ui.getCore().byId("DiagramPDF");
-                    oHtml.setContent(
-                      "<iframe src='" +
-                        DrawingURl +
-                        "' height='1700' width='1300'></iframe>"
-                    );
-
-                    // window.open("http://" + DrawingURl.Data01),
-                    // "_Drawing_Output";
+                    var sSource = DrawingURl.Data01;
+                    window.open("http://"+sSource);
                   }
                 } catch (e) {
                   alert(e.message);
