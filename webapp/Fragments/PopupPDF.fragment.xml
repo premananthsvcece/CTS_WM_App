@@ -1,0 +1,30 @@
+<c:FragmentDefinition
+    id="idDiagramBox"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:sf="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="idDialogDiagram"
+        resizable="false"
+        draggable="false"
+        state="Information"
+        stretch="false"
+        contentHeight="500px"
+        contentWidth="500px"
+        title="Material Diagram"
+        titleAlignment="Center"
+    >
+        <content>
+            <core:HTML  id="DiagramPDF"></core:HTML>
+        </content>
+        <ToolbarSpacer />
+        <Button
+            icon="sap-icon://display"
+            text="{i18n>ok}"
+            press="onCancelTextPress"
+        />
+    </Dialog>
+</c:FragmentDefinition>

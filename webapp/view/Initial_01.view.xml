@@ -29,7 +29,6 @@
                 </uxap:heading>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
-
         <uxap:headerContent>
             <HBox>
                 <VBox>
@@ -81,9 +80,7 @@
                     />
                 </VBox>
             </HBox>
-            <OverflowToolbar
-                asyncMode="false"
-            >
+            <OverflowToolbar asyncMode="false">
                 <content>
                     <ToolbarSpacer />
                     <Button
@@ -93,6 +90,41 @@
                         icon="sap-icon://process"
                         type="Accept"
                         press="onButtonPress"
+                    />
+                    <ToolbarSeparator />
+                    <Button
+                        class="sapUiSizeCompact"
+                        text="{i18n>BOM}"
+                        icon="sap-icon://machine"
+                        press="onBOMPressed"
+                        type="Emphasized"
+                        width="120px"
+                    />
+                    <Button
+                        text="{i18n>Route}"
+                        icon="sap-icon://bus-public-transport"
+                        type="Emphasized"
+                        press="onRoutePressed"
+                    />
+                    <ToolbarSeparator />
+                    <Button
+                        text="{i18n>Drawing}"
+                        icon="sap-icon://draw-rectangle"
+                        type="Emphasized"
+                        press="onDrawingPressed"
+                    />
+                    <Button
+                        text="{i18n>OrderNote}"
+                        icon="sap-icon://notes"
+                        type="Emphasized"
+                        press="onOrderNotePressed"
+                    />
+                    <Button
+                        text="{i18n>PalLabel}"
+                        icon="sap-icon://print"
+                        type="Emphasized"
+                        press="onPalLabelPressed"
+                        visible="false"
                     />
                 </content>
             </OverflowToolbar>
@@ -115,60 +147,28 @@
                             <ToolbarSpacer />
                             <ToolbarSeparator />
                             <Button
-                                class="sapUiSizeCompact"
-                                text="{i18n>BOM}"
-                                icon="sap-icon://machine"
-                                press="onBOMPressed"
-                                type="Emphasized"
-                                width="120px"
-                            />
-                            <Button
-                                text="{i18n>Route}"
-                                icon="sap-icon://bus-public-transport"
-                                type="Emphasized"
-                                press="onRoutePressed"
-                            />
-
-                            <ToolbarSeparator />
-                            <Button
-                                text="{i18n>Drawing}"
-                                icon="sap-icon://draw-rectangle"
-                                type="Emphasized"
-                                press="onDrawingPressed"
-                            />
-                            <Button
-                                text="{i18n>OrderNote}"
-                                icon="sap-icon://notes"
-                                type="Emphasized"
-                                press="onOrderNotePressed"
-                            />
-                            <Button
-                                text="{i18n>PalLabel}"
-                                icon="sap-icon://print"
-                                type="Emphasized"
-                                press="onPalLabelPressed"
-                                visible="false"
-                            />
-                            <ToolbarSeparator />
-                            <Button
+                                id="idINPStartJob"
                                 text="{i18n>StartJob}"
                                 type="Critical"
                                 icon="sap-icon://restart"
                                 press="onStartPressed"
                             />
                             <Button
+                                id="idINPStopJob"
                                 text="{i18n>StopJob}"
                                 type="Attention"
                                 icon="sap-icon://stop"
                                 press="onStopPressed"
                             />
                             <Button
+                                id="idINPScarp"
                                 text="{i18n>Scarp}"
                                 type="Emphasized"
                                 icon="sap-icon://close-command-field"
                                 press="onScrapPressed"
                             />
                             <Button
+                                id="idINPPost"
                                 text="{i18n>Post}"
                                 type="Accept"
                                 icon="sap-icon://repost"
@@ -190,6 +190,7 @@
                                 enableSelectAll="false"
                                 selectionBehavior="RowOnly"
                                 selectionMode="Single"
+                                rowSelectionChange="onTableRowSelectionChange"
                             >
                                 <Table:noData text="{i18n>NoData}" />
                                 <Table:columns>
@@ -206,9 +207,11 @@
                                             visible="false"
                                         />
                                         <Table:template>
-                                            <Button type="{InProgressModel>Data17}"
+                                            <Button
+                                                type="{InProgressModel>Data17}"
                                                 icon="sap-icon://person-placeholder"
-                                                text="{InProgressModel>Data16}" />
+                                                text="{InProgressModel>Data16}"
+                                            />
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
@@ -315,7 +318,6 @@
                                     >
                                         <Label text="{i18n>OperStrtDate}" />
                                         <Table:template>
-
                                             <DatePicker
                                                 value="{InProgressModel>Data14}"
                                                 valueFormat="dd/MM/yyyy"
@@ -463,56 +465,21 @@
                 wrapTitle="false"
             >
                 <uxap:heading>
-                    <Toolbar active="false"
+                    <Toolbar
+                        active="false"
                         design="Transparent"
                         enabled="true"
-                        style="Standard">
+                        style="Standard"
+                    >
                         <content>
                             <ToolbarSpacer />
                             <ToolbarSeparator />
                             <Button
-                                class="sapUiSizeCompact"
-                                text="{i18n>BOM}"
-                                icon="sap-icon://machine"
-                                press="onBOMPressed"
-                                type="Emphasized"
-                                width="120px"
-                            />
-                            <Button
-                                text="{i18n>Route}"
-                                icon="sap-icon://bus-public-transport"
-                                type="Emphasized"
-                                press="onRoutePressed"
-                            />
-
-                            <ToolbarSeparator />
-
-                            <Button
-                                text="{i18n>Drawing}"
-                                icon="sap-icon://draw-rectangle"
-                                type="Emphasized"
-                                press="onDrawingPressed"
-                            />
-
-                            <Button
-                                text="{i18n>OrderNote}"
-                                icon="sap-icon://notes"
-                                type="Emphasized"
-                                press="onOrderNotePressed"
-                            />
-                            <Button
-                                text="{i18n>PalLabel}"
-                                icon="sap-icon://print"
-                                type="Emphasized"
-                                press="onPalLabelPressed"
-                                visible="false"
-                            />
-                            <ToolbarSeparator />
-                            <Button
+                                id="idQUEStartJob"
                                 text="{i18n>StartJob}"
                                 type="Critical"
                                 icon="sap-icon://restart"
-                                press="onStartPressed"
+                                press="onStartQueuePressed"
                             />
                         </content>
                     </Toolbar>
@@ -808,54 +775,6 @@
                 titleUppercase="false"
                 wrapTitle="false"
             >
-                <uxap:heading>
-                    <Toolbar active="false"
-                        design="Transparent"
-                        enabled="true"
-                        style="Standard">
-                        <content>
-                            <ToolbarSpacer />
-                            <ToolbarSeparator />
-                            <Button
-                                class="sapUiSizeCompact"
-                                text="{i18n>BOM}"
-                                icon="sap-icon://machine"
-                                press="onBOMPressed"
-                                type="Emphasized"
-                                width="120px"
-                            />
-                            <Button
-                                text="{i18n>Route}"
-                                icon="sap-icon://bus-public-transport"
-                                type="Emphasized"
-                                press="onRoutePressed"
-                            />
-
-                            <ToolbarSeparator />
-
-                            <Button
-                                text="{i18n>Drawing}"
-                                icon="sap-icon://draw-rectangle"
-                                type="Emphasized"
-                                press="onDrawingPressed"
-                            />
-
-                            <Button
-                                text="{i18n>OrderNote}"
-                                icon="sap-icon://notes"
-                                type="Emphasized"
-                                press="onOrderNotePressed"
-                            />
-                            <Button
-                                text="{i18n>PalLabel}"
-                                icon="sap-icon://print"
-                                type="Emphasized"
-                                press="onPalLabelPressed"
-                                visible="false"
-                            />
-                        </content>
-                    </Toolbar>
-                </uxap:heading>
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection
                         id="FutureOrderSubSection"

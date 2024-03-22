@@ -7,6 +7,7 @@ sap.ui.define(
     "sap/ui/model/FilterOperator",
     "sap/m/ProgressIndicator",
     "sap/ui/model/type/Date",
+    "sap/m/PDFViewer",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -18,7 +19,8 @@ sap.ui.define(
     Filter,
     FilterOperator,
     ProgressIndicator,
-    Dates
+    Dates,
+    PDFViewer
   ) {
     "use strict";
 
@@ -757,19 +759,47 @@ sap.ui.define(
             );
             return;
           }
+
+          if (!that.DrawingDialog) {
+            that.DrawingDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.PopupPDF",
+              that
+            );
+            that.getView().addDependent(that.DrawingDialog);
+          }
+
           // Get the path to the Windows shared folder
-          //const sharedFolderPath =
-          var fileName = "file:\\//sbs.ferro.local/server/Fælles/Tegning/";
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
-          // Get the name of the file to open
-          // var fileName = sharedFolderPath + SelMatnr + ".pdf";
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'DrawingURl' and Key02 eq '" +
+              SelMatnr +
+              "'",
+            {
+              context: null,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var DrawingURl = oData.results[0];
+                    that.DrawingDialog.open();
+                    var oHtml = sap.ui.getCore().byId("DiagramPDF");
+                    oHtml.setContent(
+                      "<iframe src='" +
+                        DrawingURl +
+                        "' height='1700' width='1300'></iframe>"
+                    );
 
-          // Open the file
-          // var oFile = URI(sharedFolderPath).append(fileName).toURI();
-          window.open(fileName);
-          // Raise Message
-          MessageBox.information("Drawing setup is under intergration");
-          return;
+                    // window.open("http://" + DrawingURl.Data01),
+                    // "_Drawing_Output";
+                  }
+                } catch (e) {
+                  alert(e.message);
+                }
+              },
+            }
+          );
         },
 
         onOrderNotePressed: function (oEvent) {
@@ -883,6 +913,92 @@ sap.ui.define(
 
           that.hideBusyIndicator();
         },
+
+        onStartQueuePressed: function (oEvent) {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+          var Tableindex = "X";
+          var SelAufnr = " ";
+          var SelOprNo = " ";
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idQueueOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            SelAufnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getModel("InQueueModel")
+              .getData().InQueueData[Tableindex].Data02;
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getModel("InQueueModel")
+              .getData().InQueueData[Tableindex].Data05;
+          } else {
+            // Raise Message
+            MessageBox.error(
+              "Select Only Lines from In Progress and In Queue section to Proceed"
+            );
+            return;
+          }
+
+          if (Tableindex === undefined) {
+            // Raise Message
+            MessageBox.error(
+              "Select Only Lines from In Progress and In Queue section to Proceed"
+            );
+            return;
+          }
+
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          that.showBusyIndicator(1000, 0);
+
+          if (!that.StartDialog) {
+            that.StartDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.StartAction",
+              that
+            );
+            that.getView().addDependent(that.StartDialog);
+          }
+
+          // open value help dialog
+          that.StartDialog.open();
+
+          var oDateTime = new Date();
+          if (oDateTime.getMonth() < 10) {
+            var Month = "0" + (oDateTime.getMonth() + 1);
+          }
+          if (oDateTime.getMonth() > 9) {
+            var Month = oDateTime.getMonth() + 1;
+          }
+          if (oDateTime.getDate() < 10) {
+            var Day = "0" + oDateTime.getDate();
+          }
+          if (oDateTime.getDate() > 9) {
+            var Day = oDateTime.getDate();
+          }
+          var Year = oDateTime.getFullYear();
+          var oDateFormat = Year + Month + Day; // Day + "/" + Month + "/" + Year;
+
+          var hr = oDateTime.getHours().toString();
+          var mm = oDateTime.getMinutes().toString();
+          var sec = oDateTime.getSeconds().toString();
+          var oTimeFormat = hr + mm + sec;
+
+          sap.ui.getCore().byId("idStartDate").setValue(oDateFormat);
+          sap.ui.getCore().byId("idStartTime").setValue(oTimeFormat);
+          sap.ui.getCore().byId("idSelectStartPlant").setValue(SelPlant);
+
+          that.hideBusyIndicator();
+        },
+
         OnOperatorfill: function (oEvent) {
           var that = this;
           var sValue = oEvent.getParameter("value");
@@ -1434,8 +1550,34 @@ sap.ui.define(
           // open value help dialog
           that.TextBoxDialog.open();
         },
-        onConfirmTextPress: function () {
+        onConfirmTextPress: function (oEvent) {
           MessageBox.information("Update will Happen in Backend");
+          var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+          var Data01 = sap.ui.getCore().byId(`idHeaderText`).getValue();
+          var itemset = {
+            Data01: Data01,
+          };
+
+          var IEntry = [];
+          IEntry.PushManager(itemset);
+          oDataModel.create(
+            "/ValueHelpSet",
+            IEntry,
+            null,
+            function (oData, Response) {
+              try {
+                // console.log(oData);
+                that.hideBusyIndicator();
+                that.onButtonPress();
+                MessageBox.confirm("Update Successful");
+                return;
+              } catch (e) {
+                alert(e.message);
+                that.hideBusyIndicator();
+              }
+            }
+          );
           this.TextBoxDialog.close();
         },
         onCancelTextPress: function () {
@@ -1448,6 +1590,74 @@ sap.ui.define(
         onPostPressed: function () {
           MessageBox.information("POST Activity Development inprogress");
           return;
+        },
+        onTableRowSelectionChange: function () {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var StartDate;
+          var EndDate;
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            index = 0;
+            StartDate = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data14;
+
+            EndDate = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data08;
+
+            if (StartDate != "") {
+              if (EndDate != "") {
+                sap.ui
+                  .getCore()
+                  .byId(`${Path}--idINPStopJob`)
+                  .setEnabled(false);
+                sap.ui
+                  .getCore()
+                  .byId(`${Path}--idINPStartJob`)
+                  .setEnabled(true);
+              } else {
+                sap.ui
+                  .getCore()
+                  .byId(`${Path}--idINPStartJob`)
+                  .setEnabled(false);
+                sap.ui.getCore().byId(`${Path}--idINPStopJob`).setEnabled(true);
+              }
+            }
+          }
+          if (Tableindex === undefined) {
+            Tableindex = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getSelectedIndices()[0];
+            // Get Order No & Opr No
+            if (Tableindex != undefined) {
+              index = 0;
+              StartDate = sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .getModel("InQueueModel")
+                .getData().InQueueData[Tableindex].Data14;
+            }
+          }
+          if (Tableindex === undefined) {
+            // Raise Message
+            MessageBox.error("Select Only Lines for displaying order notes");
+            return;
+          }
         },
       }
     );
