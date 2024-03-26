@@ -45,6 +45,7 @@
         <Button
             icon="sap-icon://accept"
             text="{i18n>Save}"
+            type="Success"
             press="onConfirmScarpPress"
         />
         <Button

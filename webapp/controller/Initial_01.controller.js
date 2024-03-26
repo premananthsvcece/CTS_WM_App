@@ -1645,7 +1645,10 @@ sap.ui.define(
             );
             that.getView().addDependent(that.ScrapActionDialog);
           }
+          sap.ui.getCore().byId(`idScarpReason`).setValue("");
+          sap.ui.getCore().byId(`idScarpQuantity`).setValue("");
           that.ScrapActionDialog.open();
+          
         },
         onScarpReasonRequest: function () {
           var that = this;
@@ -1761,7 +1764,7 @@ sap.ui.define(
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
           var Data01 = sap.ui.getCore().byId(`idScarpReason`).getValue();
-          var Data02 = sap.ui.getCore().byId(`idScarpQuantity`).getText();
+          var Data02 = sap.ui.getCore().byId(`idScarpQuantity`).getValue();
 
           that.ScrapActionDialog.close();
 
@@ -1772,7 +1775,7 @@ sap.ui.define(
             Key04: SelPlant,
             Key05: SelOprerator,
             Data01: Data01,
-            Data01: Data02,
+            Data02: Data02,
           };
 
           var IEntry = [];
