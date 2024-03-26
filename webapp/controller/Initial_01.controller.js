@@ -784,8 +784,7 @@ sap.ui.define(
             return;
           }
 
-
-          window.open("C:\Temp\Test.pdf");
+          window.open("C:TempTest.pdf");
           // Get the path to the Windows shared folder
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -802,7 +801,7 @@ sap.ui.define(
                   if (oData.results.length != 0) {
                     var DrawingURl = oData.results[0];
                     var sSource = DrawingURl.Data01;
-                    window.open("http://"+sSource);
+                    window.open("http://" + sSource);
                   }
                 } catch (e) {
                   alert(e.message);
@@ -1549,6 +1548,11 @@ sap.ui.define(
                       .getCore()
                       .byId(`idHeaderText`)
                       .setValue(LongText.Data01);
+                    sap.ui.getCore().byId("idHeaderOrder").setText(SelAufnr);
+                    sap.ui
+                      .getCore()
+                      .byId(`idDialogTextBox`)
+                      .setTitle("Order No: " + SelAufnr + " Header Notes");
                   }
                 } catch (e) {
                   alert(e.message);
@@ -1561,25 +1565,30 @@ sap.ui.define(
           that.TextBoxDialog.open();
         },
         onConfirmTextPress: function (oEvent) {
-          MessageBox.information("Update will Happen in Backend");
+          var that = this;
+          // MessageBox.information("Update will Happen in Backend");
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
           var Data01 = sap.ui.getCore().byId(`idHeaderText`).getValue();
+          var Key01 = sap.ui.getCore().byId(`idHeaderOrder`).getText();
+
           var itemset = {
+            Key01: "Save",
+            Key02: Key01,
+            Key03: "",
+            Key04: "",
             Data01: Data01,
           };
 
           var IEntry = [];
-          IEntry.PushManager(itemset);
+          IEntry = itemset;
           oDataModel.create(
             "/ValueHelpSet",
             IEntry,
             null,
             function (oData, Response) {
               try {
-                // console.log(oData);
                 that.hideBusyIndicator();
-                that.onButtonPress();
                 MessageBox.confirm("Update Successful");
                 return;
               } catch (e) {
@@ -1594,9 +1603,200 @@ sap.ui.define(
           this.TextBoxDialog.close();
         },
         onScrapPressed: function () {
-          MessageBox.information("SCARP Activity Development inprogress");
-          return;
+          // MessageBox.information("SCARP Activity Development inprogress");
+          // return;
+
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var SelAufnr = " ";
+          var SelOprNo = " ";
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            index = 0;
+            SelAufnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data05;
+          }
+
+          if (Tableindex === undefined) {
+            // Raise Message
+            MessageBox.error("Select Only Lines to capture Scrap Activity");
+            return;
+          }
+          if (!that.ScrapActionDialog) {
+            that.ScrapActionDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.ScarpAction",
+              that
+            );
+            that.getView().addDependent(that.ScrapActionDialog);
+          }
+          that.ScrapActionDialog.open();
         },
+        onScarpReasonRequest: function () {
+          var that = this;
+          var Path = that.getView().getId();
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          if (SelPlant === null) {
+            SelPlant = "DKKV";
+          }
+          if (!that.ScarpReasonDialog) {
+            that.ScarpReasonDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpScarpReason",
+              that
+            );
+            that.getView().addDependent(that.ScarpReasonDialog);
+          }
+          // open value help dialog
+          that.ScarpReasonDialog.open();
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
+              SelPlant +
+              "'",
+            {
+              context: null,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  var ScarpReasonData = oData.results;
+                  var ScarpReasonModel = new sap.ui.model.json.JSONModel();
+
+                  ScarpReasonModel.setData({
+                    ScarpReasonData: ScarpReasonData,
+                  });
+                  var ScarpReasonTable = sap.ui
+                    .getCore()
+                    .byId("idScarpReasonDialog");
+
+                  ScarpReasonTable.setModel(
+                    ScarpReasonModel,
+                    "ScarpReasonModel"
+                  );
+                } catch (e) {
+                  alert(e.message);
+                }
+              },
+            }
+          );
+        },
+        _onScarpReasonSearch: function (oEvent) {
+          var sValue = oEvent.getParameter("value");
+          var oFilter = new Filter("Data03", FilterOperator.Contains, sValue);
+          var oBinding = oEvent.getParameter("itemsBinding");
+          oBinding.filter([oFilter]);
+        },
+        _ScarpReasonSelect: function (oEvent) {
+          if (oEvent.getParameters().selectedItems != undefined) {
+            var ScarpReason = oEvent
+              .getParameters()
+              .selectedItems[0].getTitle();
+            if (ScarpReason != undefined) {
+              var Path = this.getView().getId();
+              sap.ui.getCore().byId(`idScarpReason`).setValue(ScarpReason);
+
+              oEvent.getSource().getBinding("items").filter([]);
+            } else {
+              return;
+            }
+            this.onButtonPress();
+          }
+        },
+        onConfirmScarpPress: function (oEvent) {
+          // MessageBox.information("Scarp Update Development inprogress");
+          // return;
+          var that = this;
+          var Path = that.getView().getId();
+          var Tableindex = "X";
+          var SelAufnr = " ";
+          var SelOprNo = " ";
+          var SelOprerator = " ";
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            SelAufnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data05;
+            SelOprerator = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data16;
+          }
+
+          var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+          var Data01 = sap.ui.getCore().byId(`idScarpReason`).getValue();
+          var Data02 = sap.ui.getCore().byId(`idScarpQuantity`).getText();
+
+          that.ScrapActionDialog.close();
+
+          var itemset = {
+            Key01: "Scarp",
+            Key02: SelAufnr,
+            Key03: SelOprNo,
+            Key04: SelPlant,
+            Key05: SelOprerator,
+            Data01: Data01,
+            Data01: Data02,
+          };
+
+          var IEntry = [];
+          IEntry = itemset;
+          oDataModel.create(
+            "/ValueHelpSet",
+            IEntry,
+            null,
+            function (oData, Response) {
+              try {
+                that.hideBusyIndicator();
+                MessageBox.confirm("Update Successful");
+                return;
+              } catch (e) {
+                alert(e.message);
+                that.hideBusyIndicator();
+              }
+            }
+          );
+        },
+        onCancelScarpPress: function (oEvent) {
+          that.ScrapActionDialog.close();
+        },
+
         onPostPressed: function () {
           MessageBox.information("POST Activity Development inprogress");
           return;

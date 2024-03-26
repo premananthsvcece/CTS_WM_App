@@ -18,6 +18,7 @@
 		titleAlignment="Center"
     >
             <content>
+                <Text id="idHeaderOrder" visible="false"/>
                 <TextArea
                     id="idHeaderText"
                     showExceededText="true"

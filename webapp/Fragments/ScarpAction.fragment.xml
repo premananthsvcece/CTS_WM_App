@@ -1,0 +1,56 @@
+<c:FragmentDefinition
+    id="idScarpAction"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:sf="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog id="idDialogScarp">
+        <l:VerticalLayout
+            id="idVerticalLayoutScarp"
+            class="sapUiContentPadding"
+            width="100%"
+        >
+            <l:content>
+                <List
+                    id="idScarpList"
+                    headerText="{i18n>ScarpAction}"
+                    class="sapUiContentPadding"
+                >
+                    <InputListItem label="{i18n>ScarpType}">
+                        <Input
+                            id="idScarpReason"
+                            class="sapUiSmallMarginBottom"
+                            showValueHelp="true"
+                            valueHelpRequest="onScarpReasonRequest"
+                            placeholder="Scarp Reason"
+                            type="Text"
+                            width="15rem"
+                        />
+                    </InputListItem>
+                    <InputListItem label="{i18n>ScarpQuan}">
+                        <Input
+                            class="sapUiSmallMarginBottom"
+                            id="idScarpQuantity"
+                            type="Number"
+                            width="15rem"
+                            value="{type:'sap.ui.model.odata.type.Decimal'}"
+                        />
+                    </InputListItem>
+                </List>
+            </l:content>
+        </l:VerticalLayout>
+        <ToolbarSpacer />
+        <Button
+            icon="sap-icon://accept"
+            text="{i18n>Save}"
+            press="onConfirmScarpPress"
+        />
+        <Button
+            icon="sap-icon://cancel"
+            text="{i18n>Cancel}"
+            press="onCancelScarpPress"
+        />
+    </Dialog>
+</c:FragmentDefinition>

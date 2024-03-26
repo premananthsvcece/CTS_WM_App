@@ -1,0 +1,24 @@
+<c:FragmentDefinition
+    id="HelpScarpReason"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <SelectDialog
+        id="idScarpReasonDialog"
+        noDataText="No Scarp Reason Found"
+        growing="true"
+        title="Select Scarp Reason"
+        search="_onScarpReasonSearch"
+        confirm="_ScarpReasonSelect"
+        cancel="_ScarpReasonSelect"
+        items="{ScarpReasonModel>/ScarpReasonData}"
+    >
+        <StandardListItem
+            title="{ScarpReasonModel>Data03}"
+            description="{ScarpReasonModel>Data04}"
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active"
+        />
+    </SelectDialog>
+</c:FragmentDefinition>
