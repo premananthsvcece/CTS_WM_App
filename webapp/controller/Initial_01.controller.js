@@ -1648,7 +1648,6 @@ sap.ui.define(
           sap.ui.getCore().byId(`idScarpReason`).setValue("");
           sap.ui.getCore().byId(`idScarpQuantity`).setValue("");
           that.ScrapActionDialog.open();
-          
         },
         onScarpReasonRequest: function () {
           var that = this;
@@ -1801,8 +1800,218 @@ sap.ui.define(
         },
 
         onPostPressed: function () {
-          MessageBox.information("POST Activity Development inprogress");
-          return;
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var SelAufnr = " ";
+          var SelOprNo = " ";
+          var OperatorNo = " ";
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            index = 0;
+            SelAufnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data05;
+            OperatorNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data16;
+          }
+
+          if (Tableindex === undefined) {
+            // Raise Message
+            MessageBox.error("Select Only Lines to Post Confirmation Activity");
+            return;
+          }
+          if (!that.PostActionDialog) {
+            that.PostActionDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.PostAction",
+              that
+            );
+            that.getView().addDependent(that.PostActionDialog);
+          }
+          that.showBusyIndicator(1000, 0);
+
+          sap.ui.getCore().byId(`idPostOperator`).setValue(OperatorNo);
+          sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'Post' and Key02 eq '" +
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var PostScarpData = oData.results;
+                    if (PostScarpData.length != 0) {
+                      var PostScarpModel = new sap.ui.model.json.JSONModel();
+
+                      PostScarpModel.setData({
+                        PostScarpData: PostScarpData,
+                      });
+                      var PostScarpList = sap.ui
+                        .getCore()
+                        .byId("idPostScarpList");
+
+                      PostScarpList.setModel(PostScarpModel, "PostScarpModel");
+                    }
+                    that.hideBusyIndicator();
+                  }
+                } catch (e) {
+                  alert(e.message);
+                }
+              },
+            }
+          );
+
+          that.PostActionDialog.open();
+        },
+        onConfirmPostPress: function () {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var YeildQty = sap.ui.getCore().byId("idPostQuantity").getValue();
+
+          var Tableindex = "X";
+          var SelAufnr = " ";
+          var SelOprNo = " ";
+          var OperatorNo = " ";
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            index = 0;
+            SelAufnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data05;
+
+            OperatorNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data16;
+          }
+          if (Tableindex === undefined) {
+            // Raise Message
+            MessageBox.error(
+              "Select Only Lines from In Progress section to Proceed"
+            );
+            return;
+          }
+
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          that.showBusyIndicator(1000, 0);
+
+          var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+          var IEntry = {};
+          IEntry.Key01 = "POST";
+          IEntry.Key02 = SelAufnr;
+          IEntry.Key03 = SelOprNo;
+          IEntry.Key04 = SelPlant;
+          IEntry.Key05 = OperatorNo;
+          IEntry.WorkCenterArea = " ";
+          if (index === 0) {
+            IEntry.NavWC_InProgress = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData;
+            for (var ind = 0; ind < IEntry.NavWC_InProgress.length; ind++) {
+              if (ind === Tableindex) {
+                IEntry.NavWC_InProgress[ind].Data11 = YeildQty;
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .setData("InProgressData", IEntry.NavWC_InProgress);
+
+            IEntry.NavWC_Queue = [{}];
+          }
+
+          IEntry.NavWC_Future = [{}];
+          that.PostActionDialog.close();
+
+          console.log(IEntry);
+          oDataModel.create(
+            "/WorkCenter_AreaOrderSet",
+            IEntry,
+            null,
+            function (oData, Response) {
+              try {
+                // console.log(oData);
+                that.hideBusyIndicator();
+                // that.onButtonPress();
+                MessageBox.confirm("Update Successful");
+                return;
+              } catch (e) {
+                alert(e.message);
+                that.hideBusyIndicator();
+              }
+            }
+          );
+          that.PostActionDialog.close();
+        },
+        onCancelPostPress: function () {
+          var that = this;
+          that.PostActionDialog.close();
+        },
+        onPostQuantityChange: function(oEvent){
+          var value = oEvent.getParameter("value");
+          var valueArray = value.split('.');
+          if( valueArray.length != 2){
+            value = value + ".000";
+          }
+          sap.ui.getCore().byId("idPostQuantity").setValue(value);
         },
         onTableRowSelectionChange: function () {
           var that = this;

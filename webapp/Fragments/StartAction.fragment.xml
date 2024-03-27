@@ -64,6 +64,7 @@
                             class="sapUiSmallMarginBottom"
                             enabled="false"
                             width="15rem"
+                            displayFormat="HH:mm:ss"
                         />
                     </InputListItem>
                 </List>
@@ -72,11 +73,13 @@
         <ToolbarSpacer />
         <Button
             icon="sap-icon://accept"
+            class="sapUiSmallMarginBegin"
             text="{i18n>Confirm}"
             press="onConfirmStartPress"
         />
         <Button
             icon="sap-icon://cancel"
+            class="sapUiSmallMarginBegin"
             text="{i18n>Cancel}"
             press="onCancelStartPress"
         />

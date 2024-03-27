@@ -242,14 +242,11 @@
                                     <Table:Column
                                         id="_IDGenColumn1"
                                         width="10rem"
-                                        sortProperty="Data16"
-                                        filterProperty="Data16"
                                         autoResizable="true"
                                     >
                                         <Label
                                             id="_IDGenLabel1"
                                             text="{i18n>StomerField1}"
-                                            visible="false"
                                         />
                                         <Table:template>
                                             <Button
@@ -437,6 +434,7 @@
                                                 id="_IDGenText10"
                                                 text="{InProgressModel>Data10}"
                                                 wrapping="false"
+                                                textAlign="Right"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -456,6 +454,7 @@
                                                 id="_IDGenText11"
                                                 text="{InProgressModel>Data11}"
                                                 wrapping="false"
+                                                textAlign="Right"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -475,6 +474,7 @@
                                                 id="_IDGenText12"
                                                 text="{InProgressModel>Data12}"
                                                 wrapping="false"
+                                                textAlign="Right"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -494,6 +494,7 @@
                                                 id="_IDGenText13"
                                                 value="{InProgressModel>Data13}"
                                                 enabled="false"
+                                                displayFormat="HH:mm:ss"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -551,8 +552,6 @@
                                     <Table:Column
                                         id="_IDGenColumn14"
                                         width="10rem"
-                                        sortProperty="Data01"
-                                        filterProperty="Data01"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -748,6 +747,7 @@
                                                 id="_IDGenText23"
                                                 text="{InQueueModel>Data10}"
                                                 wrapping="false"
+                                                textAlign="Right"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -767,6 +767,7 @@
                                                 id="_IDGenText24"
                                                 text="{InQueueModel>Data11}"
                                                 wrapping="false"
+                                                textAlign="Right"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -786,6 +787,7 @@
                                                 id="_IDGenText25"
                                                 text="{InQueueModel>Data12}"
                                                 wrapping="false"
+                                                textAlign="Right"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -843,8 +845,6 @@
                                         id="_IDGenColumn27"
                                         resizable="true"
                                         width="10rem"
-                                        sortProperty="Data01"
-                                        filterProperty="Data01"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -1040,6 +1040,7 @@
                                                 id="_IDGenText36"
                                                 text="{InFutureModel>Data10}"
                                                 wrapping="false"
+                                                textAlign="Right"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -1059,6 +1060,7 @@
                                                 id="_IDGenText37"
                                                 text="{InFutureModel>Data11}"
                                                 wrapping="false"
+                                                textAlign="Right"
                                             />
                                         </Table:template>
                                     </Table:Column>
@@ -1078,6 +1080,7 @@
                                                 id="_IDGenText38"
                                                 text="{InFutureModel>Data12}"
                                                 wrapping="false"
+                                                textAlign="Right"
                                             />
                                         </Table:template>
                                     </Table:Column>

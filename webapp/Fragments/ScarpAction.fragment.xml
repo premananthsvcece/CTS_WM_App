@@ -44,12 +44,14 @@
         <ToolbarSpacer />
         <Button
             icon="sap-icon://accept"
+            class="sapUiSmallMarginBegin"
             text="{i18n>Save}"
             type="Success"
             press="onConfirmScarpPress"
         />
         <Button
             icon="sap-icon://cancel"
+            class="sapUiSmallMarginBegin"
             text="{i18n>Cancel}"
             press="onCancelScarpPress"
         />

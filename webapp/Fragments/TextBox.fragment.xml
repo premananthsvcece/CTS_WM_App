@@ -12,32 +12,37 @@
         draggable="false"
         state="Information"
         stretch="false"
-		contentHeight="500px"
-		contentWidth="500px"
-		title="Order Header Text"
-		titleAlignment="Center"
+        contentHeight="500px"
+        contentWidth="500px"
+        title="Order Header Text"
+        titleAlignment="Center"
     >
-            <content>
-                <Text id="idHeaderOrder" visible="false"/>
-                <TextArea
-                    id="idHeaderText"
-                    showExceededText="true"
-                    width="450px"
-					height="450px"
-                    growing="true"
-                    growingMaxLines="20"
-                    valueLiveUpdate="false"
-                    liveChange="handleLiveChange"
-                />
-            </content>
+        <content>
+            <Text
+                id="idHeaderOrder"
+                visible="false"
+            />
+            <TextArea
+                id="idHeaderText"
+                showExceededText="true"
+                width="450px"
+                height="450px"
+                growing="true"
+                growingMaxLines="20"
+                valueLiveUpdate="false"
+                liveChange="handleLiveChange"
+            />
+        </content>
         <ToolbarSpacer />
         <Button
             icon="sap-icon://accept"
+            class="sapUiSmallMarginBegin"
             text="{i18n>Save}"
             press="onConfirmTextPress"
         />
         <Button
             icon="sap-icon://cancel"
+            class="sapUiSmallMarginBegin"
             text="{i18n>Cancel}"
             press="onCancelTextPress"
         />
