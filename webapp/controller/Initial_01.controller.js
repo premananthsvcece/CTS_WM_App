@@ -36,9 +36,7 @@ sap.ui.define(
             urlParameters: null,
             async: false,
             success: function (oData, oResponse) {
-              // that.showBusyIndicator();
               try {
-                // Future
                 if (oData.results.length === 1) {
                   var Plant = oData.results[0].Data01;
                   var Workcenter = oData.results[0].Data02;
@@ -67,7 +65,6 @@ sap.ui.define(
                   if (Plant != " ") {
                     that.onLoadData(that, Plant, SelWCGrp, Workcenter);
                   }
-                  // that.hideBusyIndicator();
                 }
               } catch (e) {
                 that.hideBusyIndicator();
@@ -104,7 +101,7 @@ sap.ui.define(
 
               that.onLoadData(that, Plant, SelWCGrp, Workcenter);
             }
-          }, 1000);
+          }, 10000);
         },
         onLoadData: function (that, Plant, SelWCGrp, Workcenter) {
           var othis = that;
@@ -123,20 +120,18 @@ sap.ui.define(
           IEntry.NavWC_Queue = [{}];
           IEntry.NavWC_Future = [{}];
 
-          // console.log(IEntry);
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
             IEntry,
             null,
             function (oData, Response) {
               try {
-                // console.log(oData);
                 othis.hideBusyIndicator();
                 var Path = othis.getView().getId();
                 // In Progress
                 var InProgressData = oData.NavWC_InProgress.results;
                 if (InProgressData.length === 0) {
-                  // InProgressData = [{}]; Do Nothing
+                  // Do Nothing
                 }
                 var InProgressModel = new sap.ui.model.json.JSONModel();
 
@@ -148,11 +143,11 @@ sap.ui.define(
                   .byId(Path + "--idInprogressOrderList");
 
                 InProgressTable.setModel(InProgressModel, "InProgressModel");
-                // }
+
                 // Queue
                 var InQueueData = oData.NavWC_Queue.results;
                 if (InQueueData.length === 0) {
-                  // InQueueData = [{}]; Do Nothing
+                  // Do Nothing
                 }
                 var InQueueModel = new sap.ui.model.json.JSONModel();
 
@@ -164,11 +159,11 @@ sap.ui.define(
                   .byId(Path + "--idQueueOrderList");
 
                 InQueueTable.setModel(InQueueModel, "InQueueModel");
-                // }
+
                 // Future
                 var InFutureData = oData.NavWC_Future.results;
                 if (InFutureData.length === 0) {
-                  // InFutureData = [{}]; Do Nothing
+                  // Do Nothing
                 }
                 var InFutureModel = new sap.ui.model.json.JSONModel();
 
@@ -182,7 +177,8 @@ sap.ui.define(
                 InFutureTable.setModel(InFutureModel, "InFutureModel");
                 // }
               } catch (e) {
-                alert(e.message);
+                // alert(e.message);
+                MessageBox.error(e.message);
                 othis.hideBusyIndicator();
               }
             }
@@ -277,8 +273,6 @@ sap.ui.define(
               sap.ui.getCore().byId(`${Path}--idTextPlant`).setText(Plant);
               oEvent.getSource().getBinding("items").filter([]);
             } else {
-              // Raise Message
-              // MessageBox.information("Select any line to view BOM Details for the Production Order.");
               return;
             }
           }
@@ -339,7 +333,8 @@ sap.ui.define(
 
                   WorkCenterTable.setModel(WorkCenterModel, "WorkCenterModel");
                 } catch (e) {
-                  alert(e.message);
+                  MessageBox.error(e.message);
+                  // alert(e.message);
                 }
               },
             }
@@ -478,9 +473,12 @@ sap.ui.define(
           }
           if (Tableindex === undefined) {
             // Raise Message
-            MessageBox.information(
-              "Select any line to view BOM Details for the Production Order."
-            );
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("BOM001");
+            MessageBox.information(message);
             return;
           }
           if (!that.BOMDialog) {
@@ -607,9 +605,12 @@ sap.ui.define(
           }
           if (Tableindex === undefined) {
             // Raise Message
-            MessageBox.information(
-              "Select any line to view BOM Details for the Production Order."
-            );
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Route001");
+            MessageBox.information(message);
             return;
           }
           if (!that.RouteDialog) {
@@ -778,13 +779,16 @@ sap.ui.define(
           }
           if (Tableindex === undefined) {
             // Raise Message
-            MessageBox.information(
-              "Select any line to view Drawing Details for the Material."
-            );
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Drawing001");
+            MessageBox.information(message);
             return;
           }
 
-          window.open("C:TempTest.pdf");
+          // window.open("C:TempTest.pdf");
           // Get the path to the Windows shared folder
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -810,16 +814,15 @@ sap.ui.define(
             }
           );
         },
+        // onOrderNotePressed: function (oEvent) {
+        //   MessageBox.information("Enablement is coming soon");
+        //   return;
+        // },
 
-        onOrderNotePressed: function (oEvent) {
-          MessageBox.information("Enablement is coming soon");
-          return;
-        },
-
-        onPalLabelPressed: function (oEvent) {
-          MessageBox.information("Enablement is coming soon");
-          return;
-        },
+        // onPalLabelPressed: function (oEvent) {
+        //   MessageBox.information("Enablement is coming soon");
+        //   return;
+        // },
 
         onStartPressed: function (oEvent) {
           var that = this;
@@ -862,19 +865,16 @@ sap.ui.define(
                 .byId(`${Path}--idQueueOrderList`)
                 .getModel("InQueueModel")
                 .getData().InQueueData[Tableindex].Data05;
-            } else {
-              // Raise Message
-              MessageBox.error(
-                "Select Only Lines from In Progress and In Queue section to Proceed"
-              );
-              return;
             }
           }
           if (Tableindex === undefined) {
             // Raise Message
-            MessageBox.error(
-              "Select Only Lines from In Progress and In Queue section to Proceed"
-            );
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Start002");
+            MessageBox.error(message);
             return;
           }
 
@@ -947,19 +947,15 @@ sap.ui.define(
               .byId(`${Path}--idQueueOrderList`)
               .getModel("InQueueModel")
               .getData().InQueueData[Tableindex].Data05;
-          } else {
-            // Raise Message
-            MessageBox.error(
-              "Select Only Lines from In Progress and In Queue section to Proceed"
-            );
-            return;
           }
-
           if (Tableindex === undefined) {
             // Raise Message
-            MessageBox.error(
-              "Select Only Lines from In Progress and In Queue section to Proceed"
-            );
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Start002");
+            MessageBox.error(message);
             return;
           }
 
@@ -1043,7 +1039,8 @@ sap.ui.define(
                       .setValue(emparray.Data04);
                   }
                 } catch (e) {
-                  alert(e.message);
+                  MessageBox.error(e.message);
+                  // alert(e.message);
                 }
               },
             }
@@ -1055,6 +1052,15 @@ sap.ui.define(
           var Path = that.getView().getId();
 
           var OperatorNo = sap.ui.getCore().byId("idStartOperator").getValue();
+          if (OperatorNo === "") {
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Start001");
+            MessageBox.error(message);
+            return;
+          }
           var FirstName = sap.ui.getCore().byId("idStartFName").getValue();
           var LastName = sap.ui.getCore().byId("idStartLName").getValue();
           var StartDate = sap.ui.getCore().byId("idStartDate").getValue();
@@ -1099,20 +1105,17 @@ sap.ui.define(
                 .byId(`${Path}--idQueueOrderList`)
                 .getModel("InQueueModel")
                 .getData().InQueueData[Tableindex].Data05;
-            } else {
-              // Raise Message
-              MessageBox.error(
-                "Select Only Lines from In Progress and In Queue section to Proceed"
-              );
-              return;
             }
           }
 
           if (Tableindex === undefined) {
             // Raise Message
-            MessageBox.error(
-              "Select Only Lines from In Progress and In Queue section to Proceed"
-            );
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Start002");
+            MessageBox.error(message);
             return;
           }
 
@@ -1179,14 +1182,12 @@ sap.ui.define(
           IEntry.NavWC_Future = [{}];
           that.StartDialog.close();
 
-          console.log(IEntry);
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
             IEntry,
             null,
             function (oData, Response) {
               try {
-                // console.log(oData);
                 that.hideBusyIndicator();
                 that.onButtonPress();
                 MessageBox.confirm("Update Successful");
@@ -1251,9 +1252,12 @@ sap.ui.define(
           }
           if (Tableindex === undefined) {
             // Raise Message
-            MessageBox.error(
-              "Select Only Lines from In Progress section to Stop Operation"
-            );
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Stop001");
+            MessageBox.error(message);
             return;
           }
 
@@ -1382,9 +1386,12 @@ sap.ui.define(
           }
           if (Tableindex === undefined) {
             // Raise Message
-            MessageBox.error(
-              "Select Only Lines from In Progress section to Stop Operation"
-            );
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Stop001");
+            MessageBox.error(message);
             return;
           }
 
@@ -1426,14 +1433,12 @@ sap.ui.define(
           IEntry.NavWC_Future = [{}];
           that.StopDialog.close();
 
-          console.log(IEntry);
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
             IEntry,
             null,
             function (oData, Response) {
               try {
-                // console.log(oData);
                 that.hideBusyIndicator();
                 that.onButtonPress();
                 MessageBox.confirm("Update Successful");
@@ -1447,7 +1452,14 @@ sap.ui.define(
         },
         onCancelStopPress: function () {
           this.StopDialog.close();
-          MessageBox.confirm("No Update Performed");
+          // Raise Message
+          var message = that
+            .getView()
+            .getModel("i18n")
+            .getResourceBundle()
+            .getText("Gen001");
+          MessageBox.confirm(message);
+          return;
         },
         onOrderNotePressed: function () {
           var that = this;
@@ -1517,8 +1529,12 @@ sap.ui.define(
             }
           }
           if (Tableindex === undefined) {
-            // Raise Message
-            MessageBox.error("Select Only Lines for displaying order notes");
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Note001");
+            MessageBox.error(message);
             return;
           }
           if (!that.TextBoxDialog) {
@@ -1589,7 +1605,12 @@ sap.ui.define(
             function (oData, Response) {
               try {
                 that.hideBusyIndicator();
-                MessageBox.confirm("Update Successful");
+                var message = that
+                  .getView()
+                  .getModel("i18n")
+                  .getResourceBundle()
+                  .getText("Gen002");
+                MessageBox.confirm(message);
                 return;
               } catch (e) {
                 alert(e.message);
@@ -1603,9 +1624,6 @@ sap.ui.define(
           this.TextBoxDialog.close();
         },
         onScrapPressed: function () {
-          // MessageBox.information("SCARP Activity Development inprogress");
-          // return;
-
           var that = this;
           var index;
           var Path = that.getView().getId();
@@ -1634,8 +1652,12 @@ sap.ui.define(
           }
 
           if (Tableindex === undefined) {
-            // Raise Message
-            MessageBox.error("Select Only Lines to capture Scrap Activity");
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Scarp003");
+            MessageBox.error(message);
             return;
           }
           if (!that.ScrapActionDialog) {
@@ -1724,8 +1746,6 @@ sap.ui.define(
           }
         },
         onConfirmScarpPress: function (oEvent) {
-          // MessageBox.information("Scarp Update Development inprogress");
-          // return;
           var that = this;
           var Path = that.getView().getId();
           var Tableindex = "X";
@@ -1763,7 +1783,25 @@ sap.ui.define(
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
           var Data01 = sap.ui.getCore().byId(`idScarpReason`).getValue();
+          if (Data01 === "") {
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Scarp001");
+            MessageBox.error(message);
+            return;
+          }
           var Data02 = sap.ui.getCore().byId(`idScarpQuantity`).getValue();
+          if (Data01 === "") {
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Scarp002");
+            MessageBox.error(message);
+            return;
+          }
 
           that.ScrapActionDialog.close();
 
@@ -1786,10 +1824,16 @@ sap.ui.define(
             function (oData, Response) {
               try {
                 that.hideBusyIndicator();
-                MessageBox.confirm("Update Successful");
+                var message = that
+                  .getView()
+                  .getModel("i18n")
+                  .getResourceBundle()
+                  .getText("Gen002");
+                MessageBox.confirm(message);
                 return;
               } catch (e) {
-                alert(e.message);
+                // alert(e.message);
+                Message.error(e.message);
                 that.hideBusyIndicator();
               }
             }
@@ -1838,8 +1882,12 @@ sap.ui.define(
           }
 
           if (Tableindex === undefined) {
-            // Raise Message
-            MessageBox.error("Select Only Lines to Post Confirmation Activity");
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Post001");
+            MessageBox.error(message);
             return;
           }
           if (!that.PostActionDialog) {
@@ -1856,6 +1904,7 @@ sap.ui.define(
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+          var vModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Post' and Key02 eq '" +
@@ -1890,7 +1939,50 @@ sap.ui.define(
                     that.hideBusyIndicator();
                   }
                 } catch (e) {
-                  alert(e.message);
+                  MessageBox.error(e.message);
+                  // alert(e.message);
+                }
+              },
+            }
+          );
+
+          that.showBusyIndicator();
+
+          vModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'Component' and Key02 eq '" +
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var ComponentData = oData.results;
+                    if (ComponentData.length != 0) {
+                      var ComponentModel = new sap.ui.model.json.JSONModel();
+
+                      ComponentModel.setData({
+                        ComponentData: ComponentData,
+                      });
+                      var ComponentnList = sap.ui
+                        .getCore()
+                        .byId("idPostComponentList");
+
+                      ComponentnList.setModel(ComponentModel, "ComponentModel");
+                    }
+                    that.hideBusyIndicator();
+                  }
+                } catch (e) {
+                  MessageBox.error(e.message);
+                  // alert(e.message);
                 }
               },
             }
@@ -1936,10 +2028,12 @@ sap.ui.define(
               .getData().InProgressData[Tableindex].Data16;
           }
           if (Tableindex === undefined) {
-            // Raise Message
-            MessageBox.error(
-              "Select Only Lines from In Progress section to Proceed"
-            );
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Post001");
+            MessageBox.error(message);
             return;
           }
 
@@ -1981,7 +2075,6 @@ sap.ui.define(
           IEntry.NavWC_Future = [{}];
           that.PostActionDialog.close();
 
-          console.log(IEntry);
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
             IEntry,
@@ -1990,12 +2083,13 @@ sap.ui.define(
               try {
                 // console.log(oData);
                 that.hideBusyIndicator();
-                // that.onButtonPress();
                 MessageBox.confirm("Update Successful");
+                that.onButtonPress();
                 return;
               } catch (e) {
-                alert(e.message);
+                // alert(e.message);
                 that.hideBusyIndicator();
+                MessageBox.error(e.message);
               }
             }
           );
@@ -2005,15 +2099,15 @@ sap.ui.define(
           var that = this;
           that.PostActionDialog.close();
         },
-        onPostQuantityChange: function(oEvent){
+        onPostQuantityChange: function (oEvent) {
           var value = oEvent.getParameter("value");
-          var valueArray = value.split('.');
-          if( valueArray.length != 2){
+          var valueArray = value.split(".");
+          if (valueArray.length != 2) {
             value = value + ".000";
           }
           sap.ui.getCore().byId("idPostQuantity").setValue(value);
         },
-        onTableRowSelectionChange: function () {
+        onTableRowSelectionChange: function (oEvent) {
           var that = this;
           var index;
           var Path = that.getView().getId();
@@ -2076,10 +2170,77 @@ sap.ui.define(
             }
           }
           if (Tableindex === undefined) {
-            // Raise Message
-            MessageBox.error("Select Only Lines for displaying order notes");
-            return;
+            sap.ui.getCore().byId(`${Path}--idINPStopJob`).setEnabled(true);
+            sap.ui.getCore().byId(`${Path}--idINPStartJob`).setEnabled(true);
           }
+        },
+
+        onBatchHelpRequest: function (oEvent) {
+          var that = this;
+          var LineArray = oEvent.getSource().getParent().getCells();
+          var SelMatnr = " ";
+          var SelWerks = " ";
+          var SelLgort = " ";
+          var SelClabs = " ";
+          if (LineArray.length != 0) {
+            SelMatnr = LineArray[0].getTitle();
+            SelWerks = LineArray[1].getTitle();
+            SelLgort = LineArray[2].getTitle();
+            SelClabs = LineArray[4].getNumber();
+          }
+
+          var Path = that.getView().getId();
+
+          if (!that.BatchHelpDialog) {
+            that.BatchHelpDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.BatchHelpDialog",
+              that
+            );
+            that.getView().addDependent(that.BatchHelpDialog);
+          }
+          that.showBusyIndicator(1000, 0);
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'BatchValue' and Key02 eq '" +
+              SelMatnr +
+              "' and Key03 eq '" +
+              SelWerks +
+              "' and Key04 eq '" +
+              SelLgort +
+              "' and Key05 eq '" +
+              SelClabs +
+              "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var BatchData = oData.results;
+                    if (BatchData.length != 0) {
+                      var BatchModel = new sap.ui.model.json.JSONModel();
+
+                      BatchModel.setData({
+                        BatchData: BatchData,
+                      });
+                      var BatchList = sap.ui.getCore().byId("idBatchDialog");
+
+                      BatchList.setModel(BatchModel, "BatchModel");
+                    }
+                    that.hideBusyIndicator();
+                    that.BatchHelpDialog.open();
+                  }
+                } catch (e) {
+                  MessageBox.error(e.message);
+                  // alert(e.message);
+                }
+              },
+            }
+          );
         },
       }
     );

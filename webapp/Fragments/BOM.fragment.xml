@@ -10,7 +10,8 @@
         title="Display BOM"
         cancel=".onDialogClose"
         items="{BOMModel>/BOMData}"
-    >
+        contentWidth="500px"
+        contentHeight="600px">
         <columns>
             <Column width="auto">
                 <header>

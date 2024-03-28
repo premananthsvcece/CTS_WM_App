@@ -6,7 +6,10 @@
     xmlns:sf="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
 >
-    <Dialog id="idDialogPost" contentWidth="40%">
+    <Dialog
+        id="idDialogPost"
+        contentWidth="40%"
+    >
         <l:VerticalLayout
             id="idVerticalLayoutPost"
             class="sapUiContentPadding"
@@ -41,7 +44,6 @@
                             id="idPostQuantity"
                             type="Number"
                             change="onPostQuantityChange"
-                            
                             width="15rem"
                             value="{
                                 type: 'sap.ui.model.odata.type.Decimal'
@@ -62,10 +64,7 @@
                         <Column demandPopin="true">
                             <Text text="{i18n>ScarpType}" />
                         </Column>
-                        <Column
-                            minScreenWidth="Tablet"
-                            demandPopin="true"
-                        >
+                        <Column demandPopin="true">
                             <Text text="{i18n>ScarpQuan}" />
                         </Column>
                     </columns>
@@ -75,13 +74,60 @@
                                 <ObjectIdentifier
                                     title="{PostScarpModel>Data01}"
                                     text="{i18n>OperNo} : {PostScarpModel>Data02} User: {PostScarpModel>Data04}"
-
                                 />
                                 <ObjectIdentifier
                                     title="{PostScarpModel>Data06}"
                                     text="{PostScarpModel>Data07}"
                                 />
                                 <ObjectNumber number="{PostScarpModel>Data05}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                <Table
+                    id="idPostComponentList"
+                    class="sapUiContentPadding"
+                    headerText="{i18n>ComponentDetail}"
+                    items="{ComponentModel>/ComponentData}"
+                >
+                    <columns>
+                        <Column demandPopin="true">
+                            <Text text="{i18n>Component}" />
+                        </Column>
+                        <Column demandPopin="true">
+                            <Text text="{i18n>Plant}" />
+                        </Column>
+                        <Column demandPopin="true">
+                            <Text text="{i18n>Location}" />
+                        </Column>
+                        <Column demandPopin="true">
+                            <Text text="{i18n>BatchOnly}" />
+                        </Column>
+                        <Column demandPopin="true">
+                            <Text text="{i18n>BatchOnly}" />
+                        </Column>
+                        <Column demandPopin="true">
+                            <Text text="{i18n>RequriedQuan}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem vAlign="Middle">
+                            <cells>
+                                <ObjectIdentifier
+                                    title="{ComponentModel>Data01}"
+                                    text="{ComponentModel>Data02}"
+                                />
+                                <ObjectIdentifier title="{ComponentModel>Data03}" />
+                                <ObjectIdentifier title="{ComponentModel>Data04}" />
+                                <Input
+                                    value="{ComponentModel>Data05}"
+                                    valueHelpRequest="onBatchHelpRequest"
+                                    showValueHelp="true"
+                                />
+                                <ObjectNumber
+                                    number="{ComponentModel>Data06}"
+                                    unit="{ComponentModel>Data07}"
+                                />
                             </cells>
                         </ColumnListItem>
                     </items>
