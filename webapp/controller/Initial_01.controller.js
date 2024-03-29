@@ -2044,7 +2044,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-          that.showBusyIndicator(1000, 0);
+          that.showBusyIndicator();
 
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
@@ -2105,7 +2105,6 @@ sap.ui.define(
               }
             }
           );
-          that.PostActionDialog.close();
         },
         onCancelPostPress: function () {
           var that = this;
@@ -2296,8 +2295,8 @@ sap.ui.define(
               .setData("ComponentTable", ComponentTable);
           }
 
-          that.BatchHelpDialog.close();
-          return;
+          // that.BatchHelpDialog.close();
+          // return;
         },
         onBatchInputClose: function () {
           this.BatchHelpDialog.close();
