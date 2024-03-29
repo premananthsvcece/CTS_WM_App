@@ -119,6 +119,7 @@ sap.ui.define(
           IEntry.NavWC_InProgress = [{}];
           IEntry.NavWC_Queue = [{}];
           IEntry.NavWC_Future = [{}];
+          IEntry.NavWC_Component = [{}];
 
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
@@ -1180,6 +1181,7 @@ sap.ui.define(
           }
 
           IEntry.NavWC_Future = [{}];
+          IEntry.NavWC_Component = [{}];
           that.StartDialog.close();
 
           oDataModel.create(
@@ -1431,6 +1433,7 @@ sap.ui.define(
 
           IEntry.NavWC_Queue = [{}];
           IEntry.NavWC_Future = [{}];
+          IEntry.NavWC_Component = [{}];
           that.StopDialog.close();
 
           oDataModel.create(
@@ -2073,6 +2076,15 @@ sap.ui.define(
           }
 
           IEntry.NavWC_Future = [{}];
+
+          // Get Component Details
+          // IEntry.NavWC_Component = [{}];
+
+          IEntry.NavWC_Component = sap.ui
+            .getCore()
+            .byId("idPostComponentList")
+            .getModel("ComponentModel")
+            .getData().ComponentData;
           that.PostActionDialog.close();
 
           oDataModel.create(
@@ -2241,6 +2253,55 @@ sap.ui.define(
               },
             }
           );
+        },
+        onBatchInputChange: function (oEvent) {
+          var that = this;
+          if (oEvent.getParameters().selectedItems != undefined) {
+            var Batch = oEvent
+              .getParameters()
+              .selectedItem.getCells()[3]
+              .getText();
+            var Component = oEvent
+              .getParameters()
+              .selectedItem.getCells()[0]
+              .getTitle();
+            var Plant = oEvent
+              .getParameters()
+              .selectedItem.getCells()[1]
+              .getText();
+            var Location = oEvent
+              .getParameters()
+              .selectedItem.getCells()[2]
+              .getText();
+
+            var ComponentTable = sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .getData().ComponentData;
+
+            for (var ind = 0; ind < ComponentTable.length; ind++) {
+              if (
+                Component === ComponentTable[ind].Data01 &&
+                Plant === ComponentTable[ind].Data03 &&
+                Location === ComponentTable[ind].Data04
+              ) {
+                ComponentTable[ind].Data05 = Batch;
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .setData("ComponentTable", ComponentTable);
+          }
+
+          that.BatchHelpDialog.close();
+          return;
+        },
+        onBatchInputClose: function () {
+          this.BatchHelpDialog.close();
+          return;
         },
       }
     );

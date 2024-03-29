@@ -8,7 +8,8 @@
         noDataText="No Batch Found"
         growing="true"
         title="Display Batch"
-        cancel=".onDialogClose"
+        cancel="onBatchInputClose"
+        confirm="onBatchInputChange"
         items="{BatchModel>/BatchData}"
         contentWidth="500px"
         contentHeight="600px"
@@ -27,6 +28,13 @@
             <Column demandPopin="true">
                 <header>
                     <Text text="{i18n>Location}" />
+                </header>
+            </Column>
+            <Column
+                demandPopin="true"
+            >
+                <header>
+                    <Text text="{i18n>BatchOnly}" />
                 </header>
             </Column>
             <Column

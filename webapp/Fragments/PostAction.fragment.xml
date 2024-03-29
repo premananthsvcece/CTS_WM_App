@@ -104,9 +104,6 @@
                             <Text text="{i18n>BatchOnly}" />
                         </Column>
                         <Column demandPopin="true">
-                            <Text text="{i18n>BatchOnly}" />
-                        </Column>
-                        <Column demandPopin="true">
                             <Text text="{i18n>RequriedQuan}" />
                         </Column>
                     </columns>
