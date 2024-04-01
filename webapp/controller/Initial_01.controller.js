@@ -913,8 +913,14 @@ sap.ui.define(
           var oDateFormat = Year + Month + Day; // Day + "/" + Month + "/" + Year;
 
           var hr = oDateTime.getHours().toString();
+          if( hr < 10){
+            hr = '0' + hr;
+          }
           var mm = oDateTime.getMinutes().toString();
           var sec = oDateTime.getSeconds().toString();
+          if( sec < 10){
+            sec = '0' + sec;
+          }
           var oTimeFormat = hr + mm + sec;
 
           sap.ui.getCore().byId("idStartDate").setValue(oDateFormat);
@@ -993,9 +999,18 @@ sap.ui.define(
           var Year = oDateTime.getFullYear();
           var oDateFormat = Year + Month + Day; // Day + "/" + Month + "/" + Year;
 
+          // var hr = oDateTime.getHours().toString();
+          // var mm = oDateTime.getMinutes().toString();
+          // var sec = oDateTime.getSeconds().toString();
           var hr = oDateTime.getHours().toString();
+          if( hr < 10){
+            hr = '0' + hr;
+          }
           var mm = oDateTime.getMinutes().toString();
           var sec = oDateTime.getSeconds().toString();
+          if( sec < 10){
+            sec = '0' + sec;
+          }
           var oTimeFormat = hr + mm + sec;
 
           sap.ui.getCore().byId("idStartDate").setValue(oDateFormat);
@@ -1297,9 +1312,18 @@ sap.ui.define(
           var Year = oDateTime.getFullYear();
           var oDateFormat = Year + Month + Day; // Day + "/" + Month + "/" + Year;
 
+          // var hr = oDateTime.getHours().toString();
+          // var mm = oDateTime.getMinutes().toString();
+          // var sec = +oDateTime.getSeconds().toString();
           var hr = oDateTime.getHours().toString();
+          if( hr < 10){
+            hr = '0' + hr;
+          }
           var mm = oDateTime.getMinutes().toString();
-          var sec = +oDateTime.getSeconds().toString();
+          var sec = oDateTime.getSeconds().toString();
+          if( sec < 10){
+            sec = '0' + sec;
+          }
           var oTimeFormat = hr + mm + sec;
 
           sap.ui.getCore().byId("idStartEndDate").setValue(SelStartDate);
