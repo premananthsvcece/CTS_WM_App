@@ -1867,6 +1867,7 @@ sap.ui.define(
           );
         },
         onCancelScarpPress: function (oEvent) {
+          var that = this;
           that.ScrapActionDialog.close();
         },
 

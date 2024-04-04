@@ -8,6 +8,7 @@
 >
     <Dialog
         id="idDialogPost"
+        title="{i18n>PostAction}"
         contentWidth="40%"
     >
         <l:VerticalLayout
@@ -18,7 +19,6 @@
             <l:content>
                 <List
                     id="idPostList"
-                    headerText="{i18n>PostAction}"
                     class="sapUiContentPadding"
                 >
                     <InputListItem label="{i18n>OprDetails}">

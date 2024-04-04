@@ -6,15 +6,18 @@
     xmlns:sf="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
 >
-    <Dialog id="idDialogStart">
+    <Dialog
+        id="idDialogStart"
+        title="{i18n>StartAction}"
+    >
         <l:VerticalLayout
             id="idVerticalLayoutStart"
             class="sapUiContentPadding"
             width="100%"
         >
             <l:content>
-                <List id="idStartList"
-                    headerText="{i18n>StartAction}"
+                <List
+                    id="idStartList"
                     class="sapUiContentPadding"
                 >
                     <InputListItem label="{i18n>OprDetails}">
@@ -28,21 +31,21 @@
                     </InputListItem>
                     <InputListItem label="{i18n>FirstName}">
                         <Input
-                        id="idStartFName"
+                            id="idStartFName"
                             type="Text"
                             width="15rem"
                         />
                     </InputListItem>
                     <InputListItem label="{i18n>LastName}">
                         <Input
-                        id="idStartLName"
+                            id="idStartLName"
                             type="Text"
                             width="15rem"
                         />
                     </InputListItem>
                     <InputListItem label="{i18n>Plant}">
                         <Input
-                        id="idSelectStartPlant"
+                            id="idSelectStartPlant"
                             type="Text"
                             width="15rem"
                         />
@@ -57,7 +60,7 @@
                             width="15rem"
                         />
                     </InputListItem>
-                    <InputListItem label="{i18n>StartTime}" >
+                    <InputListItem label="{i18n>StartTime}">
                         <TimePicker
                             id="idStartTime"
                             placeholder="Select Time"
@@ -73,13 +76,13 @@
         <ToolbarSpacer />
         <Button
             icon="sap-icon://accept"
-            class="sapUiSmallMarginBegin"
+            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
             text="{i18n>Confirm}"
             press="onConfirmStartPress"
         />
         <Button
             icon="sap-icon://cancel"
-            class="sapUiSmallMarginBegin"
+            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
             text="{i18n>Cancel}"
             press="onCancelStartPress"
         />

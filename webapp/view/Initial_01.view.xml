@@ -59,6 +59,46 @@
                                 class="sapUiSmallMarginEnd"
                             />
                         </VBox>
+                        <ToolbarSeparator />
+                        <ToolbarSpacer />
+                        <Button
+                            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                            text="{i18n>BOM}"
+                            icon="sap-icon://machine"
+                            press="onBOMPressed"
+                            type="Emphasized"
+                            width="120px"
+                        />
+                        <Button
+                            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                            text="{i18n>Route}"
+                            icon="sap-icon://bus-public-transport"
+                            type="Emphasized"
+                            press="onRoutePressed"
+                        />
+                        <ToolbarSeparator />
+                        <Button
+                            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                            text="{i18n>Drawing}"
+                            icon="sap-icon://draw-rectangle"
+                            type="Emphasized"
+                            press="onDrawingPressed"
+                        />
+                        <Button
+                            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                            text="{i18n>OrderNote}"
+                            icon="sap-icon://notes"
+                            type="Emphasized"
+                            press="onOrderNotePressed"
+                        />
+                        <Button
+                            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                            text="{i18n>PalLabel}"
+                            icon="sap-icon://print"
+                            type="Emphasized"
+                            press="onPalLabelPressed"
+                            visible="false"
+                        />
                     </HBox>
                 </uxap:snappedHeading>
                 <uxap:expandedHeading>
@@ -138,7 +178,7 @@
                     />
                     <ToolbarSeparator />
                     <Button
-                        class="sapUiSizeCompact"
+                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                         text="{i18n>BOM}"
                         icon="sap-icon://machine"
                         press="onBOMPressed"
@@ -146,6 +186,7 @@
                         width="120px"
                     />
                     <Button
+                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                         text="{i18n>Route}"
                         icon="sap-icon://bus-public-transport"
                         type="Emphasized"
@@ -153,18 +194,21 @@
                     />
                     <ToolbarSeparator />
                     <Button
+                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                         text="{i18n>Drawing}"
                         icon="sap-icon://draw-rectangle"
                         type="Emphasized"
                         press="onDrawingPressed"
                     />
                     <Button
+                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                         text="{i18n>OrderNote}"
                         icon="sap-icon://notes"
                         type="Emphasized"
                         press="onOrderNotePressed"
                     />
                     <Button
+                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                         text="{i18n>PalLabel}"
                         icon="sap-icon://print"
                         type="Emphasized"

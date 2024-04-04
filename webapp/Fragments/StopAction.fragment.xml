@@ -6,15 +6,18 @@
     xmlns:sf="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
 >
-    <Dialog id="idDialogStop">
+    <Dialog
+        id="idDialogStop"
+        title="{i18n>StopAction}"
+    >
         <l:VerticalLayout
             id="idVerticalLayoutStop"
             class="sapUiContentPadding"
             width="100%"
         >
             <l:content>
-                <List id="idStopList"
-                    headerText="{i18n>StopAction}"
+                <List
+                    id="idStopList"
                     class="sapUiContentPadding"
                 >
                     <InputListItem label="{i18n>OprDetails}">
@@ -28,7 +31,7 @@
                     </InputListItem>
                     <InputListItem label="{i18n>FirstName}">
                         <Input
-                        id="idStopFName"
+                            id="idStopFName"
                             type="Text"
                             enabled="false"
                             width="15rem"
@@ -36,7 +39,7 @@
                     </InputListItem>
                     <InputListItem label="{i18n>LastName}">
                         <Input
-                        id="idStopLName"
+                            id="idStopLName"
                             type="Text"
                             enabled="false"
                             width="15rem"
@@ -44,7 +47,7 @@
                     </InputListItem>
                     <InputListItem label="{i18n>Plant}">
                         <Input
-                        id="idSelectStopPlant"
+                            id="idSelectStopPlant"
                             type="Text"
                             enabled="false"
                             width="15rem"
@@ -60,7 +63,7 @@
                             width="15rem"
                         />
                     </InputListItem>
-                    <InputListItem label="{i18n>StartTime}" >
+                    <InputListItem label="{i18n>StartTime}">
                         <TimePicker
                             id="idStartEndTime"
                             placeholder="Select Time"
@@ -80,7 +83,7 @@
                             width="15rem"
                         />
                     </InputListItem>
-                    <InputListItem label="{i18n>StopTime}" >
+                    <InputListItem label="{i18n>StopTime}">
                         <TimePicker
                             id="idStopEndTime"
                             placeholder="Select Time"
@@ -96,13 +99,13 @@
         <ToolbarSpacer />
         <Button
             icon="sap-icon://accept"
-            class="sapUiSmallMarginBegin"
+            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
             text="{i18n>Confirm}"
             press="onConfirmStopPress"
         />
         <Button
             icon="sap-icon://cancel"
-            class="sapUiSmallMarginBegin"
+            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
             text="{i18n>Cancel}"
             press="onCancelStopPress"
         />
