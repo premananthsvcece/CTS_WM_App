@@ -9,7 +9,7 @@
     <Dialog
         id="idDialogPost"
         title="{i18n>PostAction}"
-        contentWidth="40%"
+        contentWidth="60%"
     >
         <l:VerticalLayout
             id="idVerticalLayoutPost"
@@ -129,21 +129,88 @@
                         </ColumnListItem>
                     </items>
                 </Table>
+                <Table
+                    id="idPostActivityList"
+                    class="sapUiContentPadding"
+                    headerText="{i18n>ActivityDetails}"
+                    items="{ActivityModel>/ActivityData}"
+                >
+                    <columns>
+                        <Column demandPopin="false">
+                            <Text text="{i18n>ProdOrdNo}" />
+                        </Column>
+                        <Column demandPopin="false">
+                            <Text text="{i18n>OperNo}" />
+                        </Column>
+                        <Column demandPopin="false">
+                            <Text text="{i18n>OperStrtDate}" />
+                        </Column>
+                        <Column demandPopin="false">
+                            <Text text="{i18n>OperStrtTime}" />
+                        </Column>
+                        <Column demandPopin="false">
+                            <Text text="{i18n>OperEndDate}" />
+                        </Column>
+                        <Column demandPopin="false">
+                            <Text text="{i18n>OperEndTime}" />
+                        </Column>
+                        <Column demandPopin="false">
+                            <Text text="{i18n>TotalTime}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem vAlign="Middle">
+                            <cells>
+                                <ObjectIdentifier title="{ActivityModel>Data01}" />
+                                <ObjectIdentifier title="{ActivityModel>Data02}" />
+                                <DatePicker
+                                    value="{ActivityModel>Data03}"
+                                    displayFormat="MMM d, y"
+                                    enabled="false"
+                                />
+                                <TimePicker
+                                    value="{ActivityModel>Data04}"
+                                    displayFormat="hh:mm:ss"
+                                    enabled="false"
+                                />
+                                <DatePicker
+                                    value="{ActivityModel>Data05}"
+                                    displayFormat="MMM d, y"
+                                    enabled="false"
+                                />
+                                <TimePicker
+                                    value="{ActivityModel>Data06}"
+                                    displayFormat="hh:mm:ss"
+                                    enabled="false"
+                                />
+                                <TimePicker
+                                    value="{ActivityModel>Data07}"
+                                    displayFormat="hh:mm:ss"
+                                    enabled="false"
+                                />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
             </l:content>
         </l:VerticalLayout>
-        <ToolbarSpacer />
-        <Button
-            icon="sap-icon://accept"
-            class="sapUiSmallMarginBegin"
-            text="{i18n>Save}"
-            type="Success"
-            press="onConfirmPostPress"
-        />
-        <Button
-            icon="sap-icon://cancel"
-            class="sapUiSmallMarginBegin"
-            text="{i18n>Cancel}"
-            press="onCancelPostPress"
-        />
+        <Bar>
+            <contentMiddle>
+                <Button
+                    icon="sap-icon://accept"
+                    class="sapUiSmallMarginBegin"
+                    text="{i18n>Save}"
+                    type="Success"
+                    press="onConfirmPostPress"
+                />
+                <Button
+                    icon="sap-icon://cancel"
+                    class="sapUiSmallMarginBegin"
+                    text="{i18n>Cancel}"
+                    type="Negative"
+                    press="onCancelPostPress"
+                />
+            </contentMiddle>
+        </Bar>
     </Dialog>
 </c:FragmentDefinition>

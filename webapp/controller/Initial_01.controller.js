@@ -1962,6 +1962,7 @@ sap.ui.define(
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
           var vModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+          var logModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Post' and Key02 eq '" +
@@ -1997,7 +1998,6 @@ sap.ui.define(
                   }
                 } catch (e) {
                   MessageBox.error(e.message);
-                  // alert(e.message);
                 }
               },
             }
@@ -2045,6 +2045,46 @@ sap.ui.define(
             }
           );
 
+          that.showBusyIndicator();
+
+          logModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'LogData' and Key02 eq '" +
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var ActivityData = oData.results;
+                    if (ActivityData.length != 0) {
+                      var ActivityModel = new sap.ui.model.json.JSONModel();
+
+                      ActivityModel.setData({
+                        ActivityData: ActivityData,
+                      });
+                      var PostActivityList = sap.ui
+                        .getCore()
+                        .byId("idPostActivityList");
+
+                        PostActivityList.setModel(ActivityModel, "ActivityModel");
+                    }
+                    that.hideBusyIndicator();
+                  }
+                } catch (e) {
+                  MessageBox.error(e.message);
+                }
+              },
+            }
+          );
           that.PostActionDialog.open();
         },
         onConfirmPostPress: function () {

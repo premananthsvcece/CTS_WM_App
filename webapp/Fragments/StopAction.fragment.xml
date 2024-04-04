@@ -96,18 +96,23 @@
                 </List>
             </l:content>
         </l:VerticalLayout>
-        <ToolbarSpacer />
-        <Button
-            icon="sap-icon://accept"
-            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-            text="{i18n>Confirm}"
-            press="onConfirmStopPress"
-        />
-        <Button
-            icon="sap-icon://cancel"
-            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-            text="{i18n>Cancel}"
-            press="onCancelStopPress"
-        />
+        <Bar>
+            <contentMiddle>
+                <Button
+                    icon="sap-icon://accept"
+                    type="Success"
+                    class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                    text="{i18n>Confirm}"
+                    press="onConfirmStopPress"
+                />
+                <Button
+                    icon="sap-icon://cancel"
+                    class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                    text="{i18n>Cancel}"
+                    type="Negative"
+                    press="onCancelStopPress"
+                />
+            </contentMiddle>
+        </Bar>
     </Dialog>
 </c:FragmentDefinition>

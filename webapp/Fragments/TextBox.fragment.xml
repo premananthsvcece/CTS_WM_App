@@ -33,18 +33,22 @@
                 liveChange="handleLiveChange"
             />
         </content>
-        <ToolbarSpacer />
-        <Button
-            icon="sap-icon://accept"
-            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-            text="{i18n>Save}"
-            press="onConfirmTextPress"
-        />
-        <Button
-            icon="sap-icon://cancel"
-            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-            text="{i18n>Cancel}"
-            press="onCancelTextPress"
-        />
+        <Bar>
+            <contentMiddle>
+                <Button
+                    icon="sap-icon://accept"
+                    type="Success"
+                    class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                    text="{i18n>Save}"
+                    press="onConfirmTextPress"
+                />
+                <Button
+                    icon="sap-icon://cancel"
+                    class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                    text="{i18n>Cancel}"
+                    press="onCancelTextPress"
+                />
+            </contentMiddle>
+        </Bar>
     </Dialog>
 </c:FragmentDefinition>
