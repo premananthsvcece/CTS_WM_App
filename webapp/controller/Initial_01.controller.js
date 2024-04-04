@@ -913,13 +913,13 @@ sap.ui.define(
           var oDateFormat = Year + Month + Day; // Day + "/" + Month + "/" + Year;
 
           var hr = oDateTime.getHours().toString();
-          if( hr < 10){
-            hr = '0' + hr;
+          if (hr < 10) {
+            hr = "0" + hr;
           }
           var mm = oDateTime.getMinutes().toString();
           var sec = oDateTime.getSeconds().toString();
-          if( sec < 10){
-            sec = '0' + sec;
+          if (sec < 10) {
+            sec = "0" + sec;
           }
           var oTimeFormat = hr + mm + sec;
 
@@ -1003,13 +1003,13 @@ sap.ui.define(
           // var mm = oDateTime.getMinutes().toString();
           // var sec = oDateTime.getSeconds().toString();
           var hr = oDateTime.getHours().toString();
-          if( hr < 10){
-            hr = '0' + hr;
+          if (hr < 10) {
+            hr = "0" + hr;
           }
           var mm = oDateTime.getMinutes().toString();
           var sec = oDateTime.getSeconds().toString();
-          if( sec < 10){
-            sec = '0' + sec;
+          if (sec < 10) {
+            sec = "0" + sec;
           }
           var oTimeFormat = hr + mm + sec;
 
@@ -1085,6 +1085,7 @@ sap.ui.define(
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
+          var indicator = "";
 
           Tableindex = sap.ui
             .getCore()
@@ -1093,6 +1094,35 @@ sap.ui.define(
           // Get Order No & Opr No
           if (Tableindex != undefined) {
             index = 0;
+            var InProgressTable = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData;
+            // array.forEach(function(currentValue, index, arr), thisValue)
+            InProgressTable.forEach(function (InProgressValue, i) {
+              //Check Data16 Data17
+              if (InProgressValue.Data16 === OperatorNo) {
+                if ( indicator != 'X'){
+                if (InProgressValue.Data17 === "Success") {
+                  var message = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("Start003");
+                  MessageBox.error(message);
+                  indicator = "X"
+                  return;
+                }
+              }else{
+                return;
+              }
+              }
+            });
+
+            if ( indicator === 'X'){
+              return;
+            }
             SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
@@ -1218,7 +1248,6 @@ sap.ui.define(
         },
         onCancelStartPress: function () {
           this.StartDialog.close();
-          MessageBox.confirm("No Update Performed");
         },
         onStopPressed: function (oEvent) {
           var that = this;
@@ -1316,13 +1345,13 @@ sap.ui.define(
           // var mm = oDateTime.getMinutes().toString();
           // var sec = +oDateTime.getSeconds().toString();
           var hr = oDateTime.getHours().toString();
-          if( hr < 10){
-            hr = '0' + hr;
+          if (hr < 10) {
+            hr = "0" + hr;
           }
           var mm = oDateTime.getMinutes().toString();
           var sec = oDateTime.getSeconds().toString();
-          if( sec < 10){
-            sec = '0' + sec;
+          if (sec < 10) {
+            sec = "0" + sec;
           }
           var oTimeFormat = hr + mm + sec;
 
@@ -2319,9 +2348,6 @@ sap.ui.define(
               .getModel("ComponentModel")
               .setData("ComponentTable", ComponentTable);
           }
-
-          // that.BatchHelpDialog.close();
-          // return;
         },
         onBatchInputClose: function () {
           this.BatchHelpDialog.close();
