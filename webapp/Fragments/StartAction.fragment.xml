@@ -29,7 +29,7 @@
                             width="15rem"
                         />
                     </InputListItem>
-                    <InputListItem label="{i18n>FirstName}">
+                    <!-- <InputListItem label="{i18n>FirstName}">
                         <Input
                             id="idStartFName"
                             type="Text"
@@ -42,7 +42,7 @@
                             type="Text"
                             width="15rem"
                         />
-                    </InputListItem>
+                    </InputListItem> -->
                     <InputListItem label="{i18n>Plant}">
                         <Input
                             id="idSelectStartPlant"
