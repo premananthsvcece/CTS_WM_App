@@ -101,7 +101,7 @@ sap.ui.define(
 
               that.onLoadData(that, Plant, SelWCGrp, Workcenter);
             }
-          }, 10000);
+          }, 1000);
         },
         onLoadData: function (that, Plant, SelWCGrp, Workcenter) {
           var othis = that;
@@ -179,8 +179,9 @@ sap.ui.define(
                 // }
               } catch (e) {
                 // alert(e.message);
-                MessageBox.error(e.message);
+                // MessageBox.error(e.message);
                 othis.hideBusyIndicator();
+                MessageToast.show(e.message);
               }
             }
           );
@@ -357,7 +358,7 @@ sap.ui.define(
 
                   WorkCenterTable.setModel(WorkCenterModel, "WorkCenterModel");
                 } catch (e) {
-                  MessageBox.error(e.message);
+                  MessageToast.show(e.message);
                   // alert(e.message);
                 }
               },
@@ -1078,7 +1079,7 @@ sap.ui.define(
                     //   .setValue(emparray.Data04);
                   }
                 } catch (e) {
-                  MessageBox.error(e.message);
+                  MessageToast.show(e.message);
                   // alert(e.message);
                 }
               },
@@ -1260,7 +1261,7 @@ sap.ui.define(
               try {
                 that.hideBusyIndicator();
                 that.onButtonPress();
-                MessageBox.confirm("Update Successful");
+                MessageToast.show("Update Successful");
                 return;
               } catch (e) {
                 alert(e.message);
@@ -1520,7 +1521,7 @@ sap.ui.define(
               try {
                 that.hideBusyIndicator();
                 that.onButtonPress();
-                MessageBox.confirm("Update Successful");
+                MessageToast.show("Update Successful");
                 return;
               } catch (e) {
                 alert(e.message);
@@ -1689,7 +1690,7 @@ sap.ui.define(
                   .getModel("i18n")
                   .getResourceBundle()
                   .getText("Gen002");
-                MessageBox.confirm(message);
+                MessageToast.show(message);
                 return;
               } catch (e) {
                 alert(e.message);
@@ -1908,7 +1909,7 @@ sap.ui.define(
                   .getModel("i18n")
                   .getResourceBundle()
                   .getText("Gen002");
-                MessageBox.confirm(message);
+                  MessageToast.show(message);
                 return;
               } catch (e) {
                 // alert(e.message);
@@ -2020,7 +2021,7 @@ sap.ui.define(
                     that.hideBusyIndicator();
                   }
                 } catch (e) {
-                  MessageBox.error(e.message);
+                  MessageToast.show(e.message);
                 }
               },
             }
@@ -2061,7 +2062,7 @@ sap.ui.define(
                     that.hideBusyIndicator();
                   }
                 } catch (e) {
-                  MessageBox.error(e.message);
+                  MessageToast.show(e.message);
                   // alert(e.message);
                 }
               },
@@ -2103,7 +2104,7 @@ sap.ui.define(
                     that.hideBusyIndicator();
                   }
                 } catch (e) {
-                  MessageBox.error(e.message);
+                  MessageToast.show(e.message);
                 }
               },
             }
@@ -2212,13 +2213,13 @@ sap.ui.define(
               try {
                 // console.log(oData);
                 that.hideBusyIndicator();
-                MessageBox.confirm("Update Successful");
+                MessageToast.show("Update Successful");
                 that.onButtonPress();
                 return;
               } catch (e) {
                 // alert(e.message);
                 that.hideBusyIndicator();
-                MessageBox.error(e.message);
+                MessageToast.show(e.message);
               }
             }
           );
@@ -2363,7 +2364,7 @@ sap.ui.define(
                     that.BatchHelpDialog.open();
                   }
                 } catch (e) {
-                  MessageBox.error(e.message);
+                  MessageToast.show(e.message);
                   // alert(e.message);
                 }
               },
