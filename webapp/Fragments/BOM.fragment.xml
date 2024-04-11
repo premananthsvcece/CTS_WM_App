@@ -10,12 +10,13 @@
         title="Display BOM"
         cancel=".onDialogClose"
         items="{BOMModel>/BOMData}"
-        contentWidth="500px"
-        contentHeight="600px">
+        contentWidth="750px"
+        contentHeight="800px"
+    >
         <columns>
             <Column width="auto">
                 <header>
-                    <Text text="{i18n>Product}" />
+                    <Text text="{i18n>ItemNo}" />
                 </header>
             </Column>
             <Column
@@ -23,7 +24,7 @@
                 demandPopin="true"
             >
                 <header>
-                    <Text text="{i18n>OrdOpr}" />
+                    <Text text="{i18n>OperNo}" />
                 </header>
             </Column>
             <Column
@@ -32,7 +33,16 @@
                 hAlign="End"
             >
                 <header>
-                    <Text text="{i18n>Batch}" />
+                    <Text text="{i18n>ComponentDetail}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                hAlign="End"
+            >
+                <header>
+                    <Text text="{i18n>BatchOnly}" />
                 </header>
             </Column>
             <Column
@@ -52,27 +62,28 @@
         </columns>
         <ColumnListItem vAlign="Middle">
             <cells>
+                <ObjectIdentifier title="{BOMModel>Data03}" />
+                <ObjectIdentifier title="{BOMModel>Data02}" />
                 <ObjectIdentifier
                     title="{BOMModel>Data04}"
                     text="{BOMModel>Data05}"
                 />
-                <Text text="{BOMModel>Data01} X {BOMModel>Data02}"  />
-                <Text text="{BOMModel>Data06} x {BOMModel>Data07} x {BOMModel>Data08}" />
+                <ObjectIdentifier title="{BOMModel>Data08}" />
                 <ObjectNumber
                     number="{BOMModel>Data09}"
                     unit="{BOMModel>Data10}"
                     state="{
-						path: 'WeightMeasure',
-						formatter: 'sap.m.sample.TableSelectDialog.Formatter.weightState'
-					}"
+                        path: 'WeightMeasure',
+                        formatter: 'sap.m.sample.TableSelectDialog.Formatter.weightState'
+                    }"
                 />
                 <ObjectNumber
                     number="{BOMModel>Data11}"
                     unit="{BOMModel>Data10}"
                     state="{
-						path: 'WeightMeasure',
-						formatter: 'sap.m.sample.TableSelectDialog.Formatter.weightState'
-					}"
+                        path: 'WeightMeasure',
+                        formatter: 'sap.m.sample.TableSelectDialog.Formatter.weightState'
+                    }"
                 />
             </cells>
         </ColumnListItem>
