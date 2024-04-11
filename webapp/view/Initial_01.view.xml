@@ -37,11 +37,6 @@
                                 id="idTextPlant"
                                 class="sapUiSmallMarginEnd"
                             />
-                            <Link
-                                text="Open SAP Homepage"
-                                target="_blank"
-                                href="file://dk58mfp01/dev_ferro_pdf/F1120005.PDF"
-                            />
                         </VBox>
                         <VBox />
                         <VBox>
