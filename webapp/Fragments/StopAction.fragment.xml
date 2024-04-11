@@ -29,7 +29,7 @@
                             width="15rem"
                         />
                     </InputListItem>
-                    <InputListItem label="{i18n>FirstName}">
+                    <InputListItem label="{i18n>FirstName}" visible="false">
                         <Input
                             id="idStopFName"
                             type="Text"
@@ -38,7 +38,7 @@
                             visible="false"
                         />
                     </InputListItem>
-                    <InputListItem label="{i18n>LastName}">
+                    <InputListItem label="{i18n>LastName}" visible="false">
                         <Input
                             id="idStopLName"
                             type="Text"
