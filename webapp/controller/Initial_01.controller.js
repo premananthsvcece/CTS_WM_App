@@ -830,7 +830,7 @@ sap.ui.define(
                   if (oData.results.length != 0) {
                     var DrawingURl = oData.results[0];
                     var sSource = DrawingURl.Data01;
-                    window.open('http://' + sSource);
+                    window.open('http://' + sSource, "Download");
                     // window.location.href('file://' + sSource);
                   }
                 } catch (e) {

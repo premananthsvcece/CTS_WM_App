@@ -35,6 +35,7 @@
                             type="Text"
                             enabled="false"
                             width="15rem"
+                            visible="false"
                         />
                     </InputListItem>
                     <InputListItem label="{i18n>LastName}">
@@ -43,6 +44,7 @@
                             type="Text"
                             enabled="false"
                             width="15rem"
+                            visible="false"
                         />
                     </InputListItem>
                     <InputListItem label="{i18n>Plant}">

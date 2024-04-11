@@ -16,115 +16,119 @@
         headerContentPinnable="true"
         class="sapThemeBaseBG"
     >
-
-            <uxap:headerTitle class="sapThemeTextInverted">
-                <uxap:ObjectPageDynamicHeaderTitle>
-                    <uxap:snappedHeading>
-                        <HBox>
-                            <VBox>
-                                <Title
-                                    text="{i18n>appDescription}"
-                                    level="H6"
-                                    class="sapUiLargeMarginBeginEnd"
-                                />
-                            </VBox>
-                            <VBox>
-                                <Label
-                                    text="{i18n>Plant}"
-                                    labelFor="idTextPlant"
-                                    class="sapUiSmallMarginEnd"
-                                />
-                                <Text
-                                    id="idTextPlant"
-                                    class="sapUiSmallMarginEnd"
-                                />
-                            </VBox>
-                            <VBox />
-                            <VBox>
-                                <Label
-                                    text="{i18n>WorkArea}"
-                                    labelFor="idTextWorkArea"
-                                    class="sapUiSmallMarginEnd"
-                                />
-                                <Text
-                                    id="idTextWorkArea"
-                                    class="sapUiSmallMarginEnd"
-                                />
-                            </VBox>
-                            <VBox>
-                                <Label
-                                    text="{i18n>WorkCenter}"
-                                    labelFor="idTextWorkCenter"
-                                    class="sapUiSmallMarginEnd"
-                                />
-                                <Text
-                                    id="idTextWorkCenter"
-                                    class="sapUiSmallMarginEnd"
-                                />
-                            </VBox>
-                        </HBox>
-                    </uxap:snappedHeading>
-                    <uxap:expandedHeading>
-                        <Title
-                            level="Auto"
-                            text="{i18n>appDescription}"
-                            textAlign="Center"
-                            titleStyle="H2"
-                            width="150%"
-                            wrapping="true"
-                            wrappingType="Hyphenated"
-                        />
-                    </uxap:expandedHeading>
-                    <uxap:actions>
-                        <Button
-                            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-                            icon="sap-icon://machine"
-                            text="{i18n>BOM}"
-                            press="onBOMPressed"
-                            type="Emphasized"
-                            width="120px"
-                        />
-                        <Button
-                            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-                            icon="sap-icon://bus-public-transport"
-                            text="{i18n>Route}"
-                            type="Emphasized"
-                            press="onRoutePressed"
-                        />
-                        <ToolbarSeparator />
-                        <Button
-                            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-                            icon="sap-icon://draw-rectangle"
-                            text="{i18n>Drawing}"
-                            type="Emphasized"
-                            press="onDrawingPressed"
-                        />
-                        <Button
-                            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-                            icon="sap-icon://notes"
-                            text="{i18n>OrderNote}"
-                            type="Emphasized"
-                            press="onOrderNotePressed"
-                        />
-                        <Button
-                            class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-                            text="{i18n>PalLabel}"
-                            icon="sap-icon://print"
-                            type="Emphasized"
-                            press="onPalLabelPressed"
-                            visible="false"
-                        />
-                        <ProgressIndicator
-                            id="_IDGenProgressIndicator1"
-                            class="sapUiSmallMarginBottom"
-                            state="Success"
-                            showValue="true"
-                            width="60%"
-                            visible="false"
-                        />
-                    </uxap:actions>
-                </uxap:ObjectPageDynamicHeaderTitle>
-            </uxap:headerTitle>
+        <uxap:headerTitle class="sapThemeTextInverted">
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:snappedHeading>
+                    <HBox>
+                        <VBox>
+                            <Title
+                                text="{i18n>appDescription}"
+                                level="H6"
+                                class="sapUiLargeMarginBeginEnd"
+                            />
+                        </VBox>
+                        <VBox>
+                            <Label
+                                text="{i18n>Plant}"
+                                labelFor="idTextPlant"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Text
+                                id="idTextPlant"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Link
+                                text="Open SAP Homepage"
+                                target="_blank"
+                                href="file://dk58mfp01/dev_ferro_pdf/F1120005.PDF"
+                            />
+                        </VBox>
+                        <VBox />
+                        <VBox>
+                            <Label
+                                text="{i18n>WorkArea}"
+                                labelFor="idTextWorkArea"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Text
+                                id="idTextWorkArea"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </VBox>
+                        <VBox>
+                            <Label
+                                text="{i18n>WorkCenter}"
+                                labelFor="idTextWorkCenter"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Text
+                                id="idTextWorkCenter"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </VBox>
+                    </HBox>
+                </uxap:snappedHeading>
+                <uxap:expandedHeading>
+                    <Title
+                        level="Auto"
+                        text="{i18n>appDescription}"
+                        textAlign="Center"
+                        titleStyle="H2"
+                        width="150%"
+                        wrapping="true"
+                        wrappingType="Hyphenated"
+                    />
+                </uxap:expandedHeading>
+                <uxap:actions>
+                    <Button
+                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                        icon="sap-icon://machine"
+                        text="{i18n>BOM}"
+                        press="onBOMPressed"
+                        type="Emphasized"
+                        width="120px"
+                    />
+                    <Button
+                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                        icon="sap-icon://bus-public-transport"
+                        text="{i18n>Route}"
+                        type="Emphasized"
+                        press="onRoutePressed"
+                    />
+                    <ToolbarSeparator />
+                    <Button
+                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                        icon="sap-icon://draw-rectangle"
+                        text="{i18n>Drawing}"
+                        type="Emphasized"
+                        press="onDrawingPressed"
+                    />
+                    <Button
+                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                        icon="sap-icon://notes"
+                        text="{i18n>OrderNote}"
+                        type="Emphasized"
+                        press="onOrderNotePressed"
+                    />
+                    <Button
+                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                        text="{i18n>PalLabel}"
+                        icon="sap-icon://print"
+                        type="Emphasized"
+                        press="onPalLabelPressed"
+                        visible="false"
+                    />
+                    <ProgressIndicator
+                        id="_IDGenProgressIndicator1"
+                        class="sapUiSmallMarginBottom"
+                        state="Success"
+                        showValue="true"
+                        width="60%"
+                        visible="false"
+                    />
+                </uxap:actions>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
         <uxap:headerContent>
             <HBox>
                 <VBox>
