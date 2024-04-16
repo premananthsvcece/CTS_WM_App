@@ -6,29 +6,31 @@
     xmlns:sf="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
 >
+    <!-- contentHeight="30rem"
+        contentWidth="30rem" -->
     <Dialog
         id="idDialogTextBox"
         resizable="false"
         draggable="false"
         state="Information"
         stretch="false"
-        contentHeight="600px"
-        contentWidth="550px"
-        title="Order Header Text"
-        titleAlignment="Center"
+        contentWidth="50%"
+        contentHeight="50%"
+        title="{i18n>OrderHeaderText}"
     >
         <content>
             <Text
                 id="idHeaderOrder"
                 visible="false"
+                width="50rem"
             />
             <TextArea
                 id="idHeaderText"
                 showExceededText="true"
-                width="525px"
-                height="525px"
+                height="100%"
+                width="100%"
                 growing="true"
-                growingMaxLines="20"
+                growingMaxLines="15"
                 valueLiveUpdate="false"
                 liveChange="handleLiveChange"
             />
@@ -44,6 +46,7 @@
                 />
                 <Button
                     icon="sap-icon://cancel"
+                    type="Negative"
                     class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                     text="{i18n>Cancel}"
                     press="onCancelTextPress"

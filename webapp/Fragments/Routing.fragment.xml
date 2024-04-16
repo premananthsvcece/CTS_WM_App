@@ -5,30 +5,27 @@
 >
     <TableSelectDialog
         id="idRoutingDialog"
-        noDataText="No BOM Found"
-        growing="true"
-        title="Display BOM"
+        noDataText="{i18n>nodataroutefound}"
+        growing="true"        
+        title="{i18n>disproute}"
         cancel=".onDialogClose"
         items="{RoutingModel>/RoutingData}"
+        contentWidth="75%"
+        contentHeight="80%"
     >
         <columns>
-            <Column width="auto">
-                <header>
-                    <Text text="{i18n>OprShrTxt}" />
-                </header>
-            </Column>
             <Column
-                minScreenWidth="Tablet"
+                minScreenWidth="Desktop"
                 demandPopin="true"
+                width="15rem"
             >
                 <header>
-                    <Text text="{i18n>OrdOpr}" />
+                    <Text text="{i18n>Activity}" />
                 </header>
             </Column>
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
-                hAlign="End"
             >
                 <header>
                     <Text text="{i18n>WorkCenter}" />
@@ -37,7 +34,7 @@
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
-                hAlign="Center"
+                hAlign="End"
             >
                 <header>
                     <Text text="{i18n>OprQty}" />
@@ -46,7 +43,7 @@
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
-                hAlign="Center"
+                hAlign="End"
             >
                 <header>
                     <Text text="{i18n>TotQty}" />
@@ -55,7 +52,7 @@
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
-                hAlign="Center"
+                hAlign="End"
             >
                 <header>
                     <Text text="{i18n>CnfScrap}" />
@@ -64,18 +61,18 @@
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
-                hAlign="Center"
+                hAlign="End"
             >
                 <header>
                     <Text text="{i18n>LbrTime}" />
                 </header>
             </Column>
-            <Column hAlign="End">
+            <Column>
                 <header>
                     <Text text="{i18n>StrtDate}" />
                 </header>
             </Column>
-            <Column hAlign="End">
+            <Column>
                 <header>
                     <Text text="{i18n>EndDate}" />
                 </header>
@@ -84,7 +81,6 @@
         <ColumnListItem vAlign="Middle">
             <cells>
                 <ObjectIdentifier title="{RoutingModel>Data04}" />
-                <Text text="{RoutingModel>Data01} X {RoutingModel>Data02}" />
                 <Text text="{RoutingModel>Data03}" />
                 <Text text="{RoutingModel>Data05}" />
                 <Text text="{RoutingModel>Data06}" />

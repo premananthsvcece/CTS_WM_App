@@ -818,6 +818,9 @@ sap.ui.define(
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
+          var PDFViewer = new sap.m.PDFViewer();
+          that.getView().addDependent(PDFViewer);
+
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'DrawingURl' and Key02 eq '" +
               SelMatnr +
@@ -830,7 +833,11 @@ sap.ui.define(
                   if (oData.results.length != 0) {
                     var DrawingURl = oData.results[0];
                     var sSource = DrawingURl.Data01;
-                    window.open('http://' + sSource, "Download");
+                    // var Source = sSource; + "/$value";
+                    PDFViewer.setSource(sSource);
+                    PDFViewer.setTitle("My PDF");
+                    PDFViewer.open();
+                    // window.open(sSource, "Download");
                     // window.location.href('file://' + sSource);
                   }
                 } catch (e) {
@@ -1910,7 +1917,7 @@ sap.ui.define(
                   .getModel("i18n")
                   .getResourceBundle()
                   .getText("Gen002");
-                  MessageToast.show(message);
+                MessageToast.show(message);
                 return;
               } catch (e) {
                 // alert(e.message);

@@ -17,181 +17,199 @@
             width="auto"
         >
             <l:content>
-                <List
-                    id="idPostList"
-                    class="sapUiContentPadding"
+                <IconTabBar
+                    id="idIconTabBarMulti"
+                    expanded="{device>/isNoPhone}"
+                    class="sapUiResponsiveContentPadding"
                 >
-                    <InputListItem label="{i18n>OprDetails}">
-                        <Input
-                            id="idPostOperator"
-                            placeholder="Operator No"
-                            type="Text"
-                            enabled="false"
-                            width="15rem"
-                        />
-                    </InputListItem>
-                    <InputListItem label="{i18n>Plant}">
-                        <Input
-                            id="idSelectPostPlant"
-                            type="Text"
-                            enabled="false"
-                            width="15rem"
-                        />
-                    </InputListItem>
-                    <InputListItem label="{i18n>PostQuan}">
-                        <Input
-                            class="sapUiSmallMarginBottom"
-                            id="idPostQuantity"
-                            type="Number"
-                            change="onPostQuantityChange"
-                            width="15rem"
-                            value="{
-                                type: 'sap.ui.model.odata.type.Decimal'
-                            }"
-                        />
-                    </InputListItem>
-                </List>
-                <Table
-                    id="idPostScarpList"
-                    class="sapUiContentPadding"
-                    headerText="{i18n>ScarpDetail}"
-                    items="{PostScarpModel>/PostScarpData}"
-                >
-                    <columns>
-                        <Column demandPopin="true">
-                            <Text text="{i18n>Orddet}" />
-                        </Column>
-                        <Column demandPopin="true">
-                            <Text text="{i18n>ScarpType}" />
-                        </Column>
-                        <Column demandPopin="true">
-                            <Text text="{i18n>ScarpQuan}" />
-                        </Column>
-                    </columns>
                     <items>
-                        <ColumnListItem vAlign="Middle">
-                            <cells>
-                                <ObjectIdentifier
-                                    title="{PostScarpModel>Data01}"
-                                    text="{i18n>OperNo} : {PostScarpModel>Data02} User: {PostScarpModel>Data04}"
-                                />
-                                <ObjectIdentifier
-                                    title="{PostScarpModel>Data06}"
-                                    text="{PostScarpModel>Data07}"
-                                />
-                                <ObjectNumber number="{PostScarpModel>Data05}" />
-                            </cells>
-                        </ColumnListItem>
+                        <IconTabFilter
+                            icon="sap-icon://detail-more"
+                            key="Postinfo"
+                        >
+                            <List
+                                id="idPostList"
+                                class="sapUiContentPadding"
+                            >
+                                <InputListItem label="{i18n>OprDetails}">
+                                    <Input
+                                        id="idPostOperator"
+                                        placeholder="Operator No"
+                                        type="Text"
+                                        enabled="false"
+                                        width="15rem"
+                                    />
+                                </InputListItem>
+                                <InputListItem label="{i18n>Plant}">
+                                    <Input
+                                        id="idSelectPostPlant"
+                                        type="Text"
+                                        enabled="false"
+                                        width="15rem"
+                                    />
+                                </InputListItem>
+                                <InputListItem label="{i18n>PostQuan}">
+                                    <Input
+                                        class="sapUiSmallMarginBottom"
+                                        id="idPostQuantity"
+                                        type="Number"
+                                        change="onPostQuantityChange"
+                                        width="15rem"
+                                        value="{
+                                            type: 'sap.ui.model.odata.type.Decimal'
+                                        }"
+                                    />
+                                </InputListItem>
+                            </List>
+                            <Table
+                                id="idPostScarpList"
+                                class="sapUiContentPadding"
+                                headerText="{i18n>ScarpDetail}"
+                                items="{PostScarpModel>/PostScarpData}"
+                            >
+                                <columns>
+                                    <Column demandPopin="true">
+                                        <Text text="{i18n>Orddet}" />
+                                    </Column>
+                                    <Column demandPopin="true">
+                                        <Text text="{i18n>ScarpType}" />
+                                    </Column>
+                                    <Column demandPopin="true">
+                                        <Text text="{i18n>ScarpQuan}" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle">
+                                        <cells>
+                                            <ObjectIdentifier
+                                                title="{PostScarpModel>Data01}"
+                                                text="{i18n>OperNo} : {PostScarpModel>Data02} User: {PostScarpModel>Data04}"
+                                            />
+                                            <ObjectIdentifier
+                                                title="{PostScarpModel>Data06}"
+                                                text="{PostScarpModel>Data07}"
+                                            />
+                                            <ObjectNumber number="{PostScarpModel>Data05}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                            <Table
+                                id="idPostComponentList"
+                                class="sapUiContentPadding"
+                                headerText="{i18n>ComponentDetail}"
+                                items="{ComponentModel>/ComponentData}"
+                            >
+                                <columns>
+                                    <Column demandPopin="true">
+                                        <Text text="{i18n>Component}" />
+                                    </Column>
+                                    <Column demandPopin="true">
+                                        <Text text="{i18n>Plant}" />
+                                    </Column>
+                                    <Column demandPopin="true">
+                                        <Text text="{i18n>Location}" />
+                                    </Column>
+                                    <Column demandPopin="true">
+                                        <Text text="{i18n>BatchOnly}" />
+                                    </Column>
+                                    <Column demandPopin="true">
+                                        <Text text="{i18n>RequriedQuan}" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle">
+                                        <cells>
+                                            <ObjectIdentifier
+                                                title="{ComponentModel>Data01}"
+                                                text="{ComponentModel>Data02}"
+                                            />
+                                            <ObjectIdentifier title="{ComponentModel>Data03}" />
+                                            <ObjectIdentifier title="{ComponentModel>Data04}" />
+                                            <Input
+                                                value="{ComponentModel>Data05}"
+                                                valueHelpRequest="onBatchHelpRequest"
+                                                showValueHelp="true"
+                                            />
+                                            <ObjectNumber
+                                                number="{ComponentModel>Data06}"
+                                                unit="{ComponentModel>Data07}"
+                                            />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </IconTabFilter>
+                        <IconTabFilter
+                            icon="sap-icon://activity-2"
+                            key="Activity"
+                        >
+                            <Table
+                                id="idPostActivityList"
+                                class="sapUiContentPadding"
+                                headerText="{i18n>ActivityDetails}"
+                                items="{ActivityModel>/ActivityData}"
+                            >
+                                <columns>
+                                    <Column demandPopin="false">
+                                        <Text text="{i18n>ProdOrdNo}" />
+                                    </Column>
+                                    <Column demandPopin="false">
+                                        <Text text="{i18n>OperNo}" />
+                                    </Column>
+                                    <Column demandPopin="false">
+                                        <Text text="{i18n>OperStrtDate}" />
+                                    </Column>
+                                    <Column demandPopin="false">
+                                        <Text text="{i18n>OperStrtTime}" />
+                                    </Column>
+                                    <Column demandPopin="false">
+                                        <Text text="{i18n>OperEndDate}" />
+                                    </Column>
+                                    <Column demandPopin="false">
+                                        <Text text="{i18n>OperEndTime}" />
+                                    </Column>
+                                    <Column demandPopin="false">
+                                        <Text text="{i18n>TotalTime}" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle">
+                                        <cells>
+                                            <ObjectIdentifier title="{ActivityModel>Data01}" />
+                                            <ObjectIdentifier title="{ActivityModel>Data02}" />
+                                            <DatePicker
+                                                value="{ActivityModel>Data03}"
+                                                displayFormat="MMM d, y"
+                                                enabled="false"
+                                            />
+                                            <TimePicker
+                                                value="{ActivityModel>Data04}"
+                                                displayFormat="hh:mm:ss"
+                                                enabled="false"
+                                            />
+                                            <DatePicker
+                                                value="{ActivityModel>Data05}"
+                                                displayFormat="MMM d, y"
+                                                enabled="false"
+                                            />
+                                            <TimePicker
+                                                value="{ActivityModel>Data06}"
+                                                displayFormat="hh:mm:ss"
+                                                enabled="false"
+                                            />
+                                            <TimePicker
+                                                value="{ActivityModel>Data07}"
+                                                displayFormat="hh:mm:ss"
+                                                enabled="false"
+                                            />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </IconTabFilter>
                     </items>
-                </Table>
-                <Table
-                    id="idPostComponentList"
-                    class="sapUiContentPadding"
-                    headerText="{i18n>ComponentDetail}"
-                    items="{ComponentModel>/ComponentData}"
-                >
-                    <columns>
-                        <Column demandPopin="true">
-                            <Text text="{i18n>Component}" />
-                        </Column>
-                        <Column demandPopin="true">
-                            <Text text="{i18n>Plant}" />
-                        </Column>
-                        <Column demandPopin="true">
-                            <Text text="{i18n>Location}" />
-                        </Column>
-                        <Column demandPopin="true">
-                            <Text text="{i18n>BatchOnly}" />
-                        </Column>
-                        <Column demandPopin="true">
-                            <Text text="{i18n>RequriedQuan}" />
-                        </Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem vAlign="Middle">
-                            <cells>
-                                <ObjectIdentifier
-                                    title="{ComponentModel>Data01}"
-                                    text="{ComponentModel>Data02}"
-                                />
-                                <ObjectIdentifier title="{ComponentModel>Data03}" />
-                                <ObjectIdentifier title="{ComponentModel>Data04}" />
-                                <Input
-                                    value="{ComponentModel>Data05}"
-                                    valueHelpRequest="onBatchHelpRequest"
-                                    showValueHelp="true"
-                                />
-                                <ObjectNumber
-                                    number="{ComponentModel>Data06}"
-                                    unit="{ComponentModel>Data07}"
-                                />
-                            </cells>
-                        </ColumnListItem>
-                    </items>
-                </Table>
-                <Table
-                    id="idPostActivityList"
-                    class="sapUiContentPadding"
-                    headerText="{i18n>ActivityDetails}"
-                    items="{ActivityModel>/ActivityData}"
-                >
-                    <columns>
-                        <Column demandPopin="false">
-                            <Text text="{i18n>ProdOrdNo}" />
-                        </Column>
-                        <Column demandPopin="false">
-                            <Text text="{i18n>OperNo}" />
-                        </Column>
-                        <Column demandPopin="false">
-                            <Text text="{i18n>OperStrtDate}" />
-                        </Column>
-                        <Column demandPopin="false">
-                            <Text text="{i18n>OperStrtTime}" />
-                        </Column>
-                        <Column demandPopin="false">
-                            <Text text="{i18n>OperEndDate}" />
-                        </Column>
-                        <Column demandPopin="false">
-                            <Text text="{i18n>OperEndTime}" />
-                        </Column>
-                        <Column demandPopin="false">
-                            <Text text="{i18n>TotalTime}" />
-                        </Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem vAlign="Middle">
-                            <cells>
-                                <ObjectIdentifier title="{ActivityModel>Data01}" />
-                                <ObjectIdentifier title="{ActivityModel>Data02}" />
-                                <DatePicker
-                                    value="{ActivityModel>Data03}"
-                                    displayFormat="MMM d, y"
-                                    enabled="false"
-                                />
-                                <TimePicker
-                                    value="{ActivityModel>Data04}"
-                                    displayFormat="hh:mm:ss"
-                                    enabled="false"
-                                />
-                                <DatePicker
-                                    value="{ActivityModel>Data05}"
-                                    displayFormat="MMM d, y"
-                                    enabled="false"
-                                />
-                                <TimePicker
-                                    value="{ActivityModel>Data06}"
-                                    displayFormat="hh:mm:ss"
-                                    enabled="false"
-                                />
-                                <TimePicker
-                                    value="{ActivityModel>Data07}"
-                                    displayFormat="hh:mm:ss"
-                                    enabled="false"
-                                />
-                            </cells>
-                        </ColumnListItem>
-                    </items>
-                </Table>
+                </IconTabBar>
             </l:content>
         </l:VerticalLayout>
         <Bar>
