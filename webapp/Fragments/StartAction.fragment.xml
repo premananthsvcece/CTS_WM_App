@@ -16,6 +16,7 @@
             width="100%"
         >
             <l:content>
+                <Text id="idStartText" visible="false" />
                 <List
                     id="idStartList"
                     class="sapUiContentPadding"

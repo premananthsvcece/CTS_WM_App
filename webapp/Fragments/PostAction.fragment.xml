@@ -131,10 +131,13 @@
                                                 valueHelpRequest="onBatchHelpRequest"
                                                 showValueHelp="true"
                                             />
-                                            <ObjectNumber
-                                                number="{ComponentModel>Data06}"
-                                                unit="{ComponentModel>Data07}"
-                                            />
+                                            <HBox>
+                                                <Input value="{ComponentModel>Data06}" width="30%"/>
+                                                <Label
+                                                    value="{ComponentModel>Data07}"
+                                                    enabled="false"
+                                                />
+                                            </HBox>
                                         </cells>
                                     </ColumnListItem>
                                 </items>

@@ -958,6 +958,7 @@ sap.ui.define(
           sap.ui.getCore().byId("idStartDate").setValue(oDateFormat);
           sap.ui.getCore().byId("idStartTime").setValue(oTimeFormat);
           sap.ui.getCore().byId("idSelectStartPlant").setValue(SelPlant);
+          sap.ui.getCore().byId("idStartText").setText("InProgress");
 
           that.hideBusyIndicator();
         },
@@ -1048,6 +1049,7 @@ sap.ui.define(
           sap.ui.getCore().byId("idStartDate").setValue(oDateFormat);
           sap.ui.getCore().byId("idStartTime").setValue(oTimeFormat);
           sap.ui.getCore().byId("idSelectStartPlant").setValue(SelPlant);
+          sap.ui.getCore().byId("idStartText").setText("Queue");
 
           that.hideBusyIndicator();
         },
@@ -1109,52 +1111,27 @@ sap.ui.define(
             MessageBox.error(message);
             return;
           }
-          // var FirstName = sap.ui.getCore().byId("idStartFName").getValue();
-          // var LastName = sap.ui.getCore().byId("idStartLName").getValue();
           var StartDate = sap.ui.getCore().byId("idStartDate").getValue();
           var StartTime = sap.ui.getCore().byId("idStartTime").getValue();
+          var ScreenText = sap.ui.getCore().byId("idStartText").getText();
 
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
           var indicator = "";
-
-          Tableindex = sap.ui
+          if ( ScreenText === "InProgress"){
+            Tableindex = sap.ui
             .getCore()
             .byId(`${Path}--idInprogressOrderList`)
             .getSelectedIndices()[0];
+          }else{
+            Tableindex = undefined;
+          }
+          
           // Get Order No & Opr No
           if (Tableindex != undefined) {
             index = 0;
-            // var InProgressTable = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idInprogressOrderList`)
-            //   .getModel("InProgressModel")
-            //   .getData().InProgressData;
-            // array.forEach(function(currentValue, index, arr), thisValue)
-            // InProgressTable.forEach(function (InProgressValue, i) {
-            //   //Check Data16 Data17
-            //   if (InProgressValue.Data16 === OperatorNo) {
-            //     if (indicator != "X") {
-            //       if (InProgressValue.Data17 === "Success") {
-            //         var message = that
-            //           .getView()
-            //           .getModel("i18n")
-            //           .getResourceBundle()
-            //           .getText("Start003");
-            //         MessageBox.error(message);
-            //         indicator = "X";
-            //         return;
-            //       }
-            //     } else {
-            //       return;
-            //     }
-            //   }
-            // });
 
-            // if (indicator === "X") {
-            //   return;
-            // }
             SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
