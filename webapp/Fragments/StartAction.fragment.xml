@@ -22,6 +22,8 @@
                     class="sapUiContentPadding"
                 >
                     <InputListItem label="{i18n>OprDetails}">
+                        <Input id="idSelectOrder" visible="false" />
+                        <Input id="idSelectOprNo" visible="false" />
                         <Input
                             id="idStartOperator"
                             placeholder="Operator No"

@@ -864,6 +864,8 @@ sap.ui.define(
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
+          var OprNumber = "";
+          var OprStatus = "";
 
           Tableindex = sap.ui
             .getCore()
@@ -881,24 +883,34 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data05;
-          } else {
-            Tableindex = sap.ui
+            OprNumber = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getSelectedIndices()[0];
-            // Get Order No & Opr No
-            if (Tableindex != undefined) {
-              SelAufnr = sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getModel("InQueueModel")
-                .getData().InQueueData[Tableindex].Data02;
-              SelOprNo = sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .getModel("InQueueModel")
-                .getData().InQueueData[Tableindex].Data05;
-            }
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data16; // Operator No
+            OprStatus = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data17;
+          } else {
+            // Tableindex = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getSelectedIndices()[0];
+            // // Get Order No & Opr No
+            // if (Tableindex != undefined) {
+            //   SelAufnr = sap.ui
+            //     .getCore()
+            //     .byId(`${Path}--idQueueOrderList`)
+            //     .getModel("InQueueModel")
+            //     .getData().InQueueData[Tableindex].Data02;
+            //   SelOprNo = sap.ui
+            //     .getCore()
+            //     .byId(`${Path}--idQueueOrderList`)
+            //     .getModel("InQueueModel")
+            //     .getData().InQueueData[Tableindex].Data05;
+            // }
           }
           if (Tableindex === undefined) {
             // Raise Message
@@ -958,8 +970,15 @@ sap.ui.define(
           sap.ui.getCore().byId("idStartDate").setValue(oDateFormat);
           sap.ui.getCore().byId("idStartTime").setValue(oTimeFormat);
           sap.ui.getCore().byId("idSelectStartPlant").setValue(SelPlant);
+          sap.ui.getCore().byId("idSelectOrder").setValue(SelAufnr);
+          sap.ui.getCore().byId("idSelectOprNo").setValue(SelOprNo);
           sap.ui.getCore().byId("idStartText").setText("InProgress");
-          sap.ui.getCore().byId("idStartOperator").setValue("");
+          if( OprStatus === "Critical"){
+            sap.ui.getCore().byId("idStartOperator").setValue(OprNumber);
+          }else{
+            sap.ui.getCore().byId("idStartOperator").setValue("");
+          }
+          
 
           that.hideBusyIndicator();
         },
@@ -1051,6 +1070,8 @@ sap.ui.define(
           sap.ui.getCore().byId("idStartDate").setValue(oDateFormat);
           sap.ui.getCore().byId("idStartTime").setValue(oTimeFormat);
           sap.ui.getCore().byId("idSelectStartPlant").setValue(SelPlant);
+          sap.ui.getCore().byId("idSelectOrder").setValue(SelAufnr);
+          sap.ui.getCore().byId("idSelectOprNo").setValue(SelOprNo);
           sap.ui.getCore().byId("idStartText").setText("Queue");
 
           that.hideBusyIndicator();
@@ -1115,21 +1136,25 @@ sap.ui.define(
           }
           var StartDate = sap.ui.getCore().byId("idStartDate").getValue();
           var StartTime = sap.ui.getCore().byId("idStartTime").getValue();
-          var ScreenText = sap.ui.getCore().byId("idStartText").getText();
+          var ScreenText  = sap.ui.getCore().byId("idStartText").getText();
+          var SelOrderNo  = sap.ui.getCore().byId("idSelectOrder").getValue();
+          var SelOrderOpr = sap.ui.getCore().byId("idSelectOprNo").getValue();
 
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
           var indicator = "";
-          if ( ScreenText === "InProgress"){
+          var ScreenOprNo = "";
+          var ScreenStatus = "";
+          if (ScreenText === "InProgress") {
             Tableindex = sap.ui
-            .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getSelectedIndices()[0];
-          }else{
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getSelectedIndices()[0];
+          } else {
             Tableindex = undefined;
           }
-          
+
           // Get Order No & Opr No
           if (Tableindex != undefined) {
             index = 0;
@@ -1144,6 +1169,16 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data05;
+            ScreenOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data16;
+            ScreenStatus = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data17;
           } else {
             Tableindex = sap.ui
               .getCore()
@@ -1164,7 +1199,20 @@ sap.ui.define(
                 .getData().InQueueData[Tableindex].Data05;
             }
           }
-
+          if( ScreenStatus === "Success"){
+          if( SelOrderNo === SelAufnr && SelOrderOpr === SelOprNo){
+          if( ScreenOprNo === OperatorNo){
+            // Raise Message
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Start003");
+            MessageBox.error(message);
+            return;
+            }
+          }
+        }
           if (Tableindex === undefined) {
             // Raise Message
             var message = that
@@ -1518,7 +1566,8 @@ sap.ui.define(
           );
         },
         onCancelStopPress: function () {
-          this.StopDialog.close();
+          var that = this;
+          that.StopDialog.close();
           // Raise Message
           var message = that
             .getView()
@@ -1993,6 +2042,7 @@ sap.ui.define(
                 try {
                   if (oData.results.length != 0) {
                     var PostScarpData = oData.results;
+
                     if (PostScarpData.length != 0) {
                       var PostScarpModel = new sap.ui.model.json.JSONModel();
 
@@ -2005,6 +2055,19 @@ sap.ui.define(
 
                       PostScarpList.setModel(PostScarpModel, "PostScarpModel");
                     }
+                    that.hideBusyIndicator();
+                  } else {
+                    var PostScarpData = []; // Dummy Data
+                    var PostScarpModel = new sap.ui.model.json.JSONModel();
+
+                    PostScarpModel.setData({
+                      PostScarpData: PostScarpData,
+                    });
+                    var PostScarpList = sap.ui
+                      .getCore()
+                      .byId("idPostScarpList");
+
+                    PostScarpList.setModel(PostScarpModel, "PostScarpModel");
                     that.hideBusyIndicator();
                   }
                 } catch (e) {
@@ -2047,6 +2110,19 @@ sap.ui.define(
                       ComponentnList.setModel(ComponentModel, "ComponentModel");
                     }
                     that.hideBusyIndicator();
+                  } else {
+                    var ComponentData = [];
+                    var ComponentModel = new sap.ui.model.json.JSONModel();
+
+                    ComponentModel.setData({
+                      ComponentData: ComponentData,
+                    });
+                    var ComponentnList = sap.ui
+                      .getCore()
+                      .byId("idPostComponentList");
+
+                    ComponentnList.setModel(ComponentModel, "ComponentModel");
+                    that.hideBusyIndicator();
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
@@ -2076,6 +2152,7 @@ sap.ui.define(
                 try {
                   if (oData.results.length != 0) {
                     var ActivityData = oData.results;
+
                     if (ActivityData.length != 0) {
                       var ActivityModel = new sap.ui.model.json.JSONModel();
 
@@ -2088,6 +2165,20 @@ sap.ui.define(
 
                       PostActivityList.setModel(ActivityModel, "ActivityModel");
                     }
+                    that.hideBusyIndicator();
+                  } else {
+                    var ActivityData = []; // Dummy Data
+                    var ActivityModel = new sap.ui.model.json.JSONModel();
+
+                    ActivityModel.setData({
+                      ActivityData: ActivityData,
+                    });
+                    var PostActivityList = sap.ui
+                      .getCore()
+                      .byId("idPostActivityList");
+
+                    PostActivityList.setModel(ActivityModel, "ActivityModel");
+
                     that.hideBusyIndicator();
                   }
                 } catch (e) {
@@ -2191,6 +2282,7 @@ sap.ui.define(
             .getModel("ComponentModel")
             .getData().ComponentData;
           that.PostActionDialog.close();
+          // that.PostActionDialog.destroy();
 
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
@@ -2214,6 +2306,7 @@ sap.ui.define(
         onCancelPostPress: function () {
           var that = this;
           that.PostActionDialog.close();
+          // that.PostActionDialog.destroy();
         },
         onPostQuantityChange: function (oEvent) {
           var value = oEvent.getParameter("value");
@@ -2265,7 +2358,7 @@ sap.ui.define(
                 sap.ui
                   .getCore()
                   .byId(`${Path}--idINPStartJob`)
-                  .setEnabled(false);
+                  .setEnabled(true);
                 sap.ui.getCore().byId(`${Path}--idINPStopJob`).setEnabled(true);
               }
             }
