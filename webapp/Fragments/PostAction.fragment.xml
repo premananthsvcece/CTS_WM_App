@@ -132,8 +132,8 @@
                                                 showValueHelp="true"
                                             />
                                             <HBox>
-                                                <Input value="{ComponentModel>Data06}" width="30%"/>
-                                                <Label
+                                                <Input value="{ComponentModel>Data06}" width="70%"/>
+                                                <Input
                                                     value="{ComponentModel>Data07}"
                                                     enabled="false"
                                                 />

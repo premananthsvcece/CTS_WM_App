@@ -44,11 +44,12 @@
                             width="15rem"
                         />
                     </InputListItem> -->
-                    <InputListItem label="{i18n>Plant}">
+                    <InputListItem label="{i18n>Plant}" visible="false">
                         <Input
                             id="idSelectStartPlant"
                             type="Text"
                             width="15rem"
+                            visible="false"
                         />
                     </InputListItem>
                     <InputListItem label="{i18n>StartDate}">

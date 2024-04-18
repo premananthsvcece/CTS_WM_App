@@ -959,6 +959,7 @@ sap.ui.define(
           sap.ui.getCore().byId("idStartTime").setValue(oTimeFormat);
           sap.ui.getCore().byId("idSelectStartPlant").setValue(SelPlant);
           sap.ui.getCore().byId("idStartText").setText("InProgress");
+          sap.ui.getCore().byId("idStartOperator").setValue("");
 
           that.hideBusyIndicator();
         },
@@ -1046,6 +1047,7 @@ sap.ui.define(
           }
           var oTimeFormat = hr + mm + sec;
 
+          sap.ui.getCore().byId("idStartOperator").setValue("");
           sap.ui.getCore().byId("idStartDate").setValue(oDateFormat);
           sap.ui.getCore().byId("idStartTime").setValue(oTimeFormat);
           sap.ui.getCore().byId("idSelectStartPlant").setValue(SelPlant);
@@ -1858,7 +1860,7 @@ sap.ui.define(
             return;
           }
           var Data02 = sap.ui.getCore().byId(`idScarpQuantity`).getValue();
-          if (Data01 === "") {
+          if (Data02 === "") {
             var message = that
               .getView()
               .getModel("i18n")
