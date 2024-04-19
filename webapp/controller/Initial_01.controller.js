@@ -213,13 +213,9 @@ sap.ui.define(
         /* BUSY INDICATOR*/
         showBusyIndicator: function () {
           sap.ui.core.BusyIndicator.show(100);
-          // this.getView().setBusy(true);
-          // sap.m.BusyDialog.open();
         },
         hideBusyIndicator: function () {
-          // this.getView().setBusy(false);
           sap.ui.core.BusyIndicator.hide( );
-          // sap.m.BusyDialog.close();
         },
         onButtonPress: function () {
           var that = this;
