@@ -236,7 +236,7 @@ sap.ui.define(
           that.onLoadData(that, Plant, SelWCGrp, Workcenter);
         },
 
-        onValueHelpRequested: function () {},
+        onValueHelpRequested: function () { },
         _onPlantHelp: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
@@ -334,10 +334,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WorkCenter' and Key04 eq '" +
-              SelPlant +
-              "' and Key05 eq '" +
-              SelWCGrp +
-              "'",
+            SelPlant +
+            "' and Key05 eq '" +
+            SelWCGrp +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -389,8 +389,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WCGroup' and Key04 eq '" +
-              SelPlant +
-              "'",
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -518,10 +518,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BOM' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -650,10 +650,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Routing' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -823,8 +823,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'DrawingURl' and Key02 eq '" +
-              SelMatnr +
-              "'",
+            SelMatnr +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -973,12 +973,12 @@ sap.ui.define(
           sap.ui.getCore().byId("idSelectOrder").setValue(SelAufnr);
           sap.ui.getCore().byId("idSelectOprNo").setValue(SelOprNo);
           sap.ui.getCore().byId("idStartText").setText("InProgress");
-          if( OprStatus === "Critical"){
+          if (OprStatus === "Critical") {
             sap.ui.getCore().byId("idStartOperator").setValue(OprNumber);
-          }else{
+          } else {
             sap.ui.getCore().byId("idStartOperator").setValue("");
           }
-          
+
 
           that.hideBusyIndicator();
         },
@@ -1090,10 +1090,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-              sValue +
-              "' and Key03 eq '" +
-              SelPlant +
-              "'",
+            sValue +
+            "' and Key03 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -1136,8 +1136,8 @@ sap.ui.define(
           }
           var StartDate = sap.ui.getCore().byId("idStartDate").getValue();
           var StartTime = sap.ui.getCore().byId("idStartTime").getValue();
-          var ScreenText  = sap.ui.getCore().byId("idStartText").getText();
-          var SelOrderNo  = sap.ui.getCore().byId("idSelectOrder").getValue();
+          var ScreenText = sap.ui.getCore().byId("idStartText").getText();
+          var SelOrderNo = sap.ui.getCore().byId("idSelectOrder").getValue();
           var SelOrderOpr = sap.ui.getCore().byId("idSelectOprNo").getValue();
 
           var Tableindex = "X";
@@ -1199,20 +1199,20 @@ sap.ui.define(
                 .getData().InQueueData[Tableindex].Data05;
             }
           }
-          if( ScreenStatus === "Success"){
-          if( SelOrderNo === SelAufnr && SelOrderOpr === SelOprNo){
-          if( ScreenOprNo === OperatorNo){
-            // Raise Message
-            var message = that
-              .getView()
-              .getModel("i18n")
-              .getResourceBundle()
-              .getText("Start003");
-            MessageBox.error(message);
-            return;
+          if (ScreenStatus === "Success") {
+            if (SelOrderNo === SelAufnr && SelOrderOpr === SelOprNo) {
+              if (ScreenOprNo === OperatorNo) {
+                // Raise Message
+                var message = that
+                  .getView()
+                  .getModel("i18n")
+                  .getResourceBundle()
+                  .getText("Start003");
+                MessageBox.error(message);
+                return;
+              }
             }
           }
-        }
           if (Tableindex === undefined) {
             // Raise Message
             var message = that
@@ -1438,10 +1438,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-              sValue +
-              "' and Key03 eq '" +
-              SelPlant +
-              "'",
+            sValue +
+            "' and Key03 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -1667,8 +1667,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'HeaderText' and Key02 eq '" +
-              SelAufnr +
-              "'",
+            SelAufnr +
+            "'",
             {
               context: null,
               async: false,
@@ -1812,8 +1812,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
-              SelPlant +
-              "'",
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -2028,14 +2028,14 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Post' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "' and Key04 eq '" +
-              OperatorNo +
-              "' and Key05 eq '" +
-              SelPlant +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "' and Key04 eq '" +
+            OperatorNo +
+            "' and Key05 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -2083,14 +2083,14 @@ sap.ui.define(
 
           vModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Component' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "' and Key04 eq '" +
-              OperatorNo +
-              "' and Key05 eq '" +
-              SelPlant +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "' and Key04 eq '" +
+            OperatorNo +
+            "' and Key05 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -2138,14 +2138,14 @@ sap.ui.define(
 
           logModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'LogData' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "' and Key04 eq '" +
-              OperatorNo +
-              "' and Key05 eq '" +
-              SelPlant +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "' and Key04 eq '" +
+            OperatorNo +
+            "' and Key05 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -2416,14 +2416,14 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BatchValue' and Key02 eq '" +
-              SelMatnr +
-              "' and Key03 eq '" +
-              SelWerks +
-              "' and Key04 eq '" +
-              SelLgort +
-              "' and Key05 eq '" +
-              SelClabs +
-              "'",
+            SelMatnr +
+            "' and Key03 eq '" +
+            SelWerks +
+            "' and Key04 eq '" +
+            SelLgort +
+            "' and Key05 eq '" +
+            SelClabs +
+            "'",
             {
               context: null,
               async: false,
