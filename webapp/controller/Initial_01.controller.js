@@ -211,11 +211,15 @@ sap.ui.define(
           });
         },
         /* BUSY INDICATOR*/
-        showBusyIndicator: function (iDuration, iDelay) {
-          sap.ui.core.BusyIndicator.show(iDelay);
+        showBusyIndicator: function () {
+          sap.ui.core.BusyIndicator.show(100);
+          // this.getView().setBusy(true);
+          // sap.m.BusyDialog.open();
         },
         hideBusyIndicator: function () {
-          sap.ui.core.BusyIndicator.hide();
+          // this.getView().setBusy(false);
+          sap.ui.core.BusyIndicator.hide( );
+          // sap.m.BusyDialog.close();
         },
         onButtonPress: function () {
           var that = this;
@@ -927,7 +931,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-          that.showBusyIndicator(1000, 0);
+          that.showBusyIndicator();
 
           if (!that.StartDialog) {
             that.StartDialog = sap.ui.xmlfragment(
@@ -1023,7 +1027,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-          that.showBusyIndicator(1000, 0);
+          that.showBusyIndicator();
 
           if (!that.StartDialog) {
             that.StartDialog = sap.ui.xmlfragment(
@@ -1228,7 +1232,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-          that.showBusyIndicator(1000, 0);
+          that.showBusyIndicator();
 
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
@@ -1370,7 +1374,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-          that.showBusyIndicator(100, 0);
+          that.showBusyIndicator();
 
           if (!that.StopDialog) {
             that.StopDialog = sap.ui.xmlfragment(
@@ -1514,7 +1518,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-          that.showBusyIndicator(1000, 0);
+          that.showBusyIndicator();
 
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
@@ -1974,6 +1978,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
+          that.showBusyIndicator();
 
           Tableindex = sap.ui
             .getCore()
@@ -2015,7 +2020,6 @@ sap.ui.define(
             );
             that.getView().addDependent(that.PostActionDialog);
           }
-          that.showBusyIndicator(1000, 0);
 
           sap.ui.getCore().byId(`idPostOperator`).setValue(OperatorNo);
           sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);
@@ -2294,8 +2298,16 @@ sap.ui.define(
               try {
                 // console.log(oData);
                 that.hideBusyIndicator();
-                MessageToast.show("Update Successful");
-                that.onButtonPress();
+                if (oData.Key04 === "E") {
+                  var message = oData.Key05;
+                  MessageBox.error(message);
+                  return;
+                } else {
+                  // MessageToast.show("Update Successful");
+                  var message = oData.Key05;
+                  MessageBox.success(message);
+                  that.onButtonPress();
+                }
                 return;
               } catch (e) {
                 // alert(e.message);
@@ -2397,7 +2409,7 @@ sap.ui.define(
             SelMatnr = LineArray[0].getTitle();
             SelWerks = LineArray[1].getTitle();
             SelLgort = LineArray[2].getTitle();
-            SelClabs = LineArray[4].getValue();
+            SelClabs = LineArray[3].getValue();
           }
 
           var Path = that.getView().getId();
@@ -2409,7 +2421,7 @@ sap.ui.define(
             );
             that.getView().addDependent(that.BatchHelpDialog);
           }
-          that.showBusyIndicator(1000, 0);
+          that.showBusyIndicator();
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
