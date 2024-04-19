@@ -8,6 +8,7 @@
 >
     <Dialog
         id="idDialogStart"
+        class="sapUiResponsiveMargin"
         title="{i18n>StartAction}"
     >
         <l:VerticalLayout
@@ -32,20 +33,22 @@
                             width="15rem"
                         />
                     </InputListItem>
-                    <!-- <InputListItem label="{i18n>FirstName}">
+                    <InputListItem label="{i18n>FirstName}" visible="false">
                         <Input
                             id="idStartFName"
                             type="Text"
                             width="15rem"
+                            visible="false"
                         />
                     </InputListItem>
-                    <InputListItem label="{i18n>LastName}">
+                    <InputListItem label="{i18n>LastName}" visible="false">
                         <Input
                             id="idStartLName"
                             type="Text"
                             width="15rem"
+                            visible="false"
                         />
-                    </InputListItem> -->
+                    </InputListItem>
                     <InputListItem label="{i18n>Plant}" visible="false">
                         <Input
                             id="idSelectStartPlant"
@@ -54,7 +57,7 @@
                             visible="false"
                         />
                     </InputListItem>
-                    <InputListItem label="{i18n>StartDate}">
+                    <InputListItem label="{i18n>StartDate}" visible="false">
                         <DatePicker
                             id="idStartDate"
                             placeholder="Select Date"
@@ -62,9 +65,10 @@
                             showFooter="false"
                             enabled="false"
                             width="15rem"
+                            visible="false"
                         />
                     </InputListItem>
-                    <InputListItem label="{i18n>StartTime}">
+                    <InputListItem label="{i18n>StartTime}" visible="false">
                         <TimePicker
                             id="idStartTime"
                             placeholder="Select Time"
@@ -72,6 +76,7 @@
                             enabled="false"
                             width="15rem"
                             displayFormat="HH:mm:ss"
+                            visible="false"
                         />
                     </InputListItem>
                 </List>

@@ -834,10 +834,10 @@ sap.ui.define(
                     var DrawingURl = oData.results[0];
                     var sSource = DrawingURl.Data01;
                     // var Source = sSource; + "/$value";
-                    PDFViewer.setSource(sSource);
-                    PDFViewer.setTitle("My PDF");
-                    PDFViewer.open();
-                    // window.open(sSource, "Download");
+                    // PDFViewer.setSource(sSource);
+                    // PDFViewer.setTitle("My PDF");
+                    // PDFViewer.open();
+                    window.open(sSource, "Download");
                     // window.location.href('file://' + sSource);
                   }
                 } catch (e) {
@@ -1381,7 +1381,7 @@ sap.ui.define(
           }
 
           // open value help dialog
-          that.StopDialog.open();
+          // that.StopDialog.open();
 
           var oDateTime = new Date();
 
@@ -1420,8 +1420,9 @@ sap.ui.define(
           sap.ui.getCore().byId("idStopEndTime").setValue(oTimeFormat);
           sap.ui.getCore().byId("idSelectStopPlant").setValue(SelPlant);
           sap.ui.getCore().byId("idStopOperator").setValue(SelOpratorNo);
-          that.OnStopOperatorGet(SelOpratorNo);
+          // that.OnStopOperatorGet(SelOpratorNo);
           that.hideBusyIndicator();
+          that.onConfirmStopPress();
         },
 
         OnStopOperatorGet: function (SelOpratorNo) {
@@ -1471,8 +1472,8 @@ sap.ui.define(
           var Path = that.getView().getId();
 
           var OperatorNo = sap.ui.getCore().byId("idStopOperator").getValue();
-          var FirstName = sap.ui.getCore().byId("idStopFName").getValue();
-          var LastName = sap.ui.getCore().byId("idStopLName").getValue();
+          // var FirstName = sap.ui.getCore().byId("idStopFName").getValue();
+          // var LastName = sap.ui.getCore().byId("idStopLName").getValue();
           var EndDate = sap.ui.getCore().byId("idStopEndDate").getValue();
           var EndTime = sap.ui.getCore().byId("idStopEndTime").getValue();
 
@@ -1546,7 +1547,7 @@ sap.ui.define(
           IEntry.NavWC_Queue = [{}];
           IEntry.NavWC_Future = [{}];
           IEntry.NavWC_Component = [{}];
-          that.StopDialog.close();
+          // that.StopDialog.close();
 
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
@@ -1944,7 +1945,7 @@ sap.ui.define(
                   .getView()
                   .getModel("i18n")
                   .getResourceBundle()
-                  .getText("Gen002");
+                  .getText("Gen003");
                 MessageToast.show(message);
                 return;
               } catch (e) {
@@ -2018,6 +2019,7 @@ sap.ui.define(
 
           sap.ui.getCore().byId(`idPostOperator`).setValue(OperatorNo);
           sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);
+          sap.ui.getCore().byId(`idPostQuantity`).setValue();
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -2395,7 +2397,7 @@ sap.ui.define(
             SelMatnr = LineArray[0].getTitle();
             SelWerks = LineArray[1].getTitle();
             SelLgort = LineArray[2].getTitle();
-            SelClabs = LineArray[4].getNumber();
+            SelClabs = LineArray[4].getValue();
           }
 
           var Path = that.getView().getId();

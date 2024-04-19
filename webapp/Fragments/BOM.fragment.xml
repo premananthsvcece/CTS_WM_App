@@ -10,17 +10,39 @@
         title="Display BOM"
         cancel=".onDialogClose"
         items="{BOMModel>/BOMData}"
-        contentWidth="750px"
-        contentHeight="800px"
+        contentWidth="85%"
+        contentHeight="60%"
     >
         <columns>
-            <Column width="auto">
+            <Column
+                width="auto"
+                minScreenWidth="Desktop"
+                visible="false"
+            >
                 <header>
                     <Text text="{i18n>ItemNo}" />
                 </header>
             </Column>
             <Column
-                minScreenWidth="Tablet"
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                hAlign="Begin"
+            >
+                <header>
+                    <Text text="{i18n>Component}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                hAlign="Begin"
+            >
+                <header>
+                    <Text text="{i18n>ComponentDescr}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
                 demandPopin="true"
             >
                 <header>
@@ -30,16 +52,7 @@
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
-                hAlign="End"
-            >
-                <header>
-                    <Text text="{i18n>ComponentDetail}" />
-                </header>
-            </Column>
-            <Column
-                minScreenWidth="Desktop"
-                demandPopin="true"
-                hAlign="End"
+                hAlign="Begin"
             >
                 <header>
                     <Text text="{i18n>BatchOnly}" />
@@ -62,12 +75,13 @@
         </columns>
         <ColumnListItem vAlign="Middle">
             <cells>
-                <ObjectIdentifier title="{BOMModel>Data03}" />
-                <ObjectIdentifier title="{BOMModel>Data02}" />
                 <ObjectIdentifier
-                    title="{BOMModel>Data04}"
-                    text="{BOMModel>Data05}"
+                    title="{BOMModel>Data03}"
+                    visible="false"
                 />
+                <ObjectIdentifier title="{BOMModel>Data04}" />
+                <ObjectIdentifier title="{BOMModel>Data05}" />
+                <ObjectIdentifier title="{BOMModel>Data02}" />
                 <ObjectIdentifier title="{BOMModel>Data08}" />
                 <ObjectNumber
                     number="{BOMModel>Data09}"

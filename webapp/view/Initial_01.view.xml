@@ -252,7 +252,7 @@
                         <uxap:blocks>
                             <Table:Table
                                 id="idInprogressOrderList"
-                                visibleRowCount="5"
+                                visibleRowCount="12"
                                 visibleRowCountMode="Interactive"
                                 class="sapUiResponsiveMargin"
                                 rows="{InProgressModel>/InProgressData}"
