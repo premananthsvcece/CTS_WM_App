@@ -871,21 +871,17 @@ sap.ui.define(
                     var base64Data = btoa(sSource); // Convert binary to base64
                     var blob = that.base64toBlob(base64Data, 'application/pdf');
                     var blobUrl = URL.createObjectURL(blob);
+
                     // Create a data URI for the PDF content
-                    // var dataURI = "data:application/pdf;base64," + base64Data;
                     var PDF01Viewer = sap.ui.getCore().byId("idPDFViewer");
-                    // var pdfViewer = new sap.m.PDFViewer({
-                    //   source: blobUrl,
-                    //   width: '100%',
-                    //   height: '600px'
-                    // });
                     console.log(blobUrl);
                     PDF01Viewer.setSource(blobUrl);
                     PDF01Viewer.setWidth('100%');
                     PDF01Viewer.setHeight('60%');
-                    PDF01Viewer.setTitle("My PDF");
-                    PDF01Viewer.open();
-                    // that.PopupPDF.open();
+                    PDF01Viewer.setTitle("Drawing: " + SelMatnr + "");
+                    window.open(blobUrl);
+                    // PDF01Viewer.open();
+                    
                   }
                 } catch (e) {
                   alert(e.message);
