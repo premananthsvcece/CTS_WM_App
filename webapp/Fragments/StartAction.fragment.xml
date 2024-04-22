@@ -9,7 +9,7 @@
     <Dialog
         id="idDialogStart"
         class="sapUiResponsiveMargin"
-        title="{i18n>StartAction}"
+        showHeader="false"
     >
         <l:VerticalLayout
             id="idVerticalLayoutStart"
@@ -21,6 +21,7 @@
                 <List
                     id="idStartList"
                     class="sapUiContentPadding"
+                    showSeparators="None"
                 >
                     <InputListItem label="{i18n>OprDetails}">
                         <Input id="idSelectOrder" visible="false" />

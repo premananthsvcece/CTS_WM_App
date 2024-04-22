@@ -563,7 +563,7 @@
                         <uxap:blocks>
                             <Table:Table
                                 id="idQueueOrderList"
-                                visibleRowCount="5"
+                                visibleRowCount="10"
                                 visibleRowCountMode="Interactive"
                                 class="sapUiResponsiveMargin"
                                 rows="{InQueueModel>/InQueueData}"
@@ -855,7 +855,7 @@
                         <uxap:blocks>
                             <Table:Table
                                 id="idFutureOrderList"
-                                visibleRowCount="5"
+                                visibleRowCount="10"
                                 visibleRowCountMode="Interactive"
                                 class="sapUiResponsiveMargin"
                                 rows="{InFutureModel>/InFutureData}"

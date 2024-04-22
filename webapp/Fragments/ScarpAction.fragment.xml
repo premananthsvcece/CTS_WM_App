@@ -19,11 +19,11 @@
                 <List
                     id="idScarpList"
                     class="sapUiContentPadding"
+                    showSeparators="None"
                 >
                     <InputListItem label="{i18n>ScarpType}">
                         <Input
                             id="idScarpReason"
-                            class="sapUiSmallMarginBottom"
                             showValueHelp="true"
                             valueHelpRequest="onScarpReasonRequest"
                             placeholder="Scarp Reason"
@@ -33,7 +33,6 @@
                     </InputListItem>
                     <InputListItem label="{i18n>ScarpQuan}">
                         <Input
-                            class="sapUiSmallMarginBottom"
                             id="idScarpQuantity"
                             type="Number"
                             width="15rem"

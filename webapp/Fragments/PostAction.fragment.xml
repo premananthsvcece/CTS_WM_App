@@ -31,6 +31,7 @@
                                 id="idPostList"
                                 class="sapUiContentPadding"
                                 headerText="{i18n>StartAction}"
+                                showSeparators="None"
                             >
                                 <InputListItem label="{i18n>OprDetails}">
                                     <Input
@@ -51,7 +52,6 @@
                                 </InputListItem>
                                 <InputListItem label="{i18n>PostQuan}">
                                     <Input
-                                        class="sapUiSmallMarginBottom"
                                         id="idPostQuantity"
                                         type="Number"
                                         change="onPostQuantityChange"
@@ -67,6 +67,7 @@
                                 class="sapUiContentPadding"
                                 headerText="{i18n>ScarpDetail}"
                                 items="{PostScarpModel>/PostScarpData}"
+                                showSeparators="None"
                             >
                                 <columns>
                                     <Column demandPopin="true">
@@ -100,9 +101,13 @@
                                 class="sapUiContentPadding"
                                 headerText="{i18n>ComponentDetail}"
                                 items="{ComponentModel>/ComponentData}"
+                                showSeparators="None"
                             >
                                 <columns>
-                                    <Column demandPopin="true" width="30%">
+                                    <Column
+                                        demandPopin="true"
+                                        width="30%"
+                                    >
                                         <Text text="{i18n>Component}" />
                                     </Column>
                                     <Column
@@ -144,13 +149,10 @@
                                                 valueHelpRequest="onBatchHelpRequest"
                                                 showValueHelp="true"
                                             />
-                                            <HBox>
-                                                <Input
-                                                    value="{ComponentModel>Data06}"
-                                                    description="{ComponentModel>Data07}"
-                                                />
-                                                
-                                            </HBox>
+                                            <Input
+                                                value="{ComponentModel>Data06}"
+                                                description="{ComponentModel>Data07}"
+                                            />
                                         </cells>
                                     </ColumnListItem>
                                 </items>
@@ -167,10 +169,16 @@
                                 items="{ActivityModel>/ActivityData}"
                             >
                                 <columns>
-                                    <Column demandPopin="true" width="15%">
+                                    <Column
+                                        demandPopin="true"
+                                        width="15%"
+                                    >
                                         <Text text="{i18n>ProdOrdNo}" />
                                     </Column>
-                                    <Column demandPopin="true" width="10%">
+                                    <Column
+                                        demandPopin="true"
+                                        width="10%"
+                                    >
                                         <Text text="{i18n>OprNo}" />
                                     </Column>
                                     <Column demandPopin="true">

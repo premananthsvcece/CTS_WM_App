@@ -12,6 +12,8 @@
         items="{BOMModel>/BOMData}"
         contentWidth="85%"
         contentHeight="60%"
+        search="onBOMDataTableSelectDialogSearch"
+        liveChange="onBOMDataTableSelectDialogSearch"
     >
         <columns>
             <Column

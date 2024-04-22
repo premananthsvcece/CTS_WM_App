@@ -215,7 +215,7 @@ sap.ui.define(
           sap.ui.core.BusyIndicator.show(100);
         },
         hideBusyIndicator: function () {
-          sap.ui.core.BusyIndicator.hide( );
+          sap.ui.core.BusyIndicator.hide();
         },
         onButtonPress: function () {
           var that = this;
@@ -686,6 +686,38 @@ sap.ui.define(
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
         },
+        onRoutingDataTableSelectDialogSearch: function (oEvent) {
+          var sValue = oEvent.getParameter("value");
+          var oFilter = new Filter({
+            filters: [
+              new Filter("Data02", FilterOperator.Contains, sValue),
+              new Filter("Data03", FilterOperator.Contains, sValue),
+              new Filter("Data04", FilterOperator.Contains, sValue),
+              new Filter("Data05", FilterOperator.Contains, sValue),
+              new Filter("Data06", FilterOperator.Contains, sValue),
+              new Filter("Data07", FilterOperator.Contains, sValue),
+              new Filter("Data08", FilterOperator.Contains, sValue)
+            ]
+          });
+          var oBinding = oEvent.getParameter("itemsBinding");
+          oBinding.filter([oFilter]);
+        },
+        onBOMDataTableSelectDialogSearch: function (oEvent) {
+          var sValue = oEvent.getParameter("value");
+          var oFilter = new Filter({
+            filters: [
+              new Filter("Data02", FilterOperator.Contains, sValue),
+              new Filter("Data03", FilterOperator.Contains, sValue),
+              new Filter("Data04", FilterOperator.Contains, sValue),
+              new Filter("Data05", FilterOperator.Contains, sValue),
+              // new Filter("Data06", FilterOperator.Contains, sValue),
+              // new Filter("Data07", FilterOperator.Contains, sValue),
+              new Filter("Data08", FilterOperator.Contains, sValue)
+            ]
+          });
+          var oBinding = oEvent.getParameter("itemsBinding");
+          oBinding.filter([oFilter]);
+        },
         _onWorkAreaSearch: function (oEvent) {
           var sValue = oEvent.getParameter("value");
           var oFilter = new Filter("Data01", FilterOperator.Contains, sValue);
@@ -1077,9 +1109,13 @@ sap.ui.define(
           that.hideBusyIndicator();
         },
 
-        OnOperatorfill: function (oEvent) {
+        OnOperatorfill: function () {
           var that = this;
-          var sValue = oEvent.getParameter("value");
+          var sValue = sap.ui
+            .getCore()
+            .byId(`idStartOperator`)
+            .getValue();
+          // var sValue = oEvent.getParameter("value");
           var Path = that.getView().getId();
           var SelPlant = sap.ui
             .getCore()
@@ -1096,20 +1132,22 @@ sap.ui.define(
             "'",
             {
               context: null,
+              async: false,
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
                   var sPath = that.getView().getId();
                   if (oData.results.length != 0) {
                     var emparray = oData.results[0];
-                    // sap.ui
-                    //   .getCore()
-                    //   .byId(`idStartFName`)
-                    //   .setValue(emparray.Data03);
-                    // sap.ui
-                    //   .getCore()
-                    //   .byId(`idStartLName`)
-                    //   .setValue(emparray.Data04);
+                    sap.ui
+                      .getCore()
+                      .byId(`idStartOperator`)
+                      .setValue(sValue);
+                  } else {
+                    sap.ui
+                      .getCore()
+                      .byId(`idStartOperator`)
+                      .setValue();
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
@@ -1123,7 +1161,7 @@ sap.ui.define(
           var that = this;
           var index;
           var Path = that.getView().getId();
-
+          that.OnOperatorfill();
           var OperatorNo = sap.ui.getCore().byId("idStartOperator").getValue();
           if (OperatorNo === "") {
             var message = that
@@ -1859,7 +1897,7 @@ sap.ui.define(
             } else {
               return;
             }
-            this.onButtonPress();
+            // this.onButtonPress();
           }
         },
         onConfirmScarpPress: function (oEvent) {
@@ -1940,14 +1978,21 @@ sap.ui.define(
             null,
             function (oData, Response) {
               try {
-                that.hideBusyIndicator();
-                var message = that
-                  .getView()
-                  .getModel("i18n")
-                  .getResourceBundle()
-                  .getText("Gen003");
-                MessageToast.show(message);
-                return;
+                if (Response.data.Data01 === 'S') {
+                  that.hideBusyIndicator();
+                  var message = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("Gen003");
+                  MessageToast.show(message);
+                  return;
+                }
+                if (Response.data.Data01 === 'E') {
+                  that.hideBusyIndicator();
+                  MessageBox.error(Response.data.Data02);
+                  return;
+                }
               } catch (e) {
                 // alert(e.message);
                 Message.error(e.message);
@@ -2405,7 +2450,7 @@ sap.ui.define(
             SelMatnr = LineArray[0].getTitle();
             SelWerks = LineArray[1].getTitle();
             SelLgort = LineArray[2].getTitle();
-            SelClabs = LineArray[3].getValue();
+            SelClabs = LineArray[4].getValue();
           }
 
           var Path = that.getView().getId();

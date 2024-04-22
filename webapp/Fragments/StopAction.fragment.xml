@@ -19,6 +19,7 @@
                 <List
                     id="idStopList"
                     class="sapUiContentPadding"
+                    showSeparators="None"
                 >
                     <InputListItem label="{i18n>OprDetails}">
                         <Input

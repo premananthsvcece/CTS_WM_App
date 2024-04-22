@@ -12,6 +12,8 @@
         items="{RoutingModel>/RoutingData}"
         contentWidth="95%"
         contentHeight="80%"
+        search="onRoutingDataTableSelectDialogSearch"
+        liveChange="onRoutingDataTableSelectDialogSearch"
     >
         <columns>
             <Column
