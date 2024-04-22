@@ -25,8 +25,7 @@ sap.ui.define(
     "use strict";
 
     return Controller.extend(
-      "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
-      {
+      "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01", {
         onInit: function () {
           var that = this;
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
@@ -236,7 +235,7 @@ sap.ui.define(
           that.onLoadData(that, Plant, SelWCGrp, Workcenter);
         },
 
-        onValueHelpRequested: function () { },
+        onValueHelpRequested: function () {},
         _onPlantHelp: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
@@ -337,8 +336,7 @@ sap.ui.define(
             SelPlant +
             "' and Key05 eq '" +
             SelWCGrp +
-            "'",
-            {
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -390,8 +388,7 @@ sap.ui.define(
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WCGroup' and Key04 eq '" +
             SelPlant +
-            "'",
-            {
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -521,8 +518,7 @@ sap.ui.define(
             SelAufnr +
             "' and Key03 eq '" +
             SelOprNo +
-            "'",
-            {
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -653,8 +649,7 @@ sap.ui.define(
             SelAufnr +
             "' and Key03 eq '" +
             SelOprNo +
-            "'",
-            {
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -850,27 +845,47 @@ sap.ui.define(
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
-          var PDFViewer = new sap.m.PDFViewer();
-          that.getView().addDependent(PDFViewer);
+          if (!that.PopupPDF) {
+            that.PopupPDF = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.PopupPDF",
+              that
+            );
+            that.getView().addDependent(that.PopupPDF);
+          }
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'DrawingURl' and Key02 eq '" +
             SelMatnr +
-            "'",
-            {
+            "'", {
               context: null,
+              async: false,
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
                   if (oData.results.length != 0) {
                     var DrawingURl = oData.results[0];
-                    var sSource = DrawingURl.Data01;
-                    // var Source = sSource; + "/$value";
-                    // PDFViewer.setSource(sSource);
-                    // PDFViewer.setTitle("My PDF");
-                    // PDFViewer.open();
-                    window.open(sSource, "Download");
-                    // window.location.href('file://' + sSource);
+
+                    var sSource = DrawingURl.Data02;
+
+                    // Convert the binary data to a base64-encoded string
+                    var base64Data = btoa(sSource); // Convert binary to base64
+                    var blob = that.base64toBlob(base64Data, 'application/pdf');
+                    var blobUrl = URL.createObjectURL(blob);
+                    // Create a data URI for the PDF content
+                    // var dataURI = "data:application/pdf;base64," + base64Data;
+                    var PDF01Viewer = sap.ui.getCore().byId("idPDFViewer");
+                    // var pdfViewer = new sap.m.PDFViewer({
+                    //   source: blobUrl,
+                    //   width: '100%',
+                    //   height: '600px'
+                    // });
+                    console.log(blobUrl);
+                    PDF01Viewer.setSource(blobUrl);
+                    PDF01Viewer.setWidth('100%');
+                    PDF01Viewer.setHeight('60%');
+                    PDF01Viewer.setTitle("My PDF");
+                    PDF01Viewer.open();
+                    // that.PopupPDF.open();
                   }
                 } catch (e) {
                   alert(e.message);
@@ -878,6 +893,31 @@ sap.ui.define(
               },
             }
           );
+        },
+
+
+        // Convert base64 to blob
+        base64toBlob: function (base64Data, contentType) {
+          contentType = contentType || '';
+          var sliceSize = 1024;
+          var byteCharacters = atob(base64Data);
+          var bytesLength = byteCharacters.length;
+          var slicesCount = Math.ceil(bytesLength / sliceSize);
+          var byteArrays = new Array(slicesCount);
+
+          for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+            var begin = sliceIndex * sliceSize;
+            var end = Math.min(begin + sliceSize, bytesLength);
+
+            var bytes = new Array(end - begin);
+            for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+              bytes[i] = byteCharacters[offset].charCodeAt(0);
+            }
+            byteArrays[sliceIndex] = new Uint8Array(bytes);
+          }
+          return new Blob(byteArrays, {
+            type: contentType
+          });
         },
         // onOrderNotePressed: function (oEvent) {
         //   MessageBox.information("Enablement is coming soon");
@@ -1129,8 +1169,7 @@ sap.ui.define(
             sValue +
             "' and Key03 eq '" +
             SelPlant +
-            "'",
-            {
+            "'", {
               context: null,
               async: false,
               urlParameters: null,
@@ -1479,8 +1518,7 @@ sap.ui.define(
             sValue +
             "' and Key03 eq '" +
             SelPlant +
-            "'",
-            {
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -1706,8 +1744,7 @@ sap.ui.define(
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'HeaderText' and Key02 eq '" +
             SelAufnr +
-            "'",
-            {
+            "'", {
               context: null,
               async: false,
               urlParameters: null,
@@ -1851,8 +1888,7 @@ sap.ui.define(
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
             SelPlant +
-            "'",
-            {
+            "'", {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -2080,8 +2116,7 @@ sap.ui.define(
             OperatorNo +
             "' and Key05 eq '" +
             SelPlant +
-            "'",
-            {
+            "'", {
               context: null,
               async: false,
               urlParameters: null,
@@ -2135,8 +2170,7 @@ sap.ui.define(
             OperatorNo +
             "' and Key05 eq '" +
             SelPlant +
-            "'",
-            {
+            "'", {
               context: null,
               async: false,
               urlParameters: null,
@@ -2190,8 +2224,7 @@ sap.ui.define(
             OperatorNo +
             "' and Key05 eq '" +
             SelPlant +
-            "'",
-            {
+            "'", {
               context: null,
               async: false,
               urlParameters: null,
@@ -2476,8 +2509,7 @@ sap.ui.define(
             SelLgort +
             "' and Key05 eq '" +
             SelClabs +
-            "'",
-            {
+            "'", {
               context: null,
               async: false,
               urlParameters: null,
