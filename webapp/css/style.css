@@ -6,15 +6,11 @@
   text-align: center;
   font-size: 16px;
 }
-/* .sapUxAPObjectPageLayout.sapUxAPObjectPageLayoutTitleClickEnabled.sapUxAPObjectPageLayoutTitleForceHovered .sapFDynamicPageTitle{
-  background-color: aliceblue;
+.sapMLIBFocusable:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -1px;
 }
-.sapUxAPObjectPageLayout:not(.sapUxAPObjectPageLayoutNoAnchorBar) .sapFDynamicPageHeader.sapFDynamicPageHeaderWithContent{
-  background-color: aliceblue;
+
+html.sap-desktop .sapUiBody :focus {
+  outline: none;
 }
-.sapUiSizeCompact .sapUxAPObjectPageLayoutTitleClickEnabled .sapUxAPAnchorBar, .sapUiSizeCompact .sapUxAPObjectPageLayoutHeaderPinnable .sapUxAPAnchorBar{
-  background-color: aliceblue;
-}
-.sapUxAPObjectPageLayout:not(.sapUxAPObjectPageLayoutNoAnchorBar)>.sapUxAPObjectPageHeaderStickied>.sapFDynamicPageTitle{
-  background-color: aliceblue;
-} */

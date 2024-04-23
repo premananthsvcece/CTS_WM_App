@@ -523,7 +523,6 @@ sap.ui.define(
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
-                  // console.log(oData);
                   // Future
                   var Path = that.getView().getId();
                   var BOMData = oData.results;
@@ -654,7 +653,6 @@ sap.ui.define(
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
-                  // console.log(oData);
                   // Future
                   var Path = that.getView().getId();
                   var RoutingData = oData.results;
@@ -705,9 +703,21 @@ sap.ui.define(
               new Filter("Data03", FilterOperator.Contains, sValue),
               new Filter("Data04", FilterOperator.Contains, sValue),
               new Filter("Data05", FilterOperator.Contains, sValue),
-              // new Filter("Data06", FilterOperator.Contains, sValue),
-              // new Filter("Data07", FilterOperator.Contains, sValue),
               new Filter("Data08", FilterOperator.Contains, sValue)
+            ]
+          });
+          var oBinding = oEvent.getParameter("itemsBinding");
+          oBinding.filter([oFilter]);
+        },
+        onBatchDataDialogSearch: function(oEvent){
+          var sValue = oEvent.getParameter("value");
+          var oFilter = new Filter({
+            filters: [
+              new Filter("Data02", FilterOperator.Contains, sValue),
+              new Filter("Data03", FilterOperator.Contains, sValue),
+              new Filter("Data04", FilterOperator.Contains, sValue),
+              new Filter("Data05", FilterOperator.Contains, sValue),
+              new Filter("Data01", FilterOperator.Contains, sValue)
             ]
           });
           var oBinding = oEvent.getParameter("itemsBinding");
@@ -840,7 +850,6 @@ sap.ui.define(
             return;
           }
 
-          // window.open("C:TempTest.pdf");
           // Get the path to the Windows shared folder
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -915,15 +924,6 @@ sap.ui.define(
             type: contentType
           });
         },
-        // onOrderNotePressed: function (oEvent) {
-        //   MessageBox.information("Enablement is coming soon");
-        //   return;
-        // },
-
-        // onPalLabelPressed: function (oEvent) {
-        //   MessageBox.information("Enablement is coming soon");
-        //   return;
-        // },
 
         onStartPressed: function (oEvent) {
           var that = this;

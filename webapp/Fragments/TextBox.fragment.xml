@@ -15,7 +15,7 @@
         state="Information"
         stretch="false"
         contentWidth="50%"
-        contentHeight="50%"
+        contentHeight="33%"
         title="{i18n>OrderHeaderText}"
     >
         <content>
@@ -26,11 +26,13 @@
             />
             <TextArea
                 id="idHeaderText"
-                showExceededText="true"
+                showExceededText="false"
+                rows="16"
                 height="100%"
                 width="100%"
-                growing="true"
+                growing="false"
                 growingMaxLines="15"
+                maxLength="1000"
                 valueLiveUpdate="false"
                 liveChange="handleLiveChange"
             />

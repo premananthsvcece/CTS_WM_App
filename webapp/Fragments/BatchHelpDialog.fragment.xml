@@ -8,11 +8,13 @@
         noDataText="No Batch Found"
         growing="true"
         title="Display Batch"
+        search="onBatchDataDialogSearch"
+        liveChange="onBatchDataDialogSearch"
         cancel="onBatchInputClose"
         confirm="onBatchInputChange"
         items="{BatchModel>/BatchData}"
-        contentWidth="500px"
-        contentHeight="600px"
+        contentWidth="75%"
+        contentHeight="80%"
     >
         <columns>
             <Column width="auto">
