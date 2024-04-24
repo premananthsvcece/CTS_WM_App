@@ -2049,11 +2049,11 @@ sap.ui.define(
         var SelAufnr = " ";
         var SelOprNo = " ";
         var OperatorNo = " ";
+        var EndDate;
         var SelPlant = sap.ui
           .getCore()
           .byId(`${Path}--idInputPlant`)
           .getValue();
-        that.showBusyIndicator();
 
         Tableindex = sap.ui
           .getCore()
@@ -2077,8 +2077,21 @@ sap.ui.define(
             .byId(`${Path}--idInprogressOrderList`)
             .getModel("InProgressModel")
             .getData().InProgressData[Tableindex].Data16;
+          EndDate = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getModel("InProgressModel")
+            .getData().InProgressData[Tableindex].Data08;
         }
-
+        if( EndDate === "" ){
+          var message = that
+          .getView()
+          .getModel("i18n")
+          .getResourceBundle()
+          .getText("Post002");
+        MessageBox.error(message);
+        return;
+        }
         if (Tableindex === undefined) {
           var message = that
             .getView()
@@ -2095,7 +2108,7 @@ sap.ui.define(
           );
           that.getView().addDependent(that.PostActionDialog);
         }
-
+        that.showBusyIndicator();
         sap.ui.getCore().byId(`idPostOperator`).setValue(OperatorNo);
         sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);
         sap.ui.getCore().byId(`idPostQuantity`).setValue();
@@ -2186,11 +2199,20 @@ sap.ui.define(
                     .getCore()
                     .byId("idPostComponentList");
 
-                  var HeaderText = that
-                    .getView()
-                    .getModel("i18n")
-                    .getResourceBundle()
-                    .getText("ComponentDetail");
+                    if (ComponentData[0].Key03 === 'N') {
+                      var HeaderText = that
+                        .getView()
+                        .getModel("i18n")
+                        .getResourceBundle()
+                        .getText("ComponentDetail");
+                    }
+                    if (ComponentData[0].Key03 === 'S') {
+                      var HeaderText = that
+                        .getView()
+                        .getModel("i18n")
+                        .getResourceBundle()
+                        .getText("GRDetail");
+                    }
 
                   ComponentnList.setHeaderText(HeaderText);
 
@@ -2207,22 +2229,9 @@ sap.ui.define(
                 var ComponentnList = sap.ui
                   .getCore()
                   .byId("idPostComponentList");
-                if (ComponentData[0].Key03 = 'N') {
-                  var HeaderText = that
-                    .getView()
-                    .getModel("i18n")
-                    .getResourceBundle()
-                    .getText("ComponentDetail");
-                }
-                if (ComponentData[0].Key03 = 'S') {
-                  var HeaderText = that
-                    .getView()
-                    .getModel("i18n")
-                    .getResourceBundle()
-                    .getText("GRDetail");
-                }
+             
 
-                ComponentnList.setHeaderText(HeaderText);
+                ComponentnList.setHeaderText(""); // Blank
 
                 ComponentnList.setModel(ComponentModel, "ComponentModel");
                 that.hideBusyIndicator();
