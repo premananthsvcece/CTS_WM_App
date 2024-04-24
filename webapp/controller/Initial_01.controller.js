@@ -884,6 +884,15 @@ sap.ui.define(
                 // Open the URL in a new window
                 window.open(blobUrl);
 
+              } else {
+                // Raise Message
+                var message = that
+                  .getView()
+                  .getModel("i18n")
+                  .getResourceBundle()
+                  .getText("NoDisplay");
+                MessageBox.information(message);
+                return;
               }
             } catch (e) {
               alert(e.message);
@@ -2177,6 +2186,14 @@ sap.ui.define(
                     .getCore()
                     .byId("idPostComponentList");
 
+                  var HeaderText = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("ComponentDetail");
+
+                  ComponentnList.setHeaderText(HeaderText);
+
                   ComponentnList.setModel(ComponentModel, "ComponentModel");
                 }
                 that.hideBusyIndicator();
@@ -2190,6 +2207,22 @@ sap.ui.define(
                 var ComponentnList = sap.ui
                   .getCore()
                   .byId("idPostComponentList");
+                if (ComponentData[0].Key03 = 'N') {
+                  var HeaderText = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("ComponentDetail");
+                }
+                if (ComponentData[0].Key03 = 'S') {
+                  var HeaderText = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("GRDetail");
+                }
+
+                ComponentnList.setHeaderText(HeaderText);
 
                 ComponentnList.setModel(ComponentModel, "ComponentModel");
                 that.hideBusyIndicator();

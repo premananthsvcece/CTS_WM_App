@@ -99,7 +99,6 @@
                             <Table
                                 id="idPostComponentList"
                                 class="sapUiContentPadding"
-                                headerText="{i18n>ComponentDetail}"
                                 items="{ComponentModel>/ComponentData}"
                                 showSeparators="None"
                             >
