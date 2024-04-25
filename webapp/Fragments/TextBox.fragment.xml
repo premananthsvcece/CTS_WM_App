@@ -27,7 +27,7 @@
             <TextArea
                 id="idHeaderText"
                 showExceededText="false"
-                rows="16"
+                rows="11"
                 height="100%"
                 width="100%"
                 growing="false"
