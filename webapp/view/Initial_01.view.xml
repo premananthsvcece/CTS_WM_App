@@ -22,8 +22,10 @@
                     <HBox>
                         <VBox>
                             <Title
+                                id="idPROESTitleSnap"
                                 text="{i18n>appDescription}"
                                 level="H6"
+                                textAlign="Left"
                                 class="sapUiLargeMarginBeginEnd"
                             />
                         </VBox>
@@ -36,6 +38,17 @@
                             <Text
                                 id="idTextPlant"
                                 class="sapUiSmallMarginEnd"
+                            />
+                            <Label
+                                text="{i18n>Plant}"
+                                labelFor="idTextPlantName"
+                                class="sapUiSmallMarginEnd"
+                                visible="false"
+                            />
+                            <Text
+                                id="idTextPlantName"
+                                class="sapUiSmallMarginEnd"
+                                visible="false"
                             />
                         </VBox>
                         <VBox />
@@ -66,8 +79,9 @@
                 <uxap:expandedHeading>
                     <Title
                         level="Auto"
+                        id="idPROESTitleExp"
                         text="{i18n>appDescription}"
-                        textAlign="Center"
+                        textAlign="Left"
                         titleStyle="H2"
                         width="150%"
                         wrapping="true"
@@ -124,7 +138,7 @@
                 </uxap:actions>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
-        <uxap:headerContent>
+        <uxap:headerContent class="sapUiResponsiveMargin">
             <HBox>
                 <VBox>
                     <Label
@@ -143,6 +157,15 @@
                     />
                 </VBox>
                 <VBox>
+                    <ProgressIndicator
+                        id="_IDGenProgressIndicator1"
+                        class="sapUiSmallMarginBottom"
+                        state="Success"
+                        width="60%"
+                        visible="false"
+                    />
+                </VBox>
+                <VBox> 
                     <Label
                         text="{i18n>WorkArea}"
                         labelFor="idInputWorkArea"
@@ -173,16 +196,7 @@
                         valueHelpRequest="_onWorkCenterHelp"
                     />
                 </VBox>
-                <VBox>
-                    <!-- <ProgressIndicator
-                        id="_IDGenProgressIndicator1"
-                        class="sapUiSmallMarginBottom"
-                        state="Success"
-                        showValue="true"
-                        width="60%"
-                        visible="false"
-                    /> -->
-                </VBox>
+                
             </HBox>
             <OverflowToolbar asyncMode="false">
                 <content>
@@ -260,13 +274,14 @@
                                 enableSelectAll="false"
                                 selectionBehavior="RowOnly"
                                 selectionMode="Single"
+                                width="100%"
                                 rowSelectionChange="onTableRowSelectionChange"
                             >
                                 <Table:noData text="{i18n>NoData}" />
                                 <Table:columns>
                                     <Table:Column
                                         id="_IDGenColumn1"
-                                        width="10rem"
+                                        width="8rem"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -283,7 +298,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn2"
-                                        width="10rem"
+                                        width="8rem"
                                         sortProperty="Data02"
                                         filterProperty="Data02"
                                         autoResizable="true"
@@ -340,7 +355,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn5"
-                                        width="10rem"
+                                        width="5rem"
                                         sortProperty="Data05"
                                         filterProperty="Data05"
                                         autoResizable="true"
@@ -359,7 +374,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn6"
-                                        width="10rem"
+                                        width="5rem"
                                         sortProperty="Data06"
                                         filterProperty="Data06"
                                         autoResizable="true"
@@ -378,77 +393,12 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
-                                        width="10rem"
-                                        sortProperty="Data14"
-                                        filterProperty="Data14"
-                                        autoResizable="true"
-                                    >
-                                        <Label text="{i18n>OperStrtDate}" />
-                                        <Table:template>
-                                            <DatePicker
-                                                value="{InProgressModel>Data14}"
-                                                valueFormat="dd/MM/yyyy"
-                                                enabled="false"
-                                            />
-                                        </Table:template>
-                                    </Table:Column>
-                                    <Table:Column
-                                        width="10rem"
-                                        sortProperty="Data15"
-                                        filterProperty="Data15"
-                                        autoResizable="true"
-                                    >
-                                        <Label text="{i18n>OperStrtTime}" />
-                                        <Table:template>
-                                            <TimePicker
-                                                value="{InProgressModel>Data15}"
-                                                enabled="false"
-                                            />
-                                        </Table:template>
-                                    </Table:Column>
-                                    <Table:Column
-                                        id="_IDGenColumn8"
-                                        width="10rem"
-                                        sortProperty="Data08"
-                                        filterProperty="Data08"
-                                        autoResizable="true"
-                                    >
-                                        <Label
-                                            id="_IDGenLabel8"
-                                            text="{i18n>OperEndDate}"
-                                        />
-                                        <Table:template>
-                                            <DatePicker
-                                                value="{InProgressModel>Data08}"
-                                                valueFormat="dd/MM/yyyy"
-                                                enabled="false"
-                                            />
-                                        </Table:template>
-                                    </Table:Column>
-                                    <Table:Column
-                                        id="_IDGenColumn9"
-                                        width="10rem"
-                                        sortProperty="Data09"
-                                        filterProperty="Data09"
-                                        autoResizable="true"
-                                    >
-                                        <Label
-                                            id="_IDGenLabel9"
-                                            text="{i18n>OperEndTime}"
-                                        />
-                                        <Table:template>
-                                            <TimePicker
-                                                value="{InProgressModel>Data09}"
-                                                enabled="false"
-                                            />
-                                        </Table:template>
-                                    </Table:Column>
-                                    <Table:Column
                                         id="_IDGenColumn10"
-                                        width="10rem"
+                                        width="7rem"
                                         sortProperty="Data10"
                                         filterProperty="Data10"
                                         autoResizable="true"
+                                        hAlign="End"
                                     >
                                         <Label
                                             id="_IDGenLabel10"
@@ -465,10 +415,11 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn11"
-                                        width="10rem"
+                                        width="7rem"
                                         sortProperty="Data11"
                                         filterProperty="Data11"
                                         autoResizable="true"
+                                        hAlign="End"
                                     >
                                         <Label
                                             id="_IDGenLabel11"
@@ -485,10 +436,11 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn12"
-                                        width="10rem"
+                                        width="7rem"
                                         sortProperty="Data12"
                                         filterProperty="Data12"
                                         autoResizable="true"
+                                        hAlign="End"
                                     >
                                         <Label
                                             id="_IDGenLabel12"
@@ -504,8 +456,78 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
+                                        width="9rem"
+                                        sortProperty="Data14"
+                                        filterProperty="Data14"
+                                        autoResizable="true"
+                                    >
+                                        <Label text="{i18n>OperStrtDate}" />
+                                        <Table:template>
+                                            <DatePicker
+                                                value="{InProgressModel>Data14}"
+                                                valueFormat="dd/MM/yyyy"
+                                                displayFormat="dd/MM/yyyy"
+                                                enabled="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
+                                        width="8rem"
+                                        sortProperty="Data15"
+                                        filterProperty="Data15"
+                                        autoResizable="true"
+                                    >
+                                        <Label text="{i18n>OperStrtTime}" />
+                                        <Table:template>
+                                            <TimePicker
+                                                value="{InProgressModel>Data15}"
+                                                enabled="false"
+                                                displayFormat="HH:mm:ss"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
+                                        id="_IDGenColumn8"
+                                        width="9rem"
+                                        sortProperty="Data08"
+                                        filterProperty="Data08"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            id="_IDGenLabel8"
+                                            text="{i18n>OperEndDate}"
+                                        />
+                                        <Table:template>
+                                            <DatePicker
+                                                value="{InProgressModel>Data08}"
+                                                valueFormat="dd/MM/yyyy"
+                                                displayFormat="dd/MM/yyyy"
+                                                enabled="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
+                                        id="_IDGenColumn9"
+                                        width="8rem"
+                                        sortProperty="Data09"
+                                        filterProperty="Data09"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            id="_IDGenLabel9"
+                                            text="{i18n>OperEndTime}"
+                                        />
+                                        <Table:template>
+                                            <TimePicker
+                                                value="{InProgressModel>Data09}"
+                                                enabled="false"
+                                                displayFormat="HH:mm:ss"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
                                         id="_IDGenColumn13"
-                                        width="10rem"
+                                        width="8rem"
                                         sortProperty="Data13"
                                         filterProperty="Data13"
                                         autoResizable="true"
@@ -634,7 +656,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn17"
-                                        width="10rem"
+                                        width="15rem"
                                         sortProperty="Data04"
                                         filterProperty="Data04"
                                         autoResizable="true"
@@ -695,6 +717,7 @@
                                         sortProperty="Data14"
                                         filterProperty="Data14"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label text="{i18n>OperStrtDate}" />
                                         <Table:template>
@@ -710,6 +733,7 @@
                                         sortProperty="Data15"
                                         filterProperty="Data15"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label text="{i18n>OperStrtTime}" />
                                         <Table:template>
@@ -725,6 +749,7 @@
                                         sortProperty="Data08"
                                         filterProperty="Data08"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel21"
@@ -744,6 +769,7 @@
                                         sortProperty="Data09"
                                         filterProperty="Data09"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel22"
@@ -822,6 +848,7 @@
                                         sortProperty="Data13"
                                         filterProperty="Data13"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel26"
@@ -927,7 +954,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn30"
-                                        width="10rem"
+                                        width="15rem"
                                         sortProperty="Data04"
                                         filterProperty="Data04"
                                         autoResizable="true"
@@ -988,6 +1015,7 @@
                                         sortProperty="Data14"
                                         filterProperty="Data14"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label text="{i18n>OperStrtDate}" />
                                         <Table:template>
@@ -1003,6 +1031,7 @@
                                         sortProperty="Data15"
                                         filterProperty="Data15"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label text="{i18n>OperStrtTime}" />
                                         <Table:template>
@@ -1018,6 +1047,7 @@
                                         sortProperty="Data08"
                                         filterProperty="Data08"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel34"
@@ -1037,6 +1067,7 @@
                                         sortProperty="Data09"
                                         filterProperty="Data09"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel35"
@@ -1115,6 +1146,7 @@
                                         sortProperty="Data13"
                                         filterProperty="Data13"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel39"

@@ -38,6 +38,7 @@ sap.ui.define(
             try {
               if (oData.results.length === 1) {
                 var Plant = oData.results[0].Data01;
+                var PlantName = oData.results[0].Data03;
                 var Workcenter = oData.results[0].Data02;
                 var SelWCGrp;
                 var Path = that.getView().getId();
@@ -50,6 +51,11 @@ sap.ui.define(
                   .getCore()
                   .byId(Path + "--idTextPlant")
                   .setText(Plant);
+
+                sap.ui
+                  .getCore()
+                  .byId(Path + "--idTextPlantName")
+                  .setText(PlantName);
 
                 sap.ui
                   .getCore()
@@ -101,6 +107,18 @@ sap.ui.define(
             that.onLoadData(that, Plant, SelWCGrp, Workcenter);
           }
         }, 1000);
+
+        var PlantName = sap.ui
+          .getCore()
+          .byId(Path + "--idTextPlantName")
+          .getText();
+
+        var Path = that.getView().getId();
+        var PROES = sap.ui.getCore().byId(Path + "--idPROESTitleExp").getText();
+        sap.ui.getCore().byId(Path + "--idPROESTitleExp").setText(PROES + " / Plant: " + PlantName);
+        var PROES = sap.ui.getCore().byId(Path + "--idPROESTitleSnap").getText();
+        sap.ui.getCore().byId(Path + "--idPROESTitleSnap").setText(PROES + " / Plant: " + PlantName);
+
       },
       onLoadData: function (that, Plant, SelWCGrp, Workcenter) {
         var othis = that;
@@ -2083,14 +2101,14 @@ sap.ui.define(
             .getModel("InProgressModel")
             .getData().InProgressData[Tableindex].Data08;
         }
-        if( EndDate === "" ){
+        if (EndDate === "") {
           var message = that
-          .getView()
-          .getModel("i18n")
-          .getResourceBundle()
-          .getText("Post002");
-        MessageBox.error(message);
-        return;
+            .getView()
+            .getModel("i18n")
+            .getResourceBundle()
+            .getText("Post002");
+          MessageBox.error(message);
+          return;
         }
         if (Tableindex === undefined) {
           var message = that
@@ -2199,20 +2217,20 @@ sap.ui.define(
                     .getCore()
                     .byId("idPostComponentList");
 
-                    if (ComponentData[0].Key03 === 'N') {
-                      var HeaderText = that
-                        .getView()
-                        .getModel("i18n")
-                        .getResourceBundle()
-                        .getText("ComponentDetail");
-                    }
-                    if (ComponentData[0].Key03 === 'S') {
-                      var HeaderText = that
-                        .getView()
-                        .getModel("i18n")
-                        .getResourceBundle()
-                        .getText("GRDetail");
-                    }
+                  if (ComponentData[0].Key03 === 'N') {
+                    var HeaderText = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("ComponentDetail");
+                  }
+                  if (ComponentData[0].Key03 === 'S') {
+                    var HeaderText = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("GRDetail");
+                  }
 
                   ComponentnList.setHeaderText(HeaderText);
 
@@ -2229,7 +2247,7 @@ sap.ui.define(
                 var ComponentnList = sap.ui
                   .getCore()
                   .byId("idPostComponentList");
-             
+
 
                 ComponentnList.setHeaderText(""); // Blank
 
@@ -2628,6 +2646,10 @@ sap.ui.define(
           .getValue();
 
         if (Plant != " ") {
+          sap.ui
+            .getCore()
+            .byId(Path + "--idInputWorkCenter")
+            .setValue();
           that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
         }
       },
