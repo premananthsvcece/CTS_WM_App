@@ -127,14 +127,14 @@
                         press="onPalLabelPressed"
                         visible="false"
                     />
-                    <ProgressIndicator
+                    <!-- <ProgressIndicator
                         id="_IDGenProgressIndicator1"
                         class="sapUiSmallMarginBottom"
                         state="Success"
                         showValue="true"
                         width="60%"
                         visible="false"
-                    />
+                    /> -->
                 </uxap:actions>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
