@@ -34,10 +34,12 @@
                                 text="{i18n>Plant}"
                                 labelFor="idTextPlant"
                                 class="sapUiSmallMarginEnd"
+                                visible="false"
                             />
                             <Text
                                 id="idTextPlant"
                                 class="sapUiSmallMarginEnd"
+                                visible="false"
                             />
                             <Label
                                 text="{i18n>Plant}"
@@ -145,6 +147,7 @@
                         id="_IDGenLabel231"
                         text="{i18n>Plant}"
                         labelFor="idInputPlant"
+                        visible="false"
                     />
                     <MultiInput
                         id="idInputPlant"
@@ -154,6 +157,7 @@
                         autocomplete="true"
                         valueHelpRequest="_onPlantHelp"
                         editable="false"
+                        visible="false"
                     />
                 </VBox>
                 <VBox>
