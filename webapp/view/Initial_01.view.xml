@@ -252,7 +252,7 @@
                                 id="idINPScarp"
                                 text="{i18n>Scarp}"
                                 type="Emphasized"
-                                icon="sap-icon://close-command-field"
+                                icon="sap-icon://delete"
                                 press="onScrapPressed"
                             />
                             <Button

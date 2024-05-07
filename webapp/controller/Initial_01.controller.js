@@ -115,9 +115,9 @@ sap.ui.define(
 
         var Path = that.getView().getId();
         var PROES = sap.ui.getCore().byId(Path + "--idPROESTitleExp").getText();
-        sap.ui.getCore().byId(Path + "--idPROESTitleExp").setText(PROES + " / Plant: " + PlantName);
+        sap.ui.getCore().byId(Path + "--idPROESTitleExp").setText(PROES + " - " + PlantName);
         var PROES = sap.ui.getCore().byId(Path + "--idPROESTitleSnap").getText();
-        sap.ui.getCore().byId(Path + "--idPROESTitleSnap").setText(PROES + " / Plant: " + PlantName);
+        sap.ui.getCore().byId(Path + "--idPROESTitleSnap").setText(PROES + " - " + PlantName);
 
       },
       onLoadData: function (that, Plant, SelWCGrp, Workcenter) {
@@ -553,7 +553,18 @@ sap.ui.define(
 
               BOMTable.setModel(BOMModel, "BOMModel");
               // open value help dialog
-              that.BOMDialog.open();
+              if (BOMData.length != 0) {
+                that.BOMDialog.open();
+              } else {
+                // Raise Message
+                var message = that
+                  .getView()
+                  .getModel("i18n")
+                  .getResourceBundle()
+                  .getText("BOM002");
+                  MessageToast.show(message);
+                return;
+              }
             } catch (e) {
               alert(e.message);
             }
@@ -683,7 +694,18 @@ sap.ui.define(
 
               RoutingTable.setModel(RoutingModel, "RoutingModel");
               // open value help dialog
-              that.RouteDialog.open();
+              if (RoutingData.length != 0) {
+                that.RouteDialog.open();
+              } else {
+                // Raise Message
+                var message = that
+                  .getView()
+                  .getModel("i18n")
+                  .getResourceBundle()
+                  .getText("Route002");
+                  MessageToast.show(message);
+                return;
+              }
             } catch (e) {
               alert(e.message);
             }
