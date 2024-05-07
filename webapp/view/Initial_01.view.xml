@@ -301,6 +301,51 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
+                                        width="8rem"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            text="{i18n>OprName}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                text="{InProgressModel>Data18}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
+                                        width="8rem"
+                                        autoResizable="true"
+                                        visible="false"
+                                    >
+                                        <Label
+                                            text="{i18n>OprName}"
+                                            visible="false"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                text="{InProgressModel>Data16}"
+                                                wrapping="false"
+                                                visible="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
+                                        width="8rem"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            text="{i18n>SeqNum}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                text="{InProgressModel>Key02}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
                                         id="_IDGenColumn2"
                                         width="8rem"
                                         sortProperty="Data02"
@@ -635,6 +680,20 @@
                                             <Text
                                                 id="_IDGenText15"
                                                 text="{InQueueModel>Data02}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
+                                        width="8rem"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            text="{i18n>SeqNum}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                text="{InQueueModel>Key02}"
                                                 wrapping="false"
                                             />
                                         </Table:template>

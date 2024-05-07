@@ -106,7 +106,7 @@ sap.ui.define(
 
             that.onLoadData(that, Plant, SelWCGrp, Workcenter);
           }
-        }, 1000);
+        }, 10000);
 
         var PlantName = sap.ui
           .getCore()
@@ -1071,6 +1071,9 @@ sap.ui.define(
           hr = "0" + hr;
         }
         var mm = oDateTime.getMinutes().toString();
+        if (mm < 10) {
+          mm = "0" + mm;
+        }
         var sec = oDateTime.getSeconds().toString();
         if (sec < 10) {
           sec = "0" + sec;
@@ -1170,6 +1173,9 @@ sap.ui.define(
           hr = "0" + hr;
         }
         var mm = oDateTime.getMinutes().toString();
+        if (mm < 10) {
+          mm = "0" + mm;
+        }
         var sec = oDateTime.getSeconds().toString();
         if (sec < 10) {
           sec = "0" + sec;
@@ -1523,6 +1529,9 @@ sap.ui.define(
           hr = "0" + hr;
         }
         var mm = oDateTime.getMinutes().toString();
+        if (mm < 10) {
+          mm = "0" + mm;
+        }
         var sec = oDateTime.getSeconds().toString();
         if (sec < 10) {
           sec = "0" + sec;
@@ -2448,7 +2457,6 @@ sap.ui.define(
                 MessageBox.error(message);
                 return;
               } else {
-                // MessageToast.show("Update Successful");
                 var message = oData.Key05;
                 MessageBox.success(message);
                 that.onButtonPress();
