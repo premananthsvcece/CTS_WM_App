@@ -5,13 +5,14 @@
 >
     <TableSelectDialog
         id="idBOMDialog"
+        class="sapUiResponsiveMargin"
         noDataText="No BOM Found"
         growing="true"
         title="Display BOM"
         cancel=".onDialogClose"
         items="{BOMModel>/BOMData}"
-        contentWidth="85%"
-        contentHeight="60%"
+        contentWidth="50%"
+        contentHeight="25%"
         search="onBOMDataTableSelectDialogSearch"
         liveChange="onBOMDataTableSelectDialogSearch"
     >

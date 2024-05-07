@@ -5,13 +5,14 @@
 >
     <TableSelectDialog
         id="idRoutingDialog"
+        class="sapUiResponsiveMargin"
         noDataText="{i18n>nodataroutefound}"
         growing="true"
         title="{i18n>disproute}"
         cancel=".onDialogClose"
         items="{RoutingModel>/RoutingData}"
-        contentWidth="75%"
-        contentHeight="60%"
+        contentWidth="50%"
+        contentHeight="25%"
         search="onRoutingDataTableSelectDialogSearch"
         liveChange="onRoutingDataTableSelectDialogSearch"
     >
@@ -19,7 +20,7 @@
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
-                width="20%"
+                width="12%"
             >
                 <header>
                     <Text text="{i18n>Activity}" />
@@ -73,6 +74,7 @@
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
+                width="8rem"
             >
                 <header>
                     <Text text="{i18n>StartDate}" />
@@ -81,6 +83,7 @@
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
+                width="8rem"
             >
                 <header>
                     <Text text="{i18n>StartTime}" />
@@ -89,6 +92,7 @@
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
+                width="8rem"
             >
                 <header>
                     <Text text="{i18n>EndDate}" />
@@ -97,6 +101,7 @@
             <Column
                 minScreenWidth="Desktop"
                 demandPopin="true"
+                width="8rem"
             >
                 <header>
                     <Text text="{i18n>EndTime}" />
