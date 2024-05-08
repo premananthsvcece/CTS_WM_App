@@ -111,7 +111,6 @@
             <cells>
                 <ObjectIdentifier title="{RoutingModel>Data02}" text="{RoutingModel>Data04}"/>
                 <Text text="{RoutingModel>Data03}" />
-                <Text text="{RoutingModel>Data03}" />
                 <Text text="{RoutingModel>Data05}" />
                 <Text text="{RoutingModel>Data06}" />
                 <Text text="{RoutingModel>Data07}" />
