@@ -1387,6 +1387,7 @@ sap.ui.define(
 
         // Get Order No & Opr No
         if (Tableindex != undefined) {
+          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           index = 0;
 
           SelAufnr = sap.ui
@@ -1416,6 +1417,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
+            sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
             index = 1;
             SelAufnr = sap.ui
               .getCore()
@@ -1721,6 +1723,7 @@ sap.ui.define(
         // Get Order No & Opr No
         if (Tableindex != undefined) {
           index = 0;
+          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           SelAufnr = sap.ui
             .getCore()
             .byId(`${Path}--idInprogressOrderList`)
