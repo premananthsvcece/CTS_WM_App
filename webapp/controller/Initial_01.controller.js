@@ -1332,7 +1332,14 @@ sap.ui.define(
                   .byId(`idStartOperator`)
                   .setValue();
                 sap.ui.getCore().byId(`idStartOperator`).setValueState("Error");
-                sap.ui.getCore().byId(`idStartOperator`).setValueStateText("Enter Valid Value");
+                // Please contact admin to create you account
+                // Get Message
+                var Emessage = that
+                .getView()
+                .getModel("i18n")
+                .getResourceBundle()
+                .getText("Start001");
+                sap.ui.getCore().byId(`idStartOperator`).setValueStateText(Emessage);
               }
             } catch (e) {
               MessageToast.show(e.message);
