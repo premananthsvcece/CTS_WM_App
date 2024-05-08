@@ -5,14 +5,13 @@
 >
     <TableSelectDialog
         id="idRoutingDialog"
-        class="sapUiResponsiveMargin"
         noDataText="{i18n>nodataroutefound}"
         growing="true"
         title="{i18n>disproute}"
         cancel=".onDialogClose"
         items="{RoutingModel>/RoutingData}"
-        contentWidth="50%"
-        contentHeight="25%"
+        contentWidth="80%"
+        contentHeight="50%"
         search="onRoutingDataTableSelectDialogSearch"
         liveChange="onRoutingDataTableSelectDialogSearch"
     >

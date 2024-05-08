@@ -11,8 +11,8 @@
         title="Display BOM"
         cancel=".onDialogClose"
         items="{BOMModel>/BOMData}"
-        contentWidth="50%"
-        contentHeight="25%"
+        contentWidth="80%"
+        contentHeight="50%"
         search="onBOMDataTableSelectDialogSearch"
         liveChange="onBOMDataTableSelectDialogSearch"
     >
