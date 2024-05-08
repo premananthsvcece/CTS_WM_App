@@ -460,6 +460,7 @@ sap.ui.define(
           .getSelectedIndices()[0];
         // Get Order No & Opr No
         if (Tableindex != undefined) {
+          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           index = 0;
           SelAufnr = sap.ui
             .getCore()
@@ -491,6 +492,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
+            sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
             index = 1;
             SelAufnr = sap.ui
               .getCore()
@@ -522,6 +524,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
+            sap.ui.getCore().byId(`${Path}--idFutureOrderList`).clearSelection();
             index = 2;
             SelAufnr = sap.ui
               .getCore()
@@ -644,6 +647,7 @@ sap.ui.define(
           .getSelectedIndices()[0];
         // Get Order No & Opr No
         if (Tableindex != undefined) {
+          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           index = 0;
           SelAufnr = sap.ui
             .getCore()
@@ -674,6 +678,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
+            sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
             index = 1;
             SelAufnr = sap.ui
               .getCore()
@@ -705,6 +710,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
+            sap.ui.getCore().byId(`${Path}--idFutureOrderList`).clearSelection();
             index = 2;
             SelAufnr = sap.ui
               .getCore()
@@ -932,6 +938,7 @@ sap.ui.define(
           .getSelectedIndices()[0];
         // Get Material
         if (Tableindex != undefined) {
+          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           index = 0;
           SelMatnr = sap.ui
             .getCore()
@@ -946,6 +953,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Material
           if (Tableindex != undefined) {
+            sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
             index = 1;
             SelMatnr = sap.ui
               .getCore()
@@ -961,6 +969,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Material
           if (Tableindex != undefined) {
+            sap.ui.getCore().byId(`${Path}--idFutureOrderList`).clearSelection();
             index = 2;
             SelMatnr = sap.ui
               .getCore()
@@ -1806,6 +1815,7 @@ sap.ui.define(
           .getSelectedIndices()[0];
         // Get Order No & Opr No
         if (Tableindex != undefined) {
+          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           index = 0;
           SelAufnr = sap.ui
             .getCore()
@@ -1825,6 +1835,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
+            sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
             index = 0;
             SelAufnr = sap.ui
               .getCore()
@@ -1846,6 +1857,7 @@ sap.ui.define(
           // Get Order No & Opr No
           if (Tableindex != undefined) {
             index = 0;
+            sap.ui.getCore().byId(`${Path}--idFutureOrderList`).clearSelection();
             SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idFutureOrderList`)
