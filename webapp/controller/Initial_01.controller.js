@@ -451,6 +451,8 @@ sap.ui.define(
         var Tableindex = "X";
         var SelAufnr = " ";
         var SelOprNo = " ";
+        var SelMatnr = "";
+        var SelMaktx = "";
 
         Tableindex = sap.ui
           .getCore()
@@ -469,6 +471,17 @@ sap.ui.define(
             .byId(`${Path}--idInprogressOrderList`)
             .getModel("InProgressModel")
             .getData().InProgressData[Tableindex].Data05;
+
+          SelMatnr = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getModel("InProgressModel")
+            .getData().InProgressData[Tableindex].Data03;
+          SelMaktx = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getModel("InProgressModel")
+            .getData().InProgressData[Tableindex].Data04;
         }
 
         if (Tableindex === undefined) {
@@ -489,6 +502,17 @@ sap.ui.define(
               .byId(`${Path}--idQueueOrderList`)
               .getModel("InQueueModel")
               .getData().InQueueData[Tableindex].Data05;
+
+            SelMatnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getModel("InQueueModel")
+              .getData().InQueueData[Tableindex].Data03;
+            SelMaktx = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getModel("InQueueModel")
+              .getData().InQueueData[Tableindex].Data04;
           }
         }
         if (Tableindex === undefined) {
@@ -509,6 +533,17 @@ sap.ui.define(
               .byId(`${Path}--idFutureOrderList`)
               .getModel("InFutureModel")
               .getData().InFutureData[Tableindex].Data05;
+
+            SelMatnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idFutureOrderList`)
+              .getModel("InFutureModel")
+              .getData().InFutureData[Tableindex].Data03;
+            SelMaktx = sap.ui
+              .getCore()
+              .byId(`${Path}--idFutureOrderList`)
+              .getModel("InFutureModel")
+              .getData().InFutureData[Tableindex].Data04;
           }
         }
         if (Tableindex === undefined) {
@@ -555,6 +590,13 @@ sap.ui.define(
               // open value help dialog
               if (BOMData.length != 0) {
                 that.BOMDialog.open();
+                var Popup = that
+                  .getView()
+                  .getModel("i18n")
+                  .getResourceBundle()
+                  .getText("BOM003");
+                BOMTable.setTitle(Popup + ' ' + SelMatnr + ' - ' + SelMaktx);
+                sap.ui.getCore().byId("idBOMDialog-cancel").setText("Close");
               } else {
                 // Raise Message
                 var message = that
@@ -562,7 +604,7 @@ sap.ui.define(
                   .getModel("i18n")
                   .getResourceBundle()
                   .getText("BOM002");
-                  MessageToast.show(message);
+                MessageToast.show(message);
                 return;
               }
             } catch (e) {
@@ -593,6 +635,8 @@ sap.ui.define(
         var Tableindex = "X";
         var SelAufnr = " ";
         var SelOprNo = " ";
+        var SelMatnr = "";
+        var SelMaktx = "";
 
         Tableindex = sap.ui
           .getCore()
@@ -611,6 +655,17 @@ sap.ui.define(
             .byId(`${Path}--idInprogressOrderList`)
             .getModel("InProgressModel")
             .getData().InProgressData[Tableindex].Data05;
+
+          SelMatnr = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getModel("InProgressModel")
+            .getData().InProgressData[Tableindex].Data03;
+          SelMaktx = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getModel("InProgressModel")
+            .getData().InProgressData[Tableindex].Data04;
         }
         if (Tableindex === undefined) {
           Tableindex = sap.ui
@@ -630,6 +685,17 @@ sap.ui.define(
               .byId(`${Path}--idQueueOrderList`)
               .getModel("InQueueModel")
               .getData().InQueueData[Tableindex].Data05;
+
+            SelMatnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getModel("InQueueModel")
+              .getData().InQueueData[Tableindex].Data03;
+            SelMaktx = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getModel("InQueueModel")
+              .getData().InQueueData[Tableindex].Data04;
           }
         }
         if (Tableindex === undefined) {
@@ -650,6 +716,18 @@ sap.ui.define(
               .byId(`${Path}--idFutureOrderList`)
               .getModel("InFutureModel")
               .getData().InFutureData[Tableindex].Data05;
+
+            SelMatnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idFutureOrderList`)
+              .getModel("InFutureModel")
+              .getData().InFutureData[Tableindex].Data03;
+            SelMaktx = sap.ui
+              .getCore()
+              .byId(`${Path}--idFutureOrderList`)
+              .getModel("InFutureModel")
+              .getData().InFutureData[Tableindex].Data04;
+
           }
         }
         if (Tableindex === undefined) {
@@ -669,6 +747,7 @@ sap.ui.define(
           );
           that.getView().addDependent(that.RouteDialog);
         }
+
         var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
         var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
@@ -696,6 +775,7 @@ sap.ui.define(
               // open value help dialog
               if (RoutingData.length != 0) {
                 that.RouteDialog.open();
+                sap.ui.getCore().byId("idRoutingDialog-cancel").setText("Close");
               } else {
                 // Raise Message
                 var message = that
@@ -703,7 +783,7 @@ sap.ui.define(
                   .getModel("i18n")
                   .getResourceBundle()
                   .getText("Route002");
-                  MessageToast.show(message);
+                MessageToast.show(message);
                 return;
               }
             } catch (e) {
@@ -804,8 +884,18 @@ sap.ui.define(
 
             sap.ui
               .getCore()
+              .byId(`${Path}--idInputWorkCenter`)
+              .setValue("");
+
+            sap.ui
+              .getCore()
               .byId(`${Path}--idTextWorkArea`)
               .setText(Workcenter);
+
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idTextWorkCenter`)
+              .setText("");
 
             oEvent.getSource().getBinding("items").filter([]);
           } else {

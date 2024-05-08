@@ -1149,6 +1149,7 @@
                                         sortProperty="Data10"
                                         filterProperty="Data10"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel36"
@@ -1169,6 +1170,7 @@
                                         sortProperty="Data11"
                                         filterProperty="Data11"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel37"

@@ -10,8 +10,8 @@
         title="{i18n>disproute}"
         cancel=".onDialogClose"
         items="{RoutingModel>/RoutingData}"
-        contentWidth="80%"
-        contentHeight="50%"
+        contentWidth="70%"
+        contentHeight="auto"
         search="onRoutingDataTableSelectDialogSearch"
         liveChange="onRoutingDataTableSelectDialogSearch"
     >
@@ -107,9 +107,10 @@
                 </header>
             </Column>
         </columns>
-        <ColumnListItem vAlign="Middle">
+        <ColumnListItem vAlign="Middle" type="Active">
             <cells>
                 <ObjectIdentifier title="{RoutingModel>Data02}" text="{RoutingModel>Data04}"/>
+                <Text text="{RoutingModel>Data03}" />
                 <Text text="{RoutingModel>Data03}" />
                 <Text text="{RoutingModel>Data05}" />
                 <Text text="{RoutingModel>Data06}" />

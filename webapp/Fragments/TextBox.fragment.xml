@@ -32,7 +32,6 @@
                 width="100%"
                 growing="false"
                 growingMaxLines="15"
-                maxLength="1000"
                 valueLiveUpdate="false"
                 liveChange="handleLiveChange"
             />
