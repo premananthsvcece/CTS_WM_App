@@ -1536,6 +1536,7 @@ sap.ui.define(
         );
       },
       onCancelStartPress: function () {
+        sap.ui.getCore().byId(`idStartOperator`).setValueState();
         this.StartDialog.close();
       },
       onStopPressed: function (oEvent) {
