@@ -32,6 +32,7 @@
                             type="Text"
                             change="OnOperatorfill"
                             width="15rem"
+                            showValueStateMessage="true"
                         />
                     </InputListItem>
                     <InputListItem label="{i18n>FirstName}" visible="false">

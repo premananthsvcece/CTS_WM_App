@@ -1030,7 +1030,7 @@ sap.ui.define(
                   .getModel("i18n")
                   .getResourceBundle()
                   .getText("NoDisplay");
-                MessageBox.information(message);
+                MessageToast.show(message);
                 return;
               }
             } catch (e) {
@@ -1325,11 +1325,14 @@ sap.ui.define(
                   .getCore()
                   .byId(`idStartOperator`)
                   .setValue(sValue);
+                sap.ui.getCore().byId(`idStartOperator`).setValueState("None");
               } else {
                 sap.ui
                   .getCore()
                   .byId(`idStartOperator`)
                   .setValue();
+                sap.ui.getCore().byId(`idStartOperator`).setValueState("Error");
+                sap.ui.getCore().byId(`idStartOperator`).setValueStateText("Enter Valid Value");
               }
             } catch (e) {
               MessageToast.show(e.message);
