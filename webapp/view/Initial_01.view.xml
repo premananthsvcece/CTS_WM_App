@@ -642,6 +642,7 @@
                                 enableSelectAll="false"
                                 selectionBehavior="RowOnly"
                                 selectionMode="Single"
+                                rowSelectionChange="onTableQueSelectionChange"
                             >
                                 <Table:noData text="{i18n>NoData}" />
                                 <Table:columns>
@@ -952,7 +953,7 @@
                                 alternateRowColors="true"
                                 enableSelectAll="false"
                                 selectionBehavior="RowOnly"
-                                selectionMode="Single"
+                                selectionMode="None"
                             >
                                 <Table:noData text="{i18n>NoData}" />
                                 <Table:columns autoResizable="true">

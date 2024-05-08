@@ -1335,10 +1335,10 @@ sap.ui.define(
                 // Please contact admin to create you account
                 // Get Message
                 var Emessage = that
-                .getView()
-                .getModel("i18n")
-                .getResourceBundle()
-                .getText("Start001");
+                  .getView()
+                  .getModel("i18n")
+                  .getResourceBundle()
+                  .getText("Start001");
                 sap.ui.getCore().byId(`idStartOperator`).setValueStateText(Emessage);
               }
             } catch (e) {
@@ -2601,6 +2601,35 @@ sap.ui.define(
         }
         sap.ui.getCore().byId("idPostQuantity").setValue(value);
       },
+      onTableQueSelectionChange: function (oEvent) {
+        var that = this;
+        var index;
+        var Path = that.getView().getId();
+
+        var Tableindex = "X";
+        var StartDate;
+        var EndDate;
+
+
+        Tableindex = sap.ui
+          .getCore()
+          .byId(`${Path}--idQueueOrderList`)
+          .getSelectedIndices()[0];
+        // Get Order No & Opr No
+        if (Tableindex != undefined) {
+          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+          index = 0;
+          StartDate = sap.ui
+            .getCore()
+            .byId(`${Path}--idQueueOrderList`)
+            .getModel("InQueueModel")
+            .getData().InQueueData[Tableindex].Data14;
+        }
+        if (Tableindex === undefined) {
+          sap.ui.getCore().byId(`${Path}--idINPStopJob`).setEnabled(true);
+          sap.ui.getCore().byId(`${Path}--idINPStartJob`).setEnabled(true);
+        }
+      },
       onTableRowSelectionChange: function (oEvent) {
         var that = this;
         var index;
@@ -2616,6 +2645,7 @@ sap.ui.define(
           .getSelectedIndices()[0];
         // Get Order No & Opr No
         if (Tableindex != undefined) {
+          sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
           index = 0;
           StartDate = sap.ui
             .getCore()
@@ -2647,25 +2677,6 @@ sap.ui.define(
               sap.ui.getCore().byId(`${Path}--idINPStopJob`).setEnabled(true);
             }
           }
-        }
-        if (Tableindex === undefined) {
-          Tableindex = sap.ui
-            .getCore()
-            .byId(`${Path}--idQueueOrderList`)
-            .getSelectedIndices()[0];
-          // Get Order No & Opr No
-          if (Tableindex != undefined) {
-            index = 0;
-            StartDate = sap.ui
-              .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data14;
-          }
-        }
-        if (Tableindex === undefined) {
-          sap.ui.getCore().byId(`${Path}--idINPStopJob`).setEnabled(true);
-          sap.ui.getCore().byId(`${Path}--idINPStartJob`).setEnabled(true);
         }
       },
 
