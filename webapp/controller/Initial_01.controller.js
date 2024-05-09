@@ -1254,7 +1254,7 @@ sap.ui.define(
             .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[5].getText();
+            .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
           // SelAufnr = sap.ui
           //   .getCore()
           //   .byId(`${Path}--idQueueOrderList`)
@@ -1482,7 +1482,7 @@ sap.ui.define(
               .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
             SelOprNo = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[5].getText();
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
             // SelAufnr = sap.ui
             //   .getCore()
             //   .byId(`${Path}--idQueueOrderList`)
@@ -1995,7 +1995,7 @@ sap.ui.define(
               .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
             SelOprNo = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
             // SelAufnr = sap.ui
             //   .getCore()
             //   .byId(`${Path}--idFutureOrderList`)
