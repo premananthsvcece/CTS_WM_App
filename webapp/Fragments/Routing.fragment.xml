@@ -31,6 +31,15 @@
                 width="auto"
             >
                 <header>
+                    <Text text="{i18n>ActivityDetail}" />
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Desktop"
+                demandPopin="true"
+                width="auto"
+            >
+                <header>
                     <Text text="{i18n>WorkCenter}" />
                 </header>
             </Column>
@@ -111,9 +120,13 @@
                 </header>
             </Column>
         </columns>
-        <ColumnListItem vAlign="Middle" type="Active">
+        <ColumnListItem
+            vAlign="Middle"
+            type="Active"
+        >
             <cells>
-                <ObjectIdentifier title="{RoutingModel>Data02}" text="{RoutingModel>Data04}"/>
+                <Text text="{RoutingModel>Data02}" />
+                <Text text="{RoutingModel>Data04}" />
                 <Text text="{RoutingModel>Data03}" />
                 <Text text="{RoutingModel>Data05}" />
                 <Text text="{RoutingModel>Data06}" />

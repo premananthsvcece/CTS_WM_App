@@ -1612,6 +1612,7 @@ sap.ui.define(
         );
       },
       onCancelStartPress: function () {
+        var that = this;
         sap.ui.getCore().byId(`idStartOperator`).setValueState();
         var Path = that.getView().getId();
         sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
