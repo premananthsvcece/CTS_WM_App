@@ -509,6 +509,7 @@
                                         sortProperty="Data14"
                                         filterProperty="Data14"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label text="{i18n>OperStrtDate}" />
                                         <Table:template>
@@ -525,6 +526,7 @@
                                         sortProperty="Data15"
                                         filterProperty="Data15"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label text="{i18n>OperStrtTime}" />
                                         <Table:template>
@@ -541,6 +543,7 @@
                                         sortProperty="Data08"
                                         filterProperty="Data08"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel8"
@@ -561,6 +564,7 @@
                                         sortProperty="Data09"
                                         filterProperty="Data09"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel9"
@@ -586,12 +590,18 @@
                                             text="{i18n>TotalTime}"
                                         />
                                         <Table:template>
-                                            <TimePicker
+                                            <Text
+                                                id="_IDGenText13"
+                                                text="{InProgressModel>Data13}"
+                                                wrapping="false"
+                                                textAlign="Right"
+                                            />
+                                            <!-- <TimePicker
                                                 id="_IDGenText13"
                                                 value="{InProgressModel>Data13}"
                                                 enabled="false"
                                                 displayFormat="HH:mm:ss"
-                                            />
+                                            /> -->
                                         </Table:template>
                                     </Table:Column>
                                 </Table:columns>

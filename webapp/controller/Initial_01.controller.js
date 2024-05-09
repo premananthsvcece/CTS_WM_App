@@ -1562,10 +1562,10 @@ sap.ui.define(
             .getData().InProgressData;
           for (var ind = 0; ind < IEntry.NavWC_InProgress.length; ind++) {
             if (ind === Tableindex) {
-                IEntry.NavWC_InProgress[ind].Data16 = OperatorNo;
-                IEntry.NavWC_InProgress[ind].Data17 = "Success";
-                IEntry.NavWC_InProgress[ind].Data14 = StartDate;
-                IEntry.NavWC_InProgress[ind].Data15 = StartTime;
+              IEntry.NavWC_InProgress[ind].Data16 = OperatorNo;
+              IEntry.NavWC_InProgress[ind].Data17 = "Success";
+              IEntry.NavWC_InProgress[ind].Data14 = StartDate;
+              IEntry.NavWC_InProgress[ind].Data15 = StartTime;
             }
           }
           sap.ui
@@ -1616,7 +1616,10 @@ sap.ui.define(
                 .getModel("i18n")
                 .getResourceBundle()
                 .getText("Start004");
-              MessageToast.show(message + ' ' + SelAufnr + ' / ' + SelOprNo);
+              MessageToast.show(message + ' ' + SelAufnr + ' / ' + SelOprNo, {
+                width: "50em",
+                animationDuration: 2000,
+              });
               that.onButtonPress();
               return;
             } catch (e) {
@@ -1885,9 +1888,9 @@ sap.ui.define(
             .getData().InProgressData;
           for (var ind = 0; ind < IEntry.NavWC_InProgress.length; ind++) {
             if (ind === Tableindex) {
-                if (IEntry.NavWC_InProgress[ind].Data16 === OperatorNo) {
-              IEntry.NavWC_InProgress[ind].Data08 = EndDate;
-              IEntry.NavWC_InProgress[ind].Data09 = EndTime;
+              if (IEntry.NavWC_InProgress[ind].Data16 === OperatorNo) {
+                IEntry.NavWC_InProgress[ind].Data08 = EndDate;
+                IEntry.NavWC_InProgress[ind].Data09 = EndTime;
               }
             }
           }
@@ -1910,8 +1913,16 @@ sap.ui.define(
           function (oData, Response) {
             try {
               that.hideBusyIndicator();
+              var message = that
+            .getView()
+            .getModel("i18n")
+            .getResourceBundle()
+            .getText("Stop003");
+              MessageToast.show(message + SelAufnr + '/' + SelOprNo, {
+                width: "50em",
+                animationDuration: 2000,
+              });
               that.onButtonPress();
-              MessageToast.show("Update Successful");
               return;
             } catch (e) {
               alert(e.message);
@@ -1931,7 +1942,7 @@ sap.ui.define(
           .getModel("i18n")
           .getResourceBundle()
           .getText("Gen001");
-        MessageBox.confirm(message);
+          MessageToast.show(message);
         return;
       },
       onOrderNotePressed: function () {
