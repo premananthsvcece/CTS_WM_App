@@ -5,8 +5,9 @@
     xmlns:l="sap.ui.layout"
     xmlns:sf="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
+    autoFocus="false"
 >
-    <Dialog
+    <Dialog 
         id="idDialogPost"
         title="{i18n>PostAction}"
         contentWidth="60%"

@@ -226,6 +226,11 @@ sap.ui.define(
             }
           },
         });
+        var Path = othis.getView().getId();
+        jQuery.sap.delayedCall(500, that, function () {
+          sap.ui.getCore().byId(Path + "--idInputWorkArea").focus();
+        });
+
       },
       /* BUSY INDICATOR*/
       showBusyIndicator: function () {
@@ -464,25 +469,37 @@ sap.ui.define(
           index = 0;
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
 
           SelMatnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data03;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
           SelMaktx = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data04;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[5].getText();
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data02;
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data05;
+          // SelMatnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data03;
+          // SelMaktx = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data04;
         }
 
         if (Tableindex === undefined) {
@@ -496,25 +513,38 @@ sap.ui.define(
             index = 1;
             SelAufnr = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data02;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
             SelOprNo = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data05;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
+            // SelAufnr = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data02;
+            // SelOprNo = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data05;
 
             SelMatnr = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data03;
-            SelMaktx = sap.ui
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[2].getText();
+            SelMatnr = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data04;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
+
+            // SelMatnr = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data03;
+            // SelMatnr = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data04;
           }
         }
         if (Tableindex === undefined) {
@@ -651,25 +681,39 @@ sap.ui.define(
           index = 0;
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
 
           SelMatnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data03;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
           SelMaktx = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data04;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[5].getText();
+
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data02;
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data05;
+
+          // SelMatnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data03;
+          // SelMaktx = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data04;
         }
         if (Tableindex === undefined) {
           Tableindex = sap.ui
@@ -682,25 +726,37 @@ sap.ui.define(
             index = 1;
             SelAufnr = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data02;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
             SelOprNo = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data05;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
+            // SelAufnr = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data02;
+            // SelOprNo = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data05;
 
             SelMatnr = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data03;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[2].getText();
             SelMaktx = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data04;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
+            // SelMatnr = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data03;
+            // SelMaktx = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data04;
           }
         }
         if (Tableindex === undefined) {
@@ -940,11 +996,16 @@ sap.ui.define(
         if (Tableindex != undefined) {
           sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           index = 0;
+
           SelMatnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data03;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
+
+          // SelMatnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data03;
         }
         if (Tableindex === undefined) {
           Tableindex = sap.ui
@@ -957,9 +1018,12 @@ sap.ui.define(
             index = 1;
             SelMatnr = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data03;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[2].getText();
+            // SelMatnr = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data03;
           }
         }
         if (Tableindex === undefined) {
@@ -1084,43 +1148,19 @@ sap.ui.define(
         if (Tableindex != undefined) {
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
+
           OprNumber = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data16; // Operator No
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
           OprStatus = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data17;
-        } else {
-          // Tableindex = sap.ui
-          //   .getCore()
-          //   .byId(`${Path}--idQueueOrderList`)
-          //   .getSelectedIndices()[0];
-          // // Get Order No & Opr No
-          // if (Tableindex != undefined) {
-          //   SelAufnr = sap.ui
-          //     .getCore()
-          //     .byId(`${Path}--idQueueOrderList`)
-          //     .getModel("InQueueModel")
-          //     .getData().InQueueData[Tableindex].Data02;
-          //   SelOprNo = sap.ui
-          //     .getCore()
-          //     .byId(`${Path}--idQueueOrderList`)
-          //     .getModel("InQueueModel")
-          //     .getData().InQueueData[Tableindex].Data05;
-          // }
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getType();
         }
+
         if (Tableindex === undefined) {
           // Raise Message
           var message = that
@@ -1211,14 +1251,20 @@ sap.ui.define(
         if (Tableindex != undefined) {
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idQueueOrderList`)
-            .getModel("InQueueModel")
-            .getData().InQueueData[Tableindex].Data02;
+            .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idQueueOrderList`)
-            .getModel("InQueueModel")
-            .getData().InQueueData[Tableindex].Data05;
+            .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[5].getText();
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idQueueOrderList`)
+          //   .getModel("InQueueModel")
+          //   .getData().InQueueData[Tableindex].Data02;
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idQueueOrderList`)
+          //   .getModel("InQueueModel")
+          //   .getData().InQueueData[Tableindex].Data05;
         }
         if (Tableindex === undefined) {
           // Raise Message
@@ -1389,27 +1435,39 @@ sap.ui.define(
         if (Tableindex != undefined) {
           sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           index = 0;
-
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
+
           ScreenOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data16;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
           ScreenStatus = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data17;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getType();
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data02;
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data05;
+          // ScreenOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data16;
+          // ScreenStatus = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data17;
         } else {
           Tableindex = sap.ui
             .getCore()
@@ -1421,14 +1479,20 @@ sap.ui.define(
             index = 1;
             SelAufnr = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data02;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
             SelOprNo = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data05;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[5].getText();
+            // SelAufnr = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data02;
+            // SelOprNo = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data05;
           }
         }
         if (ScreenStatus === "Success") {
@@ -1478,11 +1542,13 @@ sap.ui.define(
             .getModel("InProgressModel")
             .getData().InProgressData;
           for (var ind = 0; ind < IEntry.NavWC_InProgress.length; ind++) {
-            if (ind === Tableindex) {
-              IEntry.NavWC_InProgress[ind].Data16 = OperatorNo;
-              IEntry.NavWC_InProgress[ind].Data17 = "Success";
-              IEntry.NavWC_InProgress[ind].Data14 = StartDate;
-              IEntry.NavWC_InProgress[ind].Data15 = StartTime;
+            if (IEntry.NavWC_InProgress[ind].Data02 === SelAufnr) {
+              if (IEntry.NavWC_InProgress[ind].Data05 === SelOprNo) {
+                IEntry.NavWC_InProgress[ind].Data16 = OperatorNo;
+                IEntry.NavWC_InProgress[ind].Data17 = "Success";
+                IEntry.NavWC_InProgress[ind].Data14 = StartDate;
+                IEntry.NavWC_InProgress[ind].Data15 = StartTime;
+              }
             }
           }
           sap.ui
@@ -1501,10 +1567,12 @@ sap.ui.define(
             .getData().InQueueData;
 
           for (var ind = 0; ind < IEntry.NavWC_Queue.length; ind++) {
-            if (ind === Tableindex) {
+            if (IEntry.NavWC_Queue[ind].Data02 === SelAufnr) {
+              if (IEntry.NavWC_Queue[ind].Data05 === SelOprNo) {
               IEntry.NavWC_Queue[ind].Data16 = OperatorNo;
               IEntry.NavWC_Queue[ind].Data14 = StartDate;
               IEntry.NavWC_Queue[ind].Data15 = StartTime;
+              }
             }
           }
           sap.ui
@@ -1527,8 +1595,14 @@ sap.ui.define(
           function (oData, Response) {
             try {
               that.hideBusyIndicator();
+              // Raise Message
+              var message = that
+                .getView()
+                .getModel("i18n")
+                .getResourceBundle()
+                .getText("Start004");
+              MessageToast.show(message + ' ' + SelAufnr + ' / ' + SelOprNo);
               that.onButtonPress();
-              MessageToast.show("Update Successful");
               return;
             } catch (e) {
               alert(e.message);
@@ -1539,6 +1613,9 @@ sap.ui.define(
       },
       onCancelStartPress: function () {
         sap.ui.getCore().byId(`idStartOperator`).setValueState();
+        var Path = that.getView().getId();
+        sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+        sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
         this.StartDialog.close();
       },
       onStopPressed: function (oEvent) {
@@ -1561,32 +1638,48 @@ sap.ui.define(
         if (Tableindex != undefined) {
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data02;
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data05;
 
           SelOpratorNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data16;
-
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
           SelStartDate = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data14;
-
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[11].getValue();
           SelStartTime = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data15;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[12].getValue();
+
+          // SelOpratorNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data16;
+
+          // SelStartDate = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data14;
+
+          // SelStartTime = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data15;
         }
         if (Tableindex === undefined) {
           // Raise Message
@@ -1726,14 +1819,21 @@ sap.ui.define(
           sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
+
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data02;
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data05;
         }
         if (Tableindex === undefined) {
           // Raise Message
@@ -1768,9 +1868,13 @@ sap.ui.define(
             .getModel("InProgressModel")
             .getData().InProgressData;
           for (var ind = 0; ind < IEntry.NavWC_InProgress.length; ind++) {
-            if (ind === Tableindex) {
+            if (IEntry.NavWC_InProgress[ind].Data02 === SelAufnr) {
+              if (IEntry.NavWC_InProgress[ind].Data05 === SelOprNo) {
+                if (IEntry.NavWC_InProgress[ind].Data16 === OperatorNo) {
               IEntry.NavWC_InProgress[ind].Data08 = EndDate;
               IEntry.NavWC_InProgress[ind].Data09 = EndTime;
+                }
+              }
             }
           }
           sap.ui
@@ -1805,6 +1909,8 @@ sap.ui.define(
       onCancelStopPress: function () {
         var that = this;
         that.StopDialog.close();
+        var Path = that.getView().getId();
+        sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
         // Raise Message
         var message = that
           .getView()
@@ -1833,14 +1939,20 @@ sap.ui.define(
           index = 0;
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data02;
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data05;
         }
         if (Tableindex === undefined) {
           Tableindex = sap.ui
@@ -1853,14 +1965,20 @@ sap.ui.define(
             index = 0;
             SelAufnr = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data02;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
             SelOprNo = sap.ui
               .getCore()
-              .byId(`${Path}--idQueueOrderList`)
-              .getModel("InQueueModel")
-              .getData().InQueueData[Tableindex].Data05;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
+            // SelAufnr = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data02;
+            // SelOprNo = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idQueueOrderList`)
+            //   .getModel("InQueueModel")
+            //   .getData().InQueueData[Tableindex].Data05;
           }
         }
         if (Tableindex === undefined) {
@@ -1874,14 +1992,20 @@ sap.ui.define(
             sap.ui.getCore().byId(`${Path}--idFutureOrderList`).clearSelection();
             SelAufnr = sap.ui
               .getCore()
-              .byId(`${Path}--idFutureOrderList`)
-              .getModel("InFutureModel")
-              .getData().InFutureData[Tableindex].Data02;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
             SelOprNo = sap.ui
               .getCore()
-              .byId(`${Path}--idFutureOrderList`)
-              .getModel("InFutureModel")
-              .getData().InFutureData[Tableindex].Data05;
+              .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
+            // SelAufnr = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idFutureOrderList`)
+            //   .getModel("InFutureModel")
+            //   .getData().InFutureData[Tableindex].Data02;
+            // SelOprNo = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idFutureOrderList`)
+            //   .getModel("InFutureModel")
+            //   .getData().InFutureData[Tableindex].Data05;
           }
         }
         if (Tableindex === undefined) {
@@ -1996,14 +2120,21 @@ sap.ui.define(
           index = 0;
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
+
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data02;
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data05;
         }
 
         if (Tableindex === undefined) {
@@ -2120,19 +2251,29 @@ sap.ui.define(
           sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
+
           SelOprerator = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data16;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data02;
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data05;
+          // SelOprerator = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data16;
         }
 
         var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
@@ -2230,24 +2371,39 @@ sap.ui.define(
           index = 0;
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
+
           OperatorNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data16;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
+
           EndDate = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data08;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[13].getValue();
+
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data02;
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data05;
+          // OperatorNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data16;
+          // EndDate = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data08;
         }
         if (EndDate === "") {
           var message = that
@@ -2465,6 +2621,9 @@ sap.ui.define(
         }
         );
         that.PostActionDialog.open();
+        jQuery.sap.delayedCall(500, that, function () {
+          sap.ui.getCore().byId("idPostQuantity").focus();
+        });
       },
       onConfirmPostPress: function () {
         var that = this;
@@ -2488,21 +2647,32 @@ sap.ui.define(
           sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           SelAufnr = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data02;
-
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
           SelOprNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data05;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
 
           OperatorNo = sap.ui
             .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getModel("InProgressModel")
-            .getData().InProgressData[Tableindex].Data16;
+            .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
+
+          // SelAufnr = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data02;
+
+          // SelOprNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data05;
+
+          // OperatorNo = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getModel("InProgressModel")
+          //   .getData().InProgressData[Tableindex].Data16;
         }
         if (Tableindex === undefined) {
           var message = that
