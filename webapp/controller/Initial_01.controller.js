@@ -1914,10 +1914,10 @@ sap.ui.define(
             try {
               that.hideBusyIndicator();
               var message = that
-            .getView()
-            .getModel("i18n")
-            .getResourceBundle()
-            .getText("Stop003");
+                .getView()
+                .getModel("i18n")
+                .getResourceBundle()
+                .getText("Stop003");
               MessageToast.show(message + SelAufnr + '/' + SelOprNo, {
                 width: "50em",
                 animationDuration: 2000,
@@ -1942,7 +1942,7 @@ sap.ui.define(
           .getModel("i18n")
           .getResourceBundle()
           .getText("Gen001");
-          MessageToast.show(message);
+        MessageToast.show(message);
         return;
       },
       onOrderNotePressed: function () {
@@ -2754,6 +2754,9 @@ sap.ui.define(
           .byId("idPostComponentList")
           .getModel("ComponentModel")
           .getData().ComponentData;
+        if (IEntry.NavWC_Component.length === 0) {
+          IEntry.NavWC_Component = [{}];
+        }
         that.PostActionDialog.close();
         // that.PostActionDialog.destroy();
 
