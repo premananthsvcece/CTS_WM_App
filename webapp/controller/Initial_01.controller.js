@@ -2669,7 +2669,7 @@ sap.ui.define(
         // Get Order No & Opr No
         if (Tableindex != undefined) {
           index = 0;
-          // sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           // SelAufnr = sap.ui
           //   .getCore()
           //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
