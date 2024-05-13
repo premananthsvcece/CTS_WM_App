@@ -348,8 +348,6 @@
                                     <Table:Column
                                         id="_IDGenColumn2"
                                         width="8rem"
-                                        sortProperty="Data02"
-                                        filterProperty="Data02"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -367,8 +365,6 @@
                                     <Table:Column
                                         id="_IDGenColumn3"
                                         width="10rem"
-                                        sortProperty="Data03"
-                                        filterProperty="Data03"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -386,8 +382,6 @@
                                     <Table:Column
                                         id="_IDGenColumn4"
                                         width="10rem"
-                                        sortProperty="Data04"
-                                        filterProperty="Data04"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -405,8 +399,6 @@
                                     <Table:Column
                                         id="_IDGenColumn5"
                                         width="5rem"
-                                        sortProperty="Data05"
-                                        filterProperty="Data05"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -424,8 +416,6 @@
                                     <Table:Column
                                         id="_IDGenColumn6"
                                         width="5rem"
-                                        sortProperty="Data06"
-                                        filterProperty="Data06"
                                         autoResizable="true"
                                         hAlign="End"
                                     >
@@ -444,8 +434,6 @@
                                     <Table:Column
                                         id="_IDGenColumn10"
                                         width="7rem"
-                                        sortProperty="Data10"
-                                        filterProperty="Data10"
                                         autoResizable="true"
                                         hAlign="End"
                                     >
@@ -465,8 +453,6 @@
                                     <Table:Column
                                         id="_IDGenColumn11"
                                         width="7rem"
-                                        sortProperty="Data11"
-                                        filterProperty="Data11"
                                         autoResizable="true"
                                         hAlign="End"
                                     >
@@ -486,8 +472,6 @@
                                     <Table:Column
                                         id="_IDGenColumn12"
                                         width="7rem"
-                                        sortProperty="Data12"
-                                        filterProperty="Data12"
                                         autoResizable="true"
                                         hAlign="End"
                                     >
@@ -506,8 +490,6 @@
                                     </Table:Column>
                                     <Table:Column
                                         width="9rem"
-                                        sortProperty="Data14"
-                                        filterProperty="Data14"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -523,8 +505,6 @@
                                     </Table:Column>
                                     <Table:Column
                                         width="8rem"
-                                        sortProperty="Data15"
-                                        filterProperty="Data15"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -540,8 +520,6 @@
                                     <Table:Column
                                         id="_IDGenColumn8"
                                         width="9rem"
-                                        sortProperty="Data08"
-                                        filterProperty="Data08"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -561,8 +539,6 @@
                                     <Table:Column
                                         id="_IDGenColumn9"
                                         width="8rem"
-                                        sortProperty="Data09"
-                                        filterProperty="Data09"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -581,8 +557,6 @@
                                     <Table:Column
                                         id="_IDGenColumn13"
                                         width="8rem"
-                                        sortProperty="Data13"
-                                        filterProperty="Data13"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -679,8 +653,6 @@
                                     <Table:Column
                                         id="_IDGenColumn15"
                                         width="10rem"
-                                        sortProperty="Data02"
-                                        filterProperty="Data02"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -712,8 +684,6 @@
                                     <Table:Column
                                         id="_IDGenColumn16"
                                         width="10rem"
-                                        sortProperty="Data03"
-                                        filterProperty="Data03"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -731,8 +701,6 @@
                                     <Table:Column
                                         id="_IDGenColumn17"
                                         width="15rem"
-                                        sortProperty="Data04"
-                                        filterProperty="Data04"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -750,8 +718,6 @@
                                     <Table:Column
                                         id="_IDGenColumn18"
                                         width="10rem"
-                                        sortProperty="Data05"
-                                        filterProperty="Data05"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -769,8 +735,6 @@
                                     <Table:Column
                                         id="_IDGenColumn19"
                                         width="10rem"
-                                        sortProperty="Data06"
-                                        filterProperty="Data06"
                                         hAlign="End"
                                         autoResizable="true"
                                     >
@@ -859,8 +823,6 @@
                                     <Table:Column
                                         id="_IDGenColumn23"
                                         width="10rem"
-                                        sortProperty="Data10"
-                                        filterProperty="Data10"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -879,8 +841,6 @@
                                     <Table:Column
                                         id="_IDGenColumn24"
                                         width="10rem"
-                                        sortProperty="Data11"
-                                        filterProperty="Data11"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -899,8 +859,6 @@
                                     <Table:Column
                                         id="_IDGenColumn25"
                                         width="10rem"
-                                        sortProperty="Data12"
-                                        filterProperty="Data12"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -919,8 +877,6 @@
                                     <Table:Column
                                         id="_IDGenColumn26"
                                         width="10rem"
-                                        sortProperty="Data13"
-                                        filterProperty="Data13"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -991,8 +947,6 @@
                                     <Table:Column
                                         id="_IDGenColumn28"
                                         width="10rem"
-                                        sortProperty="Data02"
-                                        filterProperty="Data02"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -1010,8 +964,6 @@
                                     <Table:Column
                                         id="_IDGenColumn29"
                                         width="10rem"
-                                        sortProperty="Data03"
-                                        filterProperty="Data03"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -1029,8 +981,6 @@
                                     <Table:Column
                                         id="_IDGenColumn30"
                                         width="15rem"
-                                        sortProperty="Data04"
-                                        filterProperty="Data04"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -1048,8 +998,6 @@
                                     <Table:Column
                                         id="_IDGenColumn31"
                                         width="10rem"
-                                        sortProperty="Data05"
-                                        filterProperty="Data05"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -1067,8 +1015,6 @@
                                     <Table:Column
                                         id="_IDGenColumn32"
                                         width="10rem"
-                                        sortProperty="Data06"
-                                        filterProperty="Data06"
                                         hAlign="End"
                                         autoResizable="true"
                                     >
@@ -1086,8 +1032,6 @@
                                     </Table:Column>
                                     <Table:Column
                                         width="10rem"
-                                        sortProperty="Data14"
-                                        filterProperty="Data14"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -1102,8 +1046,6 @@
                                     </Table:Column>
                                     <Table:Column
                                         width="10rem"
-                                        sortProperty="Data15"
-                                        filterProperty="Data15"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -1118,8 +1060,6 @@
                                     <Table:Column
                                         id="_IDGenColumn34"
                                         width="10rem"
-                                        sortProperty="Data08"
-                                        filterProperty="Data08"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -1138,8 +1078,6 @@
                                     <Table:Column
                                         id="_IDGenColumn35"
                                         width="10rem"
-                                        sortProperty="Data09"
-                                        filterProperty="Data09"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -1157,8 +1095,6 @@
                                     <Table:Column
                                         id="_IDGenColumn36"
                                         width="10rem"
-                                        sortProperty="Data10"
-                                        filterProperty="Data10"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -1178,8 +1114,6 @@
                                     <Table:Column
                                         id="_IDGenColumn37"
                                         width="10rem"
-                                        sortProperty="Data11"
-                                        filterProperty="Data11"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -1199,8 +1133,6 @@
                                     <Table:Column
                                         id="_IDGenColumn38"
                                         width="10rem"
-                                        sortProperty="Data12"
-                                        filterProperty="Data12"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -1219,8 +1151,6 @@
                                     <Table:Column
                                         id="_IDGenColumn39"
                                         width="10rem"
-                                        sortProperty="Data13"
-                                        filterProperty="Data13"
                                         autoResizable="true"
                                         visible="false"
                                     >

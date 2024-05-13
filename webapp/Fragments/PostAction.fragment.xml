@@ -193,9 +193,9 @@
                                     <Column demandPopin="true">
                                         <Text text="{i18n>OperEndTime}" />
                                     </Column>
-                                    <!-- <Column demandPopin="true">
+                                    <Column demandPopin="true">
                                         <Text text="{i18n>TotalTime}" />
-                                    </Column> -->
+                                    </Column>
                                 </columns>
                                 <items>
                                     <ColumnListItem vAlign="Middle">
@@ -222,11 +222,10 @@
                                                 displayFormat="hh:mm:ss"
                                                 enabled="false"
                                             />
-                                            <!-- <TimePicker
+                                            <Input
                                                 value="{ActivityModel>Data07}"
-                                                displayFormat="hh:mm:ss"
-                                                enabled="false"
-                                            /> -->
+                                                enabled="false"                                               
+                                            />
                                         </cells>
                                     </ColumnListItem>
                                 </items>
