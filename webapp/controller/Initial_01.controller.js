@@ -2467,6 +2467,8 @@ sap.ui.define(
         },
         onCancelScarpPress: function (oEvent) {
           var that = this;
+          var Path = that.getView().getId();
+          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
           that.ScrapActionDialog.close();
         },
 
