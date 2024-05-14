@@ -5,9 +5,9 @@
 >
     <SelectDialog
         id="idWorkAreaDialog"
-        noDataText="No Work Center Found"
+        noDataText="{i18n>NoData}"
         growing="true"
-        title="Select Work Center"
+        title="{i18n>WorkCenterArea}"
         search="_onWorkAreaSearch"
         confirm="_WorkAreaSelect"
         cancel="_WorkAreaSelect"

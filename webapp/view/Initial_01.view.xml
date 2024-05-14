@@ -1134,6 +1134,7 @@
                                         id="_IDGenColumn38"
                                         width="10rem"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel38"

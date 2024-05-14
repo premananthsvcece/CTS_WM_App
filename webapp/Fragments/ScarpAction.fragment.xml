@@ -49,9 +49,16 @@
                 <Button
                     icon="sap-icon://accept"
                     class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-                    text="{i18n>Save}"
+                    text="{i18n>Save_Close}"
                     type="Success"
                     press="onConfirmScarpPress"
+                />
+                <Button
+                    icon="sap-icon://accept"
+                    class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                    text="{i18n>Save_More}"
+                    type="Success"
+                    press="onConfirmScarpMorePress"
                 />
                 <Button
                     icon="sap-icon://cancel"
