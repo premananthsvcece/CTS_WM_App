@@ -397,6 +397,20 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
+                                        width="10rem"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            text="{i18n>WorkCenter}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                text="{InProgressModel>Data19}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
                                         id="_IDGenColumn5"
                                         width="5rem"
                                         autoResizable="true"
@@ -716,6 +730,20 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
+                                        width="10rem"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            text="{i18n>WorkCenter}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                text="{InQueueModel>Data19}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
                                         id="_IDGenColumn18"
                                         width="10rem"
                                         autoResizable="true"
@@ -919,7 +947,7 @@
                                 alternateRowColors="true"
                                 enableSelectAll="false"
                                 selectionBehavior="RowOnly"
-                                selectionMode="None"
+                                selectionMode="Single"
                             >
                                 <Table:noData text="{i18n>NoData}" />
                                 <Table:columns autoResizable="true">
@@ -991,6 +1019,20 @@
                                             <Text
                                                 id="_IDGenText30"
                                                 text="{InFutureModel>Data04}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
+                                        width="10rem"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            text="{i18n>WorkCenter}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                text="{InFutureModel>Data19}"
                                                 wrapping="false"
                                             />
                                         </Table:template>

@@ -2971,7 +2971,7 @@ sap.ui.define(
                 sap.ui
                   .getCore()
                   .byId(`${Path}--idINPStartJob`)
-                  .setEnabled(true);
+                  .setEnabled(false);
                 sap.ui.getCore().byId(`${Path}--idINPStopJob`).setEnabled(true);
               }
             }
