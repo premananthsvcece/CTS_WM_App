@@ -428,6 +428,20 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
+                                        width="10rem"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            text="{i18n>OprShrTxt}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                text="{InProgressModel>Data20}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
                                         id="_IDGenColumn6"
                                         width="5rem"
                                         autoResizable="true"
@@ -453,7 +467,7 @@
                                     >
                                         <Label
                                             id="_IDGenLabel10"
-                                            text="{i18n>QuanReady}"
+                                            text="{i18n>QuanAvail}"
                                         />
                                         <Table:template>
                                             <Text
@@ -761,6 +775,20 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
+                                        width="10rem"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            text="{i18n>OprShrTxt}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                text="{InQueueModel>Data20}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
                                         id="_IDGenColumn19"
                                         width="10rem"
                                         hAlign="End"
@@ -1050,6 +1078,20 @@
                                             <Text
                                                 id="_IDGenText31"
                                                 text="{InFutureModel>Data05}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
+                                        width="10rem"
+                                        autoResizable="true"
+                                    >
+                                        <Label
+                                            text="{i18n>OprShrTxt}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                text="{InFutureModel>Data20}"
                                                 wrapping="false"
                                             />
                                         </Table:template>
