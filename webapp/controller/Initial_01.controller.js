@@ -1393,7 +1393,7 @@ sap.ui.define(
                       .byId(`idStartOperator`)
                       .setValue(sValue);
                     sap.ui.getCore().byId(`idStartOperator`).setValueState("None");
-                    that.onConfirmStartPress();
+                    // that.onConfirmStartPress();
                   } else {
                     sap.ui
                       .getCore()
@@ -1421,7 +1421,7 @@ sap.ui.define(
           var that = this;
           var index;
           var Path = that.getView().getId();
-          // that.OnOperatorfill();
+          that.OnOperatorfill();
           var OperatorNo = sap.ui.getCore().byId("idStartOperator").getValue();
           if (OperatorNo === "") {
             var message = that
