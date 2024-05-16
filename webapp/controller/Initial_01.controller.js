@@ -3312,7 +3312,10 @@ sap.ui.define(
             .getCore()
             .byId(Path + "--idInputPlant")
             .getValue();
-
+          var Workcenter = sap.ui
+            .getCore()
+            .byId(Path + "--idInputWorkCenter")
+            .getValue();
           var WorkcenterArea = sap.ui
             .getCore()
             .byId(Path + "--idInputWorkArea")
