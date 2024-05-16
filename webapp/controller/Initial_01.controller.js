@@ -2899,6 +2899,42 @@ sap.ui.define(
             value = value + ".000";
           }
           sap.ui.getCore().byId("idPostQuantity").setValue(value);
+          
+          var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+
+          var IEntry = [];
+          IEntry = sap.ui
+            .getCore()
+            .byId("idPostComponentList")
+            .getModel("ComponentModel")
+            .getData().ComponentData;
+          if (IEntry.length === 0) {
+            IEntry = [{}];
+          }
+          IEntry = itemset;
+
+          oModel.oDataModel(
+            "/ValueHelpSet",
+            IEntry,
+            null,
+            function (oData, Response) {
+              try {
+                that.hideBusyIndicator();
+                var message = that
+                  .getView()
+                  .getModel("i18n")
+                  .getResourceBundle()
+                  .getText("Gen002");
+                MessageToast.show(message);
+                return;
+              } catch (e) {
+                alert(e.message);
+                that.hideBusyIndicator();
+              }
+            }
+          );
+
         },
         onTableQueSelectionChange: function (oEvent) {
           var that = this;
