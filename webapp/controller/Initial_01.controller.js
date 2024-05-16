@@ -134,16 +134,20 @@ sap.ui.define(
         },
         onLoadData: function (that, Plant, SelWCGrp, Workcenter) {
           var othis = that;
-
+          var Path = that.getView().getId();
           othis.showBusyIndicator();
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+          var OrderNo = sap.ui
+            .getCore()
+            .byId(Path + "--idInputProdOrdNo")
+            .getValue(OrderNo);
           var IEntry = {};
           IEntry.Key01 = "READ";
           IEntry.Key02 = Plant;
           IEntry.Key03 = Workcenter;
           IEntry.Key04 = SelWCGrp;
-          IEntry.Key05 = " ";
+          IEntry.Key05 = OrderNo;
           IEntry.WorkCenterArea = " ";
           IEntry.NavWC_InProgress = [{}];
           IEntry.NavWC_Queue = [{}];
@@ -3294,6 +3298,35 @@ sap.ui.define(
             .getCore()
             .byId(Path + "--idInputWorkArea")
             .getValue();
+
+          if (Plant != " ") {
+            that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
+          }
+        },
+        onidInputProdOrdNoLiveChange: function (oEvent) {
+          // Validate User Entered Input
+          var that = this;
+          var Path = that.getView().getId();
+          var OrderNo = oEvent.getParameters().newValue;
+          var Plant = sap.ui
+            .getCore()
+            .byId(Path + "--idInputPlant")
+            .getValue();
+
+          var WorkcenterArea = sap.ui
+            .getCore()
+            .byId(Path + "--idInputWorkArea")
+            .getValue();
+
+          sap.ui
+            .getCore()
+            .byId(Path + "--idTextProdOrdNo")
+            .setText(OrderNo);
+
+          sap.ui
+            .getCore()
+            .byId(Path + "--idInputProdOrdNo")
+            .setValue(OrderNo);
 
           if (Plant != " ") {
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);

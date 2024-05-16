@@ -76,6 +76,17 @@
                                 class="sapUiSmallMarginEnd"
                             />
                         </VBox>
+                        <VBox>
+                            <Label
+                                text="{i18n>ProdOrdNo}"
+                                labelFor="idTextProdOrdNo"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Text
+                                id="idTextProdOrdNo"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </VBox>
                     </HBox>
                 </uxap:snappedHeading>
                 <uxap:expandedHeading>
@@ -200,18 +211,31 @@
                         valueHelpRequest="_onWorkCenterHelp"
                     />
                 </VBox>
+                <VBox>
+                    <Label
+                        text="{i18n>ProdOrdNo}"
+                        labelFor="idInputProdOrdNo"
+                    />
+                    <MultiInput
+                        id="idInputProdOrdNo"
+                        showValueHelp="true"
+                        width="75%"
+                        autocomplete="true"
+                        valueLiveUpdate="false"
+                        change="onidInputProdOrdNoLiveChange"
+                        valueHelpRequest="_onProdOrdNoHelp"
+                    />
+                </VBox>
             </HBox>
             <OverflowToolbar asyncMode="false">
                 <content>
                     <ToolbarSpacer />
                     <Button
                         id="idGO"
-                        width="100px"
                         text="{i18n>Go}"
-                        icon="sap-icon://process"
+                        icon="sap-icon://refresh"
                         type="Accept"
                         press="onButtonPress"
-                        visible="false"
                     />
                 </content>
             </OverflowToolbar>
