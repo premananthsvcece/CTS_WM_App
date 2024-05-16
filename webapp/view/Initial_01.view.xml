@@ -169,7 +169,7 @@
                         visible="false"
                     />
                 </VBox>
-                <VBox> 
+                <VBox>
                     <Label
                         text="{i18n>WorkArea}"
                         labelFor="idInputWorkArea"
@@ -200,7 +200,6 @@
                         valueHelpRequest="_onWorkCenterHelp"
                     />
                 </VBox>
-                
             </HBox>
             <OverflowToolbar asyncMode="false">
                 <content>
@@ -304,9 +303,7 @@
                                         width="8rem"
                                         autoResizable="true"
                                     >
-                                        <Label
-                                            text="{i18n>OprName}"
-                                        />
+                                        <Label text="{i18n>OprName}" />
                                         <Table:template>
                                             <Text
                                                 text="{InProgressModel>Data18}"
@@ -335,9 +332,7 @@
                                         width="8rem"
                                         autoResizable="true"
                                     >
-                                        <Label
-                                            text="{i18n>SeqNum}"
-                                        />
+                                        <Label text="{i18n>SeqNum}" />
                                         <Table:template>
                                             <Text
                                                 text="{InProgressModel>Key02}"
@@ -400,9 +395,7 @@
                                         width="10rem"
                                         autoResizable="true"
                                     >
-                                        <Label
-                                            text="{i18n>WorkCenter}"
-                                        />
+                                        <Label text="{i18n>WorkCenter}" />
                                         <Table:template>
                                             <Text
                                                 text="{InProgressModel>Data19}"
@@ -431,9 +424,7 @@
                                         width="10rem"
                                         autoResizable="true"
                                     >
-                                        <Label
-                                            text="{i18n>OprShrTxt}"
-                                        />
+                                        <Label text="{i18n>OprShrTxt}" />
                                         <Table:template>
                                             <Text
                                                 text="{InProgressModel>Data20}"
@@ -646,7 +637,7 @@
                         <uxap:blocks>
                             <Table:Table
                                 id="idQueueOrderList"
-                                visibleRowCount="10"
+                                visibleRowCount="5"
                                 visibleRowCountMode="Interactive"
                                 class="sapUiResponsiveMargin"
                                 rows="{InQueueModel>/InQueueData}"
@@ -699,9 +690,7 @@
                                         width="8rem"
                                         autoResizable="true"
                                     >
-                                        <Label
-                                            text="{i18n>SeqNum}"
-                                        />
+                                        <Label text="{i18n>SeqNum}" />
                                         <Table:template>
                                             <Text
                                                 text="{InQueueModel>Key02}"
@@ -747,9 +736,7 @@
                                         width="10rem"
                                         autoResizable="true"
                                     >
-                                        <Label
-                                            text="{i18n>WorkCenter}"
-                                        />
+                                        <Label text="{i18n>WorkCenter}" />
                                         <Table:template>
                                             <Text
                                                 text="{InQueueModel>Data19}"
@@ -759,7 +746,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn18"
-                                        width="10rem"
+                                        width="5rem"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -778,9 +765,7 @@
                                         width="10rem"
                                         autoResizable="true"
                                     >
-                                        <Label
-                                            text="{i18n>OprShrTxt}"
-                                        />
+                                        <Label text="{i18n>OprShrTxt}" />
                                         <Table:template>
                                             <Text
                                                 text="{InQueueModel>Data20}"
@@ -968,7 +953,7 @@
                         <uxap:blocks>
                             <Table:Table
                                 id="idFutureOrderList"
-                                visibleRowCount="10"
+                                visibleRowCount="5"
                                 visibleRowCountMode="Interactive"
                                 class="sapUiResponsiveMargin"
                                 rows="{InFutureModel>/InFutureData}"
@@ -1055,9 +1040,7 @@
                                         width="10rem"
                                         autoResizable="true"
                                     >
-                                        <Label
-                                            text="{i18n>WorkCenter}"
-                                        />
+                                        <Label text="{i18n>WorkCenter}" />
                                         <Table:template>
                                             <Text
                                                 text="{InFutureModel>Data19}"
@@ -1067,7 +1050,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn31"
-                                        width="10rem"
+                                        width="5rem"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -1086,9 +1069,7 @@
                                         width="10rem"
                                         autoResizable="true"
                                     >
-                                        <Label
-                                            text="{i18n>OprShrTxt}"
-                                        />
+                                        <Label text="{i18n>OprShrTxt}" />
                                         <Table:template>
                                             <Text
                                                 text="{InFutureModel>Data20}"

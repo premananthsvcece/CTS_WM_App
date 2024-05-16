@@ -25,7 +25,8 @@ sap.ui.define(
     "use strict";
 
     return Controller.extend(
-      "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01", {
+      "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
+      {
         onInit: function () {
           var that = this;
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
@@ -114,11 +115,22 @@ sap.ui.define(
             .getText();
 
           var Path = that.getView().getId();
-          var PROES = sap.ui.getCore().byId(Path + "--idPROESTitleExp").getText();
-          sap.ui.getCore().byId(Path + "--idPROESTitleExp").setText(PROES + " - " + PlantName);
-          var PROES = sap.ui.getCore().byId(Path + "--idPROESTitleSnap").getText();
-          sap.ui.getCore().byId(Path + "--idPROESTitleSnap").setText(PROES + " - " + PlantName);
-
+          var PROES = sap.ui
+            .getCore()
+            .byId(Path + "--idPROESTitleExp")
+            .getText();
+          sap.ui
+            .getCore()
+            .byId(Path + "--idPROESTitleExp")
+            .setText(PROES + " - " + PlantName);
+          var PROES = sap.ui
+            .getCore()
+            .byId(Path + "--idPROESTitleSnap")
+            .getText();
+          sap.ui
+            .getCore()
+            .byId(Path + "--idPROESTitleSnap")
+            .setText(PROES + " - " + PlantName);
         },
         onLoadData: function (that, Plant, SelWCGrp, Workcenter) {
           var othis = that;
@@ -228,9 +240,11 @@ sap.ui.define(
           });
           var Path = othis.getView().getId();
           jQuery.sap.delayedCall(500, that, function () {
-            sap.ui.getCore().byId(Path + "--idInputWorkArea").focus();
+            sap.ui
+              .getCore()
+              .byId(Path + "--idInputWorkArea")
+              .focus();
           });
-
         },
         /* BUSY INDICATOR*/
         showBusyIndicator: function () {
@@ -356,10 +370,11 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WorkCenter' and Key04 eq '" +
-            SelPlant +
-            "' and Key05 eq '" +
-            SelWCGrp +
-            "'", {
+              SelPlant +
+              "' and Key05 eq '" +
+              SelWCGrp +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -410,8 +425,9 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WCGroup' and Key04 eq '" +
-            SelPlant +
-            "'", {
+              SelPlant +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -465,7 +481,10 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-            sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
             index = 0;
             // SelAufnr = sap.ui
             //   .getCore()
@@ -509,7 +528,10 @@ sap.ui.define(
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-              sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .clearSelection();
               index = 1;
               // SelAufnr = sap.ui
               //   .getCore()
@@ -554,7 +576,10 @@ sap.ui.define(
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-              sap.ui.getCore().byId(`${Path}--idFutureOrderList`).clearSelection();
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idFutureOrderList`)
+                .clearSelection();
               index = 2;
               SelAufnr = sap.ui
                 .getCore()
@@ -601,10 +626,11 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BOM' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "'", {
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -628,8 +654,13 @@ sap.ui.define(
                       .getModel("i18n")
                       .getResourceBundle()
                       .getText("BOM003");
-                    BOMTable.setTitle(Popup + ' ' + SelMatnr + ' - ' + SelMaktx);
-                    sap.ui.getCore().byId("idBOMDialog-cancel").setText("Close");
+                    BOMTable.setTitle(
+                      Popup + " " + SelMatnr + " - " + SelMaktx
+                    );
+                    sap.ui
+                      .getCore()
+                      .byId("idBOMDialog-cancel")
+                      .setText("Close");
                   } else {
                     // Raise Message
                     var message = that
@@ -677,7 +708,10 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-            sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
             index = 0;
             // SelAufnr = sap.ui
             //   .getCore()
@@ -722,7 +756,10 @@ sap.ui.define(
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-              sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .clearSelection();
               index = 1;
               // SelAufnr = sap.ui
               //   .getCore()
@@ -766,7 +803,10 @@ sap.ui.define(
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-              sap.ui.getCore().byId(`${Path}--idFutureOrderList`).clearSelection();
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idFutureOrderList`)
+                .clearSelection();
               index = 2;
               SelAufnr = sap.ui
                 .getCore()
@@ -789,7 +829,6 @@ sap.ui.define(
                 .byId(`${Path}--idFutureOrderList`)
                 .getModel("InFutureModel")
                 .getData().InFutureData[Tableindex].Data04;
-
             }
           }
           if (Tableindex === undefined) {
@@ -815,10 +854,11 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Routing' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "'", {
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -837,7 +877,10 @@ sap.ui.define(
                   // open value help dialog
                   if (RoutingData.length != 0) {
                     that.RouteDialog.open();
-                    sap.ui.getCore().byId("idRoutingDialog-cancel").setText("Close");
+                    sap.ui
+                      .getCore()
+                      .byId("idRoutingDialog-cancel")
+                      .setText("Close");
                   } else {
                     // Raise Message
                     var message = that
@@ -871,8 +914,8 @@ sap.ui.define(
               new Filter("Data05", FilterOperator.Contains, sValue),
               new Filter("Data06", FilterOperator.Contains, sValue),
               new Filter("Data07", FilterOperator.Contains, sValue),
-              new Filter("Data08", FilterOperator.Contains, sValue)
-            ]
+              new Filter("Data08", FilterOperator.Contains, sValue),
+            ],
           });
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
@@ -885,8 +928,8 @@ sap.ui.define(
               new Filter("Data03", FilterOperator.Contains, sValue),
               new Filter("Data04", FilterOperator.Contains, sValue),
               new Filter("Data05", FilterOperator.Contains, sValue),
-              new Filter("Data08", FilterOperator.Contains, sValue)
-            ]
+              new Filter("Data08", FilterOperator.Contains, sValue),
+            ],
           });
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
@@ -899,8 +942,8 @@ sap.ui.define(
               new Filter("Data03", FilterOperator.Contains, sValue),
               new Filter("Data04", FilterOperator.Contains, sValue),
               new Filter("Data05", FilterOperator.Contains, sValue),
-              new Filter("Data01", FilterOperator.Contains, sValue)
-            ]
+              new Filter("Data01", FilterOperator.Contains, sValue),
+            ],
           });
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
@@ -944,20 +987,14 @@ sap.ui.define(
                 .byId(`${Path}--idInputWorkArea`)
                 .setValue(Workcenter);
 
-              sap.ui
-                .getCore()
-                .byId(`${Path}--idInputWorkCenter`)
-                .setValue("");
+              sap.ui.getCore().byId(`${Path}--idInputWorkCenter`).setValue("");
 
               sap.ui
                 .getCore()
                 .byId(`${Path}--idTextWorkArea`)
                 .setText(Workcenter);
 
-              sap.ui
-                .getCore()
-                .byId(`${Path}--idTextWorkCenter`)
-                .setText("");
+              sap.ui.getCore().byId(`${Path}--idTextWorkCenter`).setText("");
 
               oEvent.getSource().getBinding("items").filter([]);
             } else {
@@ -994,7 +1031,10 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Material
           if (Tableindex != undefined) {
-            sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
             index = 0;
             // SelMatnr = sap.ui
             //   .getCore()
@@ -1013,7 +1053,10 @@ sap.ui.define(
               .getSelectedIndices()[0];
             // Get Material
             if (Tableindex != undefined) {
-              sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .clearSelection();
               index = 1;
               // SelMatnr = sap.ui
               //   .getCore()
@@ -1032,7 +1075,10 @@ sap.ui.define(
               .getSelectedIndices()[0];
             // Get Material
             if (Tableindex != undefined) {
-              sap.ui.getCore().byId(`${Path}--idFutureOrderList`).clearSelection();
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idFutureOrderList`)
+                .clearSelection();
               index = 2;
               SelMatnr = sap.ui
                 .getCore()
@@ -1058,8 +1104,9 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'DrawingURl' and Key02 eq '" +
-            SelMatnr +
-            "'", {
+              SelMatnr +
+              "'",
+            {
               context: null,
               async: false,
               urlParameters: null,
@@ -1080,14 +1127,13 @@ sap.ui.define(
                     }
                     // Create a Blob object from ArrayBuffer
                     var blob = new Blob([uint8Array], {
-                      type: 'application/pdf'
+                      type: "application/pdf",
                     });
 
                     // Create a URL for the Blob object
                     var blobUrl = URL.createObjectURL(blob);
                     // Open the URL in a new window
                     window.open(blobUrl);
-
                   } else {
                     // Raise Message
                     var message = that
@@ -1106,10 +1152,9 @@ sap.ui.define(
           );
         },
 
-
         // Convert base64 to blob
         base64toBlob: function (base64Data, contentType) {
-          contentType = contentType || '';
+          contentType = contentType || "";
           var sliceSize = 1024;
           var byteCharacters = atob(base64Data);
           var bytesLength = byteCharacters.length;
@@ -1127,7 +1172,7 @@ sap.ui.define(
             byteArrays[sliceIndex] = new Uint8Array(bytes);
           }
           return new Blob(byteArrays, {
-            type: contentType
+            type: contentType,
           });
         },
 
@@ -1252,7 +1297,6 @@ sap.ui.define(
             sap.ui.getCore().byId("idStartOperator").setValue("");
           }
 
-
           that.hideBusyIndicator();
         },
 
@@ -1361,10 +1405,7 @@ sap.ui.define(
 
         OnOperatorfill: function () {
           var that = this;
-          var sValue = sap.ui
-            .getCore()
-            .byId(`idStartOperator`)
-            .getValue();
+          var sValue = sap.ui.getCore().byId(`idStartOperator`).getValue();
           // var sValue = oEvent.getParameter("value");
           var Path = that.getView().getId();
           var SelPlant = sap.ui
@@ -1376,10 +1417,11 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-            sValue +
-            "' and Key03 eq '" +
-            SelPlant +
-            "'", {
+              sValue +
+              "' and Key03 eq '" +
+              SelPlant +
+              "'",
+            {
               context: null,
               async: false,
               urlParameters: null,
@@ -1388,18 +1430,18 @@ sap.ui.define(
                   var sPath = that.getView().getId();
                   if (oData.results.length != 0) {
                     var emparray = oData.results[0];
+                    sap.ui.getCore().byId(`idStartOperator`).setValue(sValue);
                     sap.ui
                       .getCore()
                       .byId(`idStartOperator`)
-                      .setValue(sValue);
-                    sap.ui.getCore().byId(`idStartOperator`).setValueState("None");
+                      .setValueState("None");
                     // that.onConfirmStartPress();
                   } else {
+                    sap.ui.getCore().byId(`idStartOperator`).setValue();
                     sap.ui
                       .getCore()
                       .byId(`idStartOperator`)
-                      .setValue();
-                    sap.ui.getCore().byId(`idStartOperator`).setValueState("Error");
+                      .setValueState("Error");
                     // Please contact admin to create you account
                     // Get Message
                     var Emessage = that
@@ -1407,7 +1449,10 @@ sap.ui.define(
                       .getModel("i18n")
                       .getResourceBundle()
                       .getText("Start001");
-                    sap.ui.getCore().byId(`idStartOperator`).setValueStateText(Emessage);
+                    sap.ui
+                      .getCore()
+                      .byId(`idStartOperator`)
+                      .setValueStateText(Emessage);
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
@@ -1455,7 +1500,10 @@ sap.ui.define(
 
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-            sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
             index = 0;
             // SelAufnr = sap.ui
             //   .getCore()
@@ -1497,7 +1545,10 @@ sap.ui.define(
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-              sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .clearSelection();
               index = 1;
               // SelAufnr = sap.ui
               //   .getCore()
@@ -1619,7 +1670,7 @@ sap.ui.define(
                   .getModel("i18n")
                   .getResourceBundle()
                   .getText("Start004");
-                MessageToast.show(message + ' ' + SelAufnr + ' / ' + SelOprNo, {
+                MessageToast.show(message + " " + SelAufnr + " / " + SelOprNo, {
                   width: "50em",
                   animationDuration: 2000,
                 });
@@ -1636,7 +1687,10 @@ sap.ui.define(
           var that = this;
           sap.ui.getCore().byId(`idStartOperator`).setValueState();
           var Path = that.getView().getId();
-          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+          sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .clearSelection();
           sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
           this.StartDialog.close();
         },
@@ -1789,10 +1843,11 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-            sValue +
-            "' and Key03 eq '" +
-            SelPlant +
-            "'", {
+              sValue +
+              "' and Key03 eq '" +
+              SelPlant +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -1838,7 +1893,10 @@ sap.ui.define(
           // Get Order No & Opr No
           if (Tableindex != undefined) {
             index = 0;
-            sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
             // SelAufnr = sap.ui
             //   .getCore()
             //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
@@ -1921,7 +1979,7 @@ sap.ui.define(
                   .getModel("i18n")
                   .getResourceBundle()
                   .getText("Stop003");
-                MessageToast.show(message + SelAufnr + '/' + SelOprNo, {
+                MessageToast.show(message + SelAufnr + "/" + SelOprNo, {
                   width: "50em",
                   animationDuration: 2000,
                 });
@@ -1938,7 +1996,10 @@ sap.ui.define(
           var that = this;
           that.StopDialog.close();
           var Path = that.getView().getId();
-          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+          sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .clearSelection();
           // Raise Message
           var message = that
             .getView()
@@ -1963,7 +2024,10 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-            sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
             index = 0;
             // SelAufnr = sap.ui
             //   .getCore()
@@ -1989,7 +2053,10 @@ sap.ui.define(
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-              sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .clearSelection();
               index = 0;
               // SelAufnr = sap.ui
               //   .getCore()
@@ -2017,7 +2084,10 @@ sap.ui.define(
             // Get Order No & Opr No
             if (Tableindex != undefined) {
               index = 0;
-              sap.ui.getCore().byId(`${Path}--idFutureOrderList`).clearSelection();
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idFutureOrderList`)
+                .clearSelection();
               // SelAufnr = sap.ui
               //   .getCore()
               //   .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
@@ -2058,8 +2128,9 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'HeaderText' and Key02 eq '" +
-            SelAufnr +
-            "'", {
+              SelAufnr +
+              "'",
+            {
               context: null,
               async: false,
               urlParameters: null,
@@ -2209,8 +2280,9 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
-            SelPlant +
-            "'", {
+              SelPlant +
+              "'",
+            {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
@@ -2276,7 +2348,10 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-            sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
             SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
@@ -2337,7 +2412,7 @@ sap.ui.define(
             null,
             function (oData, Response) {
               try {
-                if (Response.data.Data01 === 'S') {
+                if (Response.data.Data01 === "S") {
                   that.hideBusyIndicator();
                   var message = that
                     .getView()
@@ -2348,7 +2423,7 @@ sap.ui.define(
                   that.onButtonPress();
                   return;
                 }
-                if (Response.data.Data01 === 'E') {
+                if (Response.data.Data01 === "E") {
                   that.hideBusyIndicator();
                   MessageBox.error(Response.data.Data02);
                   return;
@@ -2440,7 +2515,7 @@ sap.ui.define(
             null,
             function (oData, Response) {
               try {
-                if (Response.data.Data01 === 'S') {
+                if (Response.data.Data01 === "S") {
                   that.hideBusyIndicator();
                   var message = that
                     .getView()
@@ -2449,11 +2524,11 @@ sap.ui.define(
                     .getText("Gen003");
                   MessageToast.show(message);
                   that.onButtonPress();
-                  sap.ui.getCore().byId(`idScarpReason`).setValue("")
-                  sap.ui.getCore().byId(`idScarpQuantity`).setValue("")
+                  sap.ui.getCore().byId(`idScarpReason`).setValue("");
+                  sap.ui.getCore().byId(`idScarpQuantity`).setValue("");
                   return;
                 }
-                if (Response.data.Data01 === 'E') {
+                if (Response.data.Data01 === "E") {
                   that.hideBusyIndicator();
                   MessageBox.error(Response.data.Data02);
                   return;
@@ -2469,7 +2544,10 @@ sap.ui.define(
         onCancelScarpPress: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
-          sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+          sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .clearSelection();
           that.ScrapActionDialog.close();
         },
 
@@ -2568,14 +2646,15 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Post' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "' and Key04 eq '" +
-            OperatorNo +
-            "' and Key05 eq '" +
-            SelPlant +
-            "'", {
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
+            {
               context: null,
               async: false,
               urlParameters: null,
@@ -2622,14 +2701,15 @@ sap.ui.define(
 
           vModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Component' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "' and Key04 eq '" +
-            OperatorNo +
-            "' and Key05 eq '" +
-            SelPlant +
-            "'", {
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
+            {
               context: null,
               async: false,
               urlParameters: null,
@@ -2647,14 +2727,14 @@ sap.ui.define(
                         .getCore()
                         .byId("idPostComponentList");
 
-                      if (ComponentData[0].Key03 === 'N') {
+                      if (ComponentData[0].Key03 === "N") {
                         var HeaderText = that
                           .getView()
                           .getModel("i18n")
                           .getResourceBundle()
                           .getText("ComponentDetail");
                       }
-                      if (ComponentData[0].Key03 === 'S') {
+                      if (ComponentData[0].Key03 === "S") {
                         var HeaderText = that
                           .getView()
                           .getModel("i18n")
@@ -2678,7 +2758,6 @@ sap.ui.define(
                       .getCore()
                       .byId("idPostComponentList");
 
-
                     ComponentnList.setHeaderText(""); // Blank
 
                     ComponentnList.setModel(ComponentModel, "ComponentModel");
@@ -2696,14 +2775,15 @@ sap.ui.define(
 
           logModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'LogData' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "' and Key04 eq '" +
-            OperatorNo +
-            "' and Key05 eq '" +
-            SelPlant +
-            "'", {
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
+            {
               context: null,
               async: false,
               urlParameters: null,
@@ -2770,7 +2850,10 @@ sap.ui.define(
           // Get Order No & Opr No
           if (Tableindex != undefined) {
             index = 0;
-            sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
             // SelAufnr = sap.ui
             //   .getCore()
             //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
@@ -2893,48 +2976,92 @@ sap.ui.define(
           // that.PostActionDialog.destroy();
         },
         onPostQuantityChange: function (oEvent) {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
           var value = oEvent.getParameter("value");
           var valueArray = value.split(".");
           if (valueArray.length != 2) {
             value = value + ".000";
           }
           sap.ui.getCore().byId("idPostQuantity").setValue(value);
-          
+
+          var Tableindex = "X";
+          var SelAufnr = " ";
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            index = 0;
+
+            SelAufnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+          }
+          if (Tableindex === undefined) {
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Post001");
+            MessageBox.error(message);
+            return;
+          }
+
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+          var IEntry = {};
+          IEntry.Key01 = "COMPONENTUPD";
+          IEntry.Key02 = SelAufnr;
+          IEntry.Key03 = value;
+          IEntry.Key04 = " ";
+          IEntry.Key05 = " ";
+          IEntry.WorkCenterArea = " ";
+          IEntry.NavWC_InProgress = [{}];
+          IEntry.NavWC_Queue = [{}];
+          IEntry.NavWC_Future = [{}];
 
-          var IEntry = [];
-          IEntry = sap.ui
+          IEntry.NavWC_Component = sap.ui
             .getCore()
             .byId("idPostComponentList")
             .getModel("ComponentModel")
             .getData().ComponentData;
-          if (IEntry.length === 0) {
-            IEntry = [{}];
+          if (IEntry.NavWC_Component.length === 0) {
+            IEntry.NavWC_Component = [{}];
           }
-          IEntry = itemset;
 
-          oModel.oDataModel(
-            "/ValueHelpSet",
+          oDataModel.create(
+            "/WorkCenter_AreaOrderSet",
             IEntry,
             null,
             function (oData, Response) {
               try {
                 that.hideBusyIndicator();
-                var message = that
-                  .getView()
-                  .getModel("i18n")
-                  .getResourceBundle()
-                  .getText("Gen002");
-                MessageToast.show(message);
-                return;
+
+                var ComponentData = oData.NavWC_Component.results;
+                if (ComponentData.length != 0) {
+                  var ComponentnList = sap.ui
+                    .getCore()
+                    .byId("idPostComponentList");
+                  var ComponentModel = new sap.ui.model.json.JSONModel();
+
+                  ComponentModel.setData({
+                    ComponentData: ComponentData,
+                  });
+
+                  ComponentnList.setModel(ComponentModel, "ComponentModel");
+                }
               } catch (e) {
-                alert(e.message);
                 that.hideBusyIndicator();
+                MessageToast.show(e.message);
               }
             }
           );
-
         },
         onTableQueSelectionChange: function (oEvent) {
           var that = this;
@@ -2945,14 +3072,16 @@ sap.ui.define(
           var StartDate;
           var EndDate;
 
-
           Tableindex = sap.ui
             .getCore()
             .byId(`${Path}--idQueueOrderList`)
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-            sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
             index = 0;
             StartDate = sap.ui
               .getCore()
@@ -3045,14 +3174,15 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BatchValue' and Key02 eq '" +
-            SelMatnr +
-            "' and Key03 eq '" +
-            SelWerks +
-            "' and Key04 eq '" +
-            SelLgort +
-            "' and Key05 eq '" +
-            SelClabs +
-            "'", {
+              SelMatnr +
+              "' and Key03 eq '" +
+              SelWerks +
+              "' and Key04 eq '" +
+              SelLgort +
+              "' and Key05 eq '" +
+              SelClabs +
+              "'",
+            {
               context: null,
               async: false,
               urlParameters: null,
