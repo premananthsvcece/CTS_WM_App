@@ -233,7 +233,6 @@
                         scanFail="onScanError"
                         inputLiveUpdate="onScanLiveupdate"
                         class="sampleBarcodeScannerButtonWithZebraEB"
-                        visible="false"
                     />
                 </VBox>
             </HBox>

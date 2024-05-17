@@ -3380,6 +3380,15 @@ sap.ui.define(
           } else {
             if (oEvent.getParameter("text")) {
               oScanResultText.setText(oEvent.getParameter("text"));
+              sap.ui
+            .getCore()
+            .byId(Path + "--idTextProdOrdNo")
+            .setText(oEvent.getParameter("text"));
+
+          sap.ui
+            .getCore()
+            .byId(Path + "--idInputProdOrdNo")
+            .setValue(oEvent.getParameter("text"));
             } else {
               oScanResultText.setText('');
             }

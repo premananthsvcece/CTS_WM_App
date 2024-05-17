@@ -19,6 +19,7 @@
             description="{OrderModel>Data02}"
             iconDensityAware="false"
             iconInset="false"
+            icon="sap-icon://my-sales-order"
             type="Active"
         />
     </SelectDialog>
