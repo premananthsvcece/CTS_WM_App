@@ -216,7 +216,6 @@
                         text="{i18n>ProdOrdNo}"
                         labelFor="idInputProdOrdNo"
                     />
-                    <HBox class="sapUiTinyMarginTop">
                     <MultiInput
                         id="idInputProdOrdNo"
                         showValueHelp="true"
@@ -226,6 +225,8 @@
                         change="onidInputProdOrdNoLiveChange"
                         valueHelpRequest="_onProdOrdNoHelp"
                     />
+                </VBox>
+                <VBox>
                     <ndc:BarcodeScannerButton
                         id="sampleBarcodeScannerButton"
                         scanSuccess="onScanSuccess"
@@ -234,7 +235,6 @@
                         class="sampleBarcodeScannerButtonWithZebraEB"
                         visible="false"
                     />
-                </HBox>
                 </VBox>
             </HBox>
             <OverflowToolbar asyncMode="false">
