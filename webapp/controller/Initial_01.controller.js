@@ -8,6 +8,7 @@ sap.ui.define(
     "sap/m/ProgressIndicator",
     "sap/ui/model/type/Date",
     "sap/m/PDFViewer",
+    "sap/ndc/BarcodeScanner"
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -20,7 +21,8 @@ sap.ui.define(
     FilterOperator,
     ProgressIndicator,
     Dates,
-    PDFViewer
+    PDFViewer,
+    BarcodeScanner
   ) {
     "use strict";
 
@@ -275,8 +277,6 @@ sap.ui.define(
 
           that.onLoadData(that, Plant, SelWCGrp, Workcenter);
         },
-
-        onValueHelpRequested: function () {},
         _onPlantHelp: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
@@ -405,6 +405,72 @@ sap.ui.define(
             }
           );
         },
+
+        _onProdOrdNoHelp: function (oEvent) {
+          var that = this;
+          var Path = that.getView().getId();
+
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          if (SelPlant === null) {
+            SelPlant = "DKKV";
+          }
+
+          var SelWCGrp = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputWorkArea`)
+            .getValue();
+
+          var SelWCValue = sap.ui
+          .getCore()
+          .byId(`${Path}--idInputWorkCenter`)
+          .getValue();
+
+          if (!that.OrderDialog) {
+            that.OrderDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpOrder",
+              that
+            );
+            that.getView().addDependent(that.OrderDialog);
+          }
+          // open value help dialog
+          that.OrderDialog.open();
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'OrderNo' and Key04 eq '" +
+              SelPlant +
+              "' and Key05 eq '" +
+              SelWCGrp +
+              "' and Key03 eq '" + SelWCValue + "'",
+            {
+              context: null,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  var Path = that.getView().getId();
+                  var OrderData = oData.results;
+                  var OrderModel = new sap.ui.model.json.JSONModel();
+
+                  OrderModel.setData({
+                    OrderData: OrderData,
+                  });
+                  var OrderTable = sap.ui
+                    .getCore()
+                    .byId("idHelpOrderDialog");
+
+                    OrderTable.setModel(OrderModel, "OrderModel");
+                } catch (e) {
+                  MessageToast.show(e.message);
+                }
+              },
+            }
+          );
+        },
+
         _onWorkAreaHelp: function () {
           var that = this;
           var Path = that.getView().getId();
@@ -908,6 +974,13 @@ sap.ui.define(
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
         },
+        _onOrderSearch: function (oEvent) {
+          var sValue = oEvent.getParameter("value");
+          var oFilter = new Filter("Data01", FilterOperator.Contains, sValue);
+          var oBinding = oEvent.getParameter("itemsBinding");
+          oBinding.filter([oFilter]);
+        },
+
         onRoutingDataTableSelectDialogSearch: function (oEvent) {
           var sValue = oEvent.getParameter("value");
           var oFilter = new Filter({
@@ -973,6 +1046,28 @@ sap.ui.define(
                 .getCore()
                 .byId(`${Path}--idTextWorkCenter`)
                 .setText(Workcenter);
+
+              oEvent.getSource().getBinding("items").filter([]);
+            } else {
+              return;
+            }
+            this.onButtonPress();
+          }
+        },
+        _OrderSelect: function (oEvent) {
+          if (oEvent.getParameters().selectedItems != undefined) {
+            var OrderNo = oEvent.getParameters().selectedItems[0].getTitle();
+            if (OrderNo != undefined) {
+              var Path = this.getView().getId();
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idInputProdOrdNo`)
+                .setValue(OrderNo);
+
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idTextProdOrdNo`)
+                .setText(OrderNo);
 
               oEvent.getSource().getBinding("items").filter([]);
             } else {
@@ -1318,12 +1413,6 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-            // SelAufnr = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
-            // SelOprNo = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
             SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idQueueOrderList`)
@@ -1510,19 +1599,6 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .clearSelection();
             index = 0;
-            // SelAufnr = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
-            // SelOprNo = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
-
-            // ScreenOprNo = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
-            // ScreenStatus = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getType();
             SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
@@ -1555,12 +1631,6 @@ sap.ui.define(
                 .byId(`${Path}--idQueueOrderList`)
                 .clearSelection();
               index = 1;
-              // SelAufnr = sap.ui
-              //   .getCore()
-              //   .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
-              // SelOprNo = sap.ui
-              //   .getCore()
-              //   .byId(`${Path}--idQueueOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
               SelAufnr = sap.ui
                 .getCore()
                 .byId(`${Path}--idQueueOrderList`)
@@ -2972,6 +3042,7 @@ sap.ui.define(
                 // alert(e.message);
                 that.hideBusyIndicator();
                 MessageToast.show(e.message);
+                that.onButtonPress();
               }
             }
           );
@@ -3302,6 +3373,25 @@ sap.ui.define(
           if (Plant != " ") {
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
+        },
+        onScanSuccess: function(oEvent) {
+          if (oEvent.getParameter("cancelled")) {
+            MessageToast.show("Scan cancelled", { duration:1000 });
+          } else {
+            if (oEvent.getParameter("text")) {
+              oScanResultText.setText(oEvent.getParameter("text"));
+            } else {
+              oScanResultText.setText('');
+            }
+          }
+        },
+  
+        onScanError: function(oEvent) {
+          MessageToast.show("Scan failed: " + oEvent, { duration:1000 });
+        },
+  
+        onScanLiveupdate: function(oEvent) {
+          // User can implement the validation about inputting value
         },
         onidInputProdOrdNoLiveChange: function (oEvent) {
           // Validate User Entered Input

@@ -4,6 +4,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
+    xmlns:ndc="sap.ndc"
     xmlns:Dynamic="sap.f"
     xmlns:Table="sap.ui.table"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
@@ -24,7 +25,7 @@
                             <Title
                                 id="idPROESTitleSnap"
                                 text="{i18n>appDescription}"
-                                level="H6"
+                                level="H2"
                                 textAlign="Left"
                                 class="sapUiLargeMarginBeginEnd"
                             />
@@ -81,10 +82,12 @@
                                 text="{i18n>ProdOrdNo}"
                                 labelFor="idTextProdOrdNo"
                                 class="sapUiSmallMarginEnd"
+                                visible="false"
                             />
                             <Text
                                 id="idTextProdOrdNo"
                                 class="sapUiSmallMarginEnd"
+                                visible="false"
                             />
                         </VBox>
                     </HBox>
@@ -101,9 +104,10 @@
                         wrappingType="Hyphenated"
                     />
                 </uxap:expandedHeading>
+                <!-- class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" -->
                 <uxap:actions>
+                    <ToolbarSeparator />
                     <Button
-                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                         icon="sap-icon://machine"
                         text="{i18n>BOM}"
                         press="onBOMPressed"
@@ -111,7 +115,6 @@
                         width="120px"
                     />
                     <Button
-                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                         icon="sap-icon://bus-public-transport"
                         text="{i18n>Route}"
                         type="Emphasized"
@@ -119,35 +122,32 @@
                     />
                     <ToolbarSeparator />
                     <Button
-                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                         icon="sap-icon://draw-rectangle"
                         text="{i18n>Drawing}"
                         type="Emphasized"
                         press="onDrawingPressed"
                     />
                     <Button
-                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                         icon="sap-icon://notes"
                         text="{i18n>OrderNote}"
                         type="Emphasized"
                         press="onOrderNotePressed"
                     />
                     <Button
-                        class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                         text="{i18n>PalLabel}"
                         icon="sap-icon://print"
                         type="Emphasized"
                         press="onPalLabelPressed"
                         visible="false"
                     />
-                    <!-- <ProgressIndicator
-                        id="_IDGenProgressIndicator1"
-                        class="sapUiSmallMarginBottom"
-                        state="Success"
-                        showValue="true"
-                        width="60%"
-                        visible="false"
-                    /> -->
+                    <ToolbarSeparator />
+                    <Button
+                        id="idGO"
+                        text="{i18n>Go}"
+                        icon="sap-icon://refresh"
+                        type="Accept"
+                        press="onButtonPress"
+                    />
                 </uxap:actions>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
@@ -216,6 +216,7 @@
                         text="{i18n>ProdOrdNo}"
                         labelFor="idInputProdOrdNo"
                     />
+                    <HBox class="sapUiTinyMarginTop">
                     <MultiInput
                         id="idInputProdOrdNo"
                         showValueHelp="true"
@@ -225,18 +226,20 @@
                         change="onidInputProdOrdNoLiveChange"
                         valueHelpRequest="_onProdOrdNoHelp"
                     />
+                    <ndc:BarcodeScannerButton
+                        id="sampleBarcodeScannerButton"
+                        scanSuccess="onScanSuccess"
+                        scanFail="onScanError"
+                        inputLiveUpdate="onScanLiveupdate"
+                        class="sampleBarcodeScannerButtonWithZebraEB"
+                        visible="false"
+                    />
+                </HBox>
                 </VBox>
             </HBox>
             <OverflowToolbar asyncMode="false">
                 <content>
                     <ToolbarSpacer />
-                    <Button
-                        id="idGO"
-                        text="{i18n>Go}"
-                        icon="sap-icon://refresh"
-                        type="Accept"
-                        press="onButtonPress"
-                    />
                 </content>
             </OverflowToolbar>
         </uxap:headerContent>
@@ -694,6 +697,18 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
+                                        width="8rem"
+                                        autoResizable="true"
+                                    >
+                                        <Label text="{i18n>SeqNum}" />
+                                        <Table:template>
+                                            <Text
+                                                text="{InQueueModel>Key02}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+                                    <Table:Column
                                         id="_IDGenColumn15"
                                         width="10rem"
                                         autoResizable="true"
@@ -706,18 +721,6 @@
                                             <Text
                                                 id="_IDGenText15"
                                                 text="{InQueueModel>Data02}"
-                                                wrapping="false"
-                                            />
-                                        </Table:template>
-                                    </Table:Column>
-                                    <Table:Column
-                                        width="8rem"
-                                        autoResizable="true"
-                                    >
-                                        <Label text="{i18n>SeqNum}" />
-                                        <Table:template>
-                                            <Text
-                                                text="{InQueueModel>Key02}"
                                                 wrapping="false"
                                             />
                                         </Table:template>

@@ -1,0 +1,25 @@
+<c:FragmentDefinition
+    id="HelpOrder"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <SelectDialog
+        contentWidth="10%"
+        id="idHelpOrderDialog"
+        noDataText="{i18n>NoData}"
+        growing="true"
+        title="{i18n>ProdOrdNo}"
+        search="_onOrderSearch"
+        confirm="_OrderSelect"
+        cancel="_OrderSelect"
+        items="{OrderModel>/OrderData}"
+    >
+        <StandardListItem
+            title="{OrderModel>Data01}"
+            description="{OrderModel>Data02}"
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active"
+        />
+    </SelectDialog>
+</c:FragmentDefinition>
