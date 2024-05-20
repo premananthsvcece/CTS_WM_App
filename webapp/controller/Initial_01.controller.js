@@ -3092,6 +3092,11 @@ sap.ui.define(
         onCancelPostPress: function () {
           var that = this;
           that.PostActionDialog.close();
+          var Path = that.getView().getId();
+          sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .clearSelection();
           // that.PostActionDialog.destroy();
         },
         onPostQuantityChange: function (oEvent) {
