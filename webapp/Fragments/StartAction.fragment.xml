@@ -92,7 +92,6 @@
                     class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
                     text="{i18n>Confirm}"
                     press="onConfirmStartPress"
-                    visible="false"
                 />
                 <Button
                     icon="sap-icon://cancel"

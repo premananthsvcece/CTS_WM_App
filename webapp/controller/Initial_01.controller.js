@@ -1648,8 +1648,33 @@ sap.ui.define(
                 .byId(`${Path}--idQueueOrderList`)
                 .getModel("InQueueModel")
                 .getData().InQueueData[Tableindex].Data05;
+
+              // Cross checking to see is order already active inprogress
+              var InProgessTable = sap.ui
+                .getCore()
+                .byId(`${Path}--idInprogressOrderList`)
+                .getModel("InProgressModel")
+                .getData();
+
+              for (var i = 0; i < InProgessTable.InProgressData.length; i++) {
+                if (
+                  InProgessTable.InProgressData[i].Data02 === SelAufnr &&
+                  InProgessTable.InProgressData[i].Data05 === SelOprNo &&
+                  InProgessTable.InProgressData[i].Data16 === OperatorNo
+                ) {
+                  // Raise Message
+                  var message = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("Start003");
+                  MessageBox.error(message);
+                  return;
+                }
+              }
             }
           }
+
           if (ScreenStatus === "Success") {
             if (SelOrderNo === SelAufnr && SelOrderOpr === SelOprNo) {
               if (ScreenOprNo === OperatorNo) {
