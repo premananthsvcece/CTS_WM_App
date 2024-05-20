@@ -21,7 +21,7 @@
                     class="sapUiContentPadding"
                     showSeparators="None"
                 >
-                    <InputListItem label="{i18n>ScarpType}">
+                    <InputListItem label="{i18n>ScarpType} *">
                         <Input
                             id="idScarpReason"
                             showValueHelp="true"
@@ -32,7 +32,7 @@
                             required="true"
                         />
                     </InputListItem>
-                    <InputListItem label="{i18n>ScarpQuan}">
+                    <InputListItem label="{i18n>ScarpQuan} *">
                         <Input
                             id="idScarpQuantity"
                             type="Number"

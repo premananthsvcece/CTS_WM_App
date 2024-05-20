@@ -51,7 +51,7 @@
                                         width="15rem"
                                     />
                                 </InputListItem>
-                                <InputListItem label="{i18n>PostQuan}">
+                                <InputListItem label="{i18n>PostQuan} *" >
                                     <Input
                                         id="idPostQuantity"
                                         type="Number"
@@ -152,13 +152,13 @@
                                         demandPopin="true"
                                         width="15%"
                                     >
-                                        <Text text="{i18n>BatchOnly}"/>
+                                        <Label text="{i18n>BatchOnly} *" />
                                     </Column>
                                     <Column
                                         demandPopin="true"
                                         width="25%"
                                     >
-                                        <Text text="{i18n>RequriedQuan}" />
+                                        <Label text="{i18n>RequriedQuan} *" />
                                     </Column>
                                 </columns>
                                 <items>
@@ -178,7 +178,6 @@
                                                 value="{ComponentModel>Data05}"
                                                 valueHelpRequest="onBatchHelpRequest"
                                                 showValueHelp="true"
-                                                required="true"
                                             />
                                             <Input
                                                 value="{ComponentModel>Data06}"
