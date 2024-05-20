@@ -217,7 +217,7 @@ sap.ui.define(
                 // MessageBox.error(e.message);
                 othis.hideBusyIndicator();
                 MessageToast.show(e.message);
-                $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
               }
             }
           );
@@ -400,7 +400,7 @@ sap.ui.define(
                   WorkCenterTable.setModel(WorkCenterModel, "WorkCenterModel");
                 } catch (e) {
                   MessageToast.show(e.message);
-                  $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                   // alert(e.message);
                 }
               },
@@ -467,7 +467,7 @@ sap.ui.define(
                   OrderTable.setModel(OrderModel, "OrderModel");
                 } catch (e) {
                   MessageToast.show(e.message);
-                  $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                 }
               },
             }
@@ -742,7 +742,7 @@ sap.ui.define(
                       .getResourceBundle()
                       .getText("BOM002");
                     MessageToast.show(message);
-                    $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                    $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                     return;
                   }
                 } catch (e) {
@@ -963,7 +963,7 @@ sap.ui.define(
                       .getResourceBundle()
                       .getText("Route002");
                     MessageToast.show(message);
-                    $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                    $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                     return;
                   }
                 } catch (e) {
@@ -1246,7 +1246,7 @@ sap.ui.define(
                       .getResourceBundle()
                       .getText("NoDisplay");
                     MessageToast.show(message);
-                    $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                    $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                     return;
                   }
                 } catch (e) {
@@ -1556,7 +1556,7 @@ sap.ui.define(
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
-                  $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                   // alert(e.message);
                 }
               },
@@ -1756,7 +1756,7 @@ sap.ui.define(
                   width: "50em",
                   animationDuration: 2000,
                 });
-                $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                 that.onButtonPress();
                 return;
               } catch (e) {
@@ -1949,7 +1949,7 @@ sap.ui.define(
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
-                  $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                 }
               },
             }
@@ -2067,12 +2067,12 @@ sap.ui.define(
                   width: "50em",
                   animationDuration: 2000,
                 });
-                $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                 that.onButtonPress();
                 return;
               } catch (e) {
                 MessageToast.show(e.message);
-                $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                 that.hideBusyIndicator();
               }
             }
@@ -2093,7 +2093,7 @@ sap.ui.define(
             .getResourceBundle()
             .getText("Gen001");
           MessageToast.show(message);
-          $( ".sapMMessageToast" ).addClass( "sapMMessageToastInfo" );
+          $(".sapMMessageToast").addClass("sapMMessageToastInfo");
           return;
         },
         onOrderNotePressed: function () {
@@ -2276,11 +2276,11 @@ sap.ui.define(
                   .getResourceBundle()
                   .getText("Gen002");
                 MessageToast.show(message);
-                $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                 return;
               } catch (e) {
                 MessageToast.show(e.message);
-                $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                 that.hideBusyIndicator();
               }
             }
@@ -2509,7 +2509,7 @@ sap.ui.define(
                     .getResourceBundle()
                     .getText("Gen003");
                   MessageToast.show(message);
-                  $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                   that.onButtonPress();
                   return;
                 }
@@ -2613,7 +2613,7 @@ sap.ui.define(
                     .getResourceBundle()
                     .getText("Gen003");
                   MessageToast.show(message);
-                  $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                   that.onButtonPress();
                   sap.ui.getCore().byId(`idScarpReason`).setValue("");
                   sap.ui.getCore().byId(`idScarpQuantity`).setValue("");
@@ -2627,7 +2627,7 @@ sap.ui.define(
               } catch (e) {
                 // alert(e.message);
                 MessageToast.show(e.message);
-                $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                 that.hideBusyIndicator();
               }
             }
@@ -2792,7 +2792,7 @@ sap.ui.define(
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
-                  $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                 }
               },
             }
@@ -2866,7 +2866,7 @@ sap.ui.define(
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
-                  $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                   // alert(e.message);
                 }
               },
@@ -2923,7 +2923,7 @@ sap.ui.define(
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
-                  $( ".sapMMessageToast" ).addClass( "sapMMessageToastDanger" );
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                 }
               },
             }
@@ -2953,10 +2953,6 @@ sap.ui.define(
           // Get Order No & Opr No
           if (Tableindex != undefined) {
             index = 0;
-            sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .clearSelection();
             // SelAufnr = sap.ui
             //   .getCore()
             //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
@@ -3052,16 +3048,19 @@ sap.ui.define(
                   .getModel("i18n")
                   .getResourceBundle()
                   .getText("Post003");
-                
+
                 MessageToast.show(message);
-                $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                 return;
               }
             }
           }
           that.PostActionDialog.close();
           // that.PostActionDialog.destroy();
-
+          sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .clearSelection();
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
             IEntry,
@@ -3084,7 +3083,7 @@ sap.ui.define(
                 // alert(e.message);
                 that.hideBusyIndicator();
                 MessageToast.show(e.message);
-                $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                 that.onButtonPress();
               }
             }
@@ -3179,7 +3178,7 @@ sap.ui.define(
               } catch (e) {
                 that.hideBusyIndicator();
                 MessageToast.show(e.message);
-                $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
               }
             }
           );
@@ -3326,7 +3325,7 @@ sap.ui.define(
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
-                  $( ".sapMMessageToast" ).addClass( "sapMMessageToastSuccess" );
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                   // alert(e.message);
                 }
               },
