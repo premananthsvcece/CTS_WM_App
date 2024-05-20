@@ -1535,7 +1535,7 @@ sap.ui.define(
                       .byId(`idStartOperator`)
                       .setValueState("None");
 
-                    that.onConfirmStartPress();
+                    // that.onConfirmStartPress();
                   } else {
                     sap.ui.getCore().byId(`idStartOperator`).setValue();
                     sap.ui
@@ -1567,7 +1567,7 @@ sap.ui.define(
           var that = this;
           var index;
           var Path = that.getView().getId();
-          // that.OnOperatorfill();
+          that.OnOperatorfill();
           var OperatorNo = sap.ui.getCore().byId("idStartOperator").getValue();
           if (OperatorNo === "") {
             var message = that
@@ -3215,8 +3215,8 @@ sap.ui.define(
               .getData().InQueueData[Tableindex].Data14;
           }
           if (Tableindex === undefined) {
-            sap.ui.getCore().byId(`${Path}--idINPStopJob`).setEnabled(true);
-            sap.ui.getCore().byId(`${Path}--idINPStartJob`).setEnabled(true);
+            sap.ui.getCore().byId(`${Path}--idQUEStartJob`).setEnabled(false);
+            // sap.ui.getCore().byId(`${Path}--idINPStartJob`).setEnabled(true);
           }
         },
         onTableRowSelectionChange: function (oEvent) {
