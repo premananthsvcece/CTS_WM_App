@@ -55,6 +55,7 @@
                                     <Input
                                         id="idPostQuantity"
                                         type="Number"
+                                        required="true"
                                         change="onPostQuantityChange"
                                         width="15rem"
                                         value="{
@@ -151,7 +152,7 @@
                                         demandPopin="true"
                                         width="15%"
                                     >
-                                        <Text text="{i18n>BatchOnly}" />
+                                        <Text text="{i18n>BatchOnly}"/>
                                     </Column>
                                     <Column
                                         demandPopin="true"
@@ -177,6 +178,7 @@
                                                 value="{ComponentModel>Data05}"
                                                 valueHelpRequest="onBatchHelpRequest"
                                                 showValueHelp="true"
+                                                required="true"
                                             />
                                             <Input
                                                 value="{ComponentModel>Data06}"
