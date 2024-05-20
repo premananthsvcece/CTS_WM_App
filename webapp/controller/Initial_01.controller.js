@@ -3045,7 +3045,7 @@ sap.ui.define(
             IEntry.NavWC_Component = [{}];
           } else {
             for (var bth = 0; bth <= IEntry.NavWC_Component.length; bth++) {
-              if (!IEntry.NavWC_Component[bth].Data05) {
+              if (IEntry.NavWC_Component[bth].Data05 === "") {
                 that.hideBusyIndicator();
                 var message = that
                   .getView()

@@ -296,7 +296,7 @@
                         <uxap:blocks>
                             <Table:Table
                                 id="idInprogressOrderList"
-                                visibleRowCount="12"
+                                visibleRowCount="10"
                                 visibleRowCountMode="Interactive"
                                 class="sapUiResponsiveMargin"
                                 rows="{InProgressModel>/InProgressData}"
@@ -760,7 +760,7 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
-                                        width="10rem"
+                                        width="8rem"
                                         autoResizable="true"
                                     >
                                         <Label text="{i18n>WorkCenter}" />
@@ -802,7 +802,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn19"
-                                        width="10rem"
+                                        width="8rem"
                                         hAlign="End"
                                         autoResizable="true"
                                     >
@@ -851,7 +851,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn21"
-                                        width="10rem"
+                                        width="9rem"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -862,13 +862,14 @@
                                             <DatePicker
                                                 value="{InQueueModel>Data08}"
                                                 valueFormat="dd/MM/yyyy"
+                                                displayFormat="dd/MM/yyyy"
                                                 enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn22"
-                                        width="10rem"
+                                        width="8rem"
                                         autoResizable="true"
                                     >
                                         <Label
@@ -878,14 +879,16 @@
                                         <Table:template>
                                             <TimePicker
                                                 value="{InQueueModel>Data09}"
+                                                displayFormat="HH:mm:ss"
                                                 enabled="false"
                                             />
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn23"
-                                        width="10rem"
+                                        width="8rem"
                                         autoResizable="true"
+                                        hAlign="End"
                                     >
                                         <Label
                                             id="_IDGenLabel23"
@@ -902,8 +905,9 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn24"
-                                        width="10rem"
+                                        width="8rem"
                                         autoResizable="true"
+                                        hAlign="End"
                                     >
                                         <Label
                                             id="_IDGenLabel24"
@@ -920,8 +924,9 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn25"
-                                        width="10rem"
+                                        width="8rem"
                                         autoResizable="true"
+                                        hAlign="End"
                                     >
                                         <Label
                                             id="_IDGenLabel25"
@@ -1131,7 +1136,7 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
-                                        width="10rem"
+                                        width="8rem"
                                         autoResizable="true"
                                         visible="false"
                                     >
@@ -1145,7 +1150,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn34"
-                                        width="10rem"
+                                        width="7rem"
                                         autoResizable="true"
                                         visible="false"
                                     >
