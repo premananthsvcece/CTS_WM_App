@@ -32,6 +32,7 @@
                             type="Text"
                             change="OnOperatorfill"
                             width="15rem"
+                            required="true"
                             showValueStateMessage="true"
                         />
                     </InputListItem>

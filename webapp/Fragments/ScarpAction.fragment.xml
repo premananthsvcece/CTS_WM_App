@@ -29,12 +29,14 @@
                             placeholder="Scarp Reason"
                             type="Text"
                             width="15rem"
+                            required="true"
                         />
                     </InputListItem>
                     <InputListItem label="{i18n>ScarpQuan}">
                         <Input
                             id="idScarpQuantity"
                             type="Number"
+                            required="true"
                             width="15rem"
                             value="{
                                 type: 'sap.ui.model.odata.type.Decimal'
