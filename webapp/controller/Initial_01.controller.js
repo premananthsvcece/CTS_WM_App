@@ -2878,6 +2878,14 @@ sap.ui.define(
                         .byId("idPostActivityList");
 
                       PostActivityList.setModel(ActivityModel, "ActivityModel");
+
+                      for( var ln = 0 ; ln in ActivityData; ln++ ){
+                        var Tottime = Tottime + ActivityData[ln].Data07;
+                      }
+                      sap.ui
+                      .getCore()
+                      .byId("idPostTotalTime").setValue(Tottime);
+                      
                     }
                     that.hideBusyIndicator();
                   } else {
