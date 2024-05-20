@@ -8,7 +8,7 @@ sap.ui.define(
     "sap/m/ProgressIndicator",
     "sap/ui/model/type/Date",
     "sap/m/PDFViewer",
-    "sap/ndc/BarcodeScanner"
+    "sap/ndc/BarcodeScanner",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -424,9 +424,9 @@ sap.ui.define(
             .getValue();
 
           var SelWCValue = sap.ui
-          .getCore()
-          .byId(`${Path}--idInputWorkCenter`)
-          .getValue();
+            .getCore()
+            .byId(`${Path}--idInputWorkCenter`)
+            .getValue();
 
           if (!that.OrderDialog) {
             that.OrderDialog = sap.ui.xmlfragment(
@@ -445,7 +445,9 @@ sap.ui.define(
               SelPlant +
               "' and Key05 eq '" +
               SelWCGrp +
-              "' and Key03 eq '" + SelWCValue + "'",
+              "' and Key03 eq '" +
+              SelWCValue +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -458,11 +460,9 @@ sap.ui.define(
                   OrderModel.setData({
                     OrderData: OrderData,
                   });
-                  var OrderTable = sap.ui
-                    .getCore()
-                    .byId("idHelpOrderDialog");
+                  var OrderTable = sap.ui.getCore().byId("idHelpOrderDialog");
 
-                    OrderTable.setModel(OrderModel, "OrderModel");
+                  OrderTable.setModel(OrderModel, "OrderModel");
                 } catch (e) {
                   MessageToast.show(e.message);
                 }
@@ -2636,6 +2636,7 @@ sap.ui.define(
           var SelOprNo = " ";
           var OperatorNo = " ";
           var EndDate;
+          var TotTime =" ";
           var SelPlant = sap.ui
             .getCore()
             .byId(`${Path}--idInputPlant`)
@@ -2683,6 +2684,11 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data08;
+            TotTime = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getModel("InProgressModel")
+            .getData().InProgressData[Tableindex].Data13;
           }
           if (EndDate === "") {
             var message = that
@@ -2713,6 +2719,8 @@ sap.ui.define(
           sap.ui.getCore().byId(`idPostOperator`).setValue(OperatorNo);
           sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);
           sap.ui.getCore().byId(`idPostQuantity`).setValue();
+          TotTime = parseInt(TotTime);
+          sap.ui.getCore().byId("idPostTotalTime").setValue(TotTime);
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -2847,7 +2855,7 @@ sap.ui.define(
           );
 
           that.showBusyIndicator();
-
+;
           logModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'LogData' and Key02 eq '" +
               SelAufnr +
@@ -2878,15 +2886,7 @@ sap.ui.define(
                         .byId("idPostActivityList");
 
                       PostActivityList.setModel(ActivityModel, "ActivityModel");
-
-                      for( var ln = 0 ; ln in ActivityData; ln++ ){
-                        var Tottime = Tottime + ActivityData[ln].Data07;
                       }
-                      sap.ui
-                      .getCore()
-                      .byId("idPostTotalTime").setValue(Tottime);
-                      
-                    }
                     that.hideBusyIndicator();
                   } else {
                     var ActivityData = []; // Dummy Data
@@ -3382,32 +3382,32 @@ sap.ui.define(
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
         },
-        onScanSuccess: function(oEvent) {
+        onScanSuccess: function (oEvent) {
           if (oEvent.getParameter("cancelled")) {
-            MessageToast.show("Scan cancelled", { duration:1000 });
+            MessageToast.show("Scan cancelled", { duration: 1000 });
           } else {
             if (oEvent.getParameter("text")) {
               oScanResultText.setText(oEvent.getParameter("text"));
               sap.ui
-            .getCore()
-            .byId(Path + "--idTextProdOrdNo")
-            .setText(oEvent.getParameter("text"));
+                .getCore()
+                .byId(Path + "--idTextProdOrdNo")
+                .setText(oEvent.getParameter("text"));
 
-          sap.ui
-            .getCore()
-            .byId(Path + "--idInputProdOrdNo")
-            .setValue(oEvent.getParameter("text"));
+              sap.ui
+                .getCore()
+                .byId(Path + "--idInputProdOrdNo")
+                .setValue(oEvent.getParameter("text"));
             } else {
-              oScanResultText.setText('');
+              oScanResultText.setText("");
             }
           }
         },
-  
-        onScanError: function(oEvent) {
-          MessageToast.show("Scan failed: " + oEvent, { duration:1000 });
+
+        onScanError: function (oEvent) {
+          MessageToast.show("Scan failed: " + oEvent, { duration: 1000 });
         },
-  
-        onScanLiveupdate: function(oEvent) {
+
+        onScanLiveupdate: function (oEvent) {
           // User can implement the validation about inputting value
         },
         onidInputProdOrdNoLiveChange: function (oEvent) {
