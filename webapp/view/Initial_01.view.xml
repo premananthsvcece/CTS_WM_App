@@ -852,14 +852,11 @@
                                     <Table:Column
                                         id="_IDGenColumn21"
                                         width="10rem"
-                                        sortProperty="Data08"
-                                        filterProperty="Data08"
                                         autoResizable="true"
-                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel21"
-                                            text="{i18n>OperEndDate}"
+                                            text="{i18n>PlanStartDate}"
                                         />
                                         <Table:template>
                                             <DatePicker
@@ -872,14 +869,11 @@
                                     <Table:Column
                                         id="_IDGenColumn22"
                                         width="10rem"
-                                        sortProperty="Data09"
-                                        filterProperty="Data09"
                                         autoResizable="true"
-                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel22"
-                                            text="{i18n>OperEndTime}"
+                                            text="{i18n>PlanStartTime}"
                                         />
                                         <Table:template>
                                             <TimePicker
