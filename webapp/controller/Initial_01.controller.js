@@ -2679,6 +2679,8 @@ sap.ui.define(
           var OperatorNo = " ";
           var EndDate;
           var TotTime = " ";
+          var SetupTIme = " ";
+
           var SelPlant = sap.ui
             .getCore()
             .byId(`${Path}--idInputPlant`)
@@ -2691,20 +2693,6 @@ sap.ui.define(
           // Get Order No & Opr No
           if (Tableindex != undefined) {
             index = 0;
-            // SelAufnr = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[3].getText();
-            // SelOprNo = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[6].getText();
-
-            // OperatorNo = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[0].getText();
-
-            // EndDate = sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[13].getValue();
 
             SelAufnr = sap.ui
               .getCore()
@@ -2731,6 +2719,11 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data13;
+            SetupTIme = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Key05;
           }
           if (EndDate === "") {
             var message = that
@@ -2763,6 +2756,8 @@ sap.ui.define(
           sap.ui.getCore().byId(`idPostQuantity`).setValue();
           TotTime = parseInt(TotTime);
           sap.ui.getCore().byId("idPostTotalTime").setValue(TotTime);
+          SetupTIme = parseInt(SetupTIme);
+          sap.ui.getCore().byId("idPostSetupTIme").setValue(SetupTIme);
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -3006,6 +3001,7 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data16;
+              
           }
           if (Tableindex === undefined) {
             var message = that
@@ -3242,6 +3238,8 @@ sap.ui.define(
           if (Tableindex === undefined) {
             sap.ui.getCore().byId(`${Path}--idQUEStartJob`).setEnabled(false);
             // sap.ui.getCore().byId(`${Path}--idINPStartJob`).setEnabled(true);
+          }else{
+            sap.ui.getCore().byId(`${Path}--idQUEStartJob`).setEnabled(true);
           }
         },
         onTableRowSelectionChange: function (oEvent) {

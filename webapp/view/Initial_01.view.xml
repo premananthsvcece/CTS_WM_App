@@ -353,6 +353,11 @@
                                                 wrapping="false"
                                                 visible="false"
                                             />
+                                            <Text
+                                                text="{InProgressModel>Key05}"
+                                                wrapping="false"
+                                                visible="false"
+                                            />
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
@@ -871,6 +876,7 @@
                                         id="_IDGenColumn22"
                                         width="8rem"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel22"
@@ -1150,18 +1156,18 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn34"
-                                        width="7rem"
+                                        width="9rem"
                                         autoResizable="true"
-                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel34"
-                                            text="{i18n>OperEndDate}"
+                                            text="{i18n>PlanStartDate}"
                                         />
                                         <Table:template>
                                             <DatePicker
                                                 value="{InFutureModel>Data08}"
                                                 valueFormat="dd/MM/yyyy"
+                                                displayFormat="dd/MM/yyyy"
                                                 enabled="false"
                                             />
                                         </Table:template>
