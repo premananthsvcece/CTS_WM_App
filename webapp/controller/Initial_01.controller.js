@@ -2853,7 +2853,7 @@ sap.ui.define(
                           .getView()
                           .getModel("i18n")
                           .getResourceBundle()
-                          .getText("ComponentDetail");
+                          .getText("CompTitle");
                       }
                       if (ComponentData[0].Key03 === "S") {
                         var HeaderText = that

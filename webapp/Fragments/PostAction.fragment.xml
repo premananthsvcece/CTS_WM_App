@@ -150,6 +150,12 @@
                                     </Column>
                                     <Column
                                         demandPopin="true"
+                                        width="10%"
+                                    >
+                                        <Text text="{i18n>MovementType}" />
+                                    </Column>
+                                    <Column
+                                        demandPopin="true"
                                         width="15%"
                                     >
                                         <Label text="{i18n>BatchOnly} *" />
@@ -173,6 +179,9 @@
                                             />
                                             <ObjectIdentifier
                                                 title="{ComponentModel>Data04}"
+                                            />
+                                            <ObjectIdentifier
+                                                title="{ComponentModel>Data08}"
                                             />
                                             <Input
                                                 value="{ComponentModel>Data05}"
