@@ -10,13 +10,6 @@ sap.ui.define(
     "sap/m/PDFViewer",
     "sap/ndc/BarcodeScanner",
     'sap/m/p13n/Engine',
-    'sap/m/p13n/SelectionController',
-    'sap/m/p13n/SortController',
-    'sap/m/p13n/GroupController',
-    'sap/m/p13n/MetadataHelper',
-    'sap/ui/model/Sorter',
-    'sap/ui/core/library',
-    'sap/m/table/ColumnWidthController',
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -31,7 +24,7 @@ sap.ui.define(
     Dates,
     PDFViewer,
     BarcodeScanner,
-    Engine, SelectionController, SortController, GroupController, MetadataHelper, Sorter, CoreLibrary, ColumnWidthController
+    Engine,
   ) {
     "use strict";
 
