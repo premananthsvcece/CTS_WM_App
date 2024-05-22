@@ -1,15 +1,15 @@
 <mvc:View
-    xmlns:smartfield="sap.ui.comp.smartfield"
     controllerName="sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
     xmlns:ndc="sap.ndc"
-    xmlns:Dynamic="sap.f"
     xmlns:Table="sap.ui.table"
-    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-    xmlns:form="sap.ui.comp.smartform"
+    xmlns:core="sap.ui.core"
     xmlns:uxap="sap.uxap"
+    xmlns:p13n="sap.m.p13n"
+    xmlns:ce="sap.ui.codeeditor"
+    xmlns:vm="sap.ui.fl.variants"
 >
     <uxap:ObjectPageLayout
         id="ObjectPageLayout"
@@ -304,15 +304,50 @@
                                 enableSelectAll="false"
                                 selectionBehavior="RowOnly"
                                 selectionMode="Single"
-                                width="100%"
+                                enableCellFilter="true"
+                                width="98%"
                                 rowSelectionChange="onTableRowSelectionChange"
                             >
+                                <Table:extension visible="false">
+                                    <OverflowToolbar visible="false">
+                                        <ToolbarSeparator />
+                                        <vm:VariantManagement
+                                            id="p13nVm"
+                                            for="idInprogressOrderList"
+                                        />
+                                        <ToolbarSpacer />
+                                        <Button
+                                            tooltip="Settings"
+                                            icon="sap-icon://settings"
+                                            press="onContainerOpen"
+                                        />
+                                        <p13n:Popup
+                                            id="p13nPopup"
+                                            title="My Custom View Settings"
+                                            close="onClose"
+                                            warningText="Are you sure?"
+                                            reset=".reset"
+                                        >
+                                            <p13n:panels>
+                                                <p13n:SelectionPanel
+                                                    id="columnsPanel"
+                                                    title="Columns"
+                                                    enableCount="true"
+                                                    showHeader="true"
+                                                    change="parseP13nState"
+                                                />
+                                            </p13n:panels>
+                                        </p13n:Popup>
+                                    </OverflowToolbar>
+                                </Table:extension>
                                 <Table:noData text="{i18n>NoData}" />
                                 <Table:columns>
                                     <Table:Column
                                         id="_IDGenColumn1"
                                         width="8rem"
                                         autoResizable="true"
+                                        sortProperty="Data16"
+                                        filterProperty="Data16"
                                     >
                                         <Label
                                             id="_IDGenLabel1"
@@ -329,6 +364,8 @@
                                     <Table:Column
                                         width="8rem"
                                         autoResizable="true"
+                                        sortProperty="Data18"
+                                        filterProperty="Data18"
                                     >
                                         <Label text="{i18n>OprName}" />
                                         <Table:template>
@@ -363,6 +400,8 @@
                                     <Table:Column
                                         width="8rem"
                                         autoResizable="true"
+                                        sortProperty="Key02"
+                                        filterProperty="Key02"
                                     >
                                         <Label text="{i18n>SeqNum}" />
                                         <Table:template>
@@ -376,6 +415,8 @@
                                         id="_IDGenColumn2"
                                         width="8rem"
                                         autoResizable="true"
+                                        sortProperty="Data02"
+                                        filterProperty="Data02"
                                     >
                                         <Label
                                             id="_IDGenLabel2"
@@ -393,6 +434,8 @@
                                         id="_IDGenColumn3"
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data03"
+                                        filterProperty="Data03"
                                     >
                                         <Label
                                             id="_IDGenLabel3"
@@ -410,6 +453,8 @@
                                         id="_IDGenColumn4"
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data04"
+                                        filterProperty="Data04"
                                     >
                                         <Label
                                             id="_IDGenLabel4"
@@ -426,6 +471,8 @@
                                     <Table:Column
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data19"
+                                        filterProperty="Data19"
                                     >
                                         <Label text="{i18n>WorkCenter}" />
                                         <Table:template>
@@ -439,6 +486,8 @@
                                         id="_IDGenColumn5"
                                         width="5rem"
                                         autoResizable="true"
+                                        sortProperty="Data05"
+                                        filterProperty="Data05"
                                     >
                                         <Label
                                             id="_IDGenLabel5"
@@ -455,6 +504,8 @@
                                     <Table:Column
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data20"
+                                        filterProperty="Data20"
                                     >
                                         <Label text="{i18n>OprShrTxt}" />
                                         <Table:template>
@@ -704,6 +755,8 @@
                                     <Table:Column
                                         width="8rem"
                                         autoResizable="true"
+                                        sortProperty="Key02"
+                                        filterProperty="Key02"
                                     >
                                         <Label text="{i18n>SeqNum}" />
                                         <Table:template>
@@ -717,6 +770,8 @@
                                         id="_IDGenColumn15"
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data02"
+                                        filterProperty="Data02"
                                     >
                                         <Label
                                             id="_IDGenLabel15"
@@ -734,6 +789,8 @@
                                         id="_IDGenColumn16"
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data03"
+                                        filterProperty="Data03"
                                     >
                                         <Label
                                             id="_IDGenLabel16"
@@ -751,6 +808,8 @@
                                         id="_IDGenColumn17"
                                         width="15rem"
                                         autoResizable="true"
+                                        sortProperty="Data04"
+                                        filterProperty="Data04"
                                     >
                                         <Label
                                             id="_IDGenLabel17"
@@ -767,6 +826,8 @@
                                     <Table:Column
                                         width="8rem"
                                         autoResizable="true"
+                                        sortProperty="Data19"
+                                        filterProperty="Data19"
                                     >
                                         <Label text="{i18n>WorkCenter}" />
                                         <Table:template>
@@ -780,6 +841,8 @@
                                         id="_IDGenColumn18"
                                         width="5rem"
                                         autoResizable="true"
+                                        sortProperty="Data05"
+                                        filterProperty="Data05"
                                     >
                                         <Label
                                             id="_IDGenLabel18"
@@ -796,6 +859,8 @@
                                     <Table:Column
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data20"
+                                        filterProperty="Data20"
                                     >
                                         <Label text="{i18n>OprShrTxt}" />
                                         <Table:template>
@@ -810,6 +875,8 @@
                                         width="8rem"
                                         hAlign="End"
                                         autoResizable="true"
+                                        sortProperty="Data06"
+                                        filterProperty="Data06"
                                     >
                                         <Label
                                             id="_IDGenLabel19"
@@ -858,6 +925,8 @@
                                         id="_IDGenColumn21"
                                         width="9rem"
                                         autoResizable="true"
+                                        sortProperty="Data08"
+                                        filterProperty="Data08"
                                     >
                                         <Label
                                             id="_IDGenLabel21"
@@ -895,6 +964,8 @@
                                         width="8rem"
                                         autoResizable="true"
                                         hAlign="End"
+                                        sortProperty="Data10"
+                                        filterProperty="Data10"
                                     >
                                         <Label
                                             id="_IDGenLabel23"
@@ -914,6 +985,8 @@
                                         width="8rem"
                                         autoResizable="true"
                                         hAlign="End"
+                                        sortProperty="Data11"
+                                        filterProperty="Data11"
                                     >
                                         <Label
                                             id="_IDGenLabel24"
@@ -933,6 +1006,8 @@
                                         width="8rem"
                                         autoResizable="true"
                                         hAlign="End"
+                                        sortProperty="Data12"
+                                        filterProperty="Data12"
                                     >
                                         <Label
                                             id="_IDGenLabel25"
@@ -1021,6 +1096,8 @@
                                         id="_IDGenColumn28"
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data02"
+                                        filterProperty="Data02"
                                     >
                                         <Label
                                             id="_IDGenLabel28"
@@ -1038,6 +1115,8 @@
                                         id="_IDGenColumn29"
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data03"
+                                        filterProperty="Data03"
                                     >
                                         <Label
                                             id="_IDGenLabel29"
@@ -1055,6 +1134,8 @@
                                         id="_IDGenColumn30"
                                         width="15rem"
                                         autoResizable="true"
+                                        sortProperty="Data04"
+                                        filterProperty="Data04"
                                     >
                                         <Label
                                             id="_IDGenLabel30"
@@ -1071,6 +1152,8 @@
                                     <Table:Column
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data19"
+                                        filterProperty="Data19"
                                     >
                                         <Label text="{i18n>WorkCenter}" />
                                         <Table:template>
@@ -1084,6 +1167,8 @@
                                         id="_IDGenColumn31"
                                         width="5rem"
                                         autoResizable="true"
+                                        sortProperty="Data05"
+                                        filterProperty="Data05"
                                     >
                                         <Label
                                             id="_IDGenLabel31"
@@ -1100,6 +1185,8 @@
                                     <Table:Column
                                         width="10rem"
                                         autoResizable="true"
+                                        sortProperty="Data20"
+                                        filterProperty="Data20"
                                     >
                                         <Label text="{i18n>OprShrTxt}" />
                                         <Table:template>
@@ -1114,6 +1201,8 @@
                                         width="10rem"
                                         hAlign="End"
                                         autoResizable="true"
+                                        sortProperty="Data06"
+                                        filterProperty="Data06"
                                     >
                                         <Label
                                             id="_IDGenLabel32"
@@ -1131,6 +1220,8 @@
                                         width="10rem"
                                         autoResizable="true"
                                         visible="false"
+                                        sortProperty="Data14"
+                                        filterProperty="Data14"
                                     >
                                         <Label text="{i18n>OperStrtDate}" />
                                         <Table:template>
@@ -1158,6 +1249,8 @@
                                         id="_IDGenColumn34"
                                         width="9rem"
                                         autoResizable="true"
+                                        sortProperty="Data08"
+                                        filterProperty="Data08"
                                     >
                                         <Label
                                             id="_IDGenLabel34"

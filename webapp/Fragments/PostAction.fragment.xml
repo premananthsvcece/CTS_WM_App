@@ -75,12 +75,13 @@
                                         }"
                                     />
                                 </InputListItem>
-                                <InputListItem label="{i18n>SetupTime}">
+                                <InputListItem label="{i18n>SetupTime}" visible="false">
                                     <Input
                                         id="idPostSetupTIme"
                                         type="Number"
                                         change="onPostSetupChange"
                                         width="15rem"
+                                        visible="false"
                                         value="{
                                             type: 'sap.ui.model.odata.type.Decimal'
                                         }"
