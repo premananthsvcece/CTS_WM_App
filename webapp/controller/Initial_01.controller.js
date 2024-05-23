@@ -179,7 +179,7 @@ sap.ui.define(
                 var InProgressTable = sap.ui
                   .getCore()
                   .byId(Path + "--idInprogressOrderList");
-                
+
                 InProgressTable.setModel(InProgressModel, "InProgressModel");
 
                 var oListBinding = InProgressTable.getBinding('rows');
@@ -2773,7 +2773,7 @@ sap.ui.define(
                     .getText("Gen003");
                   MessageToast.show(message);
                   $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
-                  that.onButtonPress();
+                  // that.onButtonPress();
                   sap.ui.getCore().byId(`idScarpReason`).setValue("");
                   sap.ui.getCore().byId(`idScarpQuantity`).setValue("");
                   return;
@@ -2799,6 +2799,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInprogressOrderList`)
             .clearSelection();
+          that.onButtonPress();
           that.ScrapActionDialog.close();
         },
 
