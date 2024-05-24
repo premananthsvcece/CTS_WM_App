@@ -1,0 +1,26 @@
+<c:FragmentDefinition
+    id="HelpBin"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <SelectDialog
+        contentWidth="10%"
+        id="idHelpBinDialog"
+        noDataText="{i18n>NoData}"
+        growing="true"
+        title="{i18n>BinDet}"
+        search="_onHelpBinSearch"
+        confirm="_HelpBinSelect"
+        cancel="_HelpBinSelect"
+        items="{BinModel>/BinData}"
+    >
+        <StandardListItem
+            title="{BinModel>Data01}"
+            description="{BinModel>Data02}"
+            iconDensityAware="false"
+            iconInset="false"
+            icon="sap-icon://journey-depart"
+            type="Active"
+        />
+    </SelectDialog>
+</c:FragmentDefinition>

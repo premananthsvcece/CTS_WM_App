@@ -933,12 +933,7 @@
                                             text="{i18n>PlanStartDate}"
                                         />
                                         <Table:template>
-                                            <DatePicker
-                                                value="{InQueueModel>Data08}"
-                                                valueFormat="dd/MM/yyyy"
-                                                displayFormat="dd/MM/yyyy"
-                                                enabled="false"
-                                            />
+                                            <Text text= "{InQueueModel>Data08}"/>
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
@@ -1257,12 +1252,7 @@
                                             text="{i18n>PlanStartDate}"
                                         />
                                         <Table:template>
-                                            <DatePicker
-                                                value="{InFutureModel>Data08}"
-                                                valueFormat="dd/MM/yyyy"
-                                                displayFormat="dd/MM/yyyy"
-                                                enabled="false"
-                                            />
+                                            <Text text= "{InFutureModel>Data08}"/>
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column

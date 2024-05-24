@@ -92,6 +92,8 @@
                                         id="idPostBinDet"
                                         required="true"
                                         change="onPostBinDetChange"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onPostBinDetHelpRequest"
                                         width="15rem"
                                     />
                                 </InputListItem>

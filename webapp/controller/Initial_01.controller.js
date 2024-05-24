@@ -3843,6 +3843,84 @@ sap.ui.define(
             source: oEvt.getSource(),
           });
         },
+        onPostBinDetHelpRequest : function(oEvent){
+          var that = this;
+          var Path = that.getView().getId();
+
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          if (SelPlant === null) {
+            SelPlant = "DKKV";
+          }
+
+          if (!that.BinDialog) {
+            that.BinDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpBin",
+              that
+            );
+            that.getView().addDependent(that.WCDialog);
+          }
+          // open value help dialog
+          that.BinDialog.open();
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'Bin' and Key04 eq '" +
+              SelPlant +
+              "'",
+            {
+              context: null,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  var Path = that.getView().getId();
+                  var BinData = oData.results;
+                  var BinModel = new sap.ui.model.json.JSONModel();
+
+                  BinModel.setData({
+                    BinData: BinData,
+                  });
+                  var BinTable = sap.ui
+                    .getCore()
+                    .byId("idHelpBinDialog");
+
+                    BinTable.setModel(BinModel, "BinModel");
+                } catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                }
+              },
+            }
+          );
+        },
+
+		_onHelpBinSearch: function(oEvent) {
+			var sValue = oEvent.getParameter("value");
+      var oFilter = new Filter("Data01", FilterOperator.Contains, sValue);
+      var oBinding = oEvent.getParameter("itemsBinding");
+      oBinding.filter([oFilter]);
+		},
+
+		_HelpBinSelect: function(oEvent) {
+			if (oEvent.getParameters().selectedItems != undefined) {
+        var BinDet = oEvent.getParameters().selectedItems[0].getTitle();
+        if (BinDet != undefined) {
+          sap.ui
+            .getCore()
+            .byId(`idPostBinDet`)
+            .setValue(BinDet);
+
+          oEvent.getSource().getBinding("items").filter([]);
+        } else {
+          return;
+        }
+      }
+		}
+
+
       }
     );
   }
