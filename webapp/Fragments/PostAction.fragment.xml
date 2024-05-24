@@ -51,18 +51,6 @@
                                         width="15rem"
                                     />
                                 </InputListItem>
-                                <InputListItem label="{i18n>PostQuan} *" >
-                                    <Input
-                                        id="idPostQuantity"
-                                        type="Number"
-                                        required="true"
-                                        change="onPostQuantityChange"
-                                        width="15rem"
-                                        value="{
-                                            type: 'sap.ui.model.odata.type.Decimal'
-                                        }"
-                                    />
-                                </InputListItem>
                                 <InputListItem label="{i18n>TotalTime}">
                                     <Input
                                         id="idPostTotalTime"
@@ -85,6 +73,26 @@
                                         value="{
                                             type: 'sap.ui.model.odata.type.Decimal'
                                         }"
+                                    />
+                                </InputListItem>
+                                <InputListItem label="{i18n>PostQuan} *" >
+                                    <Input
+                                        id="idPostQuantity"
+                                        type="Number"
+                                        required="true"
+                                        change="onPostQuantityChange"
+                                        width="15rem"
+                                        value="{
+                                            type: 'sap.ui.model.odata.type.Decimal'
+                                        }"
+                                    />
+                                </InputListItem>
+                                <InputListItem label="{i18n>BinDet} *" >
+                                    <Input
+                                        id="idPostBinDet"
+                                        required="true"
+                                        change="onPostBinDetChange"
+                                        width="15rem"
                                     />
                                 </InputListItem>
                             </List>
@@ -192,6 +200,7 @@
                                             <Input
                                                 value="{ComponentModel>Data06}"
                                                 description="{ComponentModel>Data07}"
+                                                enabled="{ComponentModel>Data09}"
                                             />
                                         </cells>
                                     </ColumnListItem>

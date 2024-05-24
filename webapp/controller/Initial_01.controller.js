@@ -9,7 +9,7 @@ sap.ui.define(
     "sap/ui/model/type/Date",
     "sap/m/PDFViewer",
     "sap/ndc/BarcodeScanner",
-    'sap/m/p13n/Engine',
+    "sap/m/p13n/Engine",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -24,7 +24,7 @@ sap.ui.define(
     Dates,
     PDFViewer,
     BarcodeScanner,
-    Engine,
+    Engine
   ) {
     "use strict";
 
@@ -182,14 +182,13 @@ sap.ui.define(
 
                 InProgressTable.setModel(InProgressModel, "InProgressModel");
 
-                var oListBinding = InProgressTable.getBinding('rows');
+                var oListBinding = InProgressTable.getBinding("rows");
                 if (oListBinding) {
                   var Sorting = oListBinding.aSorters;
                   var Filter = oListBinding.aFilters;
-                  InProgressTable.getBinding('rows').filter(Filter);
-                  InProgressTable.getBinding('rows').sort(Sorting);
+                  InProgressTable.getBinding("rows").filter(Filter);
+                  InProgressTable.getBinding("rows").sort(Sorting);
                 }
-
 
                 // Queue
                 var InQueueData = oData.NavWC_Queue.results;
@@ -207,12 +206,12 @@ sap.ui.define(
 
                 InQueueTable.setModel(InQueueModel, "InQueueModel");
 
-                var oListBinding = InQueueTable.getBinding('rows');
+                var oListBinding = InQueueTable.getBinding("rows");
                 if (oListBinding) {
                   var Sorting = oListBinding.aSorters;
                   var Filter = oListBinding.aFilters;
-                  InQueueTable.getBinding('rows').filter(Filter);
-                  InQueueTable.getBinding('rows').sort(Sorting);
+                  InQueueTable.getBinding("rows").filter(Filter);
+                  InQueueTable.getBinding("rows").sort(Sorting);
                 }
 
                 // Future
@@ -231,12 +230,12 @@ sap.ui.define(
 
                 InFutureTable.setModel(InFutureModel, "InFutureModel");
 
-                var oListBinding = InFutureTable.getBinding('rows');
+                var oListBinding = InFutureTable.getBinding("rows");
                 if (oListBinding) {
                   var Sorting = oListBinding.aSorters;
                   var Filter = oListBinding.aFilters;
-                  InFutureTable.getBinding('rows').filter(Filter);
-                  InFutureTable.getBinding('rows').sort(Sorting);
+                  InFutureTable.getBinding("rows").filter(Filter);
+                  InFutureTable.getBinding("rows").sort(Sorting);
                 }
 
                 // }
@@ -403,10 +402,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WorkCenter' and Key04 eq '" +
-            SelPlant +
-            "' and Key05 eq '" +
-            SelWCGrp +
-            "'",
+              SelPlant +
+              "' and Key05 eq '" +
+              SelWCGrp +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -472,12 +471,12 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OrderNo' and Key04 eq '" +
-            SelPlant +
-            "' and Key05 eq '" +
-            SelWCGrp +
-            "' and Key03 eq '" +
-            SelWCValue +
-            "'",
+              SelPlant +
+              "' and Key05 eq '" +
+              SelWCGrp +
+              "' and Key03 eq '" +
+              SelWCValue +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -526,8 +525,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WCGroup' and Key04 eq '" +
-            SelPlant +
-            "'",
+              SelPlant +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -583,8 +582,9 @@ sap.ui.define(
 
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -626,8 +626,9 @@ sap.ui.define(
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-
-              var aIndices = this.getView().byId(`${Path}--idQueueOrderList`).getBinding("rows").aIndices;
+              var aIndices = this.getView()
+                .byId(`${Path}--idQueueOrderList`)
+                .getBinding("rows").aIndices;
               for (var loop = 0; loop in aIndices; loop++) {
                 if (loop === Tableindex) {
                   Tableindex = aIndices[loop];
@@ -666,8 +667,9 @@ sap.ui.define(
             }
           }
           if (Tableindex === undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idFutureOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idFutureOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -675,7 +677,6 @@ sap.ui.define(
                 console.log(Tableindex);
               }
             }
-
 
             Tableindex = sap.ui
               .getCore()
@@ -733,10 +734,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BOM' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "'",
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -816,8 +817,9 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -855,8 +857,9 @@ sap.ui.define(
               .getData().InProgressData[Tableindex].Data04;
           }
           if (Tableindex === undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idQueueOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idQueueOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -901,8 +904,9 @@ sap.ui.define(
             }
           }
           if (Tableindex === undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idFutureOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idFutureOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -968,10 +972,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Routing' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "'",
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -1175,8 +1179,9 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Material
           if (Tableindex != undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -1201,8 +1206,9 @@ sap.ui.define(
               .getData().InProgressData[Tableindex].Data03;
           }
           if (Tableindex === undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idQueueOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idQueueOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -1233,8 +1239,9 @@ sap.ui.define(
             }
           }
           if (Tableindex === undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idFutureOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idFutureOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -1278,8 +1285,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'DrawingURl' and Key02 eq '" +
-            SelMatnr +
-            "'",
+              SelMatnr +
+              "'",
             {
               context: null,
               async: false,
@@ -1367,7 +1374,9 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -1485,8 +1494,9 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idQueueOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idQueueOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -1592,10 +1602,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-            sValue +
-            "' and Key03 eq '" +
-            SelPlant +
-            "'",
+              sValue +
+              "' and Key03 eq '" +
+              SelPlant +
+              "'",
             {
               context: null,
               async: false,
@@ -1677,8 +1687,9 @@ sap.ui.define(
 
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -1719,8 +1730,9 @@ sap.ui.define(
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-
-              var aIndices = this.getView().byId(`${Path}--idQueueOrderList`).getBinding("rows").aIndices;
+              var aIndices = this.getView()
+                .byId(`${Path}--idQueueOrderList`)
+                .getBinding("rows").aIndices;
               for (var loop = 0; loop in aIndices; loop++) {
                 if (loop === Tableindex) {
                   Tableindex = aIndices[loop];
@@ -1916,8 +1928,9 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -2041,10 +2054,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-            sValue +
-            "' and Key03 eq '" +
-            SelPlant +
-            "'",
+              sValue +
+              "' and Key03 eq '" +
+              SelPlant +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -2091,7 +2104,9 @@ sap.ui.define(
           if (Tableindex != undefined) {
             index = 0;
 
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -2228,8 +2243,9 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -2261,15 +2277,15 @@ sap.ui.define(
               .getData().InProgressData[Tableindex].Data05;
           }
           if (Tableindex === undefined) {
-
             Tableindex = sap.ui
               .getCore()
               .byId(`${Path}--idQueueOrderList`)
               .getSelectedIndices()[0];
             // Get Order No & Opr No
             if (Tableindex != undefined) {
-
-              var aIndices = this.getView().byId(`${Path}--idQueueOrderList`).getBinding("rows").aIndices;
+              var aIndices = this.getView()
+                .byId(`${Path}--idQueueOrderList`)
+                .getBinding("rows").aIndices;
               for (var loop = 0; loop in aIndices; loop++) {
                 if (loop === Tableindex) {
                   Tableindex = aIndices[loop];
@@ -2305,7 +2321,9 @@ sap.ui.define(
             if (Tableindex != undefined) {
               index = 0;
 
-              var aIndices = this.getView().byId(`${Path}--idFutureOrderList`).getBinding("rows").aIndices;
+              var aIndices = this.getView()
+                .byId(`${Path}--idFutureOrderList`)
+                .getBinding("rows").aIndices;
               for (var loop = 0; loop in aIndices; loop++) {
                 if (loop === Tableindex) {
                   Tableindex = aIndices[loop];
@@ -2353,8 +2371,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'HeaderText' and Key02 eq '" +
-            SelAufnr +
-            "'",
+              SelAufnr +
+              "'",
             {
               context: null,
               async: false,
@@ -2445,7 +2463,9 @@ sap.ui.define(
           if (Tableindex != undefined) {
             index = 0;
 
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -2510,8 +2530,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
-            SelPlant +
-            "'",
+              SelPlant +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -2578,8 +2598,9 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -2695,7 +2716,9 @@ sap.ui.define(
           // Get Order No & Opr No
           if (Tableindex != undefined) {
             // sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -2829,7 +2852,9 @@ sap.ui.define(
           if (Tableindex != undefined) {
             index = 0;
 
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -2863,7 +2888,6 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data13;
-
           }
           if (EndDate === "") {
             var message = that
@@ -2906,14 +2930,14 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Post' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "' and Key04 eq '" +
-            OperatorNo +
-            "' and Key05 eq '" +
-            SelPlant +
-            "'",
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
             {
               context: null,
               async: false,
@@ -2962,14 +2986,14 @@ sap.ui.define(
 
           vModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Component' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "' and Key04 eq '" +
-            OperatorNo +
-            "' and Key05 eq '" +
-            SelPlant +
-            "'",
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
             {
               context: null,
               async: false,
@@ -2980,9 +3004,18 @@ sap.ui.define(
                     var ComponentData = oData.results;
                     if (ComponentData.length != 0) {
                       var ComponentModel = new sap.ui.model.json.JSONModel();
+                      var ComponentDataLoop = [];
+                      for (var i = 0; i in ComponentData; i++) {
+                        if (ComponentData[i].Data08 === "101") {
+                          ComponentData[i].Data09 = false;
+                        } else {
+                          ComponentData[i].Data09 = true;
+                        }
+                        ComponentDataLoop.push(ComponentData[i]);
+                      }
 
                       ComponentModel.setData({
-                        ComponentData: ComponentData,
+                        ComponentData: ComponentDataLoop,
                       });
                       var ComponentnList = sap.ui
                         .getCore()
@@ -3011,7 +3044,6 @@ sap.ui.define(
                   } else {
                     var ComponentData = [];
                     var ComponentModel = new sap.ui.model.json.JSONModel();
-
                     ComponentModel.setData({
                       ComponentData: ComponentData,
                     });
@@ -3036,14 +3068,14 @@ sap.ui.define(
           that.showBusyIndicator();
           logModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'LogData' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "' and Key04 eq '" +
-            OperatorNo +
-            "' and Key05 eq '" +
-            SelPlant +
-            "'",
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
             {
               context: null,
               async: false,
@@ -3100,6 +3132,7 @@ sap.ui.define(
 
           var YeildQty = sap.ui.getCore().byId("idPostQuantity").getValue();
           // var SetupTime = sap.ui.getCore().byId("idPostSetupTIme").getValue();
+          var BinDet = sap.ui.getCore().byId("idPostBinDet").getValue();
 
           var Tableindex = "X";
           var SelAufnr = " ";
@@ -3114,7 +3147,9 @@ sap.ui.define(
           if (Tableindex != undefined) {
             index = 0;
 
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -3140,7 +3175,6 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data16;
-
           }
           if (Tableindex === undefined) {
             var message = that
@@ -3166,7 +3200,7 @@ sap.ui.define(
           IEntry.Key03 = SelOprNo;
           IEntry.Key04 = SelPlant;
           IEntry.Key05 = OperatorNo;
-          IEntry.WorkCenterArea = " ";
+          IEntry.WorkCenterArea = BinDet;
           if (index === 0) {
             IEntry.NavWC_InProgress = sap.ui
               .getCore()
@@ -3333,7 +3367,15 @@ sap.ui.define(
                     .getCore()
                     .byId("idPostComponentList");
                   var ComponentModel = new sap.ui.model.json.JSONModel();
-
+                  var ComponentDataLoop = [];
+                    for (var i = 0; i in ComponentData; i++) {
+                      if (ComponentData[i].Data08 === "101") {
+                        ComponentData[i].Data09 = false;
+                      } else {
+                        ComponentData[i].Data09 = true;
+                      }
+                      ComponentDataLoop.push(ComponentData[i]);
+                    }
                   ComponentModel.setData({
                     ComponentData: ComponentData,
                   });
@@ -3363,8 +3405,9 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idQueueOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idQueueOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -3413,7 +3456,8 @@ sap.ui.define(
             MessageBox.error(message);
             sap.ui
               .getCore()
-              .byId(`${Path}--idInprogressOrderList`).clearSelection();
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
             return;
           }
 
@@ -3423,8 +3467,9 @@ sap.ui.define(
             .getSelectedIndices()[0];
           // Get Order No & Opr No
           if (Tableindex != undefined) {
-
-            var aIndices = this.getView().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
             for (var loop = 0; loop in aIndices; loop++) {
               if (loop === Tableindex) {
                 Tableindex = aIndices[loop];
@@ -3498,14 +3543,14 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BatchValue' and Key02 eq '" +
-            SelMatnr +
-            "' and Key03 eq '" +
-            SelWerks +
-            "' and Key04 eq '" +
-            SelLgort +
-            "' and Key05 eq '" +
-            SelClabs +
-            "'",
+              SelMatnr +
+              "' and Key03 eq '" +
+              SelWerks +
+              "' and Key04 eq '" +
+              SelLgort +
+              "' and Key05 eq '" +
+              SelClabs +
+              "'",
             {
               context: null,
               async: false,
@@ -3683,57 +3728,60 @@ sap.ui.define(
           }
         },
         _initialData: {
-          columns: [{
-            visible: true,
-            name: "Data02",
-            label: "{i18n>ProdItmNo}"
-          },
-          {
-            visible: false,
-            name: "Data17",
-            label: "{i18n>StomerField1}"
-          },
-          {
-            visible: false,
-            name: "Key02",
-            label: "{i18n>SeqNum}"
-          }
+          columns: [
+            {
+              visible: true,
+              name: "Data02",
+              label: "{i18n>ProdItmNo}",
+            },
+            {
+              visible: false,
+              name: "Data17",
+              label: "{i18n>StomerField1}",
+            },
+            {
+              visible: false,
+              name: "Key02",
+              label: "{i18n>SeqNum}",
+            },
           ],
-          sort: [{
-            sorted: true,
-            name: "Data02",
-            label: "{i18n>ProdItmNo}",
-            descending: true
-          },
-          {
-            sorted: false,
-            name: "Data17",
-            label: "{i18n>StomerField1}",
-            descending: false
-          },
-          {
-            sorted: false,
-            name: "Key02",
-            label: "{i18n>SeqNum}",
-            descending: false
-          }
+          sort: [
+            {
+              sorted: true,
+              name: "Data02",
+              label: "{i18n>ProdItmNo}",
+              descending: true,
+            },
+            {
+              sorted: false,
+              name: "Data17",
+              label: "{i18n>StomerField1}",
+              descending: false,
+            },
+            {
+              sorted: false,
+              name: "Key02",
+              label: "{i18n>SeqNum}",
+              descending: false,
+            },
           ],
-          group: [{
-            grouped: true,
-            name: "Data02",
-            label: "{i18n>ProdItmNo}",
-          },
-          {
-            grouped: false,
-            name: "Data17",
-            label: "{i18n>StomerField1}",
-          },
-          {
-            grouped: false,
-            name: "Key02",
-            label: "{i18n>SeqNum}",
-          }
-          ]
+          group: [
+            {
+              grouped: true,
+              name: "Data02",
+              label: "{i18n>ProdItmNo}",
+            },
+            {
+              grouped: false,
+              name: "Data17",
+              label: "{i18n>StomerField1}",
+            },
+            {
+              grouped: false,
+              name: "Key02",
+              label: "{i18n>SeqNum}",
+            },
+          ],
         },
         _setInitialData: function () {
           const oView = this.getView();
@@ -3768,9 +3816,10 @@ sap.ui.define(
           this.parseP13nState();
         },
         parseP13nState: function (oEvt) {
-
           if (oEvt) {
-            MessageToast.show("P13n panel change reason:" + oEvt.getParameter("reason"));
+            MessageToast.show(
+              "P13n panel change reason:" + oEvt.getParameter("reason")
+            );
           }
 
           const oView = this.getView();
@@ -3779,10 +3828,10 @@ sap.ui.define(
           const oP13nState = {
             columns: oView.byId("columnsPanel").getP13nData(),
             sort: oView.byId("sortPanel").getP13nData(),
-            group: oView.byId("groupPanel").getP13nData()
+            group: oView.byId("groupPanel").getP13nData(),
           };
 
-          oEditor.setValue(JSON.stringify(oP13nState, null, '  '));
+          oEditor.setValue(JSON.stringify(oP13nState, null, "  "));
         },
         handleSettingsButtonPressed: function (oEvt) {
           var that = this;
@@ -3791,7 +3840,7 @@ sap.ui.define(
           Engine.getInstance().show(oTable, ["Columns", "Sorter"], {
             contentHeight: "35rem",
             contentWidth: "32rem",
-            source: oEvt.getSource()
+            source: oEvt.getSource(),
           });
         },
       }
