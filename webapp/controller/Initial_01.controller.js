@@ -3368,14 +3368,14 @@ sap.ui.define(
                     .byId("idPostComponentList");
                   var ComponentModel = new sap.ui.model.json.JSONModel();
                   var ComponentDataLoop = [];
-                    for (var i = 0; i in ComponentData; i++) {
-                      if (ComponentData[i].Data08 === "101") {
-                        ComponentData[i].Data09 = false;
-                      } else {
-                        ComponentData[i].Data09 = true;
-                      }
-                      ComponentDataLoop.push(ComponentData[i]);
+                  for (var i = 0; i in ComponentData; i++) {
+                    if (ComponentData[i].Data08 === "101") {
+                      ComponentData[i].Data09 = false;
+                    } else {
+                      ComponentData[i].Data09 = true;
                     }
+                    ComponentDataLoop.push(ComponentData[i]);
+                  }
                   ComponentModel.setData({
                     ComponentData: ComponentData,
                   });
@@ -3843,7 +3843,7 @@ sap.ui.define(
             source: oEvt.getSource(),
           });
         },
-        onPostBinDetHelpRequest : function(oEvent){
+        onPostBinDetHelpRequest: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
 
@@ -3883,11 +3883,9 @@ sap.ui.define(
                   BinModel.setData({
                     BinData: BinData,
                   });
-                  var BinTable = sap.ui
-                    .getCore()
-                    .byId("idHelpBinDialog");
+                  var BinTable = sap.ui.getCore().byId("idHelpBinDialog");
 
-                    BinTable.setModel(BinModel, "BinModel");
+                  BinTable.setModel(BinModel, "BinModel");
                 } catch (e) {
                   MessageToast.show(e.message);
                   $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
@@ -3897,30 +3895,25 @@ sap.ui.define(
           );
         },
 
-		_onHelpBinSearch: function(oEvent) {
-			var sValue = oEvent.getParameter("value");
-      var oFilter = new Filter("Data01", FilterOperator.Contains, sValue);
-      var oBinding = oEvent.getParameter("itemsBinding");
-      oBinding.filter([oFilter]);
-		},
+        _onHelpBinSearch: function (oEvent) {
+          var sValue = oEvent.getParameter("value");
+          var oFilter = new Filter("Data01", FilterOperator.Contains, sValue);
+          var oBinding = oEvent.getParameter("itemsBinding");
+          oBinding.filter([oFilter]);
+        },
 
-		_HelpBinSelect: function(oEvent) {
-			if (oEvent.getParameters().selectedItems != undefined) {
-        var BinDet = oEvent.getParameters().selectedItems[0].getTitle();
-        if (BinDet != undefined) {
-          sap.ui
-            .getCore()
-            .byId(`idPostBinDet`)
-            .setValue(BinDet);
+        _HelpBinSelect: function (oEvent) {
+          if (oEvent.getParameters().selectedItems != undefined) {
+            var BinDet = oEvent.getParameters().selectedItems[0].getTitle();
+            if (BinDet != undefined) {
+              sap.ui.getCore().byId(`idPostBinDet`).setValue(BinDet);
 
-          oEvent.getSource().getBinding("items").filter([]);
-        } else {
-          return;
-        }
-      }
-		}
-
-
+              oEvent.getSource().getBinding("items").filter([]);
+            } else {
+              return;
+            }
+          }
+        },
       }
     );
   }
