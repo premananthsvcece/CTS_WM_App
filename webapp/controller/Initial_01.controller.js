@@ -94,7 +94,7 @@ sap.ui.define(
             i = i + 1;
             ProgressIndicator.setPercentValue(i + "%");
             ProgressIndicator.setDisplayValue("Refresh Progress: " + i + " %");
-            if (i === 100) {
+            if (i === 400) {
               i = 1;
               var Plant = sap.ui
                 .getCore()
@@ -272,6 +272,7 @@ sap.ui.define(
               }
             },
           });
+
           var Path = othis.getView().getId();
           jQuery.sap.delayedCall(500, that, function () {
             sap.ui
@@ -1476,7 +1477,9 @@ sap.ui.define(
           } else {
             sap.ui.getCore().byId("idStartOperator").setValue("");
           }
-
+          jQuery.sap.delayedCall(500, that, function () {
+            sap.ui.getCore().byId("idStartOperator").focus();
+          });
           that.hideBusyIndicator();
         },
 
@@ -1584,6 +1587,9 @@ sap.ui.define(
           sap.ui.getCore().byId("idSelectOrder").setValue(SelAufnr);
           sap.ui.getCore().byId("idSelectOprNo").setValue(SelOprNo);
           sap.ui.getCore().byId("idStartText").setText("Queue");
+          jQuery.sap.delayedCall(500, that, function () {
+            sap.ui.getCore().byId("idStartOperator").focus();
+          });
 
           that.hideBusyIndicator();
         },
