@@ -3584,6 +3584,15 @@ sap.ui.define(
                     }
                     that.hideBusyIndicator();
                     that.BatchHelpDialog.open();
+                  }else{
+                    that.hideBusyIndicator();
+                    // Raise Message
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("BOM002");
+                    MessageToast.show(message);
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
@@ -3637,7 +3646,7 @@ sap.ui.define(
           }
         },
         onBatchInputClose: function () {
-          this.BatchHelpDialog.close();
+          // this.BatchHelpDialog.close();
           return;
         },
 
