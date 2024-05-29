@@ -3279,6 +3279,7 @@ sap.ui.define(
                 if (oData.Key04 === "E") {
                   var message = oData.Key05;
                   MessageBox.error(message);
+                  that.onButtonPress();
                   return;
                 } else {
                   var message = oData.Key05;

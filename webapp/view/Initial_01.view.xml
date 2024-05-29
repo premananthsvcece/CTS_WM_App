@@ -517,7 +517,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn6"
-                                        width="5rem"
+                                        width="6rem"
                                         autoResizable="true"
                                         hAlign="End"
                                     >
@@ -535,7 +535,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn10"
-                                        width="7rem"
+                                        width="6rem"
                                         autoResizable="true"
                                         hAlign="End"
                                     >
@@ -554,7 +554,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn11"
-                                        width="7rem"
+                                        width="6rem"
                                         autoResizable="true"
                                         hAlign="End"
                                     >
@@ -573,7 +573,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn12"
-                                        width="7rem"
+                                        width="6rem"
                                         autoResizable="true"
                                         hAlign="End"
                                     >
@@ -872,7 +872,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn19"
-                                        width="5rem"
+                                        width="6rem"
                                         hAlign="End"
                                         autoResizable="true"
                                         sortProperty="Data06"
@@ -956,7 +956,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn23"
-                                        width="7rem"
+                                        width="6rem"
                                         autoResizable="true"
                                         hAlign="End"
                                         sortProperty="Data10"
@@ -977,7 +977,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn24"
-                                        width="7rem"
+                                        width="6rem"
                                         autoResizable="true"
                                         hAlign="End"
                                         sortProperty="Data11"
@@ -998,7 +998,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn25"
-                                        width="7rem"
+                                        width="6rem"
                                         autoResizable="true"
                                         hAlign="End"
                                         sortProperty="Data12"
@@ -1193,7 +1193,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn32"
-                                        width="5rem"
+                                        width="6rem"
                                         hAlign="End"
                                         autoResizable="true"
                                         sortProperty="Data06"
@@ -1274,7 +1274,7 @@
                                     </Table:Column>
                                     <Table:Column
                                         id="_IDGenColumn36"
-                                        width="7rem"
+                                        width="6rem"
                                         autoResizable="true"
                                         visible="false"
                                     >
