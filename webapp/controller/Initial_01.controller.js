@@ -2579,7 +2579,7 @@ sap.ui.define(
               var Path = this.getView().getId();
               sap.ui.getCore().byId(`idScarpReason`).setValue(ScarpReason);
               sap.ui.getCore().byId(`idScarpReason`).setValueState("None");
-              sap.ui.getCore().byId(`idScarpReason`).setValueStateText('');
+              sap.ui.getCore().byId(`idScarpReason`).setValueStateText("");
 
               oEvent.getSource().getBinding("items").filter([]);
             } else {
@@ -3243,19 +3243,21 @@ sap.ui.define(
             IEntry.NavWC_Component = [{}];
           } else {
             for (var bth = 0; bth < IEntry.NavWC_Component.length; bth++) {
+              if( IEntry.NavWC_Component[bth].Data06 != ""){
               var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
-              if (Qty != 0 && Qty != "") {
-                if (IEntry.NavWC_Component[bth].Data05 === "") {
-                  that.hideBusyIndicator();
-                  var message = that
-                    .getView()
-                    .getModel("i18n")
-                    .getResourceBundle()
-                    .getText("Post003");
+              if (Qty != 0) {
+                  if (IEntry.NavWC_Component[bth].Data05 === "") {
+                    that.hideBusyIndicator();
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("Post003");
 
-                  MessageToast.show(message);
-                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
-                  return;
+                    MessageToast.show(message);
+                    $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                    return;
+                  }
                 }
               }
             }
@@ -3671,7 +3673,7 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
-            Plant +
+              Plant +
               "'",
             {
               context: null,
@@ -3679,22 +3681,19 @@ sap.ui.define(
               success: function (oData, oResponse) {
                 try {
                   var ScarpReasonData = oData.results;
-                  for( var i = 0; i in ScarpReasonData; i++){
-                    if ( ScarpReasonData[i].Data03 === ScrapReason){
+                  for (var i = 0; i in ScarpReasonData; i++) {
+                    if (ScarpReasonData[i].Data03 === ScrapReason) {
                       var Counter = true;
                     }
                   }
-                  if ( Counter != true )
-                    {
-                      // Raise Error Message with State
-                      sap.ui
+                  if (Counter != true) {
+                    // Raise Error Message with State
+                    sap.ui
                       .getCore()
                       .byId(`idScarpReason`)
                       .setValueState("Error");
 
-                      sap.ui
-                      .getCore()
-                      .byId(`idScarpReason`).setValue("");
+                    sap.ui.getCore().byId(`idScarpReason`).setValue("");
                     // Indtast venligst gyldig scarp-årsag
                     // Get Message
                     var Emessage = that
@@ -3706,17 +3705,17 @@ sap.ui.define(
                       .getCore()
                       .byId(`idScarpReason`)
                       .setValueStateText(Emessage);
-                    }else{
-                      // Clear Error State
-                      sap.ui
+                  } else {
+                    // Clear Error State
+                    sap.ui
                       .getCore()
                       .byId(`idScarpReason`)
                       .setValueState("None");
-                      sap.ui
+                    sap.ui
                       .getCore()
                       .byId(`idScarpReason`)
-                      .setValueStateText('');
-                    }
+                      .setValueStateText("");
+                  }
                 } catch (e) {
                   alert(e.message);
                 }
