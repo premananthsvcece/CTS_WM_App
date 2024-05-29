@@ -3664,6 +3664,7 @@ sap.ui.define(
           var that = this;
           var Path = that.getView().getId();
           var ScrapReason = oEvent.getParameters().newValue;
+          ScrapReason = ScrapReason.toUpperCase();
           var Plant = sap.ui
             .getCore()
             .byId(Path + "--idInputPlant")
@@ -3715,6 +3716,10 @@ sap.ui.define(
                       .getCore()
                       .byId(`idScarpReason`)
                       .setValueStateText("");
+                      sap.ui
+                      .getCore()
+                      .byId(`idScarpReason`)
+                      .setValue(ScrapReason);
                   }
                 } catch (e) {
                   alert(e.message);
