@@ -2578,6 +2578,8 @@ sap.ui.define(
             if (ScarpReason != undefined) {
               var Path = this.getView().getId();
               sap.ui.getCore().byId(`idScarpReason`).setValue(ScarpReason);
+              sap.ui.getCore().byId(`idScarpReason`).setValueState("None");
+              sap.ui.getCore().byId(`idScarpReason`).setValueStateText('');
 
               oEvent.getSource().getBinding("items").filter([]);
             } else {
@@ -3241,17 +3243,20 @@ sap.ui.define(
             IEntry.NavWC_Component = [{}];
           } else {
             for (var bth = 0; bth < IEntry.NavWC_Component.length; bth++) {
-              if (IEntry.NavWC_Component[bth].Data05 === "") {
-                that.hideBusyIndicator();
-                var message = that
-                  .getView()
-                  .getModel("i18n")
-                  .getResourceBundle()
-                  .getText("Post003");
+              var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
+              if (Qty != 0) {
+                if (IEntry.NavWC_Component[bth].Data05 === "") {
+                  that.hideBusyIndicator();
+                  var message = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("Post003");
 
-                MessageToast.show(message);
-                $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
-                return;
+                  MessageToast.show(message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                  return;
+                }
               }
             }
           }
@@ -3653,7 +3658,72 @@ sap.ui.define(
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
         },
+        onidScarpReasonChange: function (oEvent) {
+          var that = this;
+          var Path = that.getView().getId();
+          var ScrapReason = oEvent.getParameters().newValue;
+          var Plant = sap.ui
+            .getCore()
+            .byId(Path + "--idInputPlant")
+            .getValue();
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
+            Plant +
+              "'",
+            {
+              context: null,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  var ScarpReasonData = oData.results;
+                  for( var i = 0; i in ScarpReasonData; i++){
+                    if ( ScarpReasonData[i].Data03 === ScrapReason){
+                      var Counter = true;
+                    }
+                  }
+                  if ( Counter != true )
+                    {
+                      // Raise Error Message with State
+                      sap.ui
+                      .getCore()
+                      .byId(`idScarpReason`)
+                      .setValueState("Error");
+
+                      sap.ui
+                      .getCore()
+                      .byId(`idScarpReason`).setValue("");
+                    // Indtast venligst gyldig scarp-årsag
+                    // Get Message
+                    var Emessage = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("Scarp004");
+                    sap.ui
+                      .getCore()
+                      .byId(`idScarpReason`)
+                      .setValueStateText(Emessage);
+                    }else{
+                      // Clear Error State
+                      sap.ui
+                      .getCore()
+                      .byId(`idScarpReason`)
+                      .setValueState("None");
+                      sap.ui
+                      .getCore()
+                      .byId(`idScarpReason`)
+                      .setValueStateText('');
+                    }
+                } catch (e) {
+                  alert(e.message);
+                }
+              },
+            }
+          );
+        },
         onidInputWorkCenterLiveChange: function (oEvent) {
           // Validate User Entered Input
           var that = this;
