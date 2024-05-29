@@ -3244,7 +3244,7 @@ sap.ui.define(
           } else {
             for (var bth = 0; bth < IEntry.NavWC_Component.length; bth++) {
               var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
-              if (Qty != 0) {
+              if (Qty != 0 && Qty != "") {
                 if (IEntry.NavWC_Component[bth].Data05 === "") {
                   that.hideBusyIndicator();
                   var message = that
@@ -3254,7 +3254,7 @@ sap.ui.define(
                     .getText("Post003");
 
                   MessageToast.show(message);
-                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                   return;
                 }
               }
