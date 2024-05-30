@@ -3538,7 +3538,7 @@ sap.ui.define(
             SelMatnr = LineArray[0].getTitle();
             SelWerks = LineArray[1].getTitle();
             SelLgort = LineArray[2].getTitle();
-            SelClabs = LineArray[4].getValue();
+            SelClabs = LineArray[5].getValue();
           }
 
           var Path = that.getView().getId();
