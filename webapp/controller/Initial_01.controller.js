@@ -44,8 +44,8 @@ sap.ui.define(
     // shortcut for sap.m.DialogType
     var DialogType = mobileLibrary.DialogType;
 
-    	// shortcut for sap.ui.core.ValueState
-	  var ValueState = coreLibrary.ValueState;
+    // shortcut for sap.ui.core.ValueState
+    var ValueState = coreLibrary.ValueState;
 
     return Controller.extend(
       "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
@@ -422,10 +422,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WorkCenter' and Key04 eq '" +
-              SelPlant +
-              "' and Key05 eq '" +
-              SelWCGrp +
-              "'",
+            SelPlant +
+            "' and Key05 eq '" +
+            SelWCGrp +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -491,12 +491,12 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OrderNo' and Key04 eq '" +
-              SelPlant +
-              "' and Key05 eq '" +
-              SelWCGrp +
-              "' and Key03 eq '" +
-              SelWCValue +
-              "'",
+            SelPlant +
+            "' and Key05 eq '" +
+            SelWCGrp +
+            "' and Key03 eq '" +
+            SelWCValue +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -545,8 +545,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WCGroup' and Key04 eq '" +
-              SelPlant +
-              "'",
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -754,10 +754,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BOM' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -992,10 +992,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Routing' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -1305,8 +1305,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'DrawingURl' and Key02 eq '" +
-              SelMatnr +
-              "'",
+            SelMatnr +
+            "'",
             {
               context: null,
               async: false,
@@ -1627,10 +1627,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-              sValue +
-              "' and Key03 eq '" +
-              SelPlant +
-              "'",
+            sValue +
+            "' and Key03 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -1921,8 +1921,10 @@ sap.ui.define(
 
                 oModel.read(
                   "/ValueHelpSet?$filter=Key01 eq 'RoutingText' and Key02 eq '" +
-                    SelAufnr +
-                    "'",
+                  SelAufnr +
+                  "' and Key03 eq '" + 
+                  SelOprNo + 
+                  "'",
                   {
                     context: null,
                     async: false,
@@ -2128,10 +2130,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-              sValue +
-              "' and Key03 eq '" +
-              SelPlant +
-              "'",
+            sValue +
+            "' and Key03 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -2445,8 +2447,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'HeaderText' and Key02 eq '" +
-              SelAufnr +
-              "'",
+            SelAufnr +
+            "'",
             {
               context: null,
               async: false,
@@ -2604,8 +2606,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
-              SelPlant +
-              "'",
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -3006,14 +3008,14 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Post' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "' and Key04 eq '" +
-              OperatorNo +
-              "' and Key05 eq '" +
-              SelPlant +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "' and Key04 eq '" +
+            OperatorNo +
+            "' and Key05 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -3062,14 +3064,14 @@ sap.ui.define(
 
           vModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Component' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "' and Key04 eq '" +
-              OperatorNo +
-              "' and Key05 eq '" +
-              SelPlant +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "' and Key04 eq '" +
+            OperatorNo +
+            "' and Key05 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -3144,14 +3146,14 @@ sap.ui.define(
           that.showBusyIndicator();
           logModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'LogData' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "' and Key04 eq '" +
-              OperatorNo +
-              "' and Key05 eq '" +
-              SelPlant +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "' and Key04 eq '" +
+            OperatorNo +
+            "' and Key05 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -3625,14 +3627,14 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BatchValue' and Key02 eq '" +
-              SelMatnr +
-              "' and Key03 eq '" +
-              SelWerks +
-              "' and Key04 eq '" +
-              SelLgort +
-              "' and Key05 eq '" +
-              SelClabs +
-              "'",
+            SelMatnr +
+            "' and Key03 eq '" +
+            SelWerks +
+            "' and Key04 eq '" +
+            SelLgort +
+            "' and Key05 eq '" +
+            SelClabs +
+            "'",
             {
               context: null,
               async: false,
@@ -3752,8 +3754,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
-              Plant +
-              "'",
+            Plant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -4027,8 +4029,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Bin' and Key04 eq '" +
-              SelPlant +
-              "'",
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
