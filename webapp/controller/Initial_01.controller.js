@@ -10,6 +10,11 @@ sap.ui.define(
     "sap/m/PDFViewer",
     "sap/ndc/BarcodeScanner",
     "sap/m/p13n/Engine",
+    "sap/m/Dialog",
+    "sap/m/Button",
+    "sap/m/library",
+    "sap/m/Text",
+    "sap/ui/core/library",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -24,9 +29,23 @@ sap.ui.define(
     Dates,
     PDFViewer,
     BarcodeScanner,
-    Engine
+    Engine,
+    Dialog,
+    Button,
+    mobileLibrary,
+    Text,
+    coreLibrary
   ) {
     "use strict";
+
+    // shortcut for sap.m.ButtonType
+    var ButtonType = mobileLibrary.ButtonType;
+
+    // shortcut for sap.m.DialogType
+    var DialogType = mobileLibrary.DialogType;
+
+    	// shortcut for sap.ui.core.ValueState
+	  var ValueState = coreLibrary.ValueState;
 
     return Controller.extend(
       "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
@@ -1895,6 +1914,55 @@ sap.ui.define(
                   width: "50em",
                   animationDuration: 2000,
                 });
+
+                // Popup to show Text from Order
+                var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+                var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+                oModel.read(
+                  "/ValueHelpSet?$filter=Key01 eq 'RoutingText' and Key02 eq '" +
+                    SelAufnr +
+                    "'",
+                  {
+                    context: null,
+                    async: false,
+                    urlParameters: null,
+                    success: function (oData, oResponse) {
+                      try {
+                        if (oData.results.length != 0) {
+                          var LongText = oData.results[0];
+                          var TitleText = that
+                            .getView()
+                            .getModel("i18n")
+                            .getResourceBundle()
+                            .getText("Start005");
+                          if (!that.oInfoMessageDialog) {
+                            that.oInfoMessageDialog = new Dialog({
+                              type: DialogType.Message,
+                              title: TitleText,
+                              state: ValueState.Information,
+                              contentWidth: '45%',
+                              content: new Text({ text: LongText.Data01 }),
+                              beginButton: new Button({
+                                type: ButtonType.Emphasized,
+                                text: "OK",
+                                press: function () {
+                                  that.oInfoMessageDialog.close();
+                                }.bind(that),
+                              }),
+                            });
+                          }
+                          that.oInfoMessageDialog.open();
+
+                          // sap.ui.getCore().byId("idHeaderOrder").setText(SelAufnr);
+                        }
+                      } catch (e) {
+                        alert(e.message);
+                      }
+                    },
+                  }
+                );
+
                 $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                 that.onButtonPress();
                 return;
@@ -3243,9 +3311,9 @@ sap.ui.define(
             IEntry.NavWC_Component = [{}];
           } else {
             for (var bth = 0; bth < IEntry.NavWC_Component.length; bth++) {
-              if( IEntry.NavWC_Component[bth].Data06 != ""){
-              var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
-              if (Qty != 0) {
+              if (IEntry.NavWC_Component[bth].Data06 != "") {
+                var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
+                if (Qty != 0) {
                   if (IEntry.NavWC_Component[bth].Data05 === "") {
                     that.hideBusyIndicator();
                     var message = that
@@ -3585,7 +3653,7 @@ sap.ui.define(
                     }
                     that.hideBusyIndicator();
                     that.BatchHelpDialog.open();
-                  }else{
+                  } else {
                     that.hideBusyIndicator();
                     // Raise Message
                     var message = that
@@ -3726,7 +3794,7 @@ sap.ui.define(
                       .getCore()
                       .byId(`idScarpReason`)
                       .setValueStateText("");
-                      sap.ui
+                    sap.ui
                       .getCore()
                       .byId(`idScarpReason`)
                       .setValue(ScrapReason);
