@@ -3382,14 +3382,16 @@ sap.ui.define(
           var index;
           var Path = that.getView().getId();
           var value = oEvent.getParameter("value");
-          var valueArray = value.split(".");
-          if (valueArray.length != 2) {
-            value = value + ".000";
-          }
+          // var valueArray = value.split(".");
+          // if (valueArray.length != 2) {
+          //   value = value + ".000";
+          // }
           sap.ui.getCore().byId("idPostQuantity").setValue(value);
 
           var Tableindex = "X";
           var SelAufnr = " ";
+          var SelOprNo = " ";
+          var SelPlant = " ";
 
           Tableindex = sap.ui
             .getCore()
@@ -3404,6 +3406,12 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data02;
+
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data05;
           }
           if (Tableindex === undefined) {
             var message = that
@@ -3415,14 +3423,19 @@ sap.ui.define(
             return;
           }
 
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
           var IEntry = {};
           IEntry.Key01 = "COMPONENTUPD";
           IEntry.Key02 = SelAufnr;
           IEntry.Key03 = value;
-          IEntry.Key04 = " ";
-          IEntry.Key05 = " ";
+          IEntry.Key04 = SelOprNo;
+          IEntry.Key05 = SelPlant;
           IEntry.WorkCenterArea = " ";
           IEntry.NavWC_InProgress = [{}];
           IEntry.NavWC_Queue = [{}];
