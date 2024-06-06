@@ -3,7 +3,6 @@
     xmlns="sap.m"
     xmlns:c="sap.ui.core"
     xmlns:l="sap.ui.layout"
-    xmlns:sf="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     xmlns:uiTable="sap.ui.table"
     autoFocus="false"
@@ -101,6 +100,23 @@
                                         width="15rem"
                                     />
                                 </InputListItem>
+                                <InputListItem label="{i18n>ConfirmType} *">
+                                    <Select
+                                        id="idPostConfType"
+                                        forceSelection="false"
+                                        selectedKey="P"
+                                        width="15rem"
+                                    >
+                                        <core:Item
+                                            key="P"
+                                            text="{i18n>PartConfirm}"
+                                        />
+                                        <core:Item
+                                            key="F"
+                                            text="{i18n>FinalConfirm}"
+                                        />
+                                    </Select>
+                                </InputListItem>
                             </List>
                             <Table
                                 id="idPostScarpList"
@@ -142,7 +158,7 @@
                                 id="idPostComponentList"
                                 visibleRowCount="5"
                                 visibleRowCountMode="Interactive"
-                                class="sapUiResponsiveMargin"
+                                class="sapUiContentPadding"
                                 rows="{ComponentModel>/ComponentData}"
                                 alternateRowColors="true"
                                 enableSelectAll="false"
@@ -181,6 +197,7 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel>Data01}"
+                                                enabled="{ComponentModel>Data10}"
                                                 valueHelpRequest="onMaterailHelpRequest"
                                                 showValueHelp="true"
                                             />
@@ -189,38 +206,32 @@
                                     <uiTable:Column width="10%">
                                         <Label text="{i18n>ComponentDescr}" />
                                         <uiTable:template>
-                                            <Input
-                                                value="{ComponentModel>Data02}"
-                                                valueHelpRequest="onMaterailHelpRequest"
-                                                showValueHelp="false"
-                                                enabled="false"
+                                            <Text
+                                                text="{ComponentModel>Data02}"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column width="7%">
                                         <Label text="{i18n>Plant}" />
                                         <uiTable:template>
-                                            <Input
-                                                value="{ComponentModel>Data03}"
-                                                enabled="false"
+                                            <Text
+                                                text="{ComponentModel>Data03}"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column width="7%">
                                         <Label text="{i18n>Location}" />
                                         <uiTable:template>
-                                            <Input
-                                                value="{ComponentModel>Data04}"
-                                                enabled="false"
+                                            <Text
+                                                text="{ComponentModel>Data04}"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column width="7%">
                                         <Label text="{i18n>MovementType}" />
                                         <uiTable:template>
-                                            <Input
-                                                value="{ComponentModel>Data08}"
-                                                enabled="false"
+                                            <Text
+                                                text="{ComponentModel>Data08}"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
@@ -248,7 +259,7 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel>Data07}"
-                                                enabled="{ComponentModel>Data09}"
+                                                enabled="{ComponentModel>Data10}"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>

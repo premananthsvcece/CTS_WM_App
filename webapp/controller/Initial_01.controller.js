@@ -181,6 +181,7 @@ sap.ui.define(
           IEntry.Key03 = Workcenter;
           IEntry.Key04 = SelWCGrp;
           IEntry.Key05 = OrderNo;
+          IEntry.ConfirmType = " ";
           IEntry.WorkCenterArea = " ";
           IEntry.NavWC_InProgress = [{}];
           IEntry.NavWC_Queue = [{}];
@@ -1857,6 +1858,7 @@ sap.ui.define(
           IEntry.Key03 = SelOprNo;
           IEntry.Key04 = SelPlant;
           IEntry.Key05 = OperatorNo;
+          IEntry.ConfirmType = " ";
           IEntry.WorkCenterArea = " ";
           if (index === 0) {
             IEntry.NavWC_InProgress = sap.ui
@@ -2243,6 +2245,7 @@ sap.ui.define(
           IEntry.Key03 = SelOprNo;
           IEntry.Key04 = SelPlant;
           IEntry.Key05 = OperatorNo;
+          IEntry.ConfirmType = " ";
           IEntry.WorkCenterArea = " ";
           if (index === 0) {
             IEntry.NavWC_InProgress = sap.ui
@@ -3100,6 +3103,11 @@ sap.ui.define(
                         } else {
                           ComponentData[i].Data09 = true;
                         }
+                        if (ComponentData[i].Data10 === "false") {
+                          ComponentData[i].Data10 = false;
+                        } else {
+                          ComponentData[i].Data10 = true;
+                        }
                         ComponentDataLoop.push(ComponentData[i]);
                       }
 
@@ -3222,6 +3230,10 @@ sap.ui.define(
           var YeildQty = sap.ui.getCore().byId("idPostQuantity").getValue();
           // var SetupTime = sap.ui.getCore().byId("idPostSetupTIme").getValue();
           var BinDet = sap.ui.getCore().byId("idPostBinDet").getValue();
+          var ConfType = sap.ui
+            .getCore()
+            .byId("idPostConfType")
+            .getSelectedKey();
 
           var Tableindex = "X";
           var SelAufnr = " ";
@@ -3289,6 +3301,7 @@ sap.ui.define(
           IEntry.Key03 = SelOprNo;
           IEntry.Key04 = SelPlant;
           IEntry.Key05 = OperatorNo;
+          IEntry.ConfirmType = ConfType;
           IEntry.WorkCenterArea = BinDet;
           if (index === 0) {
             IEntry.NavWC_InProgress = sap.ui
@@ -3447,6 +3460,7 @@ sap.ui.define(
           IEntry.Key03 = value;
           IEntry.Key04 = SelOprNo;
           IEntry.Key05 = SelPlant;
+          IEntry.ConfirmType = " ";
           IEntry.WorkCenterArea = " ";
           IEntry.NavWC_InProgress = [{}];
           IEntry.NavWC_Queue = [{}];
@@ -3629,10 +3643,10 @@ sap.ui.define(
           var SelLgort = " ";
           var SelClabs = " ";
           if (LineArray.length != 0) {
-            SelMatnr = LineArray[0].getProperty('value');
-            SelWerks = LineArray[2].getProperty('value');
-            SelLgort = LineArray[3].getProperty('value');
-            SelClabs = LineArray[6].getProperty('value');
+            SelMatnr = LineArray[0].getProperty("value");
+            SelWerks = LineArray[2].getProperty("text");
+            SelLgort = LineArray[3].getProperty("text");
+            SelClabs = LineArray[6].getProperty("value");
           }
 
           var Path = that.getView().getId();
@@ -3737,14 +3751,16 @@ sap.ui.define(
               .getCore()
               .byId("idPostComponentList")
               .getModel("ComponentModel")
-              .setData("ComponentTable", ComponentTable);
+              .setData("ComponentData", ComponentTable);
           }
         },
         onBatchInputClose: function () {
           // this.BatchHelpDialog.close();
           return;
         },
-
+        onMaterialInputClose: function(){
+          return;
+        },
         onidInputWorkAreaLiveChange: function (oEvent) {
           // Validate User Entered Input
           var that = this;
@@ -4107,7 +4123,7 @@ sap.ui.define(
             .getData().ComponentData;
 
           var line = {
-            Data01: "",
+            Data01: " ",
             Data02: "",
             Data03: "DKKV",
             Data04: "GI01",
@@ -4116,7 +4132,7 @@ sap.ui.define(
             Data07: "",
             Data08: "261",
             Data09: true,
-            Data10: "",
+            Data10: true,
             Data11: "",
             Data12: "",
             Data13: "",
@@ -4148,25 +4164,21 @@ sap.ui.define(
         onMaterailHelpRequest: function (oEvent) {
           var that = this;
           var LineArray = oEvent.getSource().getParent().getCells();
-          var SelMatnr = " ";
           var SelWerks = " ";
           var SelLgort = " ";
-          var SelClabs = " ";
           if (LineArray.length != 0) {
-            SelMatnr = LineArray[0].getTitle();
-            SelWerks = LineArray[1].getTitle();
-            SelLgort = LineArray[2].getTitle();
-            SelClabs = LineArray[5].getValue();
+            SelWerks = LineArray[2].getProperty("text");
+            SelLgort = LineArray[3].getProperty("text");
           }
 
           var Path = that.getView().getId();
 
-          if (!that.BatchHelpDialog) {
-            that.BatchHelpDialog = sap.ui.xmlfragment(
-              "sap.pp.wcare.wmd.workmanagerapp.Fragments.BatchHelpDialog",
+          if (!that.MaterialHelpDialog) {
+            that.MaterialHelpDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.MaterialHelpDialog",
               that
             );
-            that.getView().addDependent(that.BatchHelpDialog);
+            that.getView().addDependent(that.MaterialHelpDialog);
           }
           that.showBusyIndicator();
 
@@ -4174,14 +4186,10 @@ sap.ui.define(
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
           oModel.read(
-            "/ValueHelpSet?$filter=Key01 eq 'BatchValue' and Key02 eq '" +
-              SelMatnr +
-              "' and Key03 eq '" +
+            "/ValueHelpSet?$filter=Key01 eq 'Material' and Key02 eq '" +
               SelWerks +
-              "' and Key04 eq '" +
+              "' and Key03 eq '" +
               SelLgort +
-              "' and Key05 eq '" +
-              SelClabs +
               "'",
             {
               context: null,
@@ -4190,19 +4198,21 @@ sap.ui.define(
               success: function (oData, oResponse) {
                 try {
                   if (oData.results.length != 0) {
-                    var BatchData = oData.results;
-                    if (BatchData.length != 0) {
-                      var BatchModel = new sap.ui.model.json.JSONModel();
+                    var MaterialData = oData.results;
+                    if (MaterialData.length != 0) {
+                      var MaterialModel = new sap.ui.model.json.JSONModel();
 
-                      BatchModel.setData({
-                        BatchData: BatchData,
+                      MaterialModel.setData({
+                        MaterialData: MaterialData,
                       });
-                      var BatchList = sap.ui.getCore().byId("idBatchDialog");
+                      var MaterialList = sap.ui
+                        .getCore()
+                        .byId("idMaterialDialog");
 
-                      BatchList.setModel(BatchModel, "BatchModel");
+                      MaterialList.setModel(MaterialModel, "MaterialModel");
                     }
                     that.hideBusyIndicator();
-                    that.BatchHelpDialog.open();
+                    that.MaterialHelpDialog.open();
                   } else {
                     that.hideBusyIndicator();
                     // Raise Message
@@ -4212,16 +4222,146 @@ sap.ui.define(
                       .getResourceBundle()
                       .getText("BOM002");
                     MessageToast.show(message);
+                    $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
-                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                   // alert(e.message);
                 }
               },
             }
           );
         },
+
+        onMaterialDataDialogSearch: function (oEvent) {
+          var sValue = oEvent.getParameter("value");
+          var oFilter = new Filter({
+            filters: [
+              new Filter("Data01", FilterOperator.Contains, sValue),
+              new Filter("Data02", FilterOperator.Contains, sValue),
+              new Filter("Data03", FilterOperator.Contains, sValue),
+              new Filter("Data04", FilterOperator.Contains, sValue),
+            ],
+          });
+          var oBinding = oEvent.getParameter("itemsBinding");
+          oBinding.filter([oFilter]);
+        },
+
+        onMaterialInputChange: function (oEvent) {
+          var that = this;
+          if (oEvent.getParameters().selectedItems != undefined) {
+            var Material = oEvent
+              .getParameters()
+              .selectedItem.getCells()[0]
+              .getTitle();
+            var MatDesc = oEvent
+              .getParameters()
+              .selectedItem.getCells()[1]
+              .getTitle();
+            var MatUOM = oEvent
+              .getParameters()
+              .selectedItem.getCells()[3]
+              .getTitle();
+
+            var ComponentTable = sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .getData().ComponentData;
+
+            for (var ind = 0; ind < ComponentTable.length; ind++) {
+              if (ComponentTable[ind].Data01 === " ") {
+                ComponentTable[ind].Data01 = Material;
+                ComponentTable[ind].Data02 = MatDesc;
+                ComponentTable[ind].Data07 = MatUOM;
+                ComponentTable[ind].Data10 = false;
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .setData("ComponentData", ComponentTable);
+          }
+        },
+
+        onPostCompCopy: function (oEvent) {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var ComponentLine = {};
+          var Plant = " ";
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`idPostComponentList`)
+            .getSelectedIndices()[0];
+
+          if (Tableindex != undefined) {
+            sap.ui.getCore().byId(`idPostComponentList`).clearSelection();
+
+            var ComponentTable = sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .getData().ComponentData;
+
+            for (var ind = 0; ind < ComponentTable.length; ind++) {
+              if (Tableindex === ind) {
+                ComponentLine = ComponentTable[ind];
+                ComponentTable.push(ComponentLine);
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .setData("ComponentData",ComponentTable);
+
+              // ComponentData
+          }
+        },
+
+		onPostCompDel: function(oEvent) {
+			var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var ComponentLine = {};
+          var ComponentNewData = [];
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`idPostComponentList`)
+            .getSelectedIndices()[0];
+
+          if (Tableindex != undefined) {
+            sap.ui.getCore().byId(`idPostComponentList`).clearSelection();
+
+            var ComponentTable = sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .getData().ComponentData;
+
+            for (var ind = 0; ind < ComponentTable.length; ind++) {
+              if (Tableindex != ind) {
+                ComponentLine = ComponentTable[ind];
+                ComponentNewData.push(ComponentLine);
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .setData("ComponentData",ComponentNewData);
+              // ComponentData
+          }
+		},
       }
     );
   }

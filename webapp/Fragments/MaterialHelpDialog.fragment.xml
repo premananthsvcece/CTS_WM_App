@@ -1,0 +1,50 @@
+<c:FragmentDefinition
+    id="BatchOutput"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <TableSelectDialog
+        id="idMaterialDialog"
+        noDataText="No Batch Found"
+        growing="true"
+        title="Display Material"
+        search="onMaterialDataDialogSearch"
+        liveChange="onMaterialDataDialogSearch"
+        cancel="onMaterialInputClose"
+        confirm="onMaterialInputChange"
+        items="{MaterialModel>/MaterialData}"
+        contentWidth="40%"
+        contentHeight="auto"
+    >
+        <columns>
+            <Column width="auto">
+                <header>
+                    <Text text="{i18n>Component}" />
+                </header>
+            </Column>
+            <Column demandPopin="true">
+                <header>
+                    <Text text="{i18n>ComponentDetail}" />
+                </header>
+            </Column>
+            <Column demandPopin="true">
+                <header>
+                    <Text text="{i18n>ComponentType}" />
+                </header>
+            </Column>
+            <Column demandPopin="true">
+                <header>
+                    <Text text="{i18n>ComponentUOM}" />
+                </header>
+            </Column>
+        </columns>
+        <ColumnListItem vAlign="Middle">
+            <cells>
+                <ObjectIdentifier title="{MaterialModel>Data01}" />
+                <ObjectIdentifier title="{MaterialModel>Data02}" />
+                <ObjectIdentifier title="{MaterialModel>Data03}" />
+                <ObjectIdentifier title="{MaterialModel>Data04}" />
+            </cells>
+        </ColumnListItem>
+    </TableSelectDialog>
+</c:FragmentDefinition>
