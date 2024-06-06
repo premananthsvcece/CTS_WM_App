@@ -1992,10 +1992,10 @@ sap.ui.define(
           var that = this;
           sap.ui.getCore().byId(`idStartOperator`).setValueState();
           var Path = that.getView().getId();
-          sap.ui
-            .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .clearSelection();
+          // sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .clearSelection();
           // sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
           this.StartDialog.close();
         },
@@ -3339,7 +3339,7 @@ sap.ui.define(
             for (var bth = 0; bth < IEntry.NavWC_Component.length; bth++) {
               if (IEntry.NavWC_Component[bth].Data06 != "") {
                 var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
-                if (Qty != 0) {
+                if (Qty != 0 ) {
                   if (IEntry.NavWC_Component[bth].Data05 === "") {
                     that.hideBusyIndicator();
                     var message = that
