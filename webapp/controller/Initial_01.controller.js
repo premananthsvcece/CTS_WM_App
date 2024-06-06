@@ -1734,10 +1734,10 @@ sap.ui.define(
               }
             }
 
-            sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .clearSelection();
+            // sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idInprogressOrderList`)
+            //   .clearSelection();
             index = 0;
             SelAufnr = sap.ui
               .getCore()
@@ -1777,10 +1777,10 @@ sap.ui.define(
                 }
               }
 
-              sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .clearSelection();
+              // sap.ui
+              //   .getCore()
+              //   .byId(`${Path}--idQueueOrderList`)
+              //   .clearSelection();
               index = 1;
               SelAufnr = sap.ui
                 .getCore()
@@ -1996,7 +1996,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInprogressOrderList`)
             .clearSelection();
-          sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
+          // sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
           this.StartDialog.close();
         },
         onStopPressed: function (oEvent) {
@@ -2204,10 +2204,10 @@ sap.ui.define(
               }
             }
 
-            sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .clearSelection();
+            // sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idInprogressOrderList`)
+            //   .clearSelection();
 
             SelAufnr = sap.ui
               .getCore()
@@ -2304,10 +2304,10 @@ sap.ui.define(
           var that = this;
           that.StopDialog.close();
           var Path = that.getView().getId();
-          sap.ui
-            .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .clearSelection();
+          // sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .clearSelection();
           // Raise Message
           var message = that
             .getView()
@@ -2344,10 +2344,10 @@ sap.ui.define(
               }
             }
 
-            sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .clearSelection();
+            // sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idInprogressOrderList`)
+            //   .clearSelection();
             index = 0;
             // SelAufnr = sap.ui
             //   .getCore()
@@ -2384,10 +2384,10 @@ sap.ui.define(
                 }
               }
 
-              sap.ui
-                .getCore()
-                .byId(`${Path}--idQueueOrderList`)
-                .clearSelection();
+              // sap.ui
+              //   .getCore()
+              //   .byId(`${Path}--idQueueOrderList`)
+              //   .clearSelection();
               index = 0;
 
               SelAufnr = sap.ui
@@ -2422,10 +2422,10 @@ sap.ui.define(
                 }
               }
 
-              sap.ui
-                .getCore()
-                .byId(`${Path}--idFutureOrderList`)
-                .clearSelection();
+              // sap.ui
+              //   .getCore()
+              //   .byId(`${Path}--idFutureOrderList`)
+              //   .clearSelection();
 
               SelAufnr = sap.ui
                 .getCore()
@@ -2700,10 +2700,10 @@ sap.ui.define(
                 console.log(Tableindex);
               }
             }
-            sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .clearSelection();
+            // sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idInprogressOrderList`)
+            //   .clearSelection();
             SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
@@ -2910,10 +2910,10 @@ sap.ui.define(
         onCancelScarpPress: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
-          sap.ui
-            .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .clearSelection();
+          // sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .clearSelection();
           that.onButtonPress();
           that.ScrapActionDialog.close();
         },
@@ -3358,10 +3358,10 @@ sap.ui.define(
           }
           that.PostActionDialog.close();
           // that.PostActionDialog.destroy();
-          sap.ui
-            .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .clearSelection();
+          // sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .clearSelection();
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
             IEntry,
@@ -3395,10 +3395,10 @@ sap.ui.define(
           var that = this;
           that.PostActionDialog.close();
           var Path = that.getView().getId();
-          sap.ui
-            .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .clearSelection();
+          // sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .clearSelection();
           // that.PostActionDialog.destroy();
         },
         onPostQuantityChange: function (oEvent) {
@@ -3496,8 +3496,14 @@ sap.ui.define(
                     } else {
                       ComponentData[i].Data09 = true;
                     }
+                    if (ComponentData[i].Data10 === "false") {
+                      ComponentData[i].Data10 = false;
+                    } else {
+                      ComponentData[i].Data10 = true;
+                    }
                     ComponentDataLoop.push(ComponentData[i]);
                   }
+
                   ComponentModel.setData({
                     ComponentData: ComponentData,
                   });
@@ -3538,10 +3544,10 @@ sap.ui.define(
               }
             }
 
-            sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .clearSelection();
+            // sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idInprogressOrderList`)
+            //   .clearSelection();
             index = 0;
             StartDate = sap.ui
               .getCore()
@@ -3576,10 +3582,10 @@ sap.ui.define(
               .getResourceBundle()
               .getText("Gen004");
             MessageBox.error(message);
-            sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .clearSelection();
+            // sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idInprogressOrderList`)
+            //   .clearSelection();
             return;
           }
 
@@ -3600,7 +3606,7 @@ sap.ui.define(
               }
             }
 
-            sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
+            // sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
             index = 0;
             StartDate = sap.ui
               .getCore()
@@ -4301,7 +4307,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
 
           if (Tableindex != undefined) {
-            sap.ui.getCore().byId(`idPostComponentList`).clearSelection();
+            // sap.ui.getCore().byId(`idPostComponentList`).clearSelection();
 
             var ComponentTable = sap.ui
               .getCore()
@@ -4340,7 +4346,7 @@ sap.ui.define(
             .getSelectedIndices()[0];
 
           if (Tableindex != undefined) {
-            sap.ui.getCore().byId(`idPostComponentList`).clearSelection();
+            // sap.ui.getCore().byId(`idPostComponentList`).clearSelection();
 
             var ComponentTable = sap.ui
               .getCore()
