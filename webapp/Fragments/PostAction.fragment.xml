@@ -5,6 +5,7 @@
     xmlns:l="sap.ui.layout"
     xmlns:sf="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
+    xmlns:uiTable="sap.ui.table"
     autoFocus="false"
 >
     <Dialog
@@ -63,7 +64,10 @@
                                         }"
                                     />
                                 </InputListItem>
-                                <InputListItem label="{i18n>SetupTime}" visible="false">
+                                <InputListItem
+                                    label="{i18n>SetupTime}"
+                                    visible="false"
+                                >
                                     <Input
                                         id="idPostSetupTIme"
                                         type="Number"
@@ -75,7 +79,7 @@
                                         }"
                                     />
                                 </InputListItem>
-                                <InputListItem label="{i18n>PostQuan} *" >
+                                <InputListItem label="{i18n>PostQuan} *">
                                     <Input
                                         id="idPostQuantity"
                                         type="Number"
@@ -87,7 +91,7 @@
                                         }"
                                     />
                                 </InputListItem>
-                                <InputListItem label="{i18n>BinDet} *" >
+                                <InputListItem label="{i18n>BinDet} *">
                                     <Input
                                         id="idPostBinDet"
                                         required="true"
@@ -134,80 +138,122 @@
                                     </ColumnListItem>
                                 </items>
                             </Table>
-                            <Table
+                            <uiTable:Table
                                 id="idPostComponentList"
-                                class="sapUiContentPadding"
-                                items="{ComponentModel>/ComponentData}"
-                                showSeparators="None"
+                                visibleRowCount="5"
+                                visibleRowCountMode="Interactive"
+                                class="sapUiResponsiveMargin"
+                                rows="{ComponentModel>/ComponentData}"
+                                alternateRowColors="true"
+                                enableSelectAll="false"
+                                selectionBehavior="RowOnly"
+                                selectionMode="Single"
+                                enableCellFilter="true"
                             >
-                                <columns>
-                                    <Column
-                                        demandPopin="true"
-                                        width="30%"
-                                    >
-                                        <Text text="{i18n>Component}" />
-                                    </Column>
-                                    <Column
-                                        demandPopin="true"
-                                        width="10%"
-                                    >
-                                        <Text text="{i18n>Plant}" />
-                                    </Column>
-                                    <Column
-                                        demandPopin="true"
-                                        width="10%"
-                                    >
-                                        <Text text="{i18n>Location}" />
-                                    </Column>
-                                    <Column
-                                        demandPopin="true"
-                                        width="10%"
-                                    >
-                                        <Text text="{i18n>MovementType}" />
-                                    </Column>
-                                    <Column
-                                        demandPopin="true"
-                                        width="15%"
-                                    >
+                                <uiTable:extension>
+                                    <OverflowToolbar>
+                                        <Title level="H2" />
+                                        <ToolbarSpacer />
+                                        <Button
+                                            text="Add"
+                                            type="Transparent"
+                                            press="onPostCompAdd"
+                                            icon="sap-icon://add"
+                                        />
+                                        <Button
+                                            text="Copy"
+                                            type="Transparent"
+                                            press="onPostCompCopy"
+                                            icon="sap-icon://copy"
+                                        />
+                                        <Button
+                                            text="Delete"
+                                            type="Attention"
+                                            press="onPostCompDel"
+                                            icon="sap-icon://delete"
+                                        />
+                                    </OverflowToolbar>
+                                </uiTable:extension>
+                                <uiTable:noData text="{i18n>NoData}" />
+                                <uiTable:columns>
+                                    <uiTable:Column width="15%">
+                                        <Label text="{i18n>Component}" />
+                                        <uiTable:template>
+                                            <Input
+                                                value="{ComponentModel>Data01}"
+                                                valueHelpRequest="onMaterailHelpRequest"
+                                                showValueHelp="true"
+                                            />
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                    <uiTable:Column width="10%">
+                                        <Label text="{i18n>ComponentDescr}" />
+                                        <uiTable:template>
+                                            <Input
+                                                value="{ComponentModel>Data02}"
+                                                valueHelpRequest="onMaterailHelpRequest"
+                                                showValueHelp="false"
+                                                enabled="false"
+                                            />
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                    <uiTable:Column width="7%">
+                                        <Label text="{i18n>Plant}" />
+                                        <uiTable:template>
+                                            <Input
+                                                value="{ComponentModel>Data03}"
+                                                enabled="false"
+                                            />
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                    <uiTable:Column width="7%">
+                                        <Label text="{i18n>Location}" />
+                                        <uiTable:template>
+                                            <Input
+                                                value="{ComponentModel>Data04}"
+                                                enabled="false"
+                                            />
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                    <uiTable:Column width="7%">
+                                        <Label text="{i18n>MovementType}" />
+                                        <uiTable:template>
+                                            <Input
+                                                value="{ComponentModel>Data08}"
+                                                enabled="false"
+                                            />
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                    <uiTable:Column width="12%">
                                         <Label text="{i18n>BatchOnly} *" />
-                                    </Column>
-                                    <Column
-                                        demandPopin="true"
-                                        width="25%"
-                                    >
-                                        <Label text="{i18n>RequriedQuan} *" />
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem vAlign="Middle">
-                                        <cells>
-                                            <ObjectIdentifier
-                                                title="{ComponentModel>Data01}"
-                                                text="{ComponentModel>Data02}"
-                                            />
-                                            <ObjectIdentifier
-                                                title="{ComponentModel>Data03}"
-                                            />
-                                            <ObjectIdentifier
-                                                title="{ComponentModel>Data04}"
-                                            />
-                                            <ObjectIdentifier
-                                                title="{ComponentModel>Data08}"
-                                            />
+                                        <uiTable:template>
                                             <Input
                                                 value="{ComponentModel>Data05}"
                                                 valueHelpRequest="onBatchHelpRequest"
                                                 showValueHelp="true"
                                             />
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                    <uiTable:Column width="12%">
+                                        <Label text="{i18n>RequriedQuan} *" />
+                                        <uiTable:template>
                                             <Input
                                                 value="{ComponentModel>Data06}"
-                                                description="{ComponentModel>Data07}"
                                                 enabled="{ComponentModel>Data09}"
                                             />
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                    <uiTable:Column width="5%">
+                                        <Label text="{i18n>UOM}" />
+                                        <uiTable:template>
+                                            <Input
+                                                value="{ComponentModel>Data07}"
+                                                enabled="{ComponentModel>Data09}"
+                                            />
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                </uiTable:columns>
+                            </uiTable:Table>
                         </IconTabFilter>
                         <IconTabFilter
                             key="Activity"

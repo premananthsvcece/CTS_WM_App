@@ -64,7 +64,7 @@ sap.ui.define(
                   var Plant = oData.results[0].Data01;
                   var PlantName = oData.results[0].Data03;
                   var Workcenter = oData.results[0].Data02;
-                  var SelWCGrp;
+                  var SelWCGrp = oData.results[0].Data04;
                   var Path = that.getView().getId();
                   sap.ui
                     .getCore()
@@ -90,6 +90,16 @@ sap.ui.define(
                     .getCore()
                     .byId(Path + "--idTextWorkCenter")
                     .setText(Workcenter);
+
+                  sap.ui
+                    .getCore()
+                    .byId(Path + "--idInputWorkArea")
+                    .setValue(SelWCGrp);
+
+                  sap.ui
+                    .getCore()
+                    .byId(Path + "--idTextWorkArea")
+                    .setText(SelWCGrp);
 
                   if (Plant != " ") {
                     that.onLoadData(that, Plant, SelWCGrp, Workcenter);
@@ -422,10 +432,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WorkCenter' and Key04 eq '" +
-            SelPlant +
-            "' and Key05 eq '" +
-            SelWCGrp +
-            "'",
+              SelPlant +
+              "' and Key05 eq '" +
+              SelWCGrp +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -491,12 +501,12 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OrderNo' and Key04 eq '" +
-            SelPlant +
-            "' and Key05 eq '" +
-            SelWCGrp +
-            "' and Key03 eq '" +
-            SelWCValue +
-            "'",
+              SelPlant +
+              "' and Key05 eq '" +
+              SelWCGrp +
+              "' and Key03 eq '" +
+              SelWCValue +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -545,8 +555,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WCGroup' and Key04 eq '" +
-            SelPlant +
-            "'",
+              SelPlant +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -754,10 +764,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BOM' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "'",
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -992,10 +1002,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Routing' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "'",
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -1305,8 +1315,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'DrawingURl' and Key02 eq '" +
-            SelMatnr +
-            "'",
+              SelMatnr +
+              "'",
             {
               context: null,
               async: false,
@@ -1627,10 +1637,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-            sValue +
-            "' and Key03 eq '" +
-            SelPlant +
-            "'",
+              sValue +
+              "' and Key03 eq '" +
+              SelPlant +
+              "'",
             {
               context: null,
               async: false,
@@ -1921,10 +1931,10 @@ sap.ui.define(
 
                 oModel.read(
                   "/ValueHelpSet?$filter=Key01 eq 'RoutingText' and Key02 eq '" +
-                  SelAufnr +
-                  "' and Key03 eq '" + 
-                  SelOprNo + 
-                  "'",
+                    SelAufnr +
+                    "' and Key03 eq '" +
+                    SelOprNo +
+                    "'",
                   {
                     context: null,
                     async: false,
@@ -1933,6 +1943,7 @@ sap.ui.define(
                       try {
                         if (oData.results.length != 0) {
                           var LongText = oData.results[0];
+                          // LongText.Data01.replace(/\n/g, " ");
                           var TitleText = that
                             .getView()
                             .getModel("i18n")
@@ -1943,7 +1954,7 @@ sap.ui.define(
                               type: DialogType.Message,
                               title: TitleText,
                               state: ValueState.Information,
-                              contentWidth: '45%',
+                              contentWidth: "45%",
                               content: new Text({ text: LongText.Data01 }),
                               beginButton: new Button({
                                 type: ButtonType.Emphasized,
@@ -2130,10 +2141,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-            sValue +
-            "' and Key03 eq '" +
-            SelPlant +
-            "'",
+              sValue +
+              "' and Key03 eq '" +
+              SelPlant +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -2447,8 +2458,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'HeaderText' and Key02 eq '" +
-            SelAufnr +
-            "'",
+              SelAufnr +
+              "'",
             {
               context: null,
               async: false,
@@ -2606,8 +2617,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
-            SelPlant +
-            "'",
+              SelPlant +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -3008,14 +3019,14 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Post' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "' and Key04 eq '" +
-            OperatorNo +
-            "' and Key05 eq '" +
-            SelPlant +
-            "'",
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
             {
               context: null,
               async: false,
@@ -3064,14 +3075,14 @@ sap.ui.define(
 
           vModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Component' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "' and Key04 eq '" +
-            OperatorNo +
-            "' and Key05 eq '" +
-            SelPlant +
-            "'",
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
             {
               context: null,
               async: false,
@@ -3114,7 +3125,7 @@ sap.ui.define(
                           .getText("GRDetail");
                       }
 
-                      ComponentnList.setHeaderText(HeaderText);
+                      ComponentnList.setTitle(HeaderText);
 
                       ComponentnList.setModel(ComponentModel, "ComponentModel");
                     }
@@ -3129,7 +3140,7 @@ sap.ui.define(
                       .getCore()
                       .byId("idPostComponentList");
 
-                    ComponentnList.setHeaderText(""); // Blank
+                    ComponentnList.setTitle(""); // Blank
 
                     ComponentnList.setModel(ComponentModel, "ComponentModel");
                     that.hideBusyIndicator();
@@ -3146,14 +3157,14 @@ sap.ui.define(
           that.showBusyIndicator();
           logModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'LogData' and Key02 eq '" +
-            SelAufnr +
-            "' and Key03 eq '" +
-            SelOprNo +
-            "' and Key04 eq '" +
-            OperatorNo +
-            "' and Key05 eq '" +
-            SelPlant +
-            "'",
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "' and Key04 eq '" +
+              OperatorNo +
+              "' and Key05 eq '" +
+              SelPlant +
+              "'",
             {
               context: null,
               async: false,
@@ -3618,10 +3629,10 @@ sap.ui.define(
           var SelLgort = " ";
           var SelClabs = " ";
           if (LineArray.length != 0) {
-            SelMatnr = LineArray[0].getTitle();
-            SelWerks = LineArray[1].getTitle();
-            SelLgort = LineArray[2].getTitle();
-            SelClabs = LineArray[5].getValue();
+            SelMatnr = LineArray[0].getProperty('value');
+            SelWerks = LineArray[2].getProperty('value');
+            SelLgort = LineArray[3].getProperty('value');
+            SelClabs = LineArray[6].getProperty('value');
           }
 
           var Path = that.getView().getId();
@@ -3640,14 +3651,14 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BatchValue' and Key02 eq '" +
-            SelMatnr +
-            "' and Key03 eq '" +
-            SelWerks +
-            "' and Key04 eq '" +
-            SelLgort +
-            "' and Key05 eq '" +
-            SelClabs +
-            "'",
+              SelMatnr +
+              "' and Key03 eq '" +
+              SelWerks +
+              "' and Key04 eq '" +
+              SelLgort +
+              "' and Key05 eq '" +
+              SelClabs +
+              "'",
             {
               context: null,
               async: false,
@@ -3767,8 +3778,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
-            Plant +
-            "'",
+              Plant +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -4042,8 +4053,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Bin' and Key04 eq '" +
-            SelPlant +
-            "'",
+              SelPlant +
+              "'",
             {
               context: null,
               urlParameters: null,
@@ -4086,6 +4097,130 @@ sap.ui.define(
               return;
             }
           }
+        },
+
+        onPostCompAdd: function (oEvent) {
+          var ComponentData = sap.ui
+            .getCore()
+            .byId("idPostComponentList")
+            .getModel("ComponentModel")
+            .getData().ComponentData;
+
+          var line = {
+            Data01: "",
+            Data02: "",
+            Data03: "DKKV",
+            Data04: "GI01",
+            Data05: "",
+            Data06: "",
+            Data07: "",
+            Data08: "261",
+            Data09: true,
+            Data10: "",
+            Data11: "",
+            Data12: "",
+            Data13: "",
+            Data14: "",
+            Data15: "",
+            Data16: "",
+            Data17: "",
+            Data18: "",
+            Data19: "",
+            Data20: "",
+            Key01: "Component",
+            Key02: "",
+            Key03: "N",
+            Key04: "2",
+            Key05: "",
+          };
+          ComponentData.push(line);
+
+          var ComponentModel = new sap.ui.model.json.JSONModel();
+
+          ComponentModel.setData({
+            ComponentData: ComponentData,
+          });
+          var ComponentnList = sap.ui.getCore().byId("idPostComponentList");
+
+          ComponentnList.setModel(ComponentModel, "ComponentModel");
+        },
+
+        onMaterailHelpRequest: function (oEvent) {
+          var that = this;
+          var LineArray = oEvent.getSource().getParent().getCells();
+          var SelMatnr = " ";
+          var SelWerks = " ";
+          var SelLgort = " ";
+          var SelClabs = " ";
+          if (LineArray.length != 0) {
+            SelMatnr = LineArray[0].getTitle();
+            SelWerks = LineArray[1].getTitle();
+            SelLgort = LineArray[2].getTitle();
+            SelClabs = LineArray[5].getValue();
+          }
+
+          var Path = that.getView().getId();
+
+          if (!that.BatchHelpDialog) {
+            that.BatchHelpDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.BatchHelpDialog",
+              that
+            );
+            that.getView().addDependent(that.BatchHelpDialog);
+          }
+          that.showBusyIndicator();
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'BatchValue' and Key02 eq '" +
+              SelMatnr +
+              "' and Key03 eq '" +
+              SelWerks +
+              "' and Key04 eq '" +
+              SelLgort +
+              "' and Key05 eq '" +
+              SelClabs +
+              "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var BatchData = oData.results;
+                    if (BatchData.length != 0) {
+                      var BatchModel = new sap.ui.model.json.JSONModel();
+
+                      BatchModel.setData({
+                        BatchData: BatchData,
+                      });
+                      var BatchList = sap.ui.getCore().byId("idBatchDialog");
+
+                      BatchList.setModel(BatchModel, "BatchModel");
+                    }
+                    that.hideBusyIndicator();
+                    that.BatchHelpDialog.open();
+                  } else {
+                    that.hideBusyIndicator();
+                    // Raise Message
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("BOM002");
+                    MessageToast.show(message);
+                  }
+                } catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                  // alert(e.message);
+                }
+              },
+            }
+          );
         },
       }
     );
