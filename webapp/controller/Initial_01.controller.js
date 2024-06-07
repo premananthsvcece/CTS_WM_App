@@ -47,6 +47,9 @@ sap.ui.define(
     // shortcut for sap.ui.core.ValueState
     var ValueState = coreLibrary.ValueState;
 
+    var sBatchId = "";
+    var sMovementId = "";
+
     return Controller.extend(
       "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
       {
@@ -212,11 +215,14 @@ sap.ui.define(
 
                 InProgressTable.setModel(InProgressModel, "InProgressModel");
                 var Line = InProgressTable.getSelectedIndex();
-                var aIndices = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+                var aIndices = sap.ui
+                  .getCore()
+                  .byId(`${Path}--idInprogressOrderList`)
+                  .getBinding("rows").aIndices;
                 for (var loop = 0; loop in aIndices; loop++) {
                   if (loop === Line) {
                     Line = aIndices[loop];
-                    break;                
+                    break;
                   }
                 }
 
@@ -227,10 +233,9 @@ sap.ui.define(
                   InProgressTable.getBinding("rows").filter(Filter);
                   InProgressTable.getBinding("rows").sort(Sorting);
                   Line = parseInt(Line);
-                  if(Line != NaN && Line != -1){
+                  if (Line != NaN && Line != -1) {
                     InProgressTable.setSelectedIndex(Line);
                   }
-                  
                 }
 
                 // Queue
@@ -248,12 +253,15 @@ sap.ui.define(
                   .byId(Path + "--idQueueOrderList");
 
                 InQueueTable.setModel(InQueueModel, "InQueueModel");
-                  var Line = InQueueTable.getSelectedIndex();
-                  var aIndices = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getBinding("rows").aIndices;
+                var Line = InQueueTable.getSelectedIndex();
+                var aIndices = sap.ui
+                  .getCore()
+                  .byId(`${Path}--idQueueOrderList`)
+                  .getBinding("rows").aIndices;
                 for (var loop = 0; loop in aIndices; loop++) {
                   if (loop === Line) {
                     Line = aIndices[loop];
-                    break;                
+                    break;
                   }
                 }
 
@@ -264,7 +272,7 @@ sap.ui.define(
                   InQueueTable.getBinding("rows").filter(Filter);
                   InQueueTable.getBinding("rows").sort(Sorting);
                   Line = parseInt(Line);
-                  if(Line != NaN && Line != -1){
+                  if (Line != NaN && Line != -1) {
                     InQueueTable.setSelectedIndex(Line);
                   }
                 }
@@ -285,11 +293,14 @@ sap.ui.define(
 
                 InFutureTable.setModel(InFutureModel, "InFutureModel");
                 var Line = InFutureTable.getSelectedIndex();
-                var aIndices = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getBinding("rows").aIndices;
+                var aIndices = sap.ui
+                  .getCore()
+                  .byId(`${Path}--idFutureOrderList`)
+                  .getBinding("rows").aIndices;
                 for (var loop = 0; loop in aIndices; loop++) {
                   if (loop === Line) {
                     Line = aIndices[loop];
-                    break;                
+                    break;
                   }
                 }
 
@@ -300,7 +311,7 @@ sap.ui.define(
                   InFutureTable.getBinding("rows").filter(Filter);
                   InFutureTable.getBinding("rows").sort(Sorting);
                   Line = parseInt(Line);
-                  if(Line != NaN && Line != -1){
+                  if (Line != NaN && Line != -1) {
                     InFutureTable.setSelectedIndex(Line);
                   }
                 }
@@ -3680,6 +3691,7 @@ sap.ui.define(
 
         onBatchHelpRequest: function (oEvent) {
           var that = this;
+          var sId = oEvent.getParameter("id");
           var LineArray = oEvent.getSource().getParent().getCells();
           var SelMatnr = " ";
           var SelWerks = " ";
@@ -3702,6 +3714,8 @@ sap.ui.define(
             that.getView().addDependent(that.BatchHelpDialog);
           }
           that.showBusyIndicator();
+
+          sBatchId = sId;
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -3775,6 +3789,10 @@ sap.ui.define(
               .selectedItem.getCells()[2]
               .getText();
 
+            var HelpBatchPath = sap.ui.getCore().byId(sBatchId).getParent()
+              .oBindingContexts.ComponentModel.sPath;
+            var BatchLineArray = HelpBatchPath.split("/");
+            var BatchLineUpdate = parseInt(BatchLineArray[2]);
             var ComponentTable = sap.ui
               .getCore()
               .byId("idPostComponentList")
@@ -3782,11 +3800,7 @@ sap.ui.define(
               .getData().ComponentData;
 
             for (var ind = 0; ind < ComponentTable.length; ind++) {
-              if (
-                Component === ComponentTable[ind].Data01 &&
-                Plant === ComponentTable[ind].Data03 &&
-                Location === ComponentTable[ind].Data04
-              ) {
+              if (BatchLineUpdate === ind) {
                 ComponentTable[ind].Data05 = Batch;
               }
             }
@@ -4277,6 +4291,74 @@ sap.ui.define(
           );
         },
 
+        onMovementHelpRequest: function (oEvent) {
+          var that = this;
+          var sId = oEvent.getParameter("id");
+          var LineArray = oEvent.getSource().getParent().getCells();
+          var SelWerks = " ";
+          var SelLgort = " ";
+          if (LineArray.length != 0) {
+            SelWerks = LineArray[2].getProperty("text");
+            SelLgort = LineArray[3].getProperty("text");
+          }
+
+          var Path = that.getView().getId();
+
+          if (!that.MovementHelpDialog) {
+            that.MovementHelpDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.MovementHelpDialog",
+              that
+            );
+            that.getView().addDependent(that.MovementHelpDialog);
+          }
+          that.showBusyIndicator();
+          sMovementId = sId;
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read("/ValueHelpSet?$filter=Key01 eq 'MovementType'", {
+            context: null,
+            async: false,
+            urlParameters: null,
+            success: function (oData, oResponse) {
+              try {
+                if (oData.results.length != 0) {
+                  var MovementData = oData.results;
+                  if (MovementData.length != 0) {
+                    var MovementModel = new sap.ui.model.json.JSONModel();
+
+                    MovementModel.setData({
+                      MovementData: MovementData,
+                    });
+                    var MovementList = sap.ui
+                      .getCore()
+                      .byId("idMovementDialog");
+
+                    MovementList.setModel(MovementModel, "MovementModel");
+                  }
+                  that.hideBusyIndicator();
+                  that.MovementHelpDialog.open();
+                } else {
+                  that.hideBusyIndicator();
+                  // Raise Message
+                  var message = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("BOM002");
+                  MessageToast.show(message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                }
+              } catch (e) {
+                MessageToast.show(e.message);
+                $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                // alert(e.message);
+              }
+            },
+          });
+        },
+
         onMaterialDataDialogSearch: function (oEvent) {
           var sValue = oEvent.getParameter("value");
           var oFilter = new Filter({
@@ -4285,6 +4367,18 @@ sap.ui.define(
               new Filter("Data02", FilterOperator.Contains, sValue),
               new Filter("Data03", FilterOperator.Contains, sValue),
               new Filter("Data04", FilterOperator.Contains, sValue),
+            ],
+          });
+          var oBinding = oEvent.getParameter("itemsBinding");
+          oBinding.filter([oFilter]);
+        },
+
+        onMovementDataDialogSearch: function (oEvent) {
+          var sValue = oEvent.getParameter("value");
+          var oFilter = new Filter({
+            filters: [
+              new Filter("Data01", FilterOperator.Contains, sValue),
+              new Filter("Data02", FilterOperator.Contains, sValue),
             ],
           });
           var oBinding = oEvent.getParameter("itemsBinding");
@@ -4319,6 +4413,37 @@ sap.ui.define(
                 ComponentTable[ind].Data02 = MatDesc;
                 ComponentTable[ind].Data07 = MatUOM;
                 ComponentTable[ind].Data10 = false;
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .setData({ ComponentData: ComponentTable });
+          }
+        },
+
+        onMovementInputChange: function (oEvent) {
+          var that = this;
+          if (oEvent.getParameters().selectedItems != undefined) {
+            var Movement = oEvent
+              .getParameters()
+              .selectedItem.getCells()[0]
+              .getTitle();
+            var ComponentTable = sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .getData().ComponentData;
+
+            var HelpMovementPath = sap.ui.getCore().byId(sMovementId).getParent()
+              .oBindingContexts.ComponentModel.sPath;
+            var MovementLineArray = HelpMovementPath.split("/");
+            var MovementLineUpdate = parseInt(MovementLineArray[2]);
+
+            for (var ind = 0; ind < ComponentTable.length; ind++) {
+              if (MovementLineUpdate === ind) {
+                ComponentTable[ind].Data08 = Movement;
               }
             }
             sap.ui

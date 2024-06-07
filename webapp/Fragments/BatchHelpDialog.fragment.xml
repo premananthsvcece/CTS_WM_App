@@ -15,7 +15,7 @@
         items="{BatchModel>/BatchData}"
         contentWidth="40%"
         contentHeight="auto"
-    >
+    >   
         <columns>
             <Column width="auto">
                 <header>

@@ -1,5 +1,5 @@
 <c:FragmentDefinition
-    id="BatchOutput"
+    id="MaterialOutput"
     xmlns="sap.m"
     xmlns:c="sap.ui.core"
 >

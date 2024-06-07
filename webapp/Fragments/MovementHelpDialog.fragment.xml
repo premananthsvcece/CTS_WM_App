@@ -1,0 +1,38 @@
+<c:FragmentDefinition
+    id="MovementOutput"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <TableSelectDialog
+        id="idMovementDialog"
+        noDataText="No Batch Found"
+        growing="true"
+        title="Display Movement"
+        search="onMovementDataDialogSearch"
+        liveChange="onMovementDataDialogSearch"
+        cancel="onMovementInputClose"
+        confirm="onMovementInputChange"
+        items="{MovementModel>/MovementData}"
+        contentWidth="40%"
+        contentHeight="auto"
+    >
+        <columns>
+            <Column width="auto">
+                <header>
+                    <Text text="{i18n>MovementType}" />
+                </header>
+            </Column>
+            <Column width="auto">
+                <header>
+                    <Text text="{i18n>MovementTypeDesc}" />
+                </header>
+            </Column>
+        </columns>
+        <ColumnListItem vAlign="Middle">
+            <cells>
+                <ObjectIdentifier title="{MovementModel>Data01}" />
+                <ObjectIdentifier title="{MovementModel>Data02}" />
+            </cells>
+        </ColumnListItem>
+    </TableSelectDialog>
+</c:FragmentDefinition>
