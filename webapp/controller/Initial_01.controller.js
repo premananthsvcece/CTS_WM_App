@@ -3802,8 +3802,8 @@ sap.ui.define(
               .getData().ComponentData;
 
             for (var ind = 0; ind < ComponentTable.length; ind++) {
+              ComponentDataLine = ComponentTable[ind]
               if (BatchLineUpdate === ind) {
-                ComponentDataLine = ComponentTable[ind]
                 ComponentDataLine.Data05 = Batch;
               }
               ComponentData.push(ComponentDataLine);
