@@ -3838,6 +3838,11 @@ sap.ui.define(
               .getCore()
               .byId(Path + "--idInputWorkCenter")
               .setValue();
+            sap.ui
+              .getCore()
+              .byId(Path + "--idTextWorkArea")
+              .setText();
+            
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
         },
@@ -4483,7 +4488,34 @@ sap.ui.define(
 
             for (var ind = 0; ind < ComponentTable.length; ind++) {
               if (Tableindex === ind) {
-                ComponentLine = ComponentTable[ind];
+                // ComponentLine = ComponentTable[ind];
+                var ComponentLine = {
+                  Data01: ComponentTable[ind].Data01,
+                  Data02: ComponentTable[ind].Data02,
+                  Data03: ComponentTable[ind].Data03,
+                  Data04: ComponentTable[ind].Data04,
+                  Data05: ComponentTable[ind].Data05,
+                  Data06: ComponentTable[ind].Data06,
+                  Data07: ComponentTable[ind].Data07,
+                  Data08: ComponentTable[ind].Data08,
+                  Data09: ComponentTable[ind].Data09,
+                  Data10: ComponentTable[ind].Data10,
+                  Data11: ComponentTable[ind].Data11,
+                  Data12: ComponentTable[ind].Data12,
+                  Data13: ComponentTable[ind].Data13,
+                  Data14: ComponentTable[ind].Data14,
+                  Data15: ComponentTable[ind].Data15,
+                  Data16: ComponentTable[ind].Data16,
+                  Data17: ComponentTable[ind].Data17,
+                  Data18: ComponentTable[ind].Data18,
+                  Data19: ComponentTable[ind].Data19,
+                  Data20: ComponentTable[ind].Data20,
+                  Key01: ComponentTable[ind].Key01,
+                  Key02: ComponentTable[ind].Key02,
+                  Key03: ComponentTable[ind].Key03,
+                  Key04: ComponentTable[ind].Key04,
+                  Key05: ComponentTable[ind].Key05,
+                };
                 ComponentTable.push(ComponentLine);
               }
             }
@@ -4522,7 +4554,34 @@ sap.ui.define(
 
             for (var ind = 0; ind < ComponentTable.length; ind++) {
               if (Tableindex != ind) {
-                ComponentLine = ComponentTable[ind];
+                // ComponentLine = ComponentTable[ind];
+                var ComponentLine = {
+                  Data01: ComponentTable[ind].Data01,
+                  Data02: ComponentTable[ind].Data02,
+                  Data03: ComponentTable[ind].Data03,
+                  Data04: ComponentTable[ind].Data04,
+                  Data05: ComponentTable[ind].Data05,
+                  Data06: ComponentTable[ind].Data06,
+                  Data07: ComponentTable[ind].Data07,
+                  Data08: ComponentTable[ind].Data08,
+                  Data09: ComponentTable[ind].Data09,
+                  Data10: ComponentTable[ind].Data10,
+                  Data11: ComponentTable[ind].Data11,
+                  Data12: ComponentTable[ind].Data12,
+                  Data13: ComponentTable[ind].Data13,
+                  Data14: ComponentTable[ind].Data14,
+                  Data15: ComponentTable[ind].Data15,
+                  Data16: ComponentTable[ind].Data16,
+                  Data17: ComponentTable[ind].Data17,
+                  Data18: ComponentTable[ind].Data18,
+                  Data19: ComponentTable[ind].Data19,
+                  Data20: ComponentTable[ind].Data20,
+                  Key01: ComponentTable[ind].Key01,
+                  Key02: ComponentTable[ind].Key02,
+                  Key03: ComponentTable[ind].Key03,
+                  Key04: ComponentTable[ind].Key04,
+                  Key05: ComponentTable[ind].Key05,
+                };
                 ComponentNewData.push(ComponentLine);
               }
             }

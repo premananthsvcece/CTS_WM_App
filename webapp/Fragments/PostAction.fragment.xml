@@ -33,6 +33,7 @@
                                 class="sapUiContentPadding"
                                 headerText="{i18n>StartAction}"
                                 showSeparators="None"
+                                backgroundDesign="Transparent"
                             >
                                 <InputListItem label="{i18n>OprDetails}">
                                     <Input
@@ -124,6 +125,7 @@
                                 headerText="{i18n>ScarpDetail}"
                                 items="{PostScarpModel>/PostScarpData}"
                                 showSeparators="None"
+                                backgroundDesign="Transparent"
                             >
                                 <columns>
                                     <Column demandPopin="true">
@@ -165,6 +167,7 @@
                                 selectionBehavior="RowOnly"
                                 selectionMode="Single"
                                 enableCellFilter="true"
+                                backgroundDesign="Transparent"
                             >
                                 <uiTable:extension>
                                     <OverflowToolbar>
@@ -277,6 +280,7 @@
                                 class="sapUiContentPadding"
                                 headerText="{i18n>ActivityDetails}"
                                 items="{ActivityModel>/ActivityData}"
+                                backgroundDesign="Transparent"
                             >
                                 <columns>
                                     <Column
