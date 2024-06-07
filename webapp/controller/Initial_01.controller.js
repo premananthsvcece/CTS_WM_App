@@ -3793,6 +3793,8 @@ sap.ui.define(
               .oBindingContexts.ComponentModel.sPath;
             var BatchLineArray = HelpBatchPath.split("/");
             var BatchLineUpdate = parseInt(BatchLineArray[2]);
+            var ComponentData = [];
+            var ComponentDataLine = {};
             var ComponentTable = sap.ui
               .getCore()
               .byId("idPostComponentList")
@@ -3801,14 +3803,16 @@ sap.ui.define(
 
             for (var ind = 0; ind < ComponentTable.length; ind++) {
               if (BatchLineUpdate === ind) {
-                ComponentTable[ind].Data05 = Batch;
+                ComponentDataLine = ComponentTable[ind]
+                ComponentDataLine.Data05 = Batch;
               }
+              ComponentData.push(ComponentDataLine);
             }
             sap.ui
               .getCore()
               .byId("idPostComponentList")
               .getModel("ComponentModel")
-              .setData("ComponentData", ComponentTable);
+              .setData({ ComponentData: ComponentData });
           }
         },
         onBatchInputClose: function () {
