@@ -211,6 +211,14 @@ sap.ui.define(
                   .byId(Path + "--idInprogressOrderList");
 
                 InProgressTable.setModel(InProgressModel, "InProgressModel");
+                var Line = InProgressTable.getSelectedIndex();
+                var aIndices = sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).getBinding("rows").aIndices;
+                for (var loop = 0; loop in aIndices; loop++) {
+                  if (loop === Line) {
+                    Line = aIndices[loop];
+                    break;                
+                  }
+                }
 
                 var oListBinding = InProgressTable.getBinding("rows");
                 if (oListBinding) {
@@ -218,6 +226,11 @@ sap.ui.define(
                   var Filter = oListBinding.aFilters;
                   InProgressTable.getBinding("rows").filter(Filter);
                   InProgressTable.getBinding("rows").sort(Sorting);
+                  Line = parseInt(Line);
+                  if(Line != NaN && Line != -1){
+                    InProgressTable.setSelectedIndex(Line);
+                  }
+                  
                 }
 
                 // Queue
@@ -235,6 +248,14 @@ sap.ui.define(
                   .byId(Path + "--idQueueOrderList");
 
                 InQueueTable.setModel(InQueueModel, "InQueueModel");
+                  var Line = InQueueTable.getSelectedIndex();
+                  var aIndices = sap.ui.getCore().byId(`${Path}--idQueueOrderList`).getBinding("rows").aIndices;
+                for (var loop = 0; loop in aIndices; loop++) {
+                  if (loop === Line) {
+                    Line = aIndices[loop];
+                    break;                
+                  }
+                }
 
                 var oListBinding = InQueueTable.getBinding("rows");
                 if (oListBinding) {
@@ -242,6 +263,10 @@ sap.ui.define(
                   var Filter = oListBinding.aFilters;
                   InQueueTable.getBinding("rows").filter(Filter);
                   InQueueTable.getBinding("rows").sort(Sorting);
+                  Line = parseInt(Line);
+                  if(Line != NaN && Line != -1){
+                    InQueueTable.setSelectedIndex(Line);
+                  }
                 }
 
                 // Future
@@ -259,6 +284,14 @@ sap.ui.define(
                   .byId(Path + "--idFutureOrderList");
 
                 InFutureTable.setModel(InFutureModel, "InFutureModel");
+                var Line = InFutureTable.getSelectedIndex();
+                var aIndices = sap.ui.getCore().byId(`${Path}--idFutureOrderList`).getBinding("rows").aIndices;
+                for (var loop = 0; loop in aIndices; loop++) {
+                  if (loop === Line) {
+                    Line = aIndices[loop];
+                    break;                
+                  }
+                }
 
                 var oListBinding = InFutureTable.getBinding("rows");
                 if (oListBinding) {
@@ -266,6 +299,10 @@ sap.ui.define(
                   var Filter = oListBinding.aFilters;
                   InFutureTable.getBinding("rows").filter(Filter);
                   InFutureTable.getBinding("rows").sort(Sorting);
+                  Line = parseInt(Line);
+                  if(Line != NaN && Line != -1){
+                    InFutureTable.setSelectedIndex(Line);
+                  }
                 }
 
                 // }
@@ -2914,7 +2951,7 @@ sap.ui.define(
           //   .getCore()
           //   .byId(`${Path}--idInprogressOrderList`)
           //   .clearSelection();
-          that.onButtonPress();
+          // that.onButtonPress();
           that.ScrapActionDialog.close();
         },
 
@@ -3339,7 +3376,7 @@ sap.ui.define(
             for (var bth = 0; bth < IEntry.NavWC_Component.length; bth++) {
               if (IEntry.NavWC_Component[bth].Data06 != "") {
                 var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
-                if (Qty != 0 ) {
+                if (Qty != 0) {
                   if (IEntry.NavWC_Component[bth].Data05 === "") {
                     that.hideBusyIndicator();
                     var message = that
@@ -3764,7 +3801,7 @@ sap.ui.define(
           // this.BatchHelpDialog.close();
           return;
         },
-        onMaterialInputClose: function(){
+        onMaterialInputClose: function () {
           return;
         },
         onidInputWorkAreaLiveChange: function (oEvent) {
@@ -4288,7 +4325,7 @@ sap.ui.define(
               .getCore()
               .byId("idPostComponentList")
               .getModel("ComponentModel")
-              .setData("ComponentData", ComponentTable);
+              .setData({ ComponentData: ComponentTable });
           }
         },
 
@@ -4325,14 +4362,14 @@ sap.ui.define(
               .getCore()
               .byId("idPostComponentList")
               .getModel("ComponentModel")
-              .setData("ComponentData",ComponentTable);
+              .setData({ ComponentData: ComponentTable });
 
-              // ComponentData
+            // ComponentData
           }
         },
 
-		onPostCompDel: function(oEvent) {
-			var that = this;
+        onPostCompDel: function (oEvent) {
+          var that = this;
           var index;
           var Path = that.getView().getId();
 
@@ -4364,10 +4401,10 @@ sap.ui.define(
               .getCore()
               .byId("idPostComponentList")
               .getModel("ComponentModel")
-              .setData("ComponentData",ComponentNewData);
-              // ComponentData
+              .setData({ ComponentData: ComponentNewData });
+            // ComponentData
           }
-		},
+        },
       }
     );
   }
