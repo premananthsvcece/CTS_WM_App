@@ -3884,6 +3884,9 @@ sap.ui.define(
         onMaterialInputClose: function () {
           return;
         },
+        onMaterialHelpInputClose: function(){
+          return;
+        },
         onidInputWorkAreaLiveChange: function (oEvent) {
           // Validate User Entered Input
           var that = this;
@@ -4301,7 +4304,7 @@ sap.ui.define(
 
           if (!that.MaterialHelpDialog) {
             that.MaterialHelpDialog = sap.ui.xmlfragment(
-              "sap.pp.wcare.wmd.workmanagerapp.Fragments.MaterialHelpDialog",
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpMaterialDialog",
               that
             );
             that.getView().addDependent(that.MaterialHelpDialog);
@@ -4331,7 +4334,7 @@ sap.ui.define(
                       MaterialModel.setData({
                         MaterialData: MaterialData,
                       });
-                      var MaterialList = sap.ui.getCore().byId("idMaterialDialog");
+                      var MaterialList = sap.ui.getCore().byId("idHelpMaterialDialog");
 
                       MaterialList.setModel(MaterialModel, "MaterialModel");
                     }
@@ -4523,7 +4526,23 @@ sap.ui.define(
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
         },
-
+        onMaterialHelpInputChange : function (oEvent){
+          var that = this;
+          var Path = that.getView().getId();
+          if (oEvent.getParameters().selectedItems != undefined) {
+            var Material = oEvent
+              .getParameters()
+              .selectedItem.getCells()[0]
+              .getTitle();
+            
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInputComponentSelNo`)
+              .setValue(Material);
+            
+            that.onButtonPress();
+          }
+        },
         onMaterialInputChange: function (oEvent) {
           var that = this;
           if (oEvent.getParameters().selectedItems != undefined) {
