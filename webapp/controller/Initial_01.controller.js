@@ -177,14 +177,18 @@ sap.ui.define(
           var OrderNo = sap.ui
             .getCore()
             .byId(Path + "--idInputProdOrdNo")
-            .getValue(OrderNo);
+            .getValue();
+          var ComponentNo = sap.ui
+            .getCore()
+            .byId(Path + "--idInputComponentSelNo")
+            .getValue();
           var IEntry = {};
           IEntry.Key01 = "READ";
           IEntry.Key02 = Plant;
           IEntry.Key03 = Workcenter;
           IEntry.Key04 = SelWCGrp;
           IEntry.Key05 = OrderNo;
-          IEntry.ConfirmType = " ";
+          IEntry.ConfirmType = ComponentNo;
           IEntry.WorkCenterArea = " ";
           IEntry.NavWC_InProgress = [{}];
           IEntry.NavWC_Queue = [{}];
@@ -4058,6 +4062,33 @@ sap.ui.define(
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
         },
+        onidInputComponentSelLiveChange: function(oEvent){
+          // Validate User Entered Input
+          var that = this;
+          var Path = that.getView().getId();
+          var ComponentNo = oEvent.getParameters().newValue;
+          var Plant = sap.ui
+            .getCore()
+            .byId(Path + "--idInputPlant")
+            .getValue();
+          var Workcenter = sap.ui
+            .getCore()
+            .byId(Path + "--idInputWorkCenter")
+            .getValue();
+          var WorkcenterArea = sap.ui
+            .getCore()
+            .byId(Path + "--idInputWorkArea")
+            .getValue();
+
+          sap.ui
+            .getCore()
+            .byId(Path + "--idInputComponentSelNo")
+            .setValue(ComponentNo);
+
+          if (Plant != " ") {
+            that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
+          }
+        },
         _initialData: {
           columns: [
             {
@@ -4319,7 +4350,7 @@ sap.ui.define(
               SelWerks +
               "' and Key03 eq '" +
               SelLgort +
-              "'",
+              "' and Key04 eq 'Header'",
             {
               context: null,
               async: false,
@@ -4334,7 +4365,9 @@ sap.ui.define(
                       MaterialModel.setData({
                         MaterialData: MaterialData,
                       });
-                      var MaterialList = sap.ui.getCore().byId("idHelpMaterialDialog");
+                      var MaterialList = sap.ui
+                        .getCore()
+                        .byId("idHelpMaterialDialog");
 
                       MaterialList.setModel(MaterialModel, "MaterialModel");
                     }
