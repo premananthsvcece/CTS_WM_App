@@ -227,6 +227,22 @@
                     />
                 </VBox>
                 <VBox>
+                    <Label
+                        text="{i18n>Component}"
+                        labelFor="idInputComponentSelNo"
+                    />
+                    <MultiInput
+                        id="idInputComponentSelNo"
+                        showValueHelp="true"
+                        width="75%"
+                        autocomplete="true"
+                        valueLiveUpdate="false"
+                        change="onidInputProdOrdNoLiveChange"
+                        valueHelpRequest="_onComponentSelHelp"
+                    />
+                </VBox>
+
+                <VBox>
                     <ndc:BarcodeScannerButton
                         id="sampleBarcodeScannerButton"
                         scanSuccess="onScanSuccess"
@@ -273,6 +289,13 @@
                                 type="Attention"
                                 icon="sap-icon://stop"
                                 press="onStopPressed"
+                            />
+                            <Button
+                                id="idRouteNotes"
+                                text="{i18n>OprNote}"
+                                type="Emphasized"
+                                icon="sap-icon://notes"
+                                press="onRouteNotesPressed"
                             />
                             <Button
                                 id="idINPScarp"
@@ -933,7 +956,9 @@
                                             text="{i18n>PlanStartDate}"
                                         />
                                         <Table:template>
-                                            <Text text= "{InQueueModel>Data08}"/>
+                                            <Text
+                                                text="{InQueueModel>Data08}"
+                                            />
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
@@ -1252,7 +1277,9 @@
                                             text="{i18n>PlanStartDate}"
                                         />
                                         <Table:template>
-                                            <Text text= "{InFutureModel>Data08}"/>
+                                            <Text
+                                                text="{InFutureModel>Data08}"
+                                            />
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column

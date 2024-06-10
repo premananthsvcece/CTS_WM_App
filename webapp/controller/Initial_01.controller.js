@@ -1733,6 +1733,121 @@ sap.ui.define(
             }
           );
         },
+        onRouteNotesPressed: function () {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+          var Tableindex = "X";
+          var SelAufnr = " ";
+          var SelOprNo = " ";
+          var OprNumber = "";
+          var OprStatus = "";
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Order No & Opr No
+          if (Tableindex != undefined) {
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
+            for (var loop = 0; loop in aIndices; loop++) {
+              if (loop === Tableindex) {
+                Tableindex = aIndices[loop];
+                break;
+                console.log(Tableindex);
+              }
+            }
+
+            SelAufnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+            SelOprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data05;
+          }
+
+          if (Tableindex === undefined) {
+            // Raise Message
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Start002");
+            MessageBox.error(message);
+            return;
+          }
+
+          // Popup to show Text from Order
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'RoutingText' and Key02 eq '" +
+              SelAufnr +
+              "' and Key03 eq '" +
+              SelOprNo +
+              "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  that.hideBusyIndicator();
+                  if (oData.results.length != 0) {
+                    var LongText = oData.results[0];
+                    // LongText.Data01.replace(/\n/g, " ");
+                    var TitleText = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("Start005");
+                    if (!that.oInfoMessageDialog) {
+                      that.oInfoMessageDialog = new Dialog({
+                        type: DialogType.Message,
+                        title: TitleText,
+                        state: ValueState.Information,
+                        contentWidth: "45%",
+                        contextHeight: "50%",
+                        content: new Text({ text: LongText.Data01 }),
+                        beginButton: new Button({
+                          type: ButtonType.Emphasized,
+                          text: "OK",
+                          press: function () {
+                            that.oInfoMessageDialog.close();
+                          }.bind(that),
+                        }),
+                      });
+                    }
+                    that.oInfoMessageDialog.open();
+
+                    // sap.ui.getCore().byId("idHeaderOrder").setText(SelAufnr);
+                  } else {
+                    // Raise Message
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("NoData");
+                    MessageToast.show(message);
+                    $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                    return;
+                  }
+                } catch (e) {
+                  that.hideBusyIndicator();
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                }
+              },
+            }
+          );
+        },
         onConfirmStartPress: function (oEvent) {
           var that = this;
           var index;
@@ -1974,58 +2089,6 @@ sap.ui.define(
                   width: "50em",
                   animationDuration: 2000,
                 });
-
-                // Popup to show Text from Order
-                var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
-                var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
-
-                oModel.read(
-                  "/ValueHelpSet?$filter=Key01 eq 'RoutingText' and Key02 eq '" +
-                    SelAufnr +
-                    "' and Key03 eq '" +
-                    SelOprNo +
-                    "'",
-                  {
-                    context: null,
-                    async: false,
-                    urlParameters: null,
-                    success: function (oData, oResponse) {
-                      try {
-                        if (oData.results.length != 0) {
-                          var LongText = oData.results[0];
-                          // LongText.Data01.replace(/\n/g, " ");
-                          var TitleText = that
-                            .getView()
-                            .getModel("i18n")
-                            .getResourceBundle()
-                            .getText("Start005");
-                          if (!that.oInfoMessageDialog) {
-                            that.oInfoMessageDialog = new Dialog({
-                              type: DialogType.Message,
-                              title: TitleText,
-                              state: ValueState.Information,
-                              contentWidth: "45%",
-                              content: new Text({ text: LongText.Data01 }),
-                              beginButton: new Button({
-                                type: ButtonType.Emphasized,
-                                text: "OK",
-                                press: function () {
-                                  that.oInfoMessageDialog.close();
-                                }.bind(that),
-                              }),
-                            });
-                          }
-                          that.oInfoMessageDialog.open();
-
-                          // sap.ui.getCore().byId("idHeaderOrder").setText(SelAufnr);
-                        }
-                      } catch (e) {
-                        alert(e.message);
-                      }
-                    },
-                  }
-                );
-
                 $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                 that.onButtonPress();
                 return;
@@ -2965,7 +3028,6 @@ sap.ui.define(
           // that.onButtonPress();
           that.ScrapActionDialog.close();
         },
-
         onPostPressed: function () {
           var that = this;
           var index;
@@ -3802,7 +3864,7 @@ sap.ui.define(
               .getData().ComponentData;
 
             for (var ind = 0; ind < ComponentTable.length; ind++) {
-              ComponentDataLine = ComponentTable[ind]
+              ComponentDataLine = ComponentTable[ind];
               if (BatchLineUpdate === ind) {
                 ComponentDataLine.Data05 = Batch;
               }
@@ -3842,7 +3904,7 @@ sap.ui.define(
               .getCore()
               .byId(Path + "--idTextWorkArea")
               .setText();
-            
+
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
         },
@@ -4226,7 +4288,75 @@ sap.ui.define(
 
           ComponentnList.setModel(ComponentModel, "ComponentModel");
         },
+        _onComponentSelHelp: function(oEvent){
+          var that = this;
+          var Path = that.getView().getId();
+          var SelWerks = " ";
+          var SelLgort = " ";
 
+          SelWerks = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+
+          if (!that.MaterialHelpDialog) {
+            that.MaterialHelpDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.MaterialHelpDialog",
+              that
+            );
+            that.getView().addDependent(that.MaterialHelpDialog);
+          }
+          that.showBusyIndicator();
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'Material' and Key02 eq '" +
+              SelWerks +
+              "' and Key03 eq '" +
+              SelLgort +
+              "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var MaterialData = oData.results;
+                    if (MaterialData.length != 0) {
+                      var MaterialModel = new sap.ui.model.json.JSONModel();
+
+                      MaterialModel.setData({
+                        MaterialData: MaterialData,
+                      });
+                      var MaterialList = sap.ui.getCore().byId("idMaterialDialog");
+
+                      MaterialList.setModel(MaterialModel, "MaterialModel");
+                    }
+                    that.hideBusyIndicator();
+                    that.MaterialHelpDialog.open();
+                  } else {
+                    that.hideBusyIndicator();
+                    // Raise Message
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("BOM002");
+                    MessageToast.show(message);
+                    $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                  }
+                } catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                  // alert(e.message);
+                }
+              },
+            }
+          );
+        },
         onMaterailHelpRequest: function (oEvent) {
           var that = this;
           var LineArray = oEvent.getSource().getParent().getCells();
@@ -4445,8 +4575,10 @@ sap.ui.define(
               .getModel("ComponentModel")
               .getData().ComponentData;
 
-            var HelpMovementPath = sap.ui.getCore().byId(sMovementId).getParent()
-              .oBindingContexts.ComponentModel.sPath;
+            var HelpMovementPath = sap.ui
+              .getCore()
+              .byId(sMovementId)
+              .getParent().oBindingContexts.ComponentModel.sPath;
             var MovementLineArray = HelpMovementPath.split("/");
             var MovementLineUpdate = parseInt(MovementLineArray[2]);
 
