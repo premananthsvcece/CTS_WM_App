@@ -49,6 +49,7 @@ sap.ui.define(
 
     var sBatchId = "";
     var sMovementId = "";
+              var sPrdSupAreaId = "";
 
     return Controller.extend(
       "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
@@ -3121,6 +3122,13 @@ sap.ui.define(
             that.getView().addDependent(that.PostActionDialog);
           }
           that.showBusyIndicator();
+          var Head = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("PostAction");
+          var Heading = Head + ' - ' + SelAufnr;
+          sap.ui.getCore().byId('idDialogPost').setTitle(Heading);
           sap.ui.getCore().byId(`idPostOperator`).setValue(OperatorNo);
           sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);
           sap.ui.getCore().byId(`idPostQuantity`).setValue();
@@ -3216,6 +3224,10 @@ sap.ui.define(
                           ComponentData[i].Data09 = false;
                         } else {
                           ComponentData[i].Data09 = true;
+                          sap.ui
+                            .getCore()
+                            .byId("idPostBinDet01")
+                            .setVisible(false);
                         }
                         if (ComponentData[i].Data10 === "false") {
                           ComponentData[i].Data10 = false;
@@ -3891,6 +3903,9 @@ sap.ui.define(
         onMaterialHelpInputClose: function(){
           return;
         },
+        onProdSuppAreaInputClose: function(){
+          return;
+        },
         onidInputWorkAreaLiveChange: function (oEvent) {
           // Validate User Entered Input
           var that = this;
@@ -4534,6 +4549,65 @@ sap.ui.define(
           });
         },
 
+        onSupplyAreaHelpRequest: function(oEvent){
+          var that = this;
+          var sId = oEvent.getParameter("id");
+          var Path = that.getView().getId();
+
+          if (!that.ProdSuppAreaDialog) {
+            that.ProdSuppAreaDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpProdSuppAreaDialog",
+              that
+            );
+            that.getView().addDependent(that.ProdSuppAreaDialog);
+          }
+          that.showBusyIndicator();
+          sPrdSupAreaId = sId;
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read("/ValueHelpSet?$filter=Key01 eq 'SupplyArea'", {
+            context: null,
+            async: false,
+            urlParameters: null,
+            success: function (oData, oResponse) {
+              try {
+                if (oData.results.length != 0) {
+                  var ProdSuppAreaData = oData.results;
+                  if (ProdSuppAreaData.length != 0) {
+                    var ProdSuppAreaModel = new sap.ui.model.json.JSONModel();
+
+                    ProdSuppAreaModel.setData({
+                      ProdSuppAreaData: ProdSuppAreaData,
+                    });
+                    var ProdSuppAreaList = sap.ui
+                      .getCore()
+                      .byId("idProdSuppAreaDialog");
+
+                    ProdSuppAreaList.setModel(ProdSuppAreaModel, "ProdSuppAreaModel");
+                  }
+                  that.hideBusyIndicator();
+                  that.ProdSuppAreaDialog.open();
+                } else {
+                  that.hideBusyIndicator();
+                  // Raise Message
+                  var message = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("BOM002");
+                  MessageToast.show(message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                }
+              } catch (e) {
+                MessageToast.show(e.message);
+                $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                // alert(e.message);
+              }
+            },
+          });
+        },
         onMaterialDataDialogSearch: function (oEvent) {
           var sValue = oEvent.getParameter("value");
           var oFilter = new Filter({
@@ -4613,7 +4687,38 @@ sap.ui.define(
               .setData({ ComponentData: ComponentTable });
           }
         },
+        onProdSuppAreaInputChange : function(oEvent){
+          var that = this;
+          if (oEvent.getParameters().selectedItems != undefined) {
+            var ProdSupplyArea = oEvent
+              .getParameters()
+              .selectedItem.getCells()[0]
+              .getTitle();
+            var ComponentTable = sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .getData().ComponentData;
 
+            var HelpPrdSupAreaPath = sap.ui
+              .getCore()
+              .byId(sPrdSupAreaId)
+              .getParent().oBindingContexts.ComponentModel.sPath;
+            var HelpPrdSupAreaArray = HelpPrdSupAreaPath.split("/");
+            var HelpPrdSupAreaUpdate = parseInt(HelpPrdSupAreaArray[2]);
+
+            for (var ind = 0; ind < ComponentTable.length; ind++) {
+              if (HelpPrdSupAreaUpdate === ind) {
+                ComponentTable[ind].Data11 = ProdSupplyArea;
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostComponentList")
+              .getModel("ComponentModel")
+              .setData({ ComponentData: ComponentTable });
+          }
+        },
         onMovementInputChange: function (oEvent) {
           var that = this;
           if (oEvent.getParameters().selectedItems != undefined) {

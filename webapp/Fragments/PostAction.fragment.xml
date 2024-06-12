@@ -91,7 +91,7 @@
                                         }"
                                     />
                                 </InputListItem>
-                                <InputListItem label="{i18n>BinDet} *">
+                                <InputListItem id="idPostBinDet01" label="{i18n>BinDet} *">
                                     <Input
                                         id="idPostBinDet"
                                         required="true"
@@ -167,7 +167,6 @@
                                 selectionBehavior="RowOnly"
                                 selectionMode="Single"
                                 enableCellFilter="true"
-                                backgroundDesign="Transparent"
                             >
                                 <uiTable:extension>
                                     <OverflowToolbar>
@@ -214,7 +213,10 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%">
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
                                         <Label text="{i18n>Plant}" />
                                         <uiTable:template>
                                             <Text
@@ -222,7 +224,10 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%">
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
                                         <Label text="{i18n>Location}" />
                                         <uiTable:template>
                                             <Text
@@ -230,6 +235,17 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
+                                    <uiTable:Column width="7%">
+                                        <Label text="{i18n>PrdSupplyArea}" />
+                                        <uiTable:template>
+                                            <Input
+                                                value="{ComponentModel>Data11}"
+                                                valueHelpRequest="onSupplyAreaHelpRequest"
+                                                showValueHelp="true"
+                                            />
+                                        </uiTable:template>
+                                    </uiTable:Column>
+
                                     <uiTable:Column width="7%">
                                         <Label text="{i18n>MovementType}" />
                                         <uiTable:template>

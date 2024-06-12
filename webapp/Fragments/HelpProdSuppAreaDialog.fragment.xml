@@ -1,0 +1,38 @@
+<c:FragmentDefinition
+    id="MovementOutput"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <TableSelectDialog
+        id="idProdSuppAreaDialog"
+        noDataText="No Batch Found"
+        growing="true"
+        title="Display Movement"
+        search="onProdSuppAreaDialogSearch"
+        liveChange="onProdSuppAreaDialogSearch"
+        cancel="onProdSuppAreaInputClose"
+        confirm="onProdSuppAreaInputChange"
+        items="{ProdSuppAreaModel>/ProdSuppAreaData}"
+        contentWidth="40%"
+        contentHeight="auto"
+    >
+        <columns>
+            <Column width="auto">
+                <header>
+                    <Text text="{i18n>PrdSupplyArea}" />
+                </header>
+            </Column>
+            <Column width="auto">
+                <header>
+                    <Text text="{i18n>Description}" />
+                </header>
+            </Column>
+        </columns>
+        <ColumnListItem vAlign="Middle">
+            <cells>
+                <ObjectIdentifier title="{ProdSuppAreaModel>Data01}" />
+                <ObjectIdentifier title="{ProdSuppAreaModel>Data02}" />
+            </cells>
+        </ColumnListItem>
+    </TableSelectDialog>
+</c:FragmentDefinition>

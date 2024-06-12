@@ -228,7 +228,7 @@
                 </VBox>
                 <VBox>
                     <Label
-                        text="{i18n>Component}"
+                        text="{i18n>ItemNo}"
                         labelFor="idInputComponentSelNo"
                     />
                     <MultiInput
