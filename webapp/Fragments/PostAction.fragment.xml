@@ -194,7 +194,7 @@
                                 </uiTable:extension>
                                 <uiTable:noData text="{i18n>NoData}" />
                                 <uiTable:columns>
-                                    <uiTable:Column width="15%">
+                                    <uiTable:Column width="12%">
                                         <Label text="{i18n>Component}" />
                                         <uiTable:template>
                                             <Input
@@ -215,7 +215,6 @@
                                     </uiTable:Column>
                                     <uiTable:Column
                                         width="7%"
-                                        visible="false"
                                     >
                                         <Label text="{i18n>Plant}" />
                                         <uiTable:template>
@@ -226,7 +225,6 @@
                                     </uiTable:Column>
                                     <uiTable:Column
                                         width="7%"
-                                        visible="false"
                                     >
                                         <Label text="{i18n>Location}" />
                                         <uiTable:template>

@@ -3779,7 +3779,7 @@ sap.ui.define(
             SelMatnr = LineArray[0].getProperty("value");
             SelWerks = LineArray[2].getProperty("text");
             SelLgort = LineArray[3].getProperty("text");
-            SelClabs = LineArray[6].getProperty("value");
+            SelClabs = LineArray[7].getProperty("value");
           }
 
           var Path = that.getView().getId();
