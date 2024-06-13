@@ -10,7 +10,7 @@
     <Dialog
         id="idDialogPost"
         title="{i18n>PostAction}"
-        contentWidth="60%"
+        contentWidth="75%"
     >
         <l:VerticalLayout
             id="idVerticalLayoutPost"
