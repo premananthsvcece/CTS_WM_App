@@ -757,8 +757,9 @@
                                 <Table:columns>
                                     <Table:Column
                                         id="_IDGenColumn14"
-                                        width="10rem"
+                                        width="5rem"
                                         autoResizable="true"
+                                        visible="false"
                                     >
                                         <Label
                                             id="_IDGenLabel14"

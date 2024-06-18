@@ -3044,6 +3044,7 @@ sap.ui.define(
           var OperatorNo = " ";
           var EndDate;
           var TotTime = " ";
+          var QtyComp = "";
           // var SetupTIme = " ";
 
           var SelPlant = sap.ui
@@ -3095,6 +3096,11 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data13;
+            QtyComp = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data11
           }
           if (EndDate === "") {
             var message = that
@@ -3131,9 +3137,10 @@ sap.ui.define(
           sap.ui.getCore().byId('idDialogPost').setTitle(Heading);
           sap.ui.getCore().byId(`idPostOperator`).setValue(OperatorNo);
           sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);
-          sap.ui.getCore().byId(`idPostQuantity`).setValue();
           TotTime = parseInt(TotTime);
           sap.ui.getCore().byId("idPostTotalTime").setValue(TotTime);
+          QtyComp = parseInt(QtyComp);
+          sap.ui.getCore().byId(`idPostQuantity`).setValue(QtyComp);
           // SetupTIme = parseInt(SetupTIme);
           // sap.ui.getCore().byId("idPostSetupTIme").setValue(SetupTIme);
 
@@ -3346,6 +3353,8 @@ sap.ui.define(
           that.PostActionDialog.open();
           jQuery.sap.delayedCall(500, that, function () {
             sap.ui.getCore().byId("idPostQuantity").focus();
+            sap.ui.getCore().byId(`idPostQuantity`).fireChangeEvent();
+            // Trigger On Change Event
           });
         },
         onConfirmPostPress: function () {
@@ -3531,12 +3540,13 @@ sap.ui.define(
           var that = this;
           var index;
           var Path = that.getView().getId();
-          var value = oEvent.getParameter("value");
+          var value = sap.ui.getCore().byId(`idPostQuantity`).getValue();
+          // var value = oEvent.getParameter("value");
           // var valueArray = value.split(".");
           // if (valueArray.length != 2) {
           //   value = value + ".000";
           // }
-          sap.ui.getCore().byId("idPostQuantity").setValue(value);
+          // sap.ui.getCore().byId("idPostQuantity").setValue(value);
 
           var Tableindex = "X";
           var SelAufnr = " ";

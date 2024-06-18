@@ -35,7 +35,7 @@
                                 showSeparators="None"
                                 backgroundDesign="Transparent"
                             >
-                                <InputListItem label="{i18n>OprDetails}">
+                                <InputListItem label="{i18n>OprDetails}" visible="false">
                                     <Input
                                         id="idPostOperator"
                                         placeholder="Operator No"
@@ -44,7 +44,7 @@
                                         width="15rem"
                                     />
                                 </InputListItem>
-                                <InputListItem label="{i18n>Plant}">
+                                <InputListItem label="{i18n>Plant}" visible="false">
                                     <Input
                                         id="idSelectPostPlant"
                                         type="Text"
@@ -85,6 +85,7 @@
                                         type="Number"
                                         required="true"
                                         change="onPostQuantityChange"
+                                        valueLiveUpdate="true"
                                         width="15rem"
                                         value="{
                                             type: 'sap.ui.model.odata.type.Decimal'
