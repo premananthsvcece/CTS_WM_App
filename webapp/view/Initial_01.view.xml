@@ -207,7 +207,7 @@
                         width="75%"
                         autocomplete="true"
                         valueLiveUpdate="false"
-                        change="onidInputWorkCenterLiveChange" 
+                        change="onidInputWorkCenterLiveChange"
                         valueHelpRequest="_onWorkCenterHelp"
                     />
                 </VBox>
@@ -891,26 +891,6 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
-                                        id="_IDGenColumn19"
-                                        width="6rem"
-                                        hAlign="End"
-                                        autoResizable="true"
-                                        sortProperty="Data06"
-                                        filterProperty="Data06"
-                                    >
-                                        <Label
-                                            id="_IDGenLabel19"
-                                            text="{i18n>Quantity}"
-                                        />
-                                        <Table:template>
-                                            <Text
-                                                id="_IDGenText19"
-                                                text="{InQueueModel>Data06}"
-                                                wrapping="false"
-                                            />
-                                        </Table:template>
-                                    </Table:Column>
-                                    <Table:Column
                                         width="10rem"
                                         sortProperty="Data14"
                                         filterProperty="Data14"
@@ -958,6 +938,27 @@
                                             />
                                         </Table:template>
                                     </Table:Column>
+                                    <Table:Column
+                                        id="_IDGenColumn19"
+                                        width="6rem"
+                                        hAlign="End"
+                                        autoResizable="true"
+                                        sortProperty="Data06"
+                                        filterProperty="Data06"
+                                    >
+                                        <Label
+                                            id="_IDGenLabel19"
+                                            text="{i18n>Quantity}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                id="_IDGenText19"
+                                                text="{InQueueModel>Data06}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+
                                     <Table:Column
                                         id="_IDGenColumn22"
                                         width="8rem"
@@ -1214,26 +1215,6 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
-                                        id="_IDGenColumn32"
-                                        width="6rem"
-                                        hAlign="End"
-                                        autoResizable="true"
-                                        sortProperty="Data06"
-                                        filterProperty="Data06"
-                                    >
-                                        <Label
-                                            id="_IDGenLabel32"
-                                            text="{i18n>Quantity}"
-                                        />
-                                        <Table:template>
-                                            <Text
-                                                id="_IDGenText32"
-                                                text="{InFutureModel>Data06}"
-                                                wrapping="false"
-                                            />
-                                        </Table:template>
-                                    </Table:Column>
-                                    <Table:Column
                                         width="10rem"
                                         autoResizable="true"
                                         visible="false"
@@ -1280,6 +1261,27 @@
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
+                                        id="_IDGenColumn32"
+                                        width="6rem"
+                                        hAlign="End"
+                                        autoResizable="true"
+                                        sortProperty="Data06"
+                                        filterProperty="Data06"
+                                    >
+                                        <Label
+                                            id="_IDGenLabel32"
+                                            text="{i18n>Quantity}"
+                                        />
+                                        <Table:template>
+                                            <Text
+                                                id="_IDGenText32"
+                                                text="{InFutureModel>Data06}"
+                                                wrapping="false"
+                                            />
+                                        </Table:template>
+                                    </Table:Column>
+
+                                    <Table:Column
                                         id="_IDGenColumn35"
                                         width="10rem"
                                         autoResizable="true"
@@ -1303,7 +1305,7 @@
                                     >
                                         <Label
                                             id="_IDGenLabel36"
-                                            text="{i18n>QuanReady}"
+                                            text="{i18n>OpenQty}"
                                         />
                                         <Table:template>
                                             <Text
