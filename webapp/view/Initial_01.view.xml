@@ -207,7 +207,7 @@
                         width="75%"
                         autocomplete="true"
                         valueLiveUpdate="false"
-                        change="onidInputWorkCenterLiveChange"
+                        change="onidInputWorkCenterLiveChange" 
                         valueHelpRequest="_onWorkCenterHelp"
                     />
                 </VBox>

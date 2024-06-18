@@ -4023,6 +4023,15 @@ sap.ui.define(
             .byId(Path + "--idInputWorkArea")
             .getValue();
 
+          sap.ui
+              .getCore()
+              .byId(Path + "--idInputWorkCenter")
+              .setValue(Workcenter);
+            sap.ui
+              .getCore()
+              .byId(Path + "--idTextWorkCenter")
+              .setText(Workcenter);
+
           if (Plant != " ") {
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
