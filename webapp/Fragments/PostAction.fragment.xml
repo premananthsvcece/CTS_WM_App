@@ -105,7 +105,7 @@
                                 <InputListItem label="{i18n>ConfirmType} *">
                                     <Select
                                         id="idPostConfType"
-                                        forceSelection="false"
+                                        forceSelection="true"
                                         selectedKey="P"
                                         width="15rem"
                                     >
@@ -129,9 +129,9 @@
                                 backgroundDesign="Transparent"
                             >
                                 <columns>
-                                    <Column demandPopin="true">
+                                    <!-- <Column demandPopin="true">
                                         <Text text="{i18n>Orddet}" />
-                                    </Column>
+                                    </Column> -->
                                     <Column demandPopin="true">
                                         <Text text="{i18n>ScarpType}" />
                                     </Column>
@@ -142,10 +142,10 @@
                                 <items>
                                     <ColumnListItem vAlign="Middle">
                                         <cells>
-                                            <ObjectIdentifier
+                                            <!-- <ObjectIdentifier
                                                 title="{PostScarpModel>Data01}"
                                                 text="{i18n>OperNo} : {PostScarpModel>Data02} User: {PostScarpModel>Data04}"
-                                            />
+                                            /> -->
                                             <ObjectIdentifier
                                                 title="{PostScarpModel>Data06}"
                                                 text="{PostScarpModel>Data07}"
