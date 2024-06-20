@@ -13,7 +13,7 @@
         cancel="onBatchInputClose"
         confirm="onBatchInputChange"
         items="{BatchModel>/BatchData}"
-        contentWidth="40%"
+        contentWidth="25%"
         contentHeight="auto"
     >   
         <columns>
