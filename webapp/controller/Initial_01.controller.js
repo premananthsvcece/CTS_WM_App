@@ -3387,6 +3387,7 @@ sap.ui.define(
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
+                  var Visible = " ";
                   if (oData.results.length != 0) {
                     var ComponentData = oData.results;
                     if (ComponentData.length != 0) {
@@ -3395,12 +3396,9 @@ sap.ui.define(
                       for (var i = 0; i in ComponentData; i++) {
                         if (ComponentData[i].Data08 === "101") {
                           ComponentData[i].Data09 = false;
+                          Visible = 'X';
                         } else {
                           ComponentData[i].Data09 = true;
-                          sap.ui
-                            .getCore()
-                            .byId("idPostBinDet01")
-                            .setVisible(false);
                         }
                         if (ComponentData[i].Data10 === "false") {
                           ComponentData[i].Data10 = false;
@@ -3435,6 +3433,9 @@ sap.ui.define(
                       ComponentnList.setTitle(HeaderText);
 
                       ComponentnList.setModel(ComponentModel, "ComponentModel");
+                    }
+                    if( Visible != 'X'){
+                      sap.ui.getCore().byId("idPostBinDet01").setVisible(false);
                     }
                     that.hideBusyIndicator();
                   } else {
