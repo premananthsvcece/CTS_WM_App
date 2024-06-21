@@ -5,47 +5,97 @@
     xmlns:l="sap.ui.layout"
     xmlns:sf="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
+    xmlns:uiTable="sap.ui.table"
 >
     <Dialog
         id="idDialogScarp"
         title="{i18n>ScarpAction}"
+        contentWidth="30%"
     >
         <l:VerticalLayout
             id="idVerticalLayoutScarp"
             class="sapUiContentPadding"
-            width="100%"
         >
             <l:content>
-                <List
+                <uiTable:Table
                     id="idScarpList"
+                    visibleRowCount="5"
+                    visibleRowCountMode="Interactive"
                     class="sapUiContentPadding"
-                    showSeparators="None"
+                    rows="{ScarpModel>/ScarpData}"
+                    alternateRowColors="true"
+                    enableSelectAll="false"
+                    selectionBehavior="RowSelector"
+                    selectionMode="Single"
+                    enableCellFilter="true"
                 >
-                    <InputListItem label="{i18n>ScarpType} *">
-                        <Input
-                            id="idScarpReason"
-                            showValueHelp="true"
-                            showSuggestion="true"
-                            valueHelpRequest="onScarpReasonRequest"
-                            placeholder="Scarp Reason"
-                            change="onidScarpReasonChange"
-                            type="Text"
-                            width="15rem"
-                            required="true"
-                        />
-                    </InputListItem>
-                    <InputListItem label="{i18n>ScarpQuan} *">
-                        <Input
-                            id="idScarpQuantity"
-                            type="Number"
-                            required="true"
-                            width="15rem"
-                            value="{
-                                type: 'sap.ui.model.odata.type.Decimal'
-                            }"
-                        />
-                    </InputListItem>
-                </List>
+                    <uiTable:extension>
+                        <OverflowToolbar>
+                            <Title level="H2" />
+                            <ToolbarSpacer />
+                            <Button
+                                text="Add"
+                                type="Transparent"
+                                press="onScarpCompAdd"
+                                icon="sap-icon://add"
+                            />
+                            <Button
+                                text="Copy"
+                                type="Transparent"
+                                press="onScarpCompCopy"
+                                icon="sap-icon://copy"
+                                visible="false"
+                            />
+                            <Button
+                                text="Delete"
+                                type="Attention"
+                                press="onScarpCompDel"
+                                icon="sap-icon://delete"
+                            />
+                        </OverflowToolbar>
+                    </uiTable:extension>
+                    <uiTable:noData text="{i18n>NoData}" />
+                    <uiTable:columns>
+                        <uiTable:Column width="20%">
+                            <Label text="{i18n>ScarpType} *" />
+                            <uiTable:template>
+                                <Input
+                                    showValueHelp="true"
+                                    showSuggestion="true"
+                                    valueHelpRequest="onScarpReasonRequest"
+                                    value="{ScarpModel>Data06}"
+                                    placeholder="Scarp Reason"
+                                    change="onidScarpReasonChange"
+                                    type="Text"
+                                    valueLiveUpdate="false"
+                                    required="true"
+                                />
+                            </uiTable:template>
+                        </uiTable:Column>
+                        <uiTable:Column width="50%">
+                            <Label text="{i18n>Description}" />
+                            <uiTable:template>
+                                <Input
+                                    type="Text"
+                                    required="true"
+                                    value="{ScarpModel>Data07}"
+                                    enabled="false"
+                                />
+                            </uiTable:template>
+                        </uiTable:Column>
+                        <uiTable:Column width="20%">
+                            <Label text="{i18n>ScarpQuan}" />
+                            <uiTable:template>
+                                <Input
+                                    type="Number"
+                                    required="true"
+                                    value="{ScarpModel>Data05}"
+                                    textAlign="Right"
+                                />
+                            </uiTable:template>
+                        </uiTable:Column>
+                    </uiTable:columns>
+                </uiTable:Table>
             </l:content>
         </l:VerticalLayout>
         <Bar>
@@ -53,7 +103,7 @@
                 <Button
                     icon="sap-icon://accept"
                     class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-                    text="{i18n>Save_Close}"
+                    text="{i18n>Saved}"
                     type="Success"
                     press="onConfirmScarpPress"
                 />
@@ -63,6 +113,7 @@
                     text="{i18n>Save_More}"
                     type="Success"
                     press="onConfirmScarpMorePress"
+                    visible="false"
                 />
                 <Button
                     icon="sap-icon://cancel"

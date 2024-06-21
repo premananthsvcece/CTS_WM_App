@@ -53,3 +53,7 @@ html.sap-desktop .sapUiBody :focus {
   border: 1px solid #4E4D4D !important;
   border-left: 7px solid #4E4D4D !important;
 }
+
+.sapMInputBaseInner {
+    background: rgb(230, 215, 215);
+  }

@@ -49,7 +49,8 @@ sap.ui.define(
 
     var sBatchId = "";
     var sMovementId = "";
-              var sPrdSupAreaId = "";
+    var sPrdSupAreaId = "";
+    var sReasonCodeId = "";
 
     return Controller.extend(
       "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
@@ -486,10 +487,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WorkCenter' and Key04 eq '" +
-              SelPlant +
-              "' and Key05 eq '" +
-              SelWCGrp +
-              "'",
+            SelPlant +
+            "' and Key05 eq '" +
+            SelWCGrp +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -555,12 +556,12 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OrderNo' and Key04 eq '" +
-              SelPlant +
-              "' and Key05 eq '" +
-              SelWCGrp +
-              "' and Key03 eq '" +
-              SelWCValue +
-              "'",
+            SelPlant +
+            "' and Key05 eq '" +
+            SelWCGrp +
+            "' and Key03 eq '" +
+            SelWCValue +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -609,8 +610,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'WCGroup' and Key04 eq '" +
-              SelPlant +
-              "'",
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -818,10 +819,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BOM' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -1056,10 +1057,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Routing' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -1369,8 +1370,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'DrawingURl' and Key02 eq '" +
-              SelMatnr +
-              "'",
+            SelMatnr +
+            "'",
             {
               context: null,
               async: false,
@@ -1691,10 +1692,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-              sValue +
-              "' and Key03 eq '" +
-              SelPlant +
-              "'",
+            sValue +
+            "' and Key03 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -1794,10 +1795,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'RoutingText' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "'",
             {
               context: null,
               async: false,
@@ -2259,10 +2260,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'OperatorNo' and Key02 eq '" +
-              sValue +
-              "' and Key03 eq '" +
-              SelPlant +
-              "'",
+            sValue +
+            "' and Key03 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -2577,8 +2578,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'HeaderText' and Key02 eq '" +
-              SelAufnr +
-              "'",
+            SelAufnr +
+            "'",
             {
               context: null,
               async: false,
@@ -2660,6 +2661,12 @@ sap.ui.define(
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
+          var OperatorNo = " ";
+
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
 
           Tableindex = sap.ui
             .getCore()
@@ -2690,6 +2697,11 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data05;
+            OperatorNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data16;
           }
 
           if (Tableindex === undefined) {
@@ -2708,13 +2720,69 @@ sap.ui.define(
             );
             that.getView().addDependent(that.ScrapActionDialog);
           }
-          sap.ui.getCore().byId(`idScarpReason`).setValue("");
-          sap.ui.getCore().byId(`idScarpQuantity`).setValue("");
+
           that.ScrapActionDialog.open();
+          that.showBusyIndicator();
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+          var vModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+          var logModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'Post' and Key02 eq '" +
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "' and Key04 eq '" +
+            OperatorNo +
+            "' and Key05 eq '" +
+            SelPlant +
+            "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var ScarpData = oData.results;
+
+                    if (ScarpData.length != 0) {
+                      var ScarpModel = new sap.ui.model.json.JSONModel();
+
+                      ScarpModel.setData({
+                        ScarpData: ScarpData,
+                      });
+                      var ScarpList = sap.ui.getCore().byId("idScarpList");
+
+                      ScarpList.setModel(ScarpModel, "ScarpModel");
+                    }
+                    that.hideBusyIndicator();
+                  } else {
+                    var ScarpData = []; // Dummy Data
+                    var ScarpModel = new sap.ui.model.json.JSONModel();
+
+                    ScarpModel.setData({
+                      ScarpData: ScarpData,
+                    });
+                    var ScarpList = sap.ui.getCore().byId("idScarpList");
+
+                    ScarpList.setModel(ScarpModel, "ScarpModel");
+                    that.hideBusyIndicator();
+                  }
+                } catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                }
+              },
+            }
+          );
         },
-        onScarpReasonRequest: function () {
+        onScarpReasonRequest: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
+          var sId = oEvent.getParameter("id");
           var SelPlant = sap.ui
             .getCore()
             .byId(`${Path}--idInputPlant`)
@@ -2731,13 +2799,14 @@ sap.ui.define(
           }
           // open value help dialog
           that.ScarpReasonDialog.open();
+          sReasonCodeId = sId;
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
-              SelPlant +
-              "'",
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -2771,21 +2840,60 @@ sap.ui.define(
           oBinding.filter([oFilter]);
         },
         _ScarpReasonSelect: function (oEvent) {
+          var ScarpDataLine = [];
           if (oEvent.getParameters().selectedItems != undefined) {
             var ScarpReason = oEvent
               .getParameters()
               .selectedItems[0].getTitle();
-            if (ScarpReason != undefined) {
-              var Path = this.getView().getId();
-              sap.ui.getCore().byId(`idScarpReason`).setValue(ScarpReason);
-              sap.ui.getCore().byId(`idScarpReason`).setValueState("None");
-              sap.ui.getCore().byId(`idScarpReason`).setValueStateText("");
 
-              oEvent.getSource().getBinding("items").filter([]);
+            var ScarpText = oEvent
+              .getParameters()
+              .selectedItems[0].getDescription();
+
+            if (ScarpReason != undefined) {
+              // Tableindex = sap.ui
+              //   .getCore()
+              //   .byId(`idScarpList`)
+              //   .getSelectedIndices()[0];
+              // if (Tableindex != undefined) {
+
+              var ScarpData = sap.ui
+                .getCore()
+                .byId("idScarpList")
+                .getModel("ScarpModel")
+                .getData().ScarpData;
+              // }
+              // sReasonCodeId
+              var HelpReasonCodePath = sap.ui.getCore().byId(sReasonCodeId).getParent().oBindingContexts.ScarpModel.sPath;
+              var HelpReasonCodeArray = HelpReasonCodePath.split("/");
+              var HelpReasonCodeUpdate = parseInt(HelpReasonCodeArray[2]);
+
+              for (var ind = 0; ind < ScarpData.length; ind++) {
+                if (ScarpData[ind].Data06 === ScarpReason) {
+                  HelpReasonCodeUpdate = ind;
+                  var message = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("Gen005");
+                  MessageToast.show(message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                }
+                if (HelpReasonCodeUpdate === ind) {
+                  ScarpData[ind].Data06 = ScarpReason;
+                  ScarpData[ind].Data07 = ScarpText;
+                }
+                ScarpDataLine.push(ScarpData[ind]);
+              }
+
+              sap.ui
+                .getCore()
+                .byId("idScarpList")
+                .getModel("ScarpModel")
+                .setData({ ScarpData: ScarpDataLine });
             } else {
               return;
             }
-            // this.onButtonPress();
           }
         },
         onConfirmScarpPress: function (oEvent) {
@@ -2816,10 +2924,6 @@ sap.ui.define(
                 console.log(Tableindex);
               }
             }
-            // sap.ui
-            //   .getCore()
-            //   .byId(`${Path}--idInprogressOrderList`)
-            //   .clearSelection();
             SelAufnr = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
@@ -2837,191 +2941,236 @@ sap.ui.define(
               .getData().InProgressData[Tableindex].Data16;
           }
 
-          var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
-          var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
-          var Data01 = sap.ui.getCore().byId(`idScarpReason`).getValue();
-          if (Data01 === "") {
-            var message = that
-              .getView()
-              .getModel("i18n")
-              .getResourceBundle()
-              .getText("Scarp001");
-            MessageBox.error(message);
+          var Error = "";
+          var ScarpData = sap.ui
+            .getCore()
+            .byId("idScarpList")
+            .getModel("ScarpModel")
+            .getData().ScarpData;
+
+          for (var ind = 0; ind < ScarpData.length; ind++) {
+            if (ScarpData[ind].Data06 === "") {
+              var message = that
+                .getView()
+                .getModel("i18n")
+                .getResourceBundle()
+                .getText("Scarp001");
+              MessageBox.error(message);
+              Error = 'X';
+              return;
+            }
+            if (ScarpData[ind].Data05 === "") {
+              var message = that
+                .getView()
+                .getModel("i18n")
+                .getResourceBundle()
+                .getText("Scarp002");
+              MessageBox.error(message);
+              Error = 'X';
+              return;
+            }
+          }
+          if (Error === 'X') {
             return;
           }
-          var Data02 = sap.ui.getCore().byId(`idScarpQuantity`).getValue();
-          if (Data02 === "") {
-            var message = that
-              .getView()
-              .getModel("i18n")
-              .getResourceBundle()
-              .getText("Scarp002");
-            MessageBox.error(message);
-            return;
-          }
+
+          // sap.ui
+          //   .getCore()
+          //   .byId("idScarpList")
+          //   .getModel("ScarpModel")
+          //   .setData({ ScarpData: ScarpTableData });
+
+          // var Data01 = sap.ui.getCore().byId(`idScarpReason`).getValue();
+          // if (Data01 === "") {
+          //   var message = that
+          //     .getView()
+          //     .getModel("i18n")
+          //     .getResourceBundle()
+          //     .getText("Scarp001");
+          //   MessageBox.error(message);
+          //   return;
+          // }
+          // var Data02 = sap.ui.getCore().byId(`idScarpQuantity`).getValue();
+          // if (Data02 === "") {
+          //   var message = that
+          //     .getView()
+          //     .getModel("i18n")
+          //     .getResourceBundle()
+          //     .getText("Scarp002");
+          //   MessageBox.error(message);
+          //   return;
+          // }
 
           that.ScrapActionDialog.close();
+          that.onScarpupdate(that, SelAufnr, SelOprNo, SelPlant, SelOprerator, ScarpData);
 
-          var itemset = {
-            Key01: "Scarp",
-            Key02: SelAufnr,
-            Key03: SelOprNo,
-            Key04: SelPlant,
-            Key05: SelOprerator,
-            Data01: Data01,
-            Data02: Data02,
-          };
+        },
 
-          var IEntry = [];
-          IEntry = itemset;
-          oDataModel.create(
-            "/ValueHelpSet",
-            IEntry,
-            null,
-            function (oData, Response) {
-              try {
-                if (Response.data.Data01 === "S") {
+        onScarpupdate: function (that, SelAufnr, SelOprNo, SelPlant, SelOprerator, ScarpData) {
+          for (var ind = 0; ind < ScarpData.length; ind++) {
+            var itemset = {
+              Key01: "Scarp",
+              Key02: SelAufnr,
+              Key03: SelOprNo,
+              Key04: SelPlant,
+              Key05: SelOprerator,
+              Data01: ScarpData[ind].Data06,
+              Data02: ScarpData[ind].Data05,
+            };
+
+            var IEntry = [];
+            IEntry = itemset;
+            var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+            var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+            oDataModel.create(
+              "/ValueHelpSet",
+              IEntry,
+              null,
+              function (oData, Response) {
+                try {
+                  if (Response.data.Data01 === "S") {
+                    that.hideBusyIndicator();
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("Gen003");
+                    MessageToast.show(message);
+                    $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                    // return;
+                  }
+                  if (Response.data.Data01 === "E") {
+                    that.hideBusyIndicator();
+                    MessageBox.error(Response.data.Data02);
+                    // return;
+                  }
+                } catch (e) {
+                  // alert(e.message);
+                  MessageBox.error(e.message);
                   that.hideBusyIndicator();
-                  var message = that
-                    .getView()
-                    .getModel("i18n")
-                    .getResourceBundle()
-                    .getText("Gen003");
-                  MessageToast.show(message);
-                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
-                  that.onButtonPress();
-                  return;
                 }
-                if (Response.data.Data01 === "E") {
-                  that.hideBusyIndicator();
-                  MessageBox.error(Response.data.Data02);
-                  return;
-                }
-              } catch (e) {
-                // alert(e.message);
-                Message.error(e.message);
-                that.hideBusyIndicator();
               }
-            }
-          );
+            );
+          }
+          that.onButtonPress();
         },
         onConfirmScarpMorePress: function (oEvent) {
-          var that = this;
-          var Path = that.getView().getId();
-          var Tableindex = "X";
-          var SelAufnr = " ";
-          var SelOprNo = " ";
-          var SelOprerator = " ";
-          var SelPlant = sap.ui
-            .getCore()
-            .byId(`${Path}--idInputPlant`)
-            .getValue();
+          // var that = this;
+          // var Path = that.getView().getId();
+          // var Tableindex = "X";
+          // var SelAufnr = " ";
+          // var SelOprNo = " ";
+          // var SelOprerator = " ";
+          // var SelPlant = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInputPlant`)
+          //   .getValue();
 
-          Tableindex = sap.ui
-            .getCore()
-            .byId(`${Path}--idInprogressOrderList`)
-            .getSelectedIndices()[0];
-          // Get Order No & Opr No
-          if (Tableindex != undefined) {
-            // sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
-            var aIndices = this.getView()
-              .byId(`${Path}--idInprogressOrderList`)
-              .getBinding("rows").aIndices;
-            for (var loop = 0; loop in aIndices; loop++) {
-              if (loop === Tableindex) {
-                Tableindex = aIndices[loop];
-                break;
-                console.log(Tableindex);
-              }
-            }
+          // Tableindex = sap.ui
+          //   .getCore()
+          //   .byId(`${Path}--idInprogressOrderList`)
+          //   .getSelectedIndices()[0];
+          // // Get Order No & Opr No
+          // if (Tableindex != undefined) {
+          //   // sap.ui.getCore().byId(`${Path}--idInprogressOrderList`).clearSelection();
+          //   var aIndices = this.getView()
+          //     .byId(`${Path}--idInprogressOrderList`)
+          //     .getBinding("rows").aIndices;
+          //   for (var loop = 0; loop in aIndices; loop++) {
+          //     if (loop === Tableindex) {
+          //       Tableindex = aIndices[loop];
+          //       break;
+          //       console.log(Tableindex);
+          //     }
+          //   }
 
-            SelAufnr = sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .getModel("InProgressModel")
-              .getData().InProgressData[Tableindex].Data02;
-            SelOprNo = sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .getModel("InProgressModel")
-              .getData().InProgressData[Tableindex].Data05;
-            SelOprerator = sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .getModel("InProgressModel")
-              .getData().InProgressData[Tableindex].Data16;
-          }
+          //   SelAufnr = sap.ui
+          //     .getCore()
+          //     .byId(`${Path}--idInprogressOrderList`)
+          //     .getModel("InProgressModel")
+          //     .getData().InProgressData[Tableindex].Data02;
+          //   SelOprNo = sap.ui
+          //     .getCore()
+          //     .byId(`${Path}--idInprogressOrderList`)
+          //     .getModel("InProgressModel")
+          //     .getData().InProgressData[Tableindex].Data05;
+          //   SelOprerator = sap.ui
+          //     .getCore()
+          //     .byId(`${Path}--idInprogressOrderList`)
+          //     .getModel("InProgressModel")
+          //     .getData().InProgressData[Tableindex].Data16;
+          // }
 
-          var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
-          var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
-          var Data01 = sap.ui.getCore().byId(`idScarpReason`).getValue();
-          if (Data01 === "") {
-            var message = that
-              .getView()
-              .getModel("i18n")
-              .getResourceBundle()
-              .getText("Scarp001");
-            MessageBox.error(message);
-            return;
-          }
-          var Data02 = sap.ui.getCore().byId(`idScarpQuantity`).getValue();
-          if (Data02 === "") {
-            var message = that
-              .getView()
-              .getModel("i18n")
-              .getResourceBundle()
-              .getText("Scarp002");
-            MessageBox.error(message);
-            return;
-          }
+          // var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          // var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+          // var Data01 = sap.ui.getCore().byId(`idScarpReason`).getValue();
+          // if (Data01 === "") {
+          //   var message = that
+          //     .getView()
+          //     .getModel("i18n")
+          //     .getResourceBundle()
+          //     .getText("Scarp001");
+          //   MessageBox.error(message);
+          //   return;
+          // }
+          // var Data02 = sap.ui.getCore().byId(`idScarpQuantity`).getValue();
+          // if (Data02 === "") {
+          //   var message = that
+          //     .getView()
+          //     .getModel("i18n")
+          //     .getResourceBundle()
+          //     .getText("Scarp002");
+          //   MessageBox.error(message);
+          //   return;
+          // }
 
-          // that.ScrapActionDialog.close();   Keep to Open to Save more value
+          // // that.ScrapActionDialog.close();   Keep to Open to Save more value
 
-          var itemset = {
-            Key01: "Scarp",
-            Key02: SelAufnr,
-            Key03: SelOprNo,
-            Key04: SelPlant,
-            Key05: SelOprerator,
-            Data01: Data01,
-            Data02: Data02,
-          };
+          // var itemset = {
+          //   Key01: "Scarp",
+          //   Key02: SelAufnr,
+          //   Key03: SelOprNo,
+          //   Key04: SelPlant,
+          //   Key05: SelOprerator,
+          //   Data01: Data01,
+          //   Data02: Data02,
+          // };
 
-          var IEntry = [];
-          IEntry = itemset;
-          oDataModel.create(
-            "/ValueHelpSet",
-            IEntry,
-            null,
-            function (oData, Response) {
-              try {
-                if (Response.data.Data01 === "S") {
-                  that.hideBusyIndicator();
-                  var message = that
-                    .getView()
-                    .getModel("i18n")
-                    .getResourceBundle()
-                    .getText("Gen003");
-                  MessageToast.show(message);
-                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
-                  // that.onButtonPress();
-                  sap.ui.getCore().byId(`idScarpReason`).setValue("");
-                  sap.ui.getCore().byId(`idScarpQuantity`).setValue("");
-                  return;
-                }
-                if (Response.data.Data01 === "E") {
-                  that.hideBusyIndicator();
-                  MessageBox.error(Response.data.Data02);
-                  return;
-                }
-              } catch (e) {
-                // alert(e.message);
-                MessageToast.show(e.message);
-                $(".sapMMessageToast").addClass("sapMMessageToastDanger");
-                that.hideBusyIndicator();
-              }
-            }
-          );
+          // var IEntry = [];
+          // IEntry = itemset;
+          // oDataModel.create(
+          //   "/ValueHelpSet",
+          //   IEntry,
+          //   null,
+          //   function (oData, Response) {
+          //     try {
+          //       if (Response.data.Data01 === "S") {
+          //         that.hideBusyIndicator();
+          //         var message = that
+          //           .getView()
+          //           .getModel("i18n")
+          //           .getResourceBundle()
+          //           .getText("Gen003");
+          //         MessageToast.show(message);
+          //         $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+          //         // that.onButtonPress();
+          //         sap.ui.getCore().byId(`idScarpReason`).setValue("");
+          //         sap.ui.getCore().byId(`idScarpQuantity`).setValue("");
+          //         return;
+          //       }
+          //       if (Response.data.Data01 === "E") {
+          //         that.hideBusyIndicator();
+          //         MessageBox.error(Response.data.Data02);
+          //         return;
+          //       }
+          //     } catch (e) {
+          //       // alert(e.message);
+          //       MessageToast.show(e.message);
+          //       $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+          //       that.hideBusyIndicator();
+          //     }
+          //   }
+          // );
         },
         onCancelScarpPress: function (oEvent) {
           var that = this;
@@ -3044,7 +3193,7 @@ sap.ui.define(
           var OperatorNo = " ";
           var EndDate;
           var TotTime = " ";
-          var QtyComp = "";
+          var QtyAvail = "";
           // var SetupTIme = " ";
 
           var SelPlant = sap.ui
@@ -3096,11 +3245,11 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data13;
-            QtyComp = sap.ui
+            QtyAvail = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
-              .getData().InProgressData[Tableindex].Data11
+              .getData().InProgressData[Tableindex].Data10;
           }
           if (EndDate === "") {
             var message = that
@@ -3129,20 +3278,19 @@ sap.ui.define(
           }
           that.showBusyIndicator();
           var Head = that
-              .getView()
-              .getModel("i18n")
-              .getResourceBundle()
-              .getText("PostAction");
-          var Heading = Head + ' - ' + SelAufnr;
-          sap.ui.getCore().byId('idDialogPost').setTitle(Heading);
+            .getView()
+            .getModel("i18n")
+            .getResourceBundle()
+            .getText("PostAction");
+          var Heading = Head + " - " + SelAufnr;
+          sap.ui.getCore().byId("idDialogPost").setTitle(Heading);
           sap.ui.getCore().byId(`idPostOperator`).setValue(OperatorNo);
           sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);
           TotTime = parseInt(TotTime);
           sap.ui.getCore().byId("idPostTotalTime").setValue(TotTime);
-          QtyComp = parseInt(QtyComp);
-          sap.ui.getCore().byId(`idPostQuantity`).setValue(QtyComp);
-          // SetupTIme = parseInt(SetupTIme);
-          // sap.ui.getCore().byId("idPostSetupTIme").setValue(SetupTIme);
+          QtyAvail = parseInt(QtyAvail);
+          sap.ui.getCore().byId(`idPostQuantity`).setValue(QtyAvail);
+          sap.ui.getCore().byId(`idPostConfType`).setSelectedKey('P');
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -3151,14 +3299,14 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Post' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "' and Key04 eq '" +
-              OperatorNo +
-              "' and Key05 eq '" +
-              SelPlant +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "' and Key04 eq '" +
+            OperatorNo +
+            "' and Key05 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -3207,14 +3355,14 @@ sap.ui.define(
 
           vModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Component' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "' and Key04 eq '" +
-              OperatorNo +
-              "' and Key05 eq '" +
-              SelPlant +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "' and Key04 eq '" +
+            OperatorNo +
+            "' and Key05 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -3298,14 +3446,14 @@ sap.ui.define(
           that.showBusyIndicator();
           logModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'LogData' and Key02 eq '" +
-              SelAufnr +
-              "' and Key03 eq '" +
-              SelOprNo +
-              "' and Key04 eq '" +
-              OperatorNo +
-              "' and Key05 eq '" +
-              SelPlant +
-              "'",
+            SelAufnr +
+            "' and Key03 eq '" +
+            SelOprNo +
+            "' and Key04 eq '" +
+            OperatorNo +
+            "' and Key05 eq '" +
+            SelPlant +
+            "'",
             {
               context: null,
               async: false,
@@ -3508,11 +3656,20 @@ sap.ui.define(
                 if (oData.Key04 === "E") {
                   var message = oData.Key05;
                   MessageBox.error(message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                   that.onButtonPress();
                   return;
-                } else {
+                }else if (oData.Key04 === "I") {
+                  var message = oData.Key05;
+                  MessageBox.warning(message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastWarning");
+                  that.onButtonPress();
+                  return;
+                }
+                else {
                   var message = oData.Key05;
                   MessageBox.success(message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                   that.onButtonPress();
                 }
                 return;
@@ -3810,14 +3967,14 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'BatchValue' and Key02 eq '" +
-              SelMatnr +
-              "' and Key03 eq '" +
-              SelWerks +
-              "' and Key04 eq '" +
-              SelLgort +
-              "' and Key05 eq '" +
-              SelClabs +
-              "'",
+            SelMatnr +
+            "' and Key03 eq '" +
+            SelWerks +
+            "' and Key04 eq '" +
+            SelLgort +
+            "' and Key05 eq '" +
+            SelClabs +
+            "'",
             {
               context: null,
               async: false,
@@ -3910,10 +4067,10 @@ sap.ui.define(
         onMaterialInputClose: function () {
           return;
         },
-        onMaterialHelpInputClose: function(){
+        onMaterialHelpInputClose: function () {
           return;
         },
-        onProdSuppAreaInputClose: function(){
+        onProdSuppAreaInputClose: function () {
           return;
         },
         onidInputWorkAreaLiveChange: function (oEvent) {
@@ -3943,6 +4100,7 @@ sap.ui.define(
         onidScarpReasonChange: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
+          var sId = oEvent.getParameter("id");
           var ScrapReason = oEvent.getParameters().newValue;
           ScrapReason = ScrapReason.toUpperCase();
           var Plant = sap.ui
@@ -3951,31 +4109,47 @@ sap.ui.define(
             .getValue();
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
-
+          sReasonCodeId = sId;
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
-              Plant +
-              "'",
+            Plant +
+            "'",
             {
               context: null,
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
                   var ScarpReasonData = oData.results;
+                  // sReasonCodeId
+                  var HelpReasonCodePath = sap.ui.getCore().byId(sReasonCodeId).getParent().oBindingContexts.ScarpModel.sPath;
+                  var HelpReasonCodeArray = HelpReasonCodePath.split("/");
+                  var HelpReasonCodeUpdate = parseInt(HelpReasonCodeArray[2]);
                   for (var i = 0; i in ScarpReasonData; i++) {
                     if (ScarpReasonData[i].Data03 === ScrapReason) {
-                      var Counter = true;
+                      if( HelpReasonCodeUpdate === i ){
+                        var Counter = true;
+                      }else{
+                        // Clear the current Line and Only Use Existing Line
+                        sap.ui.getCore().byId(sReasonCodeId).setValue("");
+                        var message = that
+                                      .getView()
+                                      .getModel("i18n")
+                                      .getResourceBundle()
+                                      .getText("Gen005");
+                        MessageToast.show(message);
+                        $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                        return;
+                      }
                     }
                   }
                   if (Counter != true) {
                     // Raise Error Message with State
                     sap.ui
                       .getCore()
-                      .byId(`idScarpReason`)
+                      .byId(sReasonCodeId)
                       .setValueState("Error");
+                    sap.ui.getCore().byId(sReasonCodeId).setValue("");
 
-                    sap.ui.getCore().byId(`idScarpReason`).setValue("");
-                    // Indtast venligst gyldig scarp-årsag
                     // Get Message
                     var Emessage = that
                       .getView()
@@ -3984,21 +4158,21 @@ sap.ui.define(
                       .getText("Scarp004");
                     sap.ui
                       .getCore()
-                      .byId(`idScarpReason`)
+                      .byId(sReasonCodeId)
                       .setValueStateText(Emessage);
                   } else {
                     // Clear Error State
                     sap.ui
                       .getCore()
-                      .byId(`idScarpReason`)
+                      .byId(sReasonCodeId)
                       .setValueState("None");
                     sap.ui
                       .getCore()
-                      .byId(`idScarpReason`)
+                      .byId(sReasonCodeId)
                       .setValueStateText("");
                     sap.ui
                       .getCore()
-                      .byId(`idScarpReason`)
+                      .byId(sReasonCodeId)
                       .setValue(ScrapReason);
                   }
                 } catch (e) {
@@ -4024,13 +4198,13 @@ sap.ui.define(
             .getValue();
 
           sap.ui
-              .getCore()
-              .byId(Path + "--idInputWorkCenter")
-              .setValue(Workcenter);
-            sap.ui
-              .getCore()
-              .byId(Path + "--idTextWorkCenter")
-              .setText(Workcenter);
+            .getCore()
+            .byId(Path + "--idInputWorkCenter")
+            .setValue(Workcenter);
+          sap.ui
+            .getCore()
+            .byId(Path + "--idTextWorkCenter")
+            .setText(Workcenter);
 
           if (Plant != " ") {
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
@@ -4096,7 +4270,7 @@ sap.ui.define(
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
         },
-        onidInputComponentSelLiveChange: function(oEvent){
+        onidInputComponentSelLiveChange: function (oEvent) {
           // Validate User Entered Input
           var that = this;
           var Path = that.getView().getId();
@@ -4265,8 +4439,8 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Bin' and Key04 eq '" +
-              SelPlant +
-              "'",
+            SelPlant +
+            "'",
             {
               context: null,
               urlParameters: null,
@@ -4310,7 +4484,51 @@ sap.ui.define(
             }
           }
         },
+        onScarpCompAdd: function () {
+          var ScarpData = sap.ui
+            .getCore()
+            .byId("idScarpList")
+            .getModel("ScarpModel")
+            .getData().ScarpData;
 
+          var line = {
+            Data01: "",
+            Data02: "",
+            Data03: "",
+            Data04: "",
+            Data05: "",
+            Data06: "",
+            Data07: "",
+            Data08: "",
+            Data09: "",
+            Data10: "",
+            Data11: "",
+            Data12: "",
+            Data13: "",
+            Data14: "",
+            Data15: "",
+            Data16: "",
+            Data17: "",
+            Data18: "",
+            Data19: "",
+            Data20: "",
+            Key01: "Scarp",
+            Key02: "",
+            Key03: "N",
+            Key04: "2",
+            Key05: "",
+          };
+          ScarpData.push(line);
+
+          var ScarpModel = new sap.ui.model.json.JSONModel();
+
+          ScarpModel.setData({
+            ScarpData: ScarpData,
+          });
+          var ScarpList = sap.ui.getCore().byId("idScarpList");
+
+          ScarpList.setModel(ScarpModel, "ScarpModel");
+        },
         onPostCompAdd: function (oEvent) {
           var ComponentData = sap.ui
             .getCore()
@@ -4356,16 +4574,13 @@ sap.ui.define(
 
           ComponentnList.setModel(ComponentModel, "ComponentModel");
         },
-        _onComponentSelHelp: function(oEvent){
+        _onComponentSelHelp: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
           var SelWerks = " ";
           var SelLgort = " ";
 
-          SelWerks = sap.ui
-            .getCore()
-            .byId(`${Path}--idInputPlant`)
-            .getValue();
+          SelWerks = sap.ui.getCore().byId(`${Path}--idInputPlant`).getValue();
 
           if (!that.MaterialHelpDialog) {
             that.MaterialHelpDialog = sap.ui.xmlfragment(
@@ -4381,10 +4596,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Material' and Key02 eq '" +
-              SelWerks +
-              "' and Key03 eq '" +
-              SelLgort +
-              "' and Key04 eq 'Header'",
+            SelWerks +
+            "' and Key03 eq '" +
+            SelLgort +
+            "' and Key04 eq 'Header'",
             {
               context: null,
               async: false,
@@ -4453,10 +4668,10 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'Material' and Key02 eq '" +
-              SelWerks +
-              "' and Key03 eq '" +
-              SelLgort +
-              "'",
+            SelWerks +
+            "' and Key03 eq '" +
+            SelLgort +
+            "'",
             {
               context: null,
               async: false,
@@ -4568,7 +4783,7 @@ sap.ui.define(
           });
         },
 
-        onSupplyAreaHelpRequest: function(oEvent){
+        onSupplyAreaHelpRequest: function (oEvent) {
           var that = this;
           var sId = oEvent.getParameter("id");
           var Path = that.getView().getId();
@@ -4604,7 +4819,10 @@ sap.ui.define(
                       .getCore()
                       .byId("idProdSuppAreaDialog");
 
-                    ProdSuppAreaList.setModel(ProdSuppAreaModel, "ProdSuppAreaModel");
+                    ProdSuppAreaList.setModel(
+                      ProdSuppAreaModel,
+                      "ProdSuppAreaModel"
+                    );
                   }
                   that.hideBusyIndicator();
                   that.ProdSuppAreaDialog.open();
@@ -4652,7 +4870,7 @@ sap.ui.define(
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
         },
-        onMaterialHelpInputChange : function (oEvent){
+        onMaterialHelpInputChange: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
           if (oEvent.getParameters().selectedItems != undefined) {
@@ -4660,12 +4878,12 @@ sap.ui.define(
               .getParameters()
               .selectedItem.getCells()[0]
               .getTitle();
-            
+
             sap.ui
               .getCore()
               .byId(`${Path}--idInputComponentSelNo`)
               .setValue(Material);
-            
+
             that.onButtonPress();
           }
         },
@@ -4706,7 +4924,7 @@ sap.ui.define(
               .setData({ ComponentData: ComponentTable });
           }
         },
-        onProdSuppAreaInputChange : function(oEvent){
+        onProdSuppAreaInputChange: function (oEvent) {
           var that = this;
           if (oEvent.getParameters().selectedItems != undefined) {
             var ProdSupplyArea = oEvent
@@ -4770,7 +4988,65 @@ sap.ui.define(
               .setData({ ComponentData: ComponentTable });
           }
         },
+        onScarpCompCopy: function () {
+          var that = this;
 
+          var Tableindex = "X";
+          var ScarpLine = {};
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`idScarpList`)
+            .getSelectedIndices()[0];
+
+          if (Tableindex != undefined) {
+
+            var ScarpData = sap.ui
+              .getCore()
+              .byId("idScarpList")
+              .getModel("ScarpModel")
+              .getData().ScarpData;
+
+            for (var ind = 0; ind < ScarpData.length; ind++) {
+              if (Tableindex === ind) {
+                // ComponentLine = ComponentTable[ind];
+                var ScarpLine = {
+                  Data01: ScarpData[ind].Data01,
+                  Data02: ScarpData[ind].Data02,
+                  Data03: ScarpData[ind].Data03,
+                  Data04: ScarpData[ind].Data04,
+                  Data05: ScarpData[ind].Data05,
+                  Data06: ScarpData[ind].Data06,
+                  Data07: ScarpData[ind].Data07,
+                  Data08: ScarpData[ind].Data08,
+                  Data09: ScarpData[ind].Data09,
+                  Data10: ScarpData[ind].Data10,
+                  Data11: ScarpData[ind].Data11,
+                  Data12: ScarpData[ind].Data12,
+                  Data13: ScarpData[ind].Data13,
+                  Data14: ScarpData[ind].Data14,
+                  Data15: ScarpData[ind].Data15,
+                  Data16: ScarpData[ind].Data16,
+                  Data17: ScarpData[ind].Data17,
+                  Data18: ScarpData[ind].Data18,
+                  Data19: ScarpData[ind].Data19,
+                  Data20: ScarpData[ind].Data20,
+                  Key01: ScarpData[ind].Key01,
+                  Key02: ScarpData[ind].Key02,
+                  Key03: ScarpData[ind].Key03,
+                  Key04: ScarpData[ind].Key04,
+                  Key05: ScarpData[ind].Key05,
+                };
+                ScarpData.push(ScarpLine);
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idScarpList")
+              .getModel("ScarpModel")
+              .setData({ ScarpData: ScarpData });
+          }
+        },
         onPostCompCopy: function (oEvent) {
           var that = this;
           var index;
@@ -4836,7 +5112,41 @@ sap.ui.define(
             // ComponentData
           }
         },
+        onScarpCompDel: function () {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
 
+          var Tableindex = "X";
+          var ScarpLine = {};
+          var ScarpTableData = [];
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`idScarpList`)
+            .getSelectedIndices()[0];
+
+          if (Tableindex != undefined) {
+
+            var ScarpData = sap.ui
+              .getCore()
+              .byId("idScarpList")
+              .getModel("ScarpModel")
+              .getData().ScarpData;
+
+            for (var ind = 0; ind < ScarpData.length; ind++) {
+              if (Tableindex != ind) {
+                ScarpTableData.push(ScarpData[ind]);
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idScarpList")
+              .getModel("ScarpModel")
+              .setData({ ScarpData: ScarpTableData });
+
+          }
+        },
         onPostCompDel: function (oEvent) {
           var that = this;
           var index;
@@ -4898,7 +5208,7 @@ sap.ui.define(
               .byId("idPostComponentList")
               .getModel("ComponentModel")
               .setData({ ComponentData: ComponentNewData });
-            // ComponentData
+
           }
         },
       }
