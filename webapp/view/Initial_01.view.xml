@@ -192,7 +192,7 @@
                         autocomplete="true"
                         valueLiveUpdate="false"
                         change="onidInputWorkAreaLiveChange"
-                        valueHelpRequest="_onWorkAreaHelp"
+                        valueHelpRequest="_onWorkAreaHelp" 
                     />
                 </VBox>
                 <VBox>

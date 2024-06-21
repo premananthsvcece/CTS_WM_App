@@ -2734,7 +2734,7 @@ sap.ui.define(
 
           that.ScrapActionDialog.open();
           that.showBusyIndicator();
-                    sap.ui.getCore().byId("idDialogScarp").setTitle(message + SelAufnr +" / "+ OperDispText);
+                    sap.ui.getCore().byId("idDialogScarp").setTitle(message + ' ' + SelAufnr +" / "+ OperDispText);
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -2852,6 +2852,7 @@ sap.ui.define(
           oBinding.filter([oFilter]);
         },
         _ScarpReasonSelect: function (oEvent) {
+          var that = this;
           var ScarpDataLine = [];
           if (oEvent.getParameters().selectedItems != undefined) {
             var ScarpReason = oEvent
@@ -4002,8 +4003,10 @@ sap.ui.define(
           var SelWerks = " ";
           var SelLgort = " ";
           var SelClabs = " ";
+          var SelDesc = " ";
           if (LineArray.length != 0) {
             SelMatnr = LineArray[0].getProperty("value");
+            SelDesc  = LineArray[1].getProperty("text");
             SelWerks = LineArray[2].getProperty("text");
             SelLgort = LineArray[3].getProperty("text");
             SelClabs = LineArray[7].getProperty("value");
@@ -4021,6 +4024,12 @@ sap.ui.define(
           that.showBusyIndicator();
 
           sBatchId = sId;
+          var Title = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Gen006");
+          sap.ui.getCore().byId('idBatchDialog').setTitle(Title + ' - ' + SelDesc)
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -4148,11 +4157,15 @@ sap.ui.define(
             sap.ui
               .getCore()
               .byId(Path + "--idInputWorkCenter")
-              .setValue();
+              .setValue(Workcenter);
             sap.ui
               .getCore()
               .byId(Path + "--idTextWorkArea")
-              .setText();
+              .setText(WorkcenterArea);
+            sap.ui
+              .getCore()
+              .byId(Path + "--idTextWorkCenter")
+              .setText(Workcenter);
 
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
@@ -4162,6 +4175,7 @@ sap.ui.define(
           var Path = that.getView().getId();
           var sId = oEvent.getParameter("id");
           var ScrapReason = oEvent.getParameters().newValue;
+          var ScarpText = " ";
           ScrapReason = ScrapReason.toUpperCase();
           var Plant = sap.ui
             .getCore()
@@ -4170,6 +4184,30 @@ sap.ui.define(
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
           sReasonCodeId = sId;
+          var ind;
+          var ScarpData = sap.ui
+            .getCore()
+            .byId("idScarpList")
+            .getModel("ScarpModel")
+            .getData().ScarpData;
+
+          for( var i = 0; i < ScarpData.length; i++){
+            // Line Already Available in Table so need to updated in that Line
+            if( ScarpData[i].Data02 === ScrapReason){
+              ind = 'X'
+                sap.ui.getCore().byId(sReasonCodeId).setValue("");
+            }
+          }
+          if (ind === 'X') {
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Gen005");
+                MessageToast.show(message);
+                $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+            return;
+          }
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
             Plant +
@@ -4186,20 +4224,8 @@ sap.ui.define(
                   var HelpReasonCodeUpdate = parseInt(HelpReasonCodeArray[2]);
                   for (var i = 0; i in ScarpReasonData; i++) {
                     if (ScarpReasonData[i].Data03 === ScrapReason) {
-                      if( HelpReasonCodeUpdate === i ){
-                        var Counter = true;
-                      }else{
-                        // Clear the current Line and Only Use Existing Line
-                        sap.ui.getCore().byId(sReasonCodeId).setValue("");
-                        var message = that
-                                      .getView()
-                                      .getModel("i18n")
-                                      .getResourceBundle()
-                                      .getText("Gen005");
-                        MessageToast.show(message);
-                        $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
-                        return;
-                      }
+                      ScarpText = ScarpReasonData[i].Data04;
+                      var Counter = true;
                     }
                   }
                   if (Counter != true) {
@@ -4234,6 +4260,26 @@ sap.ui.define(
                       .getCore()
                       .byId(sReasonCodeId)
                       .setValue(ScrapReason);
+                    // ScarpText
+                    var ScarpTable = [];
+                    var ScarpData = sap.ui
+                                    .getCore()
+                                    .byId("idScarpList")
+                                    .getModel("ScarpModel")
+                                    .getData().ScarpData;
+                    for( var j = 0; j < ScarpData.length; j++ ) {
+                      if( ScarpData[j].Data06 === ScrapReason )
+                      {
+                        ScarpData[j].Data07 = ScarpText;
+                      }
+                      ScarpTable.push(ScarpData[j]);
+                    }
+                      // Update Table to Screen
+                      sap.ui
+                        .getCore()
+                        .byId("idScarpList")
+                        .getModel("ScarpModel")
+                        .setData({ ScarpData: ScarpTable });
                   }
                 } catch (e) {
                   alert(e.message);
