@@ -3019,6 +3019,47 @@ sap.ui.define(
         },
 
         onScarpupdate: function (that, SelAufnr, SelOprNo, SelPlant, SelOprerator, ScarpData) {
+
+          // Dummy Call to Delete Table Entry
+          var IEntry = [];
+          var Process = "";
+          var itemset = {
+              Key01: "ScarpDel",
+              Key02: SelAufnr,
+              Key03: SelOprNo,
+              Key04: SelPlant,
+              Key05: SelOprerator,
+              Data01: " ",
+              Data02: " ",
+            };
+
+            IEntry = itemset;
+            var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+            var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+            oDataModel.create(
+              "/ValueHelpSet",
+              IEntry,
+              null,
+              function (oData, Response) {
+                try {
+                  if (Response.data.Data01 === "S") {
+                    that.hideBusyIndicator();
+                    Process = 'X';
+                  }
+                  if (Response.data.Data01 === "E") {
+                    that.hideBusyIndicator();
+                    Process = 'X';
+                  }
+                } catch (e) {
+                  // alert(e.message);
+                  MessageBox.error(e.message);
+                  that.hideBusyIndicator();
+                }
+              }
+            );
+            if( Process != 'X'){
+             return; 
+            }
           for (var ind = 0; ind < ScarpData.length; ind++) {
             var itemset = {
               Key01: "Scarp",
