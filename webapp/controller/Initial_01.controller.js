@@ -2662,6 +2662,7 @@ sap.ui.define(
           var SelAufnr = " ";
           var SelOprNo = " ";
           var OperatorNo = " ";
+          var OperDispText = " ";
 
           var SelPlant = sap.ui
             .getCore()
@@ -2702,6 +2703,11 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data16;
+            OperDispText = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data20;
           }
 
           if (Tableindex === undefined) {
@@ -2720,9 +2726,15 @@ sap.ui.define(
             );
             that.getView().addDependent(that.ScrapActionDialog);
           }
+          var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Scarp005");
 
           that.ScrapActionDialog.open();
           that.showBusyIndicator();
+                    sap.ui.getCore().byId("idDialogScarp").setTitle(message + SelAufnr +" / "+ OperDispText);
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -3194,6 +3206,7 @@ sap.ui.define(
           var EndDate;
           var TotTime = " ";
           var QtyAvail = "";
+          var OperDispText = " ";
           // var SetupTIme = " ";
 
           var SelPlant = sap.ui
@@ -3250,6 +3263,11 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data10;
+            OperDispText = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data20;
           }
           if (EndDate === "") {
             var message = that
@@ -3282,7 +3300,7 @@ sap.ui.define(
             .getModel("i18n")
             .getResourceBundle()
             .getText("PostAction");
-          var Heading = Head + " - " + SelAufnr;
+          var Heading = Head + " - " + SelAufnr + " / " + OperDispText;
           sap.ui.getCore().byId("idDialogPost").setTitle(Heading);
           sap.ui.getCore().byId(`idPostOperator`).setValue(OperatorNo);
           sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);

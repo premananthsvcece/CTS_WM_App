@@ -9,7 +9,6 @@
 >
     <Dialog
         id="idDialogScarp"
-        title="{i18n>ScarpAction}"
         contentWidth="30%"
     >
         <l:VerticalLayout
@@ -25,7 +24,7 @@
                     rows="{ScarpModel>/ScarpData}"
                     alternateRowColors="true"
                     enableSelectAll="false"
-                    selectionBehavior="RowSelector"
+                    selectionBehavior="RowOnly"
                     selectionMode="Single"
                     enableCellFilter="true"
                 >
@@ -75,11 +74,8 @@
                         <uiTable:Column width="50%">
                             <Label text="{i18n>Description}" />
                             <uiTable:template>
-                                <Input
-                                    type="Text"
-                                    required="true"
-                                    value="{ScarpModel>Data07}"
-                                    enabled="false"
+                                <Text
+                                    text="{ScarpModel>Data07}"
                                 />
                             </uiTable:template>
                         </uiTable:Column>
