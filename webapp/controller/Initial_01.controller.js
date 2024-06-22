@@ -3770,6 +3770,7 @@ sap.ui.define(
           var SelAufnr = " ";
           var SelOprNo = " ";
           var SelPlant = " ";
+          var OprNo = " ";
 
           Tableindex = sap.ui
             .getCore()
@@ -3790,6 +3791,12 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data05;
+            
+            OprNo = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data16;
           }
           if (Tableindex === undefined) {
             var message = that
@@ -3814,7 +3821,7 @@ sap.ui.define(
           IEntry.Key03 = value;
           IEntry.Key04 = SelOprNo;
           IEntry.Key05 = SelPlant;
-          IEntry.ConfirmType = " ";
+          IEntry.ConfirmType = OprNo;
           IEntry.WorkCenterArea = " ";
           IEntry.NavWC_InProgress = [{}];
           IEntry.NavWC_Queue = [{}];
