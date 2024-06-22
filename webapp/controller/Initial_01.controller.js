@@ -4283,6 +4283,126 @@ sap.ui.define(
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
         },
+        onidScarpPostReasonChange: function(oEvent){
+
+          var that = this;
+          var Path = that.getView().getId();
+          var sId = oEvent.getParameter("id");
+          var ScrapReason = oEvent.getParameters().newValue;
+          var ScarpText = " ";
+          ScrapReason = ScrapReason.toUpperCase();
+          var Plant = sap.ui
+            .getCore()
+            .byId(Path + "--idInputPlant")
+            .getValue();
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+          sPostReasonCodeId = sId;
+          var ind = 0;
+          var ScarpData = sap.ui
+            .getCore()
+            .byId("idPostScarpList")
+            .getModel("PostScarpModel")
+            .getData().PostScarpData;
+
+          for (var i = 0; i < ScarpData.length; i++) {
+            // Line Already Available in Table so need to updated in that Line
+            if (ScarpData[i].Data06 === ScrapReason) {
+              ind = parseInt(ind) + 1;
+              
+            }
+          }
+          if (ind > 1) {
+            sap.ui.getCore().byId(sPostReasonCodeId).setValue("");
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Gen005");
+            MessageToast.show(message);
+            $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+            return;
+          }
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
+            Plant +
+            "'",
+            {
+              context: null,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  var ScarpReasonData = oData.results;
+                  // sReasonCodeId
+                  var HelpReasonCodePath = sap.ui.getCore().byId(sPostReasonCodeId).getParent().oBindingContexts.PostScarpModel.sPath;
+                  var HelpReasonCodeArray = HelpReasonCodePath.split("/");
+                  var HelpReasonCodeUpdate = parseInt(HelpReasonCodeArray[2]);
+                  for (var i = 0; i in ScarpReasonData; i++) {
+                    if (ScarpReasonData[i].Data03 === ScrapReason) {
+                      ScarpText = ScarpReasonData[i].Data04;
+                      var Counter = true;
+                    }
+                  }
+                  if (Counter != true) {
+                    // Raise Error Message with State
+                    sap.ui
+                      .getCore()
+                      .byId(sPostReasonCodeId)
+                      .setValueState("Error");
+                    sap.ui.getCore().byId(sPostReasonCodeId).setValue("");
+
+                    // Get Message
+                    var Emessage = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("Scarp004");
+                    sap.ui
+                      .getCore()
+                      .byId(sPostReasonCodeId)
+                      .setValueStateText(Emessage);
+                  } else {
+                    // Clear Error State
+                    sap.ui
+                      .getCore()
+                      .byId(sPostReasonCodeId)
+                      .setValueState("None");
+                    sap.ui
+                      .getCore()
+                      .byId(sPostReasonCodeId)
+                      .setValueStateText("");
+                    sap.ui
+                      .getCore()
+                      .byId(sPostReasonCodeId)
+                      .setValue(ScrapReason);
+                    // ScarpText
+                    var ScarpTable = [];
+                    var ScarpData = sap.ui
+                      .getCore()
+                      .byId("idPostScarpList")
+                      .getModel("PostScarpModel")
+                      .getData().PostScarpData;
+                    for (var j = 0; j < ScarpData.length; j++) {
+                      if (ScarpData[j].Data06 === ScrapReason) {
+                        ScarpData[j].Data07 = ScarpText;
+                      }
+                      ScarpTable.push(ScarpData[j]);
+                    }
+                    // Update Table to Screen
+                    sap.ui
+                      .getCore()
+                      .byId("idPostScarpList")
+                      .getModel("PostScarpModel")
+                      .setData({ PostScarpData: ScarpTable });
+                  }
+                } catch (e) {
+                  alert(e.message);
+                }
+              },
+            }
+          );
+
+        },
         onidScarpReasonChange: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
@@ -4297,7 +4417,7 @@ sap.ui.define(
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
           sReasonCodeId = sId;
-          var ind;
+          var ind = 0;
           var ScarpData = sap.ui
             .getCore()
             .byId("idScarpList")
@@ -4306,12 +4426,12 @@ sap.ui.define(
 
           for (var i = 0; i < ScarpData.length; i++) {
             // Line Already Available in Table so need to updated in that Line
-            if (ScarpData[i].Data02 === ScrapReason) {
-              ind = 'X'
-              sap.ui.getCore().byId(sReasonCodeId).setValue("");
+            if (ScarpData[i].Data06 === ScrapReason) {
+              ind = parseInt(ind) + 1;
             }
           }
-          if (ind === 'X') {
+          if (ind > 1) {
+            sap.ui.getCore().byId(sReasonCodeId).setValue("");
             var message = that
               .getView()
               .getModel("i18n")
