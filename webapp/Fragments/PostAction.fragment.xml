@@ -35,7 +35,10 @@
                                 showSeparators="None"
                                 backgroundDesign="Transparent"
                             >
-                                <InputListItem label="{i18n>OprDetails}" visible="false">
+                                <InputListItem
+                                    label="{i18n>OprDetails}"
+                                    visible="false"
+                                >
                                     <Input
                                         id="idPostOperator"
                                         placeholder="Operator No"
@@ -44,7 +47,10 @@
                                         width="15rem"
                                     />
                                 </InputListItem>
-                                <InputListItem label="{i18n>Plant}" visible="false">
+                                <InputListItem
+                                    label="{i18n>Plant}"
+                                    visible="false"
+                                >
                                     <Input
                                         id="idSelectPostPlant"
                                         type="Text"
@@ -92,7 +98,10 @@
                                         }"
                                     />
                                 </InputListItem>
-                                <InputListItem id="idPostBinDet01" label="{i18n>BinDet} *">
+                                <InputListItem
+                                    id="idPostBinDet01"
+                                    label="{i18n>BinDet} *"
+                                >
                                     <Input
                                         id="idPostBinDet"
                                         required="true"
@@ -120,43 +129,83 @@
                                     </Select>
                                 </InputListItem>
                             </List>
-                            <Table
+
+                            <uiTable:Table
                                 id="idPostScarpList"
+                                visibleRowCount="5"
+                                visibleRowCountMode="Interactive"
                                 class="sapUiContentPadding"
-                                headerText="{i18n>ScarpDetail}"
-                                items="{PostScarpModel>/PostScarpData}"
-                                showSeparators="None"
-                                backgroundDesign="Transparent"
+                                rows="{PostScarpModel>/PostScarpData}"
+                                alternateRowColors="true"
+                                enableSelectAll="false"
+                                selectionBehavior="RowOnly"
+                                selectionMode="Single"
+                                enableCellFilter="true"
                             >
-                                <columns>
-                                    <!-- <Column demandPopin="true">
-                                        <Text text="{i18n>Orddet}" />
-                                    </Column> -->
-                                    <Column demandPopin="true">
-                                        <Text text="{i18n>ScarpType}" />
-                                    </Column>
-                                    <Column demandPopin="true">
-                                        <Text text="{i18n>ScarpQuan}" />
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem vAlign="Middle">
-                                        <cells>
-                                            <!-- <ObjectIdentifier
-                                                title="{PostScarpModel>Data01}"
-                                                text="{i18n>OperNo} : {PostScarpModel>Data02} User: {PostScarpModel>Data04}"
-                                            /> -->
-                                            <ObjectIdentifier
-                                                title="{PostScarpModel>Data06}"
+                                <uiTable:extension>
+                                    <OverflowToolbar>
+                                        <Title level="H2" />
+                                        <ToolbarSpacer />
+                                        <Button
+                                            text="Add"
+                                            type="Transparent"
+                                            press="onScarpPostAdd"
+                                            icon="sap-icon://add"
+                                        />
+                                        <Button
+                                            text="Copy"
+                                            type="Transparent"
+                                            press="onScarpPostCopy"
+                                            icon="sap-icon://copy"
+                                            visible="false"
+                                        />
+                                        <Button
+                                            text="Delete"
+                                            type="Attention"
+                                            press="onScarpPostDel"
+                                            icon="sap-icon://delete"
+                                        />
+                                    </OverflowToolbar>
+                                </uiTable:extension>
+                                <uiTable:noData text="{i18n>NoData}" />
+                                <uiTable:columns>
+                                    <uiTable:Column width="20%">
+                                        <Label text="{i18n>ScarpType} *" />
+                                        <uiTable:template>
+                                            <Input
+                                                showValueHelp="true"
+                                                showSuggestion="true"
+                                                valueHelpRequest="onScarpPostReasonRequest"
+                                                value="{PostScarpModel>Data06}"
+                                                placeholder="Scarp Reason"
+                                                change="onidScarpPostReasonChange"
+                                                type="Text"
+                                                valueLiveUpdate="false"
+                                                required="true"
+                                            />
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                    <uiTable:Column width="50%">
+                                        <Label text="{i18n>Description}" />
+                                        <uiTable:template>
+                                            <Text
                                                 text="{PostScarpModel>Data07}"
                                             />
-                                            <ObjectNumber
-                                                number="{PostScarpModel>Data05}"
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                    <uiTable:Column width="20%">
+                                        <Label text="{i18n>ScarpQuan}" />
+                                        <uiTable:template>
+                                            <Input
+                                                type="Number"
+                                                required="true"
+                                                value="{PostScarpModel>Data05}"
+                                                textAlign="Right"
                                             />
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                </uiTable:columns>
+                            </uiTable:Table>
                             <uiTable:Table
                                 id="idPostComponentList"
                                 visibleRowCount="5"
@@ -214,9 +263,7 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column
-                                        width="7%"
-                                    >
+                                    <uiTable:Column width="7%">
                                         <Label text="{i18n>Plant}" />
                                         <uiTable:template>
                                             <Text
@@ -224,9 +271,7 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column
-                                        width="7%"
-                                    >
+                                    <uiTable:Column width="7%">
                                         <Label text="{i18n>Location}" />
                                         <uiTable:template>
                                             <Text

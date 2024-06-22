@@ -51,6 +51,7 @@ sap.ui.define(
     var sMovementId = "";
     var sPrdSupAreaId = "";
     var sReasonCodeId = "";
+    var sPostReasonCodeId = ""
 
     return Controller.extend(
       "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
@@ -2727,14 +2728,14 @@ sap.ui.define(
             that.getView().addDependent(that.ScrapActionDialog);
           }
           var message = that
-              .getView()
-              .getModel("i18n")
-              .getResourceBundle()
-              .getText("Scarp005");
+            .getView()
+            .getModel("i18n")
+            .getResourceBundle()
+            .getText("Scarp005");
 
           that.ScrapActionDialog.open();
           that.showBusyIndicator();
-                    sap.ui.getCore().byId("idDialogScarp").setTitle(message + ' ' + SelAufnr +" / "+ OperDispText);
+          sap.ui.getCore().byId("idDialogScarp").setTitle(message + ' ' + SelAufnr + " / " + OperDispText);
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -2791,6 +2792,62 @@ sap.ui.define(
             }
           );
         },
+
+        onScarpPostReasonRequest: function (oEvent) {
+          var that = this;
+          var Path = that.getView().getId();
+          var sId = oEvent.getParameter("id");
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          if (SelPlant === null) {
+            SelPlant = "DKKV";
+          }
+          if (!that.ScarpReasonDialog) {
+            that.ScarpReasonDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpPostScarpReason",
+              that
+            );
+            that.getView().addDependent(that.ScarpReasonDialog);
+          }
+          // open value help dialog
+          that.ScarpReasonDialog.open();
+          sPostReasonCodeId = sId;
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'ScrapReason' and Key02 eq '" +
+            SelPlant +
+            "'",
+            {
+              context: null,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  var ScarpReasonData = oData.results;
+                  var ScarpReasonModel = new sap.ui.model.json.JSONModel();
+
+                  ScarpReasonModel.setData({
+                    ScarpReasonData: ScarpReasonData,
+                  });
+                  var ScarpReasonTable = sap.ui
+                    .getCore()
+                    .byId("idScarpReasonDialog");
+
+                  ScarpReasonTable.setModel(
+                    ScarpReasonModel,
+                    "ScarpReasonModel"
+                  );
+                } catch (e) {
+                  alert(e.message);
+                }
+              },
+            }
+          );
+        },
+
         onScarpReasonRequest: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
@@ -2845,12 +2902,72 @@ sap.ui.define(
             }
           );
         },
+        _onScarpPostReasonSearch: function (oEvent) {
+          var sValue = oEvent.getParameter("value");
+          var oFilter = new Filter("Data03", FilterOperator.Contains, sValue);
+          var oBinding = oEvent.getParameter("itemsBinding");
+          oBinding.filter([oFilter]);
+        },
         _onScarpReasonSearch: function (oEvent) {
           var sValue = oEvent.getParameter("value");
           var oFilter = new Filter("Data03", FilterOperator.Contains, sValue);
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
         },
+        _ScarpPostReasonSelect: function (oEvent) {
+          var that = this;
+          var ScarpDataLine = [];
+          if (oEvent.getParameters().selectedItems != undefined) {
+            var ScarpReason = oEvent
+              .getParameters()
+              .selectedItems[0].getTitle();
+
+            var ScarpText = oEvent
+              .getParameters()
+              .selectedItems[0].getDescription();
+
+            if (ScarpReason != undefined) {
+
+              var ScarpData = sap.ui
+                .getCore()
+                .byId("idPostScarpList")
+                .getModel("PostScarpModel")
+                .getData().PostScarpData;
+              // }
+              // sReasonCodeId
+              var HelpReasonCodePath = sap.ui.getCore().byId(sPostReasonCodeId).getParent().oBindingContexts.PostScarpModel.sPath;
+              var HelpReasonCodeArray = HelpReasonCodePath.split("/");
+              var HelpReasonCodeUpdate = parseInt(HelpReasonCodeArray[2]);
+
+              for (var ind = 0; ind < ScarpData.length; ind++) {
+                if (ScarpData[ind].Data06 === ScarpReason) {
+                  HelpReasonCodeUpdate = ind;
+                  var message = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("Gen005");
+                  MessageToast.show(message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                }
+                if (HelpReasonCodeUpdate === ind) {
+                  ScarpData[ind].Data06 = ScarpReason;
+                  ScarpData[ind].Data07 = ScarpText;
+                }
+                ScarpDataLine.push(ScarpData[ind]);
+              }
+
+              sap.ui
+                .getCore()
+                .byId("idPostScarpList")
+                .getModel("PostScarpModel")
+                .setData({ PostScarpData: ScarpDataLine });
+            } else {
+              return;
+            }
+          }
+        },
+
         _ScarpReasonSelect: function (oEvent) {
           var that = this;
           var ScarpDataLine = [];
@@ -2987,33 +3104,6 @@ sap.ui.define(
             return;
           }
 
-          // sap.ui
-          //   .getCore()
-          //   .byId("idScarpList")
-          //   .getModel("ScarpModel")
-          //   .setData({ ScarpData: ScarpTableData });
-
-          // var Data01 = sap.ui.getCore().byId(`idScarpReason`).getValue();
-          // if (Data01 === "") {
-          //   var message = that
-          //     .getView()
-          //     .getModel("i18n")
-          //     .getResourceBundle()
-          //     .getText("Scarp001");
-          //   MessageBox.error(message);
-          //   return;
-          // }
-          // var Data02 = sap.ui.getCore().byId(`idScarpQuantity`).getValue();
-          // if (Data02 === "") {
-          //   var message = that
-          //     .getView()
-          //     .getModel("i18n")
-          //     .getResourceBundle()
-          //     .getText("Scarp002");
-          //   MessageBox.error(message);
-          //   return;
-          // }
-
           that.ScrapActionDialog.close();
           that.onScarpupdate(that, SelAufnr, SelOprNo, SelPlant, SelOprerator, ScarpData);
 
@@ -3025,42 +3115,42 @@ sap.ui.define(
           var IEntry = [];
           var Process = "";
           var itemset = {
-              Key01: "ScarpDel",
-              Key02: SelAufnr,
-              Key03: SelOprNo,
-              Key04: SelPlant,
-              Key05: SelOprerator,
-              Data01: " ",
-              Data02: " ",
-            };
+            Key01: "ScarpDel",
+            Key02: SelAufnr,
+            Key03: SelOprNo,
+            Key04: SelPlant,
+            Key05: SelOprerator,
+            Data01: " ",
+            Data02: " ",
+          };
 
-            IEntry = itemset;
-            var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
-            var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
-            oDataModel.create(
-              "/ValueHelpSet",
-              IEntry,
-              null,
-              function (oData, Response) {
-                try {
-                  if (Response.data.Data01 === "S") {
-                    that.hideBusyIndicator();
-                    Process = 'X';
-                  }
-                  if (Response.data.Data01 === "E") {
-                    that.hideBusyIndicator();
-                    Process = 'X';
-                  }
-                } catch (e) {
-                  // alert(e.message);
-                  MessageBox.error(e.message);
+          IEntry = itemset;
+          var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
+          oDataModel.create(
+            "/ValueHelpSet",
+            IEntry,
+            null,
+            function (oData, Response) {
+              try {
+                if (Response.data.Data01 === "S") {
                   that.hideBusyIndicator();
+                  Process = 'X';
                 }
+                if (Response.data.Data01 === "E") {
+                  that.hideBusyIndicator();
+                  Process = 'X';
+                }
+              } catch (e) {
+                // alert(e.message);
+                MessageBox.error(e.message);
+                that.hideBusyIndicator();
               }
-            );
-            if( Process != 'X'){
-             return; 
             }
+          );
+          if (Process != 'X') {
+            return;
+          }
           for (var ind = 0; ind < ScarpData.length; ind++) {
             var itemset = {
               Key01: "Scarp",
@@ -3352,6 +3442,15 @@ sap.ui.define(
           sap.ui.getCore().byId(`idPostQuantity`).setValue(QtyAvail);
           sap.ui.getCore().byId(`idPostConfType`).setSelectedKey('P');
 
+          var message = that
+            .getView()
+            .getModel("i18n")
+            .getResourceBundle()
+            .getText("Scarp005");
+
+
+          sap.ui.getCore().byId("idPostScarpList").setTitle(message + ' ' + SelAufnr + " / " + OperDispText);
+
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
           var vModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -3476,7 +3575,7 @@ sap.ui.define(
 
                       ComponentnList.setModel(ComponentModel, "ComponentModel");
                     }
-                    if( Visible != 'X'){
+                    if (Visible != 'X') {
                       sap.ui.getCore().byId("idPostBinDet01").setVisible(false);
                     }
                     that.hideBusyIndicator();
@@ -3636,6 +3735,13 @@ sap.ui.define(
             .byId(`${Path}--idInputPlant`)
             .getValue();
           that.showBusyIndicator();
+          var ScarpData = sap.ui
+            .getCore()
+            .byId("idPostScarpList")
+            .getModel("PostScarpModel")
+            .getData().PostScarpData;
+
+          that.onScarpupdate(that, SelAufnr, SelOprNo, SelPlant, OperatorNo, ScarpData);
 
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
@@ -3720,7 +3826,7 @@ sap.ui.define(
                   $(".sapMMessageToast").addClass("sapMMessageToastDanger");
                   that.onButtonPress();
                   return;
-                }else if (oData.Key04 === "I") {
+                } else if (oData.Key04 === "I") {
                   var message = oData.Key05;
                   MessageBox.warning(message);
                   $(".sapMMessageToast").addClass("sapMMessageToastWarning");
@@ -3791,7 +3897,7 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data05;
-            
+
             OprNo = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
@@ -4013,7 +4119,7 @@ sap.ui.define(
           var SelDesc = " ";
           if (LineArray.length != 0) {
             SelMatnr = LineArray[0].getProperty("value");
-            SelDesc  = LineArray[1].getProperty("text");
+            SelDesc = LineArray[1].getProperty("text");
             SelWerks = LineArray[2].getProperty("text");
             SelLgort = LineArray[3].getProperty("text");
             SelClabs = LineArray[7].getProperty("value");
@@ -4032,10 +4138,10 @@ sap.ui.define(
 
           sBatchId = sId;
           var Title = that
-              .getView()
-              .getModel("i18n")
-              .getResourceBundle()
-              .getText("Gen006");
+            .getView()
+            .getModel("i18n")
+            .getResourceBundle()
+            .getText("Gen006");
           sap.ui.getCore().byId('idBatchDialog').setTitle(Title + ' - ' + SelDesc)
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
@@ -4198,11 +4304,11 @@ sap.ui.define(
             .getModel("ScarpModel")
             .getData().ScarpData;
 
-          for( var i = 0; i < ScarpData.length; i++){
+          for (var i = 0; i < ScarpData.length; i++) {
             // Line Already Available in Table so need to updated in that Line
-            if( ScarpData[i].Data02 === ScrapReason){
+            if (ScarpData[i].Data02 === ScrapReason) {
               ind = 'X'
-                sap.ui.getCore().byId(sReasonCodeId).setValue("");
+              sap.ui.getCore().byId(sReasonCodeId).setValue("");
             }
           }
           if (ind === 'X') {
@@ -4211,8 +4317,8 @@ sap.ui.define(
               .getModel("i18n")
               .getResourceBundle()
               .getText("Gen005");
-                MessageToast.show(message);
-                $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+            MessageToast.show(message);
+            $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
             return;
           }
           oModel.read(
@@ -4270,23 +4376,22 @@ sap.ui.define(
                     // ScarpText
                     var ScarpTable = [];
                     var ScarpData = sap.ui
-                                    .getCore()
-                                    .byId("idScarpList")
-                                    .getModel("ScarpModel")
-                                    .getData().ScarpData;
-                    for( var j = 0; j < ScarpData.length; j++ ) {
-                      if( ScarpData[j].Data06 === ScrapReason )
-                      {
+                      .getCore()
+                      .byId("idScarpList")
+                      .getModel("ScarpModel")
+                      .getData().ScarpData;
+                    for (var j = 0; j < ScarpData.length; j++) {
+                      if (ScarpData[j].Data06 === ScrapReason) {
                         ScarpData[j].Data07 = ScarpText;
                       }
                       ScarpTable.push(ScarpData[j]);
                     }
-                      // Update Table to Screen
-                      sap.ui
-                        .getCore()
-                        .byId("idScarpList")
-                        .getModel("ScarpModel")
-                        .setData({ ScarpData: ScarpTable });
+                    // Update Table to Screen
+                    sap.ui
+                      .getCore()
+                      .byId("idScarpList")
+                      .getModel("ScarpModel")
+                      .setData({ ScarpData: ScarpTable });
                   }
                 } catch (e) {
                   alert(e.message);
@@ -4597,6 +4702,52 @@ sap.ui.define(
             }
           }
         },
+        onScarpPostAdd: function () {
+          var PostScarpData = sap.ui
+            .getCore()
+            .byId("idPostScarpList")
+            .getModel("PostScarpModel")
+            .getData().PostScarpData;
+
+          var line = {
+            Data01: "",
+            Data02: "",
+            Data03: "",
+            Data04: "",
+            Data05: "",
+            Data06: "",
+            Data07: "",
+            Data08: "",
+            Data09: "",
+            Data10: "",
+            Data11: "",
+            Data12: "",
+            Data13: "",
+            Data14: "",
+            Data15: "",
+            Data16: "",
+            Data17: "",
+            Data18: "",
+            Data19: "",
+            Data20: "",
+            Key01: "Scarp",
+            Key02: "",
+            Key03: "N",
+            Key04: "2",
+            Key05: "",
+          };
+          PostScarpData.push(line);
+
+          var PostScarpModel = new sap.ui.model.json.JSONModel();
+
+          PostScarpModel.setData({
+            PostScarpData: PostScarpData,
+          });
+          var ScarpList = sap.ui.getCore().byId("idPostScarpList");
+
+          ScarpList.setModel(PostScarpModel, "PostScarpModel");
+        },
+
         onScarpCompAdd: function () {
           var ScarpData = sap.ui
             .getCore()
@@ -4642,6 +4793,7 @@ sap.ui.define(
 
           ScarpList.setModel(ScarpModel, "ScarpModel");
         },
+
         onPostCompAdd: function (oEvent) {
           var ComponentData = sap.ui
             .getCore()
@@ -5101,6 +5253,67 @@ sap.ui.define(
               .setData({ ComponentData: ComponentTable });
           }
         },
+
+        onScarpPostCopy: function () {
+          var that = this;
+
+          var Tableindex = "X";
+          var ScarpLine = {};
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`idPostScarpList`)
+            .getSelectedIndices()[0];
+
+          if (Tableindex != undefined) {
+
+            var ScarpData = sap.ui
+              .getCore()
+              .byId("idPostScarpList")
+              .getModel("PostScarpModel")
+              .getData().PostScarpData;
+
+            for (var ind = 0; ind < ScarpData.length; ind++) {
+              if (Tableindex === ind) {
+                // ComponentLine = ComponentTable[ind];
+                var ScarpLine = {
+                  Data01: ScarpData[ind].Data01,
+                  Data02: ScarpData[ind].Data02,
+                  Data03: ScarpData[ind].Data03,
+                  Data04: ScarpData[ind].Data04,
+                  Data05: ScarpData[ind].Data05,
+                  Data06: ScarpData[ind].Data06,
+                  Data07: ScarpData[ind].Data07,
+                  Data08: ScarpData[ind].Data08,
+                  Data09: ScarpData[ind].Data09,
+                  Data10: ScarpData[ind].Data10,
+                  Data11: ScarpData[ind].Data11,
+                  Data12: ScarpData[ind].Data12,
+                  Data13: ScarpData[ind].Data13,
+                  Data14: ScarpData[ind].Data14,
+                  Data15: ScarpData[ind].Data15,
+                  Data16: ScarpData[ind].Data16,
+                  Data17: ScarpData[ind].Data17,
+                  Data18: ScarpData[ind].Data18,
+                  Data19: ScarpData[ind].Data19,
+                  Data20: ScarpData[ind].Data20,
+                  Key01: ScarpData[ind].Key01,
+                  Key02: ScarpData[ind].Key02,
+                  Key03: ScarpData[ind].Key03,
+                  Key04: ScarpData[ind].Key04,
+                  Key05: ScarpData[ind].Key05,
+                };
+                ScarpData.push(ScarpLine);
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostScarpList")
+              .getModel("PostScarpModel")
+              .setData({ PostScarpData: ScarpData });
+          }
+        },
+
         onScarpCompCopy: function () {
           var that = this;
 
@@ -5225,6 +5438,42 @@ sap.ui.define(
             // ComponentData
           }
         },
+        onScarpPostDel: function () {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var ScarpLine = {};
+          var ScarpTableData = [];
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`idPostScarpList`)
+            .getSelectedIndices()[0];
+
+          if (Tableindex != undefined) {
+
+            var ScarpData = sap.ui
+              .getCore()
+              .byId("idPostScarpList")
+              .getModel("PostScarpModel")
+              .getData().PostScarpData;
+
+            for (var ind = 0; ind < ScarpData.length; ind++) {
+              if (Tableindex != ind) {
+                ScarpTableData.push(ScarpData[ind]);
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostScarpList")
+              .getModel("PostScarpModel")
+              .setData({ PostScarpData: ScarpTableData });
+
+          }
+        },
+
         onScarpCompDel: function () {
           var that = this;
           var index;
