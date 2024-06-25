@@ -52,6 +52,8 @@ sap.ui.define(
     var sPrdSupAreaId = "";
     var sReasonCodeId = "";
     var sPostReasonCodeId = ""
+    var TableMatGlobalId = "";
+    var TableBatchGlobalId = "";
 
     return Controller.extend(
       "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
@@ -3449,7 +3451,7 @@ sap.ui.define(
             .getText("Scarp005");
 
 
-          sap.ui.getCore().byId("idPostScarpList").setTitle(message + ' ' + SelAufnr + " / " + OperDispText);
+          // sap.ui.getCore().byId("idPostScarpList").setTitle(message + ' ' + SelAufnr + " / " + OperDispText);
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -4000,12 +4002,36 @@ sap.ui.define(
           IEntry.NavWC_InProgress = [{}];
           IEntry.NavWC_Queue = [{}];
           IEntry.NavWC_Future = [{}];
-
-          IEntry.NavWC_Component = sap.ui
+          var ComponentList101 = sap.ui
             .getCore()
             .byId("idPostComponentList101")
             .getModel("ComponentModel101")
             .getData().ComponentData101;
+          var ComponentList261 = sap.ui
+            .getCore()
+            .byId("idPostComponentList261")
+            .getModel("ComponentModel261")
+            .getData().ComponentData261;
+          var ComponentList561 = sap.ui
+            .getCore()
+            .byId("idPostComponentList561")
+            .getModel("ComponentModel561")
+            .getData().ComponentData561;
+          if( ComponentList101.length != 0){
+            if( var i = 0; i < ComponentList101.length; i++){
+              IEntry.NavWC_Component.push(ComponentList101[i]);
+            }
+          }
+          if( ComponentList261.length != 0){
+            if( var i = 0; i < ComponentList261.length; i++){
+              IEntry.NavWC_Component.push(ComponentList261[i]);
+            }
+          }
+          if( ComponentList561.length != 0){
+            if( var i = 0; i < ComponentList561.length; i++){
+              IEntry.NavWC_Component.push(ComponentList561[i]);
+            }
+          }
           if (IEntry.NavWC_Component.length === 0) {
             IEntry.NavWC_Component = [{}];
           }
@@ -4181,16 +4207,16 @@ sap.ui.define(
           var sId = oEvent.getParameter("id");
           var LineArray = oEvent.getSource().getParent().getCells();
           var SelMatnr = " ";
-          var SelWerks = " ";
-          var SelLgort = " ";
+          var SelWerks = sap.ui.getCore().byId("idSelectPostPlant").getValue();
+          var SelLgort = "GI01";
           var SelClabs = " ";
           var SelDesc = " ";
           if (LineArray.length != 0) {
             SelMatnr = LineArray[0].getProperty("value");
             SelDesc = LineArray[1].getProperty("text");
-            SelWerks = LineArray[2].getProperty("text");
-            SelLgort = LineArray[3].getProperty("text");
-            SelClabs = LineArray[7].getProperty("value");
+            // SelWerks = LineArray[2].getProperty("text");
+            // SelLgort = LineArray[3].getProperty("text");
+            SelClabs = LineArray[5].getProperty("value");
           }
 
           var Path = that.getView().getId();
@@ -5188,12 +5214,10 @@ sap.ui.define(
         onMaterailHelpRequest: function (oEvent) {
           var that = this;
           var LineArray = oEvent.getSource().getParent().getCells();
-          var SelWerks = " ";
-          var SelLgort = " ";
-          if (LineArray.length != 0) {
-            SelWerks = LineArray[2].getProperty("text");
-            SelLgort = LineArray[3].getProperty("text");
-          }
+          var TableDetail = oEvent.getSource().getParent().sId;
+          var SelWerks = sap.ui.getCore().byId("idSelectPostPlant").getValue();
+          var SelLgort = "GI01";
+
 
           var Path = that.getView().getId();
 
@@ -5205,6 +5229,7 @@ sap.ui.define(
             that.getView().addDependent(that.MaterialHelpDialog);
           }
           that.showBusyIndicator();
+          TableMatGlobalId = TableDetail;
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -5445,7 +5470,12 @@ sap.ui.define(
               .getParameters()
               .selectedItem.getCells()[3]
               .getTitle();
-            if (sap.ui.getCore().byId("idPostComponentList101").getVisible() === true) {
+            // TableMatGlobalId
+            var Array = TableMatGlobalId.split("-");
+            if (Array.length != 0) {
+              var TableUpdateId = Array[0];
+            }
+            if (TableUpdateId === "idPostComponentList101") {
               var ComponentTable = sap.ui
                 .getCore()
                 .byId("idPostComponentList101")
@@ -5465,6 +5495,48 @@ sap.ui.define(
                 .byId("idPostComponentList101")
                 .getModel("ComponentModel101")
                 .setData({ ComponentData101: ComponentTable });
+            }
+            if (TableUpdateId === "idPostComponentList261") {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList261")
+                .getModel("ComponentModel261")
+                .getData().ComponentData101;
+
+              for (var ind = 0; ind < ComponentTable.length; ind++) {
+                if (ComponentTable[ind].Data01 === " ") {
+                  ComponentTable[ind].Data01 = Material;
+                  ComponentTable[ind].Data02 = MatDesc;
+                  ComponentTable[ind].Data07 = MatUOM;
+                  ComponentTable[ind].Data10 = false;
+                }
+              }
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList261")
+                .getModel("ComponentModel261")
+                .setData({ ComponentData261: ComponentTable });
+            }
+            if (TableUpdateId === "idPostComponentList561") {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList561")
+                .getModel("ComponentModel561")
+                .getData().ComponentData561;
+
+              for (var ind = 0; ind < ComponentTable.length; ind++) {
+                if (ComponentTable[ind].Data01 === " ") {
+                  ComponentTable[ind].Data01 = Material;
+                  ComponentTable[ind].Data02 = MatDesc;
+                  ComponentTable[ind].Data07 = MatUOM;
+                  ComponentTable[ind].Data10 = false;
+                }
+              }
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList561")
+                .getModel("ComponentModel561")
+                .setData({ ComponentData561: ComponentTable });
             }
 
           }

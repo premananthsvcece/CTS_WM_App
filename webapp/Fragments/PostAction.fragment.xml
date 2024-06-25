@@ -131,7 +131,7 @@
                             </List>
                             <uiTable:Table
                                 id="idPostScarpList"
-                                visibleRowCount="5"
+                                visibleRowCount="3"
                                 visibleRowCountMode="Interactive"
                                 class="sapUiContentPadding"
                                 rows="{PostScarpModel>/PostScarpData}"
@@ -205,7 +205,7 @@
                             </uiTable:Table>
                             <uiTable:Table
                                 id="idPostComponentList101"
-                                visibleRowCount="5"
+                                visibleRowCount="3"
                                 visibleRowCountMode="Interactive"
                                 class="sapUiContentPadding"
                                 rows="{ComponentModel101>/ComponentData101}"
@@ -322,7 +322,7 @@
                             </uiTable:Table>
                             <uiTable:Table
                                 id="idPostComponentList261"
-                                visibleRowCount="5"
+                                visibleRowCount="3"
                                 visibleRowCountMode="Interactive"
                                 class="sapUiContentPadding"
                                 rows="{ComponentModel261>/ComponentData261}"
@@ -439,7 +439,7 @@
                             </uiTable:Table>
                             <uiTable:Table
                                 id="idPostComponentList561"
-                                visibleRowCount="5"
+                                visibleRowCount="3"
                                 visibleRowCountMode="Interactive"
                                 class="sapUiContentPadding"
                                 rows="{ComponentModel561>/ComponentData561}"
