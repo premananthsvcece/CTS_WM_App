@@ -1706,7 +1706,7 @@ sap.ui.define(
                   var sPath = that.getView().getId();
                   if (oData.results.length != 0) {
                     var emparray = oData.results[0];
-                    sap.ui.getCore().byId(`idStartOperator`).setValue(sValue);
+                    sap.ui.getCore().byId(`idStartOperator`).setValue(emparray.Data02);
                     sap.ui
                       .getCore()
                       .byId(`idStartOperator`)
@@ -3532,8 +3532,16 @@ sap.ui.define(
                   if (oData.results.length != 0) {
                     var ComponentData = oData.results;
                     if (ComponentData.length != 0) {
-                      var ComponentModel = new sap.ui.model.json.JSONModel();
-                      var ComponentDataLoop = [];
+
+                      var ComponentModel101 = new sap.ui.model.json.JSONModel();
+                      var ComponentModel261 = new sap.ui.model.json.JSONModel();
+                      var ComponentModel561 = new sap.ui.model.json.JSONModel();
+
+                      var ComponentDataLoop101 = [];
+                      var ComponentDataLoop261 = [];
+                      var ComponentDataLoop561 = [];
+
+
                       for (var i = 0; i in ComponentData; i++) {
                         if (ComponentData[i].Data08 === "101") {
                           ComponentData[i].Data09 = false;
@@ -3546,52 +3554,112 @@ sap.ui.define(
                         } else {
                           ComponentData[i].Data10 = true;
                         }
-                        ComponentDataLoop.push(ComponentData[i]);
+                        if (ComponentData[i].Data08 === '101') {
+                          ComponentDataLoop101.push(ComponentData[i]);
+                        } else if (ComponentData[i].Data08 === '261') {
+                          ComponentDataLoop261.push(ComponentData[i]);
+                        } else {
+                          ComponentDataLoop561.push(ComponentData[i]);
+                        }
+
+                      }
+                      if (ComponentDataLoop101.length != 0) {
+                        sap.ui.getCore().byId("idPostComponentList101").setVisible(true);
+                        ComponentModel101.setData({
+                          ComponentData101: ComponentDataLoop101,
+                        });
+
+                        var ComponentnList101 = sap.ui
+                          .getCore()
+                          .byId("idPostComponentList101");
+
+                        if (ComponentData[0].Key03 === "N") {
+                          var HeaderText = that
+                            .getView()
+                            .getModel("i18n")
+                            .getResourceBundle()
+                            .getText("CompTitle");
+                        }
+                        if (ComponentData[0].Key03 === "S") {
+                          var HeaderText = that
+                            .getView()
+                            .getModel("i18n")
+                            .getResourceBundle()
+                            .getText("GRDetail");
+                        }
+
+                        ComponentnList101.setTitle(HeaderText);
+
+                        ComponentnList101.setModel(ComponentModel101, "ComponentModel101");
+                      } else {
+                        sap.ui.getCore().byId("idPostComponentList101").setVisible(false);
                       }
 
-                      ComponentModel101.setData({
-                        ComponentData101: ComponentDataLoop,
-                      });
-                      var ComponentnList101 = sap.ui
-                        .getCore()
-                        .byId("idPostComponentList101");
+                      if (ComponentDataLoop261.length != 0) {
+                        sap.ui.getCore().byId("idPostComponentList261").setVisible(true);
+                        ComponentModel261.setData({
+                          ComponentData261: ComponentDataLoop261,
+                        });
 
-                      if (ComponentData[0].Key03 === "N") {
+                        var ComponentnList261 = sap.ui
+                          .getCore()
+                          .byId("idPostComponentList261");
+
                         var HeaderText = that
                           .getView()
                           .getModel("i18n")
                           .getResourceBundle()
                           .getText("CompTitle");
+
+
+                        ComponentnList261.setTitle(HeaderText);
+
+                        ComponentnList261.setModel(ComponentModel261, "ComponentModel261");
+                      } else {
+                        sap.ui.getCore().byId("idPostComponentList261").setVisible(false);
                       }
-                      if (ComponentData[0].Key03 === "S") {
+
+                      if (ComponentDataLoop561.length != 0) {
+                        sap.ui.getCore().byId("idPostComponentList561").setVisible(true);
+                        ComponentModel561.setData({
+                          ComponentData561: ComponentDataLoop561,
+                        });
+
+                        var ComponentnList561 = sap.ui
+                          .getCore()
+                          .byId("idPostComponentList561");
+
                         var HeaderText = that
                           .getView()
                           .getModel("i18n")
                           .getResourceBundle()
                           .getText("GRDetail");
+
+                        ComponentnList561.setTitle(HeaderText);
+
+                        ComponentnList561.setModel(ComponentModel561, "ComponentModel561");
+                      } else {
+                        sap.ui.getCore().byId("idPostComponentList561").setVisible(false);
                       }
 
-                      ComponentnList101.setTitle(HeaderText);
-
-                      ComponentnList101.setModel(ComponentModel101, "ComponentModel101");
                     }
                     if (Visible != 'X') {
                       sap.ui.getCore().byId("idPostBinDet01").setVisible(false);
                     }
                     that.hideBusyIndicator();
                   } else {
-                    var ComponentData = [];
-                    var ComponentModel = new sap.ui.model.json.JSONModel();
-                    ComponentModel.setData({
-                      ComponentData: ComponentData,
-                    });
-                    var ComponentnList = sap.ui
-                      .getCore()
-                      .byId("idPostComponentList");
+                    // var ComponentData = [];
+                    // var ComponentModel = new sap.ui.model.json.JSONModel();
+                    // ComponentModel.setData({
+                    //   ComponentData: ComponentData,
+                    // });
+                    // var ComponentnList = sap.ui
+                    //   .getCore()
+                    //   .byId("idPostComponentList");
 
-                    ComponentnList.setTitle(""); // Blank
+                    // ComponentnList.setTitle(""); // Blank
 
-                    ComponentnList.setModel(ComponentModel, "ComponentModel");
+                    // ComponentnList.setModel(ComponentModel, "ComponentModel");
                     that.hideBusyIndicator();
                   }
                 } catch (e) {
@@ -3935,9 +4003,9 @@ sap.ui.define(
 
           IEntry.NavWC_Component = sap.ui
             .getCore()
-            .byId("idPostComponentList")
-            .getModel("ComponentModel")
-            .getData().ComponentData;
+            .byId("idPostComponentList101")
+            .getModel("ComponentModel101")
+            .getData().ComponentData101;
           if (IEntry.NavWC_Component.length === 0) {
             IEntry.NavWC_Component = [{}];
           }
@@ -3954,8 +4022,8 @@ sap.ui.define(
                 if (ComponentData.length != 0) {
                   var ComponentnList = sap.ui
                     .getCore()
-                    .byId("idPostComponentList");
-                  var ComponentModel = new sap.ui.model.json.JSONModel();
+                    .byId("idPostComponentList101");
+                  var ComponentModel101 = new sap.ui.model.json.JSONModel();
                   var ComponentDataLoop = [];
                   for (var i = 0; i in ComponentData; i++) {
                     if (ComponentData[i].Data08 === "101") {
@@ -3971,11 +4039,11 @@ sap.ui.define(
                     ComponentDataLoop.push(ComponentData[i]);
                   }
 
-                  ComponentModel.setData({
-                    ComponentData: ComponentData,
+                  ComponentModel101.setData({
+                    ComponentData101: ComponentData,
                   });
 
-                  ComponentnList.setModel(ComponentModel, "ComponentModel");
+                  ComponentnList.setModel(ComponentModel101, "ComponentModel101");
                 }
               } catch (e) {
                 that.hideBusyIndicator();
@@ -4283,7 +4351,7 @@ sap.ui.define(
             that.onLoadData(that, Plant, WorkcenterArea, Workcenter);
           }
         },
-        onidScarpPostReasonChange: function(oEvent){
+        onidScarpPostReasonChange: function (oEvent) {
 
           var that = this;
           var Path = that.getView().getId();
@@ -4309,7 +4377,7 @@ sap.ui.define(
             // Line Already Available in Table so need to updated in that Line
             if (ScarpData[i].Data06 === ScrapReason) {
               ind = parseInt(ind) + 1;
-              
+
             }
           }
           if (ind > 1) {
@@ -4914,12 +4982,57 @@ sap.ui.define(
           ScarpList.setModel(ScarpModel, "ScarpModel");
         },
 
-        onPostCompAdd: function (oEvent) {
+        onPostCompAdd101: function (oEvent) {
           var ComponentData = sap.ui
             .getCore()
-            .byId("idPostComponentList")
-            .getModel("ComponentModel")
-            .getData().ComponentData;
+            .byId("idPostComponentList101")
+            .getModel("ComponentModel101")
+            .getData().ComponentData101;
+
+          var line = {
+            Data01: " ",
+            Data02: "",
+            Data03: "DKKV",
+            Data04: "GI01",
+            Data05: "",
+            Data06: "",
+            Data07: "",
+            Data08: "101",
+            Data09: true,
+            Data10: false,
+            Data11: "",
+            Data12: "",
+            Data13: "",
+            Data14: "",
+            Data15: "",
+            Data16: "",
+            Data17: "",
+            Data18: "",
+            Data19: "",
+            Data20: "",
+            Key01: "Component",
+            Key02: "",
+            Key03: "N",
+            Key04: "2",
+            Key05: "",
+          };
+          ComponentData.push(line);
+
+          var ComponentModel101 = new sap.ui.model.json.JSONModel();
+
+          ComponentModel101.setData({
+            ComponentData101: ComponentData,
+          });
+          var ComponentnList = sap.ui.getCore().byId("idPostComponentList101");
+
+          ComponentnList.setModel(ComponentModel101, "ComponentModel101");
+        },
+        onPostCompAdd261: function (oEvent) {
+          var ComponentData = sap.ui
+            .getCore()
+            .byId("idPostComponentList261")
+            .getModel("ComponentModel261")
+            .getData().ComponentData261;
 
           var line = {
             Data01: " ",
@@ -4950,14 +5063,59 @@ sap.ui.define(
           };
           ComponentData.push(line);
 
-          var ComponentModel = new sap.ui.model.json.JSONModel();
+          var ComponentModel261 = new sap.ui.model.json.JSONModel();
 
-          ComponentModel.setData({
-            ComponentData: ComponentData,
+          ComponentModel261.setData({
+            ComponentData261: ComponentData,
           });
-          var ComponentnList = sap.ui.getCore().byId("idPostComponentList");
+          var ComponentnList = sap.ui.getCore().byId("idPostComponentList261");
 
-          ComponentnList.setModel(ComponentModel, "ComponentModel");
+          ComponentnList.setModel(ComponentModel261, "ComponentModel261");
+        },
+        onPostCompAdd561: function (oEvent) {
+          var ComponentData = sap.ui
+            .getCore()
+            .byId("idPostComponentList561")
+            .getModel("ComponentModel561")
+            .getData().ComponentData561;
+
+          var line = {
+            Data01: " ",
+            Data02: "",
+            Data03: "DKKV",
+            Data04: "GI01",
+            Data05: "",
+            Data06: "",
+            Data07: "",
+            Data08: "",
+            Data09: true,
+            Data10: true,
+            Data11: "",
+            Data12: "",
+            Data13: "",
+            Data14: "",
+            Data15: "",
+            Data16: "",
+            Data17: "",
+            Data18: "",
+            Data19: "",
+            Data20: "",
+            Key01: "Component",
+            Key02: "",
+            Key03: "N",
+            Key04: "2",
+            Key05: "",
+          };
+          ComponentData.push(line);
+
+          var ComponentModel561 = new sap.ui.model.json.JSONModel();
+
+          ComponentModel561.setData({
+            ComponentData561: ComponentData,
+          });
+          var ComponentnList = sap.ui.getCore().byId("idPostComponentList561");
+
+          ComponentnList.setModel(ComponentModel561, "ComponentModel561");
         },
         _onComponentSelHelp: function (oEvent) {
           var that = this;
@@ -5287,26 +5445,28 @@ sap.ui.define(
               .getParameters()
               .selectedItem.getCells()[3]
               .getTitle();
+            if (sap.ui.getCore().byId("idPostComponentList101").getVisible() === true) {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList101")
+                .getModel("ComponentModel101")
+                .getData().ComponentData101;
 
-            var ComponentTable = sap.ui
-              .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .getData().ComponentData;
-
-            for (var ind = 0; ind < ComponentTable.length; ind++) {
-              if (ComponentTable[ind].Data01 === " ") {
-                ComponentTable[ind].Data01 = Material;
-                ComponentTable[ind].Data02 = MatDesc;
-                ComponentTable[ind].Data07 = MatUOM;
-                ComponentTable[ind].Data10 = false;
+              for (var ind = 0; ind < ComponentTable.length; ind++) {
+                if (ComponentTable[ind].Data01 === " ") {
+                  ComponentTable[ind].Data01 = Material;
+                  ComponentTable[ind].Data02 = MatDesc;
+                  ComponentTable[ind].Data07 = MatUOM;
+                  ComponentTable[ind].Data10 = false;
+                }
               }
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList101")
+                .getModel("ComponentModel101")
+                .setData({ ComponentData101: ComponentTable });
             }
-            sap.ui
-              .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .setData({ ComponentData: ComponentTable });
+
           }
         },
         onProdSuppAreaInputChange: function (oEvent) {
@@ -5493,7 +5653,7 @@ sap.ui.define(
               .setData({ ScarpData: ScarpData });
           }
         },
-        onPostCompCopy: function (oEvent) {
+        onPostCompCopy101: function (oEvent) {
           var that = this;
           var index;
           var Path = that.getView().getId();
@@ -5504,7 +5664,7 @@ sap.ui.define(
 
           Tableindex = sap.ui
             .getCore()
-            .byId(`idPostComponentList`)
+            .byId(`idPostComponentList101`)
             .getSelectedIndices()[0];
 
           if (Tableindex != undefined) {
@@ -5512,9 +5672,9 @@ sap.ui.define(
 
             var ComponentTable = sap.ui
               .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .getData().ComponentData;
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .getData().ComponentData101;
 
             for (var ind = 0; ind < ComponentTable.length; ind++) {
               if (Tableindex === ind) {
@@ -5551,9 +5711,139 @@ sap.ui.define(
             }
             sap.ui
               .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .setData({ ComponentData: ComponentTable });
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .setData({ ComponentData101: ComponentTable });
+
+            // ComponentData
+          }
+        },
+        onPostCompCopy261: function (oEvent) {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var ComponentLine = {};
+          var Plant = " ";
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`idPostComponentList261`)
+            .getSelectedIndices()[0];
+
+          if (Tableindex != undefined) {
+            // sap.ui.getCore().byId(`idPostComponentList`).clearSelection();
+
+            var ComponentTable = sap.ui
+              .getCore()
+              .byId("idPostComponentList261")
+              .getModel("ComponentModel261")
+              .getData().ComponentData261;
+
+            for (var ind = 0; ind < ComponentTable.length; ind++) {
+              if (Tableindex === ind) {
+                // ComponentLine = ComponentTable[ind];
+                var ComponentLine = {
+                  Data01: ComponentTable[ind].Data01,
+                  Data02: ComponentTable[ind].Data02,
+                  Data03: ComponentTable[ind].Data03,
+                  Data04: ComponentTable[ind].Data04,
+                  Data05: ComponentTable[ind].Data05,
+                  Data06: ComponentTable[ind].Data06,
+                  Data07: ComponentTable[ind].Data07,
+                  Data08: ComponentTable[ind].Data08,
+                  Data09: ComponentTable[ind].Data09,
+                  Data10: ComponentTable[ind].Data10,
+                  Data11: ComponentTable[ind].Data11,
+                  Data12: ComponentTable[ind].Data12,
+                  Data13: ComponentTable[ind].Data13,
+                  Data14: ComponentTable[ind].Data14,
+                  Data15: ComponentTable[ind].Data15,
+                  Data16: ComponentTable[ind].Data16,
+                  Data17: ComponentTable[ind].Data17,
+                  Data18: ComponentTable[ind].Data18,
+                  Data19: ComponentTable[ind].Data19,
+                  Data20: ComponentTable[ind].Data20,
+                  Key01: ComponentTable[ind].Key01,
+                  Key02: ComponentTable[ind].Key02,
+                  Key03: ComponentTable[ind].Key03,
+                  Key04: ComponentTable[ind].Key04,
+                  Key05: ComponentTable[ind].Key05,
+                };
+                ComponentTable.push(ComponentLine);
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostComponentList261")
+              .getModel("ComponentModel261")
+              .setData({ ComponentData261: ComponentTable });
+
+            // ComponentData
+          }
+        },
+        onPostCompCopy561: function (oEvent) {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var ComponentLine = {};
+          var Plant = " ";
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`idPostComponentList561`)
+            .getSelectedIndices()[0];
+
+          if (Tableindex != undefined) {
+            // sap.ui.getCore().byId(`idPostComponentList`).clearSelection();
+
+            var ComponentTable = sap.ui
+              .getCore()
+              .byId("idPostComponentList561")
+              .getModel("ComponentModel561")
+              .getData().ComponentData561;
+
+            for (var ind = 0; ind < ComponentTable.length; ind++) {
+              if (Tableindex === ind) {
+                // ComponentLine = ComponentTable[ind];
+                var ComponentLine = {
+                  Data01: ComponentTable[ind].Data01,
+                  Data02: ComponentTable[ind].Data02,
+                  Data03: ComponentTable[ind].Data03,
+                  Data04: ComponentTable[ind].Data04,
+                  Data05: ComponentTable[ind].Data05,
+                  Data06: ComponentTable[ind].Data06,
+                  Data07: ComponentTable[ind].Data07,
+                  Data08: ComponentTable[ind].Data08,
+                  Data09: ComponentTable[ind].Data09,
+                  Data10: ComponentTable[ind].Data10,
+                  Data11: ComponentTable[ind].Data11,
+                  Data12: ComponentTable[ind].Data12,
+                  Data13: ComponentTable[ind].Data13,
+                  Data14: ComponentTable[ind].Data14,
+                  Data15: ComponentTable[ind].Data15,
+                  Data16: ComponentTable[ind].Data16,
+                  Data17: ComponentTable[ind].Data17,
+                  Data18: ComponentTable[ind].Data18,
+                  Data19: ComponentTable[ind].Data19,
+                  Data20: ComponentTable[ind].Data20,
+                  Key01: ComponentTable[ind].Key01,
+                  Key02: ComponentTable[ind].Key02,
+                  Key03: ComponentTable[ind].Key03,
+                  Key04: ComponentTable[ind].Key04,
+                  Key05: ComponentTable[ind].Key05,
+                };
+                ComponentTable.push(ComponentLine);
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostComponentList561")
+              .getModel("ComponentModel561")
+              .setData({ ComponentData561: ComponentTable });
 
             // ComponentData
           }
@@ -5629,7 +5919,7 @@ sap.ui.define(
 
           }
         },
-        onPostCompDel: function (oEvent) {
+        onPostCompDel101: function (oEvent) {
           var that = this;
           var index;
           var Path = that.getView().getId();
@@ -5640,7 +5930,7 @@ sap.ui.define(
 
           Tableindex = sap.ui
             .getCore()
-            .byId(`idPostComponentList`)
+            .byId(`idPostComponentList101`)
             .getSelectedIndices()[0];
 
           if (Tableindex != undefined) {
@@ -5648,9 +5938,9 @@ sap.ui.define(
 
             var ComponentTable = sap.ui
               .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .getData().ComponentData;
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .getData().ComponentData101;
 
             for (var ind = 0; ind < ComponentTable.length; ind++) {
               if (Tableindex != ind) {
@@ -5687,12 +5977,141 @@ sap.ui.define(
             }
             sap.ui
               .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .setData({ ComponentData: ComponentNewData });
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .setData({ ComponentData101: ComponentNewData });
 
           }
         },
+        onPostCompDel261: function (oEvent) {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var ComponentLine = {};
+          var ComponentNewData = [];
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`idPostComponentList261`)
+            .getSelectedIndices()[0];
+
+          if (Tableindex != undefined) {
+            // sap.ui.getCore().byId(`idPostComponentList`).clearSelection();
+
+            var ComponentTable = sap.ui
+              .getCore()
+              .byId("idPostComponentList261")
+              .getModel("ComponentModel261")
+              .getData().ComponentData261;
+
+            for (var ind = 0; ind < ComponentTable.length; ind++) {
+              if (Tableindex != ind) {
+                // ComponentLine = ComponentTable[ind];
+                var ComponentLine = {
+                  Data01: ComponentTable[ind].Data01,
+                  Data02: ComponentTable[ind].Data02,
+                  Data03: ComponentTable[ind].Data03,
+                  Data04: ComponentTable[ind].Data04,
+                  Data05: ComponentTable[ind].Data05,
+                  Data06: ComponentTable[ind].Data06,
+                  Data07: ComponentTable[ind].Data07,
+                  Data08: ComponentTable[ind].Data08,
+                  Data09: ComponentTable[ind].Data09,
+                  Data10: ComponentTable[ind].Data10,
+                  Data11: ComponentTable[ind].Data11,
+                  Data12: ComponentTable[ind].Data12,
+                  Data13: ComponentTable[ind].Data13,
+                  Data14: ComponentTable[ind].Data14,
+                  Data15: ComponentTable[ind].Data15,
+                  Data16: ComponentTable[ind].Data16,
+                  Data17: ComponentTable[ind].Data17,
+                  Data18: ComponentTable[ind].Data18,
+                  Data19: ComponentTable[ind].Data19,
+                  Data20: ComponentTable[ind].Data20,
+                  Key01: ComponentTable[ind].Key01,
+                  Key02: ComponentTable[ind].Key02,
+                  Key03: ComponentTable[ind].Key03,
+                  Key04: ComponentTable[ind].Key04,
+                  Key05: ComponentTable[ind].Key05,
+                };
+                ComponentNewData.push(ComponentLine);
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostComponentList261")
+              .getModel("ComponentModel261")
+              .setData({ ComponentData261: ComponentNewData });
+
+          }
+        },
+        onPostCompDel561: function (oEvent) {
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+
+          var Tableindex = "X";
+          var ComponentLine = {};
+          var ComponentNewData = [];
+
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`idPostComponentList561`)
+            .getSelectedIndices()[0];
+
+          if (Tableindex != undefined) {
+            // sap.ui.getCore().byId(`idPostComponentList`).clearSelection();
+
+            var ComponentTable = sap.ui
+              .getCore()
+              .byId("idPostComponentList561")
+              .getModel("ComponentModel561")
+              .getData().ComponentData101;
+
+            for (var ind = 0; ind < ComponentTable.length; ind++) {
+              if (Tableindex != ind) {
+                // ComponentLine = ComponentTable[ind];
+                var ComponentLine = {
+                  Data01: ComponentTable[ind].Data01,
+                  Data02: ComponentTable[ind].Data02,
+                  Data03: ComponentTable[ind].Data03,
+                  Data04: ComponentTable[ind].Data04,
+                  Data05: ComponentTable[ind].Data05,
+                  Data06: ComponentTable[ind].Data06,
+                  Data07: ComponentTable[ind].Data07,
+                  Data08: ComponentTable[ind].Data08,
+                  Data09: ComponentTable[ind].Data09,
+                  Data10: ComponentTable[ind].Data10,
+                  Data11: ComponentTable[ind].Data11,
+                  Data12: ComponentTable[ind].Data12,
+                  Data13: ComponentTable[ind].Data13,
+                  Data14: ComponentTable[ind].Data14,
+                  Data15: ComponentTable[ind].Data15,
+                  Data16: ComponentTable[ind].Data16,
+                  Data17: ComponentTable[ind].Data17,
+                  Data18: ComponentTable[ind].Data18,
+                  Data19: ComponentTable[ind].Data19,
+                  Data20: ComponentTable[ind].Data20,
+                  Key01: ComponentTable[ind].Key01,
+                  Key02: ComponentTable[ind].Key02,
+                  Key03: ComponentTable[ind].Key03,
+                  Key04: ComponentTable[ind].Key04,
+                  Key05: ComponentTable[ind].Key05,
+                };
+                ComponentNewData.push(ComponentLine);
+              }
+            }
+            sap.ui
+              .getCore()
+              .byId("idPostComponentList561")
+              .getModel("ComponentModel561")
+              .setData({ ComponentData561: ComponentNewData });
+
+          }
+        },
+
       }
     );
   }
