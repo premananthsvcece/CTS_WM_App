@@ -1523,7 +1523,7 @@ sap.ui.define(
           }
 
           // open value help dialog
-          that.StartDialog.open();
+          // that.StartDialog.open();
 
           var oDateTime = new Date();
           if (oDateTime.getMonth() < 10) {
@@ -1566,10 +1566,12 @@ sap.ui.define(
           } else {
             sap.ui.getCore().byId("idStartOperator").setValue("");
           }
-          jQuery.sap.delayedCall(500, that, function () {
-            sap.ui.getCore().byId("idStartOperator").focus();
-          });
+          // jQuery.sap.delayedCall(500, that, function () {
+          //   sap.ui.getCore().byId("idStartOperator").focus();
+          // });
           that.hideBusyIndicator();
+          that.onConfirmStartPress();
+
         },
 
         onStartQueuePressed: function (oEvent) {
@@ -1687,11 +1689,14 @@ sap.ui.define(
           var that = this;
           var sValue = sap.ui.getCore().byId(`idStartOperator`).getValue();
           // var sValue = oEvent.getParameter("value");
+          // open value help dialog
           var Path = that.getView().getId();
           var SelPlant = sap.ui
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
+          
+                    that.StartDialog.close();
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
@@ -1715,8 +1720,7 @@ sap.ui.define(
                       .getCore()
                       .byId(`idStartOperator`)
                       .setValueState("None");
-
-                    // that.onConfirmStartPress();
+                    that.onConfirmStartPress();
                   } else {
                     sap.ui.getCore().byId(`idStartOperator`).setValue();
                     sap.ui
@@ -1863,7 +1867,7 @@ sap.ui.define(
           var that = this;
           var index;
           var Path = that.getView().getId();
-          that.OnOperatorfill();
+          // that.OnOperatorfill();
           var OperatorNo = sap.ui.getCore().byId("idStartOperator").getValue();
           if (OperatorNo === "") {
             var message = that
@@ -2081,7 +2085,9 @@ sap.ui.define(
 
           IEntry.NavWC_Future = [{}];
           IEntry.NavWC_Component = [{}];
-          that.StartDialog.close();
+          // if (ScreenText != "InProgress"){
+          // that.StartDialog.close();
+          // }
 
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
