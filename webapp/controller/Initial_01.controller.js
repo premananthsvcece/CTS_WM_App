@@ -3549,12 +3549,12 @@ sap.ui.define(
                         ComponentDataLoop.push(ComponentData[i]);
                       }
 
-                      ComponentModel.setData({
-                        ComponentData: ComponentDataLoop,
+                      ComponentModel101.setData({
+                        ComponentData101: ComponentDataLoop,
                       });
-                      var ComponentnList = sap.ui
+                      var ComponentnList101 = sap.ui
                         .getCore()
-                        .byId("idPostComponentList");
+                        .byId("idPostComponentList101");
 
                       if (ComponentData[0].Key03 === "N") {
                         var HeaderText = that
@@ -3571,9 +3571,9 @@ sap.ui.define(
                           .getText("GRDetail");
                       }
 
-                      ComponentnList.setTitle(HeaderText);
+                      ComponentnList101.setTitle(HeaderText);
 
-                      ComponentnList.setModel(ComponentModel, "ComponentModel");
+                      ComponentnList101.setModel(ComponentModel101, "ComponentModel101");
                     }
                     if (Visible != 'X') {
                       sap.ui.getCore().byId("idPostBinDet01").setVisible(false);
@@ -4224,9 +4224,9 @@ sap.ui.define(
             var ComponentDataLine = {};
             var ComponentTable = sap.ui
               .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .getData().ComponentData;
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .getData().ComponentData101;
 
             for (var ind = 0; ind < ComponentTable.length; ind++) {
               ComponentDataLine = ComponentTable[ind];
@@ -4237,9 +4237,9 @@ sap.ui.define(
             }
             sap.ui
               .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .setData({ ComponentData: ComponentData });
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .setData({ ComponentData101: ComponentData });
           }
         },
         onBatchInputClose: function () {
@@ -5318,9 +5318,9 @@ sap.ui.define(
               .getTitle();
             var ComponentTable = sap.ui
               .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .getData().ComponentData;
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .getData().ComponentData101;
 
             var HelpPrdSupAreaPath = sap.ui
               .getCore()
@@ -5336,9 +5336,9 @@ sap.ui.define(
             }
             sap.ui
               .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .setData({ ComponentData: ComponentTable });
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .setData({ ComponentData101: ComponentTable });
           }
         },
         onMovementInputChange: function (oEvent) {
@@ -5350,9 +5350,9 @@ sap.ui.define(
               .getTitle();
             var ComponentTable = sap.ui
               .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .getData().ComponentData;
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .getData().ComponentData101;
 
             var HelpMovementPath = sap.ui
               .getCore()
@@ -5368,9 +5368,9 @@ sap.ui.define(
             }
             sap.ui
               .getCore()
-              .byId("idPostComponentList")
-              .getModel("ComponentModel")
-              .setData({ ComponentData: ComponentTable });
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .setData({ ComponentData101: ComponentTable });
           }
         },
 
