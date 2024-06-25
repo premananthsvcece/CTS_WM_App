@@ -54,6 +54,7 @@ sap.ui.define(
     var sPostReasonCodeId = ""
     var TableMatGlobalId = "";
     var TableBatchGlobalId = "";
+    var TableSAGlobalId = "";
 
     return Controller.extend(
       "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
@@ -5354,6 +5355,7 @@ sap.ui.define(
         onSupplyAreaHelpRequest: function (oEvent) {
           var that = this;
           var sId = oEvent.getParameter("id");
+          var TableDetail = oEvent.getSource().getParent().sId;
           var Path = that.getView().getId();
 
           if (!that.ProdSuppAreaDialog) {
@@ -5365,7 +5367,7 @@ sap.ui.define(
           }
           that.showBusyIndicator();
           sPrdSupAreaId = sId;
-
+          TableSAGlobalId = TableDetail;
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
@@ -5566,11 +5568,33 @@ sap.ui.define(
                 ComponentTable[ind].Data11 = ProdSupplyArea;
               }
             }
+            var Array = TableDetail.split('-');
+            if ( Array.length != 0 ){
+              var SelTablId = Array[0];
+            } else{
+            return;
+          }
+          if( SelTablId === 'idPostComponentList101'){
             sap.ui
               .getCore()
               .byId("idPostComponentList101")
               .getModel("ComponentModel101")
               .setData({ ComponentData101: ComponentTable });
+          }
+          if( SelTablId === 'idPostComponentList261'){
+            sap.ui
+            .getCore()
+            .byId("idPostComponentList261")
+            .getModel("ComponentModel261")
+            .setData({ ComponentData101: ComponentTable });
+          }
+          if( SelTablId === 'idPostComponentList561'){
+            sap.ui
+            .getCore()
+            .byId("idPostComponentList561")
+            .getModel("ComponentModel561")
+            .setData({ ComponentData101: ComponentTable });
+          }
           }
         },
         onMovementInputChange: function (oEvent) {
