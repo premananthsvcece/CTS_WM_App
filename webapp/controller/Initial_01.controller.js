@@ -54,6 +54,7 @@ sap.ui.define(
     var sPostReasonCodeId = ""
     var TableMatGlobalId = "";
     var TableBatchGlobalId = "";
+    var TableMvtGlobalId = "";
     var TableSAGlobalId = "";
 
     return Controller.extend(
@@ -3847,13 +3848,46 @@ sap.ui.define(
           IEntry.NavWC_Future = [{}];
 
           // Get Component Details
-          // IEntry.NavWC_Component = [{}];
+          IEntry.NavWC_Component = [];
+          if (sap.ui.getCore().byId("idPostComponentList101").getModel("ComponentModel101") != undefined) {
+            var ComponentList101 = sap.ui
+              .getCore()
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .getData().ComponentData101;
+            if (ComponentList101.length != 0) {
+              for (var i = 0; i in ComponentList101; i++) {
+                IEntry.NavWC_Component.push(ComponentList101[i]);
+              }
+            }
+          }
+          if (sap.ui.getCore().byId("idPostComponentList261").getModel("ComponentModel261") != undefined) {
+            var ComponentList261 = sap.ui
+              .getCore()
+              .byId("idPostComponentList261")
+              .getModel("ComponentModel261")
+              .getData().ComponentData261;
 
-          IEntry.NavWC_Component = sap.ui
-            .getCore()
-            .byId("idPostComponentList")
-            .getModel("ComponentModel")
-            .getData().ComponentData;
+            if (ComponentList261.length != 0) {
+              for (var i = 0; i in ComponentList261; i++) {
+                IEntry.NavWC_Component.push(ComponentList261[i]);
+              }
+            }
+          }
+          if (sap.ui.getCore().byId("idPostComponentList561").getModel("ComponentModel561") != undefined) {
+            var ComponentList561 = sap.ui
+              .getCore()
+              .byId("idPostComponentList561")
+              .getModel("ComponentModel561")
+              .getData().ComponentData561;
+            if (ComponentList561.length != 0) {
+              for (var i = 0; i in ComponentList561; i++) {
+                IEntry.NavWC_Component.push(ComponentList561[i]);
+              }
+            }
+          }
+          
+          
           if (IEntry.NavWC_Component.length === 0) {
             IEntry.NavWC_Component = [{}];
           } else {
@@ -3878,18 +3912,12 @@ sap.ui.define(
             }
           }
           that.PostActionDialog.close();
-          // that.PostActionDialog.destroy();
-          // sap.ui
-          //   .getCore()
-          //   .byId(`${Path}--idInprogressOrderList`)
-          //   .clearSelection();
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
             IEntry,
             null,
             function (oData, Response) {
               try {
-                // console.log(oData);
                 that.hideBusyIndicator();
                 if (oData.Key04 === "E") {
                   var message = oData.Key05;
@@ -3912,7 +3940,6 @@ sap.ui.define(
                 }
                 return;
               } catch (e) {
-                // alert(e.message);
                 that.hideBusyIndicator();
                 MessageToast.show(e.message);
                 $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
@@ -3925,23 +3952,12 @@ sap.ui.define(
           var that = this;
           that.PostActionDialog.close();
           var Path = that.getView().getId();
-          // sap.ui
-          //   .getCore()
-          //   .byId(`${Path}--idInprogressOrderList`)
-          //   .clearSelection();
-          // that.PostActionDialog.destroy();
         },
         onPostQuantityChange: function (oEvent) {
           var that = this;
           var index;
           var Path = that.getView().getId();
           var value = sap.ui.getCore().byId(`idPostQuantity`).getValue();
-          // var value = oEvent.getParameter("value");
-          // var valueArray = value.split(".");
-          // if (valueArray.length != 2) {
-          //   value = value + ".000";
-          // }
-          // sap.ui.getCore().byId("idPostQuantity").setValue(value);
 
           var Tableindex = "X";
           var SelAufnr = " ";
@@ -4003,36 +4019,47 @@ sap.ui.define(
           IEntry.NavWC_InProgress = [{}];
           IEntry.NavWC_Queue = [{}];
           IEntry.NavWC_Future = [{}];
-          var ComponentList101 = sap.ui
-            .getCore()
-            .byId("idPostComponentList101")
-            .getModel("ComponentModel101")
-            .getData().ComponentData101;
-          var ComponentList261 = sap.ui
-            .getCore()
-            .byId("idPostComponentList261")
-            .getModel("ComponentModel261")
-            .getData().ComponentData261;
-          var ComponentList561 = sap.ui
-            .getCore()
-            .byId("idPostComponentList561")
-            .getModel("ComponentModel561")
-            .getData().ComponentData561;
-          if( ComponentList101.length != 0){
-            if( var i = 0; i < ComponentList101.length; i++){
-              IEntry.NavWC_Component.push(ComponentList101[i]);
+          IEntry.NavWC_Component = [];
+          if (sap.ui.getCore().byId("idPostComponentList101").getModel("ComponentModel101") != undefined) {
+            var ComponentList101 = sap.ui
+              .getCore()
+              .byId("idPostComponentList101")
+              .getModel("ComponentModel101")
+              .getData().ComponentData101;
+            if (ComponentList101.length != 0) {
+              for (var i = 0; i in ComponentList101; i++) {
+                IEntry.NavWC_Component.push(ComponentList101[i]);
+              }
             }
           }
-          if( ComponentList261.length != 0){
-            if( var i = 0; i < ComponentList261.length; i++){
-              IEntry.NavWC_Component.push(ComponentList261[i]);
+          if (sap.ui.getCore().byId("idPostComponentList261").getModel("ComponentModel261") != undefined) {
+            var ComponentList261 = sap.ui
+              .getCore()
+              .byId("idPostComponentList261")
+              .getModel("ComponentModel261")
+              .getData().ComponentData261;
+
+            if (ComponentList261.length != 0) {
+              for (var i = 0; i in ComponentList261; i++) {
+                IEntry.NavWC_Component.push(ComponentList261[i]);
+              }
             }
           }
-          if( ComponentList561.length != 0){
-            if( var i = 0; i < ComponentList561.length; i++){
-              IEntry.NavWC_Component.push(ComponentList561[i]);
+          if (sap.ui.getCore().byId("idPostComponentList561").getModel("ComponentModel561") != undefined) {
+            var ComponentList561 = sap.ui
+              .getCore()
+              .byId("idPostComponentList561")
+              .getModel("ComponentModel561")
+              .getData().ComponentData561;
+            if (ComponentList561.length != 0) {
+              for (var i = 0; i in ComponentList561; i++) {
+                IEntry.NavWC_Component.push(ComponentList561[i]);
+              }
             }
           }
+
+
+
           if (IEntry.NavWC_Component.length === 0) {
             IEntry.NavWC_Component = [{}];
           }
@@ -4046,11 +4073,18 @@ sap.ui.define(
                 that.hideBusyIndicator();
 
                 var ComponentData = oData.NavWC_Component.results;
+                var ComponentDataLoop101 = [];
+                var ComponentDataLoop261 = [];
+                var ComponentDataLoop561 = [];
                 if (ComponentData.length != 0) {
-                  var ComponentnList = sap.ui
-                    .getCore()
-                    .byId("idPostComponentList101");
+                  var ComponentnList101 = sap.ui.getCore().byId("idPostComponentList101");
+                  var ComponentnList261 = sap.ui.getCore().byId("idPostComponentList261");
+                  var ComponentnList561 = sap.ui.getCore().byId("idPostComponentList561");
+
                   var ComponentModel101 = new sap.ui.model.json.JSONModel();
+                  var ComponentModel261 = new sap.ui.model.json.JSONModel();
+                  var ComponentModel561 = new sap.ui.model.json.JSONModel();
+
                   var ComponentDataLoop = [];
                   for (var i = 0; i in ComponentData; i++) {
                     if (ComponentData[i].Data08 === "101") {
@@ -4063,14 +4097,38 @@ sap.ui.define(
                     } else {
                       ComponentData[i].Data10 = true;
                     }
-                    ComponentDataLoop.push(ComponentData[i]);
-                  }
+                    if (ComponentData[i].Data08 === "101") {
+                    ComponentDataLoop101.push(ComponentData[i]);
+                    }
+                    else if (ComponentData[i].Data08 === "261") {
+                      ComponentDataLoop261.push(ComponentData[i]);
+                    }
+                    else {
+                      ComponentDataLoop561.push(ComponentData[i]);
 
+                    }
+                  }
+                if( ComponentDataLoop101.length != 0 ){
                   ComponentModel101.setData({
-                    ComponentData101: ComponentData,
+                    ComponentData101: ComponentDataLoop101,
                   });
 
-                  ComponentnList.setModel(ComponentModel101, "ComponentModel101");
+                  ComponentnList101.setModel(ComponentModel101, "ComponentModel101");
+                }
+                if( ComponentDataLoop261.length != 0 ){
+                  ComponentModel261.setData({
+                    ComponentData261: ComponentDataLoop261,
+                  });
+
+                  ComponentnList261.setModel(ComponentModel261, "ComponentModel261");
+                }
+                if( ComponentDataLoop561.length != 0 ){
+                  ComponentModel561.setData({
+                    ComponentData561: ComponentDataLoop561,
+                  });
+
+                  ComponentnList561.setModel(ComponentModel561, "ComponentModel561");
+                }
                 }
               } catch (e) {
                 that.hideBusyIndicator();
@@ -4206,6 +4264,7 @@ sap.ui.define(
         onBatchHelpRequest: function (oEvent) {
           var that = this;
           var sId = oEvent.getParameter("id");
+          var TableDetail = oEvent.getSource().getParent().sId;
           var LineArray = oEvent.getSource().getParent().getCells();
           var SelMatnr = " ";
           var SelWerks = sap.ui.getCore().byId("idSelectPostPlant").getValue();
@@ -4219,7 +4278,7 @@ sap.ui.define(
             // SelLgort = LineArray[3].getProperty("text");
             SelClabs = LineArray[5].getProperty("value");
           }
-
+          TableBatchGlobalId = TableDetail;
           var Path = that.getView().getId();
 
           if (!that.BatchHelpDialog) {
@@ -4311,18 +4370,50 @@ sap.ui.define(
               .selectedItem.getCells()[2]
               .getText();
 
-            var HelpBatchPath = sap.ui.getCore().byId(sBatchId).getParent()
-              .oBindingContexts.ComponentModel.sPath;
-            var BatchLineArray = HelpBatchPath.split("/");
-            var BatchLineUpdate = parseInt(BatchLineArray[2]);
-            var ComponentData = [];
-            var ComponentDataLine = {};
-            var ComponentTable = sap.ui
-              .getCore()
-              .byId("idPostComponentList101")
-              .getModel("ComponentModel101")
-              .getData().ComponentData101;
+            var SelTable = TableBatchGlobalId.split("-");
+            if (SelTable.length != 0) {
+              var SelTableLine = SelTable[0];
+            }
 
+            if (SelTableLine === "idPostComponentList101") {
+
+              var HelpBatchPath = sap.ui.getCore().byId(sBatchId).getParent().oBindingContexts.ComponentModel101.sPath;
+              var BatchLineArray = HelpBatchPath.split("/");
+              var BatchLineUpdate = parseInt(BatchLineArray[2]);
+              var ComponentData = [];
+              var ComponentDataLine = {};
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList101")
+                .getModel("ComponentModel101")
+                .getData().ComponentData101;
+            }
+            if (SelTableLine === "idPostComponentList261") {
+
+              var HelpBatchPath = sap.ui.getCore().byId(sBatchId).getParent().oBindingContexts.ComponentModel261.sPath;
+              var BatchLineArray = HelpBatchPath.split("/");
+              var BatchLineUpdate = parseInt(BatchLineArray[2]);
+              var ComponentData = [];
+              var ComponentDataLine = {};
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList261")
+                .getModel("ComponentModel261")
+                .getData().ComponentData261;
+            }
+            if (SelTableLine === "idPostComponentList561") {
+
+              var HelpBatchPath = sap.ui.getCore().byId(sBatchId).getParent().oBindingContexts.ComponentModel561.sPath;
+              var BatchLineArray = HelpBatchPath.split("/");
+              var BatchLineUpdate = parseInt(BatchLineArray[2]);
+              var ComponentData = [];
+              var ComponentDataLine = {};
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList561")
+                .getModel("ComponentModel561")
+                .getData().ComponentData561;
+            }
             for (var ind = 0; ind < ComponentTable.length; ind++) {
               ComponentDataLine = ComponentTable[ind];
               if (BatchLineUpdate === ind) {
@@ -4330,11 +4421,27 @@ sap.ui.define(
               }
               ComponentData.push(ComponentDataLine);
             }
-            sap.ui
-              .getCore()
-              .byId("idPostComponentList101")
-              .getModel("ComponentModel101")
-              .setData({ ComponentData101: ComponentData });
+            if (SelTableLine === "idPostComponentList101") {
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList101")
+                .getModel("ComponentModel101")
+                .setData({ ComponentData101: ComponentData });
+            }
+            if (SelTableLine === "idPostComponentList261") {
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList261")
+                .getModel("ComponentModel261")
+                .setData({ ComponentData261: ComponentData });
+            }
+            if (SelTableLine === "idPostComponentList561") {
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList561")
+                .getModel("ComponentModel561")
+                .setData({ ComponentData561: ComponentData });
+            }
           }
         },
         onBatchInputClose: function () {
@@ -5287,12 +5394,14 @@ sap.ui.define(
         onMovementHelpRequest: function (oEvent) {
           var that = this;
           var sId = oEvent.getParameter("id");
+          var TableDetail = oEvent.getSource().getParent().sId;
           var LineArray = oEvent.getSource().getParent().getCells();
-          var SelWerks = " ";
-          var SelLgort = " ";
+          TableMvtGlobalId = TableDetail;
+          var SelWerks = sap.ui.getCore().byId("idSelectPostPlant").getValue();
+          var SelLgort = "GI01";
           if (LineArray.length != 0) {
-            SelWerks = LineArray[2].getProperty("text");
-            SelLgort = LineArray[3].getProperty("text");
+            // SelWerks = LineArray[2].getProperty("text");
+            // SelLgort = LineArray[3].getProperty("text");
           }
 
           var Path = that.getView().getId();
@@ -5503,7 +5612,7 @@ sap.ui.define(
                 .getCore()
                 .byId("idPostComponentList261")
                 .getModel("ComponentModel261")
-                .getData().ComponentData101;
+                .getData().ComponentData261;
 
               for (var ind = 0; ind < ComponentTable.length; ind++) {
                 if (ComponentTable[ind].Data01 === " ") {
@@ -5546,20 +5655,50 @@ sap.ui.define(
         onProdSuppAreaInputChange: function (oEvent) {
           var that = this;
           if (oEvent.getParameters().selectedItems != undefined) {
+
+            var Array = TableSAGlobalId.split('-');
+            if (Array.length != 0) {
+              var SelTablId = Array[0];
+            } else {
+              return;
+            }
             var ProdSupplyArea = oEvent
               .getParameters()
               .selectedItem.getCells()[0]
               .getTitle();
-            var ComponentTable = sap.ui
-              .getCore()
-              .byId("idPostComponentList101")
-              .getModel("ComponentModel101")
-              .getData().ComponentData101;
-
-            var HelpPrdSupAreaPath = sap.ui
-              .getCore()
-              .byId(sPrdSupAreaId)
-              .getParent().oBindingContexts.ComponentModel.sPath;
+            if (SelTablId === 'idPostComponentList101') {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList101")
+                .getModel("ComponentModel101")
+                .getData().ComponentData101;
+              var HelpPrdSupAreaPath = sap.ui
+                .getCore()
+                .byId(sPrdSupAreaId)
+                .getParent().oBindingContexts.ComponentModel101.sPath;
+            }
+            if (SelTablId === 'idPostComponentList261') {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList261")
+                .getModel("ComponentModel261")
+                .getData().ComponentData261;
+              var HelpPrdSupAreaPath = sap.ui
+                .getCore()
+                .byId(sPrdSupAreaId)
+                .getParent().oBindingContexts.ComponentModel261.sPath;
+            }
+            if (SelTablId === 'idPostComponentList561') {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList561")
+                .getModel("ComponentModel561")
+                .getData().ComponentData561;
+              var HelpPrdSupAreaPath = sap.ui
+                .getCore()
+                .byId(sPrdSupAreaId)
+                .getParent().oBindingContexts.ComponentModel561.sPath;
+            }
             var HelpPrdSupAreaArray = HelpPrdSupAreaPath.split("/");
             var HelpPrdSupAreaUpdate = parseInt(HelpPrdSupAreaArray[2]);
 
@@ -5568,52 +5707,80 @@ sap.ui.define(
                 ComponentTable[ind].Data11 = ProdSupplyArea;
               }
             }
-            var Array = TableDetail.split('-');
-            if ( Array.length != 0 ){
-              var SelTablId = Array[0];
-            } else{
-            return;
-          }
-          if( SelTablId === 'idPostComponentList101'){
-            sap.ui
-              .getCore()
-              .byId("idPostComponentList101")
-              .getModel("ComponentModel101")
-              .setData({ ComponentData101: ComponentTable });
-          }
-          if( SelTablId === 'idPostComponentList261'){
-            sap.ui
-            .getCore()
-            .byId("idPostComponentList261")
-            .getModel("ComponentModel261")
-            .setData({ ComponentData101: ComponentTable });
-          }
-          if( SelTablId === 'idPostComponentList561'){
-            sap.ui
-            .getCore()
-            .byId("idPostComponentList561")
-            .getModel("ComponentModel561")
-            .setData({ ComponentData101: ComponentTable });
-          }
+            if (SelTablId === 'idPostComponentList101') {
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList101")
+                .getModel("ComponentModel101")
+                .setData({ ComponentData101: ComponentTable });
+            }
+            if (SelTablId === 'idPostComponentList261') {
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList261")
+                .getModel("ComponentModel261")
+                .setData({ ComponentData261: ComponentTable });
+            }
+            if (SelTablId === 'idPostComponentList561') {
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList561")
+                .getModel("ComponentModel561")
+                .setData({ ComponentData561: ComponentTable });
+            }
           }
         },
         onMovementInputChange: function (oEvent) {
           var that = this;
           if (oEvent.getParameters().selectedItems != undefined) {
+
+            var SelTable = TableMvtGlobalId.split('-');
+            if (SelTable.length != 0) {
+              var SelTableLine = SelTable[0];
+            }
+
             var Movement = oEvent
               .getParameters()
               .selectedItem.getCells()[0]
               .getTitle();
-            var ComponentTable = sap.ui
-              .getCore()
-              .byId("idPostComponentList101")
-              .getModel("ComponentModel101")
-              .getData().ComponentData101;
 
-            var HelpMovementPath = sap.ui
-              .getCore()
-              .byId(sMovementId)
-              .getParent().oBindingContexts.ComponentModel.sPath;
+            if (SelTableLine === 'idPostComponentList101') {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList101")
+                .getModel("ComponentModel101")
+                .getData().ComponentData101;
+
+              var HelpMovementPath = sap.ui
+                .getCore()
+                .byId(sMovementId)
+                .getParent().oBindingContexts.ComponentModel101.sPath;
+            }
+            if (SelTableLine === 'idPostComponentList261') {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList261")
+                .getModel("ComponentModel261")
+                .getData().ComponentData261;
+
+              var HelpMovementPath = sap.ui
+                .getCore()
+                .byId(sMovementId)
+                .getParent().oBindingContexts.ComponentModel261.sPath;
+            }
+            if (SelTableLine === 'idPostComponentList561') {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList561")
+                .getModel("ComponentModel561")
+                .getData().ComponentData561;
+
+              var HelpMovementPath = sap.ui
+                .getCore()
+                .byId(sMovementId)
+                .getParent().oBindingContexts.ComponentModel561.sPath;
+            }
+
             var MovementLineArray = HelpMovementPath.split("/");
             var MovementLineUpdate = parseInt(MovementLineArray[2]);
 
@@ -5622,11 +5789,27 @@ sap.ui.define(
                 ComponentTable[ind].Data08 = Movement;
               }
             }
-            sap.ui
-              .getCore()
-              .byId("idPostComponentList101")
-              .getModel("ComponentModel101")
-              .setData({ ComponentData101: ComponentTable });
+            if (SelTableLine === 'idPostComponentList101') {
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList101")
+                .getModel("ComponentModel101")
+                .setData({ ComponentData101: ComponentTable });
+            }
+            if (SelTableLine === 'idPostComponentList261') {
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList261")
+                .getModel("ComponentModel261")
+                .setData({ ComponentData261: ComponentTable });
+            }
+            if (SelTableLine === 'idPostComponentList561') {
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList561")
+                .getModel("ComponentModel561")
+                .setData({ ComponentData561: ComponentTable });
+            }
           }
         },
 
