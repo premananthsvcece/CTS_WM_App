@@ -759,16 +759,16 @@
                                         id="_IDGenColumn14"
                                         width="5rem"
                                         autoResizable="true"
-                                        visible="false"
+                                        visible="true"
                                     >
                                         <Label
                                             id="_IDGenLabel14"
-                                            text="{i18n>StomerField1}"
+                                            text="{i18n>QueueActivity}"
                                         />
                                         <Table:template>
                                             <Button
                                                 type="{InQueueModel>Data17}"
-                                                icon="sap-icon://person-placeholder"
+                                                icon="{InQueueModel>Data18}"
                                             />
                                         </Table:template>
                                     </Table:Column>
