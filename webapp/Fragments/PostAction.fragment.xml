@@ -280,7 +280,7 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%">
+                                    <uiTable:Column width="7%" visible="false">
                                         <Label text="{i18n>MovementType}" />
                                         <uiTable:template>
                                             <Input
@@ -397,7 +397,7 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%">
+                                    <uiTable:Column width="7%" visible="false">
                                         <Label text="{i18n>MovementType}" />
                                         <uiTable:template>
                                             <Input
@@ -514,7 +514,7 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%">
+                                    <uiTable:Column width="7%" visible="false">
                                         <Label text="{i18n>MovementType}" />
                                         <uiTable:template>
                                             <Input

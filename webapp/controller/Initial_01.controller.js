@@ -1695,8 +1695,8 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-          
-                    that.StartDialog.close();
+
+          that.StartDialog.close();
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
@@ -3583,20 +3583,12 @@ sap.ui.define(
                           .getCore()
                           .byId("idPostComponentList101");
 
-                        if (ComponentData[0].Key03 === "N") {
-                          var HeaderText = that
-                            .getView()
-                            .getModel("i18n")
-                            .getResourceBundle()
-                            .getText("CompTitle");
-                        }
-                        if (ComponentData[0].Key03 === "S") {
-                          var HeaderText = that
-                            .getView()
-                            .getModel("i18n")
-                            .getResourceBundle()
-                            .getText("GRDetail");
-                        }
+                        var HeaderText = that
+                          .getView()
+                          .getModel("i18n")
+                          .getResourceBundle()
+                          .getText("GRDetail");
+
 
                         ComponentnList101.setTitle(HeaderText);
 
@@ -3643,7 +3635,7 @@ sap.ui.define(
                           .getView()
                           .getModel("i18n")
                           .getResourceBundle()
-                          .getText("GRDetail");
+                          .getText("Receipts");
 
                         ComponentnList561.setTitle(HeaderText);
 
@@ -3658,18 +3650,42 @@ sap.ui.define(
                     }
                     that.hideBusyIndicator();
                   } else {
-                    // var ComponentData = [];
-                    // var ComponentModel = new sap.ui.model.json.JSONModel();
-                    // ComponentModel.setData({
-                    //   ComponentData: ComponentData,
-                    // });
-                    // var ComponentnList = sap.ui
-                    //   .getCore()
-                    //   .byId("idPostComponentList");
+                    var ComponentModel101 = new sap.ui.model.json.JSONModel();
+                    var ComponentModel261 = new sap.ui.model.json.JSONModel();
+                    var ComponentModel561 = new sap.ui.model.json.JSONModel();
 
-                    // ComponentnList.setTitle(""); // Blank
+                    var ComponentDataLoop101 = [];
+                    var ComponentDataLoop261 = [];
+                    var ComponentDataLoop561 = [];
 
-                    // ComponentnList.setModel(ComponentModel, "ComponentModel");
+
+                    var ComponentnList101 = sap.ui
+                      .getCore()
+                      .byId("idPostComponentList101");
+                    var ComponentnList261 = sap.ui
+                      .getCore()
+                      .byId("idPostComponentList261");
+                    var ComponentnList561 = sap.ui
+                      .getCore()
+                      .byId("idPostComponentList561");
+
+                    ComponentnList101.setModel(ComponentModel101, "ComponentModel101");
+                    ComponentModel101.setData({
+                      ComponentData101: ComponentDataLoop101,
+                    });
+                    ComponentnList261.setModel(ComponentModel261, "ComponentModel261");
+                    ComponentModel261.setData({
+                      ComponentData261: ComponentDataLoop261,
+                    });
+                    ComponentnList561.setModel(ComponentModel561, "ComponentModel561");
+                    ComponentModel561.setData({
+                      ComponentData561: ComponentDataLoop561,
+                    });
+
+                    sap.ui.getCore().byId("idPostComponentList101").setVisible(false);
+                    sap.ui.getCore().byId("idPostComponentList261").setVisible(false);
+                    sap.ui.getCore().byId("idPostComponentList561").setVisible(false);
+
                     that.hideBusyIndicator();
                   }
                 } catch (e) {
@@ -3892,8 +3908,8 @@ sap.ui.define(
               }
             }
           }
-          
-          
+
+
           if (IEntry.NavWC_Component.length === 0) {
             IEntry.NavWC_Component = [{}];
           } else {
@@ -4104,7 +4120,7 @@ sap.ui.define(
                       ComponentData[i].Data10 = true;
                     }
                     if (ComponentData[i].Data08 === "101") {
-                    ComponentDataLoop101.push(ComponentData[i]);
+                      ComponentDataLoop101.push(ComponentData[i]);
                     }
                     else if (ComponentData[i].Data08 === "261") {
                       ComponentDataLoop261.push(ComponentData[i]);
@@ -4114,27 +4130,27 @@ sap.ui.define(
 
                     }
                   }
-                if( ComponentDataLoop101.length != 0 ){
-                  ComponentModel101.setData({
-                    ComponentData101: ComponentDataLoop101,
-                  });
+                  if (ComponentDataLoop101.length != 0) {
+                    ComponentModel101.setData({
+                      ComponentData101: ComponentDataLoop101,
+                    });
 
-                  ComponentnList101.setModel(ComponentModel101, "ComponentModel101");
-                }
-                if( ComponentDataLoop261.length != 0 ){
-                  ComponentModel261.setData({
-                    ComponentData261: ComponentDataLoop261,
-                  });
+                    ComponentnList101.setModel(ComponentModel101, "ComponentModel101");
+                  }
+                  if (ComponentDataLoop261.length != 0) {
+                    ComponentModel261.setData({
+                      ComponentData261: ComponentDataLoop261,
+                    });
 
-                  ComponentnList261.setModel(ComponentModel261, "ComponentModel261");
-                }
-                if( ComponentDataLoop561.length != 0 ){
-                  ComponentModel561.setData({
-                    ComponentData561: ComponentDataLoop561,
-                  });
+                    ComponentnList261.setModel(ComponentModel261, "ComponentModel261");
+                  }
+                  if (ComponentDataLoop561.length != 0) {
+                    ComponentModel561.setData({
+                      ComponentData561: ComponentDataLoop561,
+                    });
 
-                  ComponentnList561.setModel(ComponentModel561, "ComponentModel561");
-                }
+                    ComponentnList561.setModel(ComponentModel561, "ComponentModel561");
+                  }
                 }
               } catch (e) {
                 that.hideBusyIndicator();
