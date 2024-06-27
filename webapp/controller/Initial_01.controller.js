@@ -1722,7 +1722,7 @@ sap.ui.define(
                       .getCore()
                       .byId(`idStartOperator`)
                       .setValueState("None");
-                    that.onConfirmStartPress();
+                    // that.onConfirmStartPress();
                   } else {
                     sap.ui.getCore().byId(`idStartOperator`).setValue();
                     sap.ui
@@ -1869,7 +1869,14 @@ sap.ui.define(
           var that = this;
           var index;
           var Path = that.getView().getId();
-          // that.OnOperatorfill();
+          var StartDate = sap.ui.getCore().byId("idStartDate").getValue();
+          var StartTime = sap.ui.getCore().byId("idStartTime").getValue();
+          var ScreenText = sap.ui.getCore().byId("idStartText").getText();
+          var SelOrderNo = sap.ui.getCore().byId("idSelectOrder").getValue();
+          var SelOrderOpr = sap.ui.getCore().byId("idSelectOprNo").getValue();
+          if (ScreenText != "InProgress") {
+          that.OnOperatorfill();
+          }
           var OperatorNo = sap.ui.getCore().byId("idStartOperator").getValue();
           if (OperatorNo === "") {
             var message = that
@@ -1880,11 +1887,7 @@ sap.ui.define(
             MessageBox.error(message);
             return;
           }
-          var StartDate = sap.ui.getCore().byId("idStartDate").getValue();
-          var StartTime = sap.ui.getCore().byId("idStartTime").getValue();
-          var ScreenText = sap.ui.getCore().byId("idStartText").getText();
-          var SelOrderNo = sap.ui.getCore().byId("idSelectOrder").getValue();
-          var SelOrderOpr = sap.ui.getCore().byId("idSelectOprNo").getValue();
+
 
           var Tableindex = "X";
           var SelAufnr = " ";
@@ -2087,9 +2090,9 @@ sap.ui.define(
 
           IEntry.NavWC_Future = [{}];
           IEntry.NavWC_Component = [{}];
-          // if (ScreenText != "InProgress"){
-          // that.StartDialog.close();
-          // }
+          if (ScreenText != "InProgress"){
+          that.StartDialog.close();
+          }
 
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
@@ -2122,11 +2125,6 @@ sap.ui.define(
           var that = this;
           sap.ui.getCore().byId(`idStartOperator`).setValueState();
           var Path = that.getView().getId();
-          // sap.ui
-          //   .getCore()
-          //   .byId(`${Path}--idInprogressOrderList`)
-          //   .clearSelection();
-          // sap.ui.getCore().byId(`${Path}--idQueueOrderList`).clearSelection();
           this.StartDialog.close();
         },
         onStopPressed: function (oEvent) {
