@@ -240,6 +240,9 @@ sap.ui.define(
                   .getCore()
                   .byId(`${Path}--idInprogressOrderList`)
                   .getBinding("rows").aIndices;
+                if( aIndices.length < Line){
+                  Line = aIndices.length;
+                }
                 for (var loop = 0; loop in aIndices; loop++) {
                   if (loop === Line) {
                     if (InprogressObject != undefined) {
