@@ -11,7 +11,7 @@
         title="{i18n>BinDet}"
         search="_onHelpBinSearch"
         confirm="_HelpBinSelect"
-        cancel="_HelpBinSelect"
+        cancel="_HelpBinSelect" 
         items="{BinModel>/BinData}"
     >
         <StandardListItem

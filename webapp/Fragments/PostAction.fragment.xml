@@ -150,6 +150,7 @@
                                             type="Transparent"
                                             press="onScarpPostAdd"
                                             icon="sap-icon://add"
+                                            visible="false"
                                         />
                                         <Button
                                             text="Copy"
@@ -163,6 +164,7 @@
                                             type="Attention"
                                             press="onScarpPostDel"
                                             icon="sap-icon://delete"
+                                            visible="false"
                                         />
                                     </OverflowToolbar>
                                 </uiTable:extension>
@@ -181,6 +183,7 @@
                                                 type="Text"
                                                 valueLiveUpdate="false"
                                                 required="true"
+                                                enabled="false"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
@@ -198,6 +201,7 @@
                                                 required="true"
                                                 value="{PostScarpModel>Data05}"
                                                 textAlign="Right"
+                                                enabled="false"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
@@ -206,7 +210,7 @@
                             <uiTable:Table
                                 id="idPostComponentList101"
                                 visibleRowCount="3"
-                                visibleRowCountMode="Interactive"
+                                visibleRowCountMode="Fixed"
                                 class="sapUiContentPadding"
                                 rows="{ComponentModel101>/ComponentData101}"
                                 alternateRowColors="true"
@@ -220,18 +224,21 @@
                                         <Title level="H2" />
                                         <ToolbarSpacer />
                                         <Button
+                                            id="101Add"
                                             text="Add"
                                             type="Transparent"
                                             press="onPostCompAdd101"
                                             icon="sap-icon://add"
                                         />
                                         <Button
+                                            id="101Copy"
                                             text="Copy"
                                             type="Transparent"
                                             press="onPostCompCopy101"
                                             icon="sap-icon://copy"
                                         />
                                         <Button
+                                            id="101Del"
                                             text="Delete"
                                             type="Attention"
                                             press="onPostCompDel101"
@@ -271,6 +278,17 @@
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column width="7%">
+                                        <Label text="{i18n>BinDet}" />
+                                        <uiTable:template>
+                                            <Input
+                                                value="{ComponentModel101>Data12}"
+                                                showValueHelp="true"
+                                                change="onPostBinDetChange"
+                                                valueHelpRequest="onPostBinDetHelpRequest"
+                                            />
+                                        </uiTable:template>
+                                    </uiTable:Column>
+                                    <!-- <uiTable:Column width="7%">
                                         <Label text="{i18n>PrdSupplyArea}" />
                                         <uiTable:template>
                                             <Input
@@ -279,7 +297,7 @@
                                                 showValueHelp="true"
                                             />
                                         </uiTable:template>
-                                    </uiTable:Column>
+                                    </uiTable:Column> -->
                                     <uiTable:Column width="7%" visible="false">
                                         <Label text="{i18n>MovementType}" />
                                         <uiTable:template>
