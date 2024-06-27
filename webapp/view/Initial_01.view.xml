@@ -286,7 +286,7 @@
                             <Button
                                 id="idINPStopJob"
                                 text="{i18n>StopJob}"
-                                type="Attention"
+                                type="Critical"
                                 icon="sap-icon://stop"
                                 press="onStopPressed"
                             />

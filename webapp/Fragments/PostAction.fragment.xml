@@ -101,6 +101,7 @@
                                 <InputListItem
                                     id="idPostBinDet01"
                                     label="{i18n>BinDet} *"
+                                    visible="false"
                                 >
                                     <Input
                                         id="idPostBinDet"
@@ -109,6 +110,7 @@
                                         showValueHelp="true"
                                         valueHelpRequest="onPostBinDetHelpRequest"
                                         width="15rem"
+                                        visible="false"
                                     />
                                 </InputListItem>
                                 <InputListItem label="{i18n>ConfirmType} *">
@@ -249,7 +251,7 @@
                                 <uiTable:noData text="{i18n>NoData}" />
                                 <uiTable:columns>
                                     <uiTable:Column width="12%">
-                                        <Label text="{i18n>Component}" />
+                                        <Label text="{i18n>ItemNo}" />
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel101>Data01}"
@@ -265,16 +267,34 @@
                                             <Text text="{ComponentModel101>Data02}" />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%" visible="false">
-                                        <Label text="{i18n>Plant}" visible="false"/>
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
+                                        <Label
+                                            text="{i18n>Plant}"
+                                            visible="false"
+                                        />
                                         <uiTable:template>
-                                            <Text text="{ComponentModel101>Data03}" visible="false"/>
+                                            <Text
+                                                text="{ComponentModel101>Data03}"
+                                                visible="false"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%" visible="false">
-                                        <Label text="{i18n>Location}" visible="false"/>
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
+                                        <Label
+                                            text="{i18n>Location}"
+                                            visible="false"
+                                        />
                                         <uiTable:template>
-                                            <Text text="{ComponentModel101>Data04}" visible="false"/>
+                                            <Text
+                                                text="{ComponentModel101>Data04}"
+                                                visible="false"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column width="7%">
@@ -298,7 +318,10 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column> -->
-                                    <uiTable:Column width="7%" visible="false">
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
                                         <Label text="{i18n>MovementType}" />
                                         <uiTable:template>
                                             <Input
@@ -393,16 +416,34 @@
                                             <Text text="{ComponentModel261>Data02}" />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%" visible="false">
-                                        <Label text="{i18n>Plant}" visible="false"/>
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
+                                        <Label
+                                            text="{i18n>Plant}"
+                                            visible="false"
+                                        />
                                         <uiTable:template>
-                                            <Text text="{ComponentModel261>Data03}" visible="false"/>
+                                            <Text
+                                                text="{ComponentModel261>Data03}"
+                                                visible="false"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%" visible="false">
-                                        <Label text="{i18n>Location}" visible="false"/>
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
+                                        <Label
+                                            text="{i18n>Location}"
+                                            visible="false"
+                                        />
                                         <uiTable:template>
-                                            <Text text="{ComponentModel261>Data04}" visible="false"/>
+                                            <Text
+                                                text="{ComponentModel261>Data04}"
+                                                visible="false"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column width="7%">
@@ -415,7 +456,10 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%" visible="false">
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
                                         <Label text="{i18n>MovementType}" />
                                         <uiTable:template>
                                             <Input
@@ -510,16 +554,34 @@
                                             <Text text="{ComponentModel561>Data02}" />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%" visible="false">
-                                        <Label text="{i18n>Plant}" visible="false"/>
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
+                                        <Label
+                                            text="{i18n>Plant}"
+                                            visible="false"
+                                        />
                                         <uiTable:template>
-                                            <Text text="{ComponentModel561>Data03}" visible="false"/>
+                                            <Text
+                                                text="{ComponentModel561>Data03}"
+                                                visible="false"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%" visible="false">
-                                        <Label text="{i18n>Location}" visible="false"/>
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
+                                        <Label
+                                            text="{i18n>Location}"
+                                            visible="false"
+                                        />
                                         <uiTable:template>
-                                            <Text text="{ComponentModel561>Data04}" visible="false"/>
+                                            <Text
+                                                text="{ComponentModel561>Data04}"
+                                                visible="false"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column width="7%">
@@ -532,7 +594,10 @@
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
-                                    <uiTable:Column width="7%" visible="false">
+                                    <uiTable:Column
+                                        width="7%"
+                                        visible="false"
+                                    >
                                         <Label text="{i18n>MovementType}" />
                                         <uiTable:template>
                                             <Input
