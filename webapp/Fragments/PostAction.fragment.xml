@@ -224,21 +224,21 @@
                                         <Title level="H2" />
                                         <ToolbarSpacer />
                                         <Button
-                                            id="101Add"
+                                            id="id101Add"
                                             text="Add"
                                             type="Transparent"
                                             press="onPostCompAdd101"
                                             icon="sap-icon://add"
                                         />
                                         <Button
-                                            id="101Copy"
+                                            id="id101Copy"
                                             text="Copy"
                                             type="Transparent"
                                             press="onPostCompCopy101"
                                             icon="sap-icon://copy"
                                         />
                                         <Button
-                                            id="101Del"
+                                            id="id101Del"
                                             text="Delete"
                                             type="Attention"
                                             press="onPostCompDel101"

@@ -3437,6 +3437,8 @@ sap.ui.define(
             that.getView().addDependent(that.PostActionDialog);
           }
           that.showBusyIndicator();
+          that.PostActionDialog.open();
+
           var Head = that
             .getView()
             .getModel("i18n")
@@ -3477,7 +3479,7 @@ sap.ui.define(
             "'",
             {
               context: null,
-              async: false,
+              async: true,
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
@@ -3533,7 +3535,7 @@ sap.ui.define(
             "'",
             {
               context: null,
-              async: false,
+              async: true,
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
@@ -3647,13 +3649,13 @@ sap.ui.define(
 
                     }
                     if (Visible != 'X') {
-                      sap.ui.getCore().byId("101Add").setVisible(false);
-                      sap.ui.getCore().byId("101Copy").setVisible(false);
-                      sap.ui.getCore().byId("101Del").setVisible(false);
+                      sap.ui.getCore().byId("id101Add").setVisible(false);
+                      sap.ui.getCore().byId("id101Copy").setVisible(false);
+                      sap.ui.getCore().byId("id101Del").setVisible(false);
                     } else {
-                      sap.ui.getCore().byId("101Add").setVisible(true);
-                      sap.ui.getCore().byId("101Copy").setVisible(true);
-                      sap.ui.getCore().byId("101Del").setVisible(true);
+                      sap.ui.getCore().byId("id101Add").setVisible(true);
+                      sap.ui.getCore().byId("id101Copy").setVisible(true);
+                      sap.ui.getCore().byId("id101Del").setVisible(true);
                     }
                     that.hideBusyIndicator();
                   } else {
@@ -3717,7 +3719,7 @@ sap.ui.define(
             "'",
             {
               context: null,
-              async: false,
+              async: true,
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
@@ -3759,7 +3761,6 @@ sap.ui.define(
               },
             }
           );
-          that.PostActionDialog.open();
           jQuery.sap.delayedCall(500, that, function () {
             sap.ui.getCore().byId("idPostQuantity").focus();
             sap.ui.getCore().byId(`idPostQuantity`).fireChangeEvent();
