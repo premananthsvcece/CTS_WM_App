@@ -226,17 +226,43 @@ sap.ui.define(
                   .getCore()
                   .byId(Path + "--idInprogressOrderList");
 
-                InProgressTable.setModel(InProgressModel, "InProgressModel");
                 var Line = InProgressTable.getSelectedIndex();
+                var InProgressArray = {};
+                // Get the Selected Line Item Value
+                if (InProgressTable.getModel('InProgressModel') != undefined) {
+                  var InprogressObject = InProgressTable.getModel('InProgressModel').getData().InProgressData;
+                } else {
+                  var InprogressObject = undefined;
+                }
+
+                InProgressTable.setModel(InProgressModel, "InProgressModel");
                 var aIndices = sap.ui
                   .getCore()
                   .byId(`${Path}--idInprogressOrderList`)
                   .getBinding("rows").aIndices;
                 for (var loop = 0; loop in aIndices; loop++) {
                   if (loop === Line) {
-                    Line = aIndices[loop];
-                    break;
+                    if (InprogressObject != undefined) {
+                      InProgressArray = InprogressObject[loop];
+                      // Line = aIndices[loop];
+                      break;
+                    } else {
+                      InProgressArray = undefined;
+                    }
                   }
+                }
+                if (InProgressArray != undefined) {
+                  for (var fline = 0; fline in InProgressData; fline++) {
+                    if (InProgressData[fline].Data16 === InProgressArray.Data16
+                      && InProgressData[fline].Data02 === InProgressArray.Data02
+                      && InProgressData[fline].Data05 === InProgressArray.Data05
+                    ) {
+                      Line = fline;
+                      break;
+                    }
+                  }
+                } else {
+                  Line = -1;
                 }
 
                 var oListBinding = InProgressTable.getBinding("rows");
@@ -1875,7 +1901,7 @@ sap.ui.define(
           var SelOrderNo = sap.ui.getCore().byId("idSelectOrder").getValue();
           var SelOrderOpr = sap.ui.getCore().byId("idSelectOprNo").getValue();
           if (ScreenText != "InProgress") {
-          that.OnOperatorfill();
+            that.OnOperatorfill();
           }
           var OperatorNo = sap.ui.getCore().byId("idStartOperator").getValue();
           if (OperatorNo === "") {
@@ -2090,8 +2116,8 @@ sap.ui.define(
 
           IEntry.NavWC_Future = [{}];
           IEntry.NavWC_Component = [{}];
-          if (ScreenText != "InProgress"){
-          that.StartDialog.close();
+          if (ScreenText != "InProgress") {
+            that.StartDialog.close();
           }
 
           oDataModel.create(
@@ -3771,6 +3797,7 @@ sap.ui.define(
           var that = this;
           var index;
           var Path = that.getView().getId();
+          that.showBusyIndicator();
 
           var YeildQty = sap.ui.getCore().byId("idPostQuantity").getValue();
           // var SetupTime = sap.ui.getCore().byId("idPostSetupTIme").getValue();
@@ -3836,7 +3863,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-          that.showBusyIndicator();
+
           var ScarpData = sap.ui
             .getCore()
             .byId("idPostScarpList")
