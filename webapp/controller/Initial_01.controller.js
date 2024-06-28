@@ -214,9 +214,7 @@ sap.ui.define(
                 var Path = othis.getView().getId();
                 // In Progress
                 var InProgressData = oData.NavWC_InProgress.results;
-                if (InProgressData.length === 0) {
-                  // Do Nothing
-                }
+                
                 var InProgressModel = new sap.ui.model.json.JSONModel();
 
                 InProgressModel.setData({
@@ -242,6 +240,7 @@ sap.ui.define(
                   .getBinding("rows").aIndices;
                 if( aIndices.length < Line){
                   Line = aIndices.length;
+                  Line = Line - 1;
                 }
                 for (var loop = 0; loop in aIndices; loop++) {
                   if (loop === Line) {
@@ -267,7 +266,10 @@ sap.ui.define(
                 } else {
                   Line = -1;
                 }
-
+                if (InProgressData.length === 0) {
+                  // Do Nothing
+                  Line = -1;
+                }
                 var oListBinding = InProgressTable.getBinding("rows");
                 if (oListBinding) {
                   var Sorting = oListBinding.aSorters;
@@ -3144,7 +3146,7 @@ sap.ui.define(
           }
 
           that.ScrapActionDialog.close();
-          that.onScarpupdate(that, SelAufnr, SelOprNo, SelPlant, SelOprerator, ScarpData);
+          // that.onScarpupdate(that, SelAufnr, SelOprNo, SelPlant, SelOprerator, ScarpData);
 
         },
 
@@ -5262,7 +5264,7 @@ sap.ui.define(
             Data07: "",
             Data08: "101",
             Data09: true,
-            Data10: false,
+            Data10: true,
             Data11: "",
             Data12: "",
             Data13: "",
