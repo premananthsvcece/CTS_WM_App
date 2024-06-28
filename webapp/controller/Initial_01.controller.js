@@ -3076,7 +3076,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-
+            
           Tableindex = sap.ui
             .getCore()
             .byId(`${Path}--idInprogressOrderList`)
@@ -3218,7 +3218,12 @@ sap.ui.define(
                       .getModel("i18n")
                       .getResourceBundle()
                       .getText("Gen003");
-                    MessageToast.show(message);
+                    
+                    MessageToast.show(message + " " + SelAufnr + " / " + SelOprNo, {
+                      width: "200em",
+                      animationDuration: 2000,
+                    });
+
                     $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                     // return;
                   }
@@ -3378,6 +3383,8 @@ sap.ui.define(
           var TotTime = " ";
           var QtyAvail = "";
           var OperDispText = " ";
+          var OrdQty = " ";
+          var ComQty = " ";
           // var SetupTIme = " ";
 
           var SelPlant = sap.ui
@@ -3434,6 +3441,28 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data10;
+              
+              if(SelOprNo === '0010'){
+
+                OrdQty =  sap.ui
+                .getCore()
+                .byId(`${Path}--idInprogressOrderList`)
+                .getModel("InProgressModel")
+                .getData().InProgressData[Tableindex].Data06;
+
+                ComQty =  sap.ui
+                .getCore()
+                .byId(`${Path}--idInprogressOrderList`)
+                .getModel("InProgressModel")
+                .getData().InProgressData[Tableindex].Data11;
+
+                QtyAvail = OrdQty - ComQty;
+
+                if(QtyAvail < 0){
+                  QtyAvail = 0;
+                }
+
+              }
             OperDispText = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
@@ -3467,7 +3496,7 @@ sap.ui.define(
           }
           that.showBusyIndicator();
           that.PostActionDialog.open();
-
+          
           var Head = that
             .getView()
             .getModel("i18n")
@@ -4018,7 +4047,7 @@ sap.ui.define(
           var index;
           var Path = that.getView().getId();
           var value = sap.ui.getCore().byId(`idPostQuantity`).getValue();
-
+           
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
