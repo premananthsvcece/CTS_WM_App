@@ -769,6 +769,7 @@
                                             <Button
                                                 type="{InQueueModel>Data17}"
                                                 icon="{InQueueModel>Data18}"
+                                                tooltip="{InQueueModel>Data21}"
                                             />
                                         </Table:template>
                                     </Table:Column>
