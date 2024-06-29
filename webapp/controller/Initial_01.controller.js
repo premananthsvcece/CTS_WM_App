@@ -214,7 +214,7 @@ sap.ui.define(
                 var Path = othis.getView().getId();
                 // In Progress
                 var InProgressData = oData.NavWC_InProgress.results;
-                
+
                 var InProgressModel = new sap.ui.model.json.JSONModel();
 
                 InProgressModel.setData({
@@ -238,7 +238,7 @@ sap.ui.define(
                   .getCore()
                   .byId(`${Path}--idInprogressOrderList`)
                   .getBinding("rows").aIndices;
-                if( aIndices.length < Line){
+                if (aIndices.length < Line) {
                   Line = aIndices.length;
                   Line = Line - 1;
                 }
@@ -3078,7 +3078,7 @@ sap.ui.define(
             .getCore()
             .byId(`${Path}--idInputPlant`)
             .getValue();
-            
+
           Tableindex = sap.ui
             .getCore()
             .byId(`${Path}--idInprogressOrderList`)
@@ -3220,7 +3220,7 @@ sap.ui.define(
                       .getModel("i18n")
                       .getResourceBundle()
                       .getText("Gen003");
-                    
+
                     MessageToast.show(message + " " + SelAufnr + " / " + SelOprNo, {
                       width: "200em",
                       animationDuration: 2000,
@@ -3443,28 +3443,28 @@ sap.ui.define(
               .byId(`${Path}--idInprogressOrderList`)
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data10;
-              
-              if(SelOprNo === '0010'){
 
-                OrdQty =  sap.ui
+            if (SelOprNo === '0010') {
+
+              OrdQty = sap.ui
                 .getCore()
                 .byId(`${Path}--idInprogressOrderList`)
                 .getModel("InProgressModel")
                 .getData().InProgressData[Tableindex].Data06;
 
-                ComQty =  sap.ui
+              ComQty = sap.ui
                 .getCore()
                 .byId(`${Path}--idInprogressOrderList`)
                 .getModel("InProgressModel")
                 .getData().InProgressData[Tableindex].Data11;
 
-                QtyAvail = OrdQty - ComQty;
+              QtyAvail = OrdQty - ComQty;
 
-                if(QtyAvail < 0){
-                  QtyAvail = 0;
-                }
-
+              if (QtyAvail < 0) {
+                QtyAvail = 0;
               }
+
+            }
             OperDispText = sap.ui
               .getCore()
               .byId(`${Path}--idInprogressOrderList`)
@@ -3498,7 +3498,7 @@ sap.ui.define(
           }
           that.showBusyIndicator();
           that.PostActionDialog.open();
-          
+
           var Head = that
             .getView()
             .getModel("i18n")
@@ -3937,6 +3937,7 @@ sap.ui.define(
           }
 
           IEntry.NavWC_Future = [{}];
+          var Yeildline = 0;
 
           // Get Component Details
           IEntry.NavWC_Component = [];
@@ -3948,7 +3949,21 @@ sap.ui.define(
               .getData().ComponentData101;
             if (ComponentList101.length != 0) {
               for (var i = 0; i in ComponentList101; i++) {
+                Yeildline = Yeildline + parseInt(ComponentList101[i].Data06);
                 IEntry.NavWC_Component.push(ComponentList101[i]);
+              }
+              var CheckQty = parseInt(YeildQty);
+              if (Yeildline != CheckQty) {
+                rthat.hideBusyIndicator();
+                var message = that
+                  .getView()
+                  .getModel("i18n")
+                  .getResourceBundle()
+                  .getText("Post004");
+
+                MessageToast.show(message);
+                $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                return;
               }
             }
           }
@@ -4049,7 +4064,7 @@ sap.ui.define(
           var index;
           var Path = that.getView().getId();
           var value = sap.ui.getCore().byId(`idPostQuantity`).getValue();
-           
+
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
