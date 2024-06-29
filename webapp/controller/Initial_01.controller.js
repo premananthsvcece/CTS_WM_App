@@ -3709,11 +3709,11 @@ sap.ui.define(
 
                     }
                     if (Visible === 'X') {
-                      sap.ui.getCore().byId("id101Add").setVisible(false);
+                      // sap.ui.getCore().byId("id101Add").setVisible(false);
                       sap.ui.getCore().byId("id101Copy").setVisible(false);
                       sap.ui.getCore().byId("id101Del").setVisible(false);
                     } else {
-                      sap.ui.getCore().byId("id101Add").setVisible(true);
+                      // sap.ui.getCore().byId("id101Add").setVisible(true);
                       sap.ui.getCore().byId("id101Copy").setVisible(true);
                       sap.ui.getCore().byId("id101Del").setVisible(true);
                     }
