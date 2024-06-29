@@ -503,7 +503,7 @@
                             <uiTable:Table
                                 id="idPostComponentList561"
                                 visibleRowCount="3"
-                                visibleRowCountMode="Interactive"
+                                visibleRowCountMode="Fixed"
                                 class="sapUiContentPadding"
                                 rows="{ComponentModel561>/ComponentData561}"
                                 alternateRowColors="true"
