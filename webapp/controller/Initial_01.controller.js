@@ -3146,7 +3146,7 @@ sap.ui.define(
           }
 
           that.ScrapActionDialog.close();
-          // that.onScarpupdate(that, SelAufnr, SelOprNo, SelPlant, SelOprerator, ScarpData);
+          that.onScarpupdate(that, SelAufnr, SelOprNo, SelPlant, SelOprerator, ScarpData);
 
         },
 
@@ -3904,7 +3904,7 @@ sap.ui.define(
             .getModel("PostScarpModel")
             .getData().PostScarpData;
 
-          that.onScarpupdate(that, SelAufnr, SelOprNo, SelPlant, OperatorNo, ScarpData);
+          // that.onScarpupdate(that, SelAufnr, SelOprNo, SelPlant, OperatorNo, ScarpData);
 
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
