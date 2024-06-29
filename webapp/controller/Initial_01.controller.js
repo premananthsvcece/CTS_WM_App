@@ -4017,7 +4017,6 @@ sap.ui.define(
               }
             }
           }
-          that.PostActionDialog.close();
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
             IEntry,
@@ -4035,6 +4034,7 @@ sap.ui.define(
                   var message = oData.Key05;
                   MessageBox.warning(message);
                   $(".sapMMessageToast").addClass("sapMMessageToastWarning");
+                  that.PostActionDialog.close();
                   that.onButtonPress();
                   return;
                 }
@@ -4042,6 +4042,7 @@ sap.ui.define(
                   var message = oData.Key05;
                   MessageBox.success(message);
                   $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                  that.PostActionDialog.close();
                   that.onButtonPress();
                 }
                 return;
