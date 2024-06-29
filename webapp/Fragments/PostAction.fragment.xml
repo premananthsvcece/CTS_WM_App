@@ -231,6 +231,7 @@
                                             type="Transparent"
                                             press="onPostCompAdd101"
                                             icon="sap-icon://add"
+                                            visible="false"
                                         />
                                         <Button
                                             id="id101Copy"
@@ -255,7 +256,7 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel101>Data01}"
-                                                enabled="{ComponentModel101>Data10}"
+                                                enabled="false"
                                                 valueHelpRequest="onMaterailHelpRequest"
                                                 showValueHelp="true"
                                             />

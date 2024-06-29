@@ -3595,7 +3595,7 @@ sap.ui.define(
             "'",
             {
               context: null,
-              async: true,
+              async: false,
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
