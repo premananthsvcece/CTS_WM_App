@@ -1721,6 +1721,10 @@ sap.ui.define(
         OnOperatorfill: function () {
           var that = this;
           var sValue = sap.ui.getCore().byId(`idStartOperator`).getValue();
+          var ScreenText = sap.ui.getCore().byId("idStartText").getText();
+          if (ScreenText != "InProgress") {
+            that.StartDialog.close();
+          }
           // var sValue = oEvent.getParameter("value");
           // open value help dialog
           var Path = that.getView().getId();
@@ -1729,7 +1733,6 @@ sap.ui.define(
             .byId(`${Path}--idInputPlant`)
             .getValue();
 
-          that.StartDialog.close();
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
