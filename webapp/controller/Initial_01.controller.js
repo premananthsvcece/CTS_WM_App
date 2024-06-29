@@ -3890,6 +3890,7 @@ sap.ui.define(
               .getResourceBundle()
               .getText("Post001");
             MessageBox.error(message);
+            that.hideBusyIndicator();
             return;
           }
 
@@ -3954,7 +3955,7 @@ sap.ui.define(
               }
               var CheckQty = parseInt(YeildQty);
               if (Yeildline != CheckQty) {
-                rthat.hideBusyIndicator();
+                that.hideBusyIndicator();
                 var message = that
                   .getView()
                   .getModel("i18n")
