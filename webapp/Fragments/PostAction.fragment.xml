@@ -347,7 +347,6 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel101>Data06}"
-                                                enabled="{ComponentModel101>Data09}"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
