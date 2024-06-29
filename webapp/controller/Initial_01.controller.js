@@ -1722,7 +1722,7 @@ sap.ui.define(
           var that = this;
           var sValue = sap.ui.getCore().byId(`idStartOperator`).getValue();
           var ScreenText = sap.ui.getCore().byId("idStartText").getText();
-          if (ScreenText != "InProgress") {
+          if (ScreenText === "InProgress") {
             that.StartDialog.close();
           }
           // var sValue = oEvent.getParameter("value");
