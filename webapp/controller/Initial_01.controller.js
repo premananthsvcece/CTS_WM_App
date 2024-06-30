@@ -3501,7 +3501,8 @@ sap.ui.define(
                 .byId(`${Path}--idInprogressOrderList`)
                 .getModel("InProgressModel")
                 .getData().InProgressData[Tableindex].Data11;
-
+                OrdQty = parseFloat(OrdQty);
+                ComQty = parseFloat(ComQty);
               QtyAvail = OrdQty - ComQty;
 
               if (QtyAvail < 0) {
@@ -3555,7 +3556,7 @@ sap.ui.define(
           sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);
           TotTime = parseInt(TotTime);
           sap.ui.getCore().byId("idPostTotalTime").setValue(TotTime);
-          QtyAvail = parseInt(QtyAvail);
+          QtyAvail = parseFloat(QtyAvail);
           sap.ui.getCore().byId(`idPostQuantity`).setValue(QtyAvail);
           sap.ui.getCore().byId(`idPostConfType`).setSelectedKey('P');
 
