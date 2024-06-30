@@ -211,7 +211,7 @@ sap.ui.define(
 
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
-            IEntry, 
+            IEntry,
             null,
             function (oData, Response) {
               try {
@@ -406,12 +406,12 @@ sap.ui.define(
           // });
 
           var Path = othis.getView().getId();
-          jQuery.sap.delayedCall(500, that, function () {
-            sap.ui
-              .getCore()
-              .byId(Path + "--idInputWorkArea")
-              .focus();
-          });
+          // jQuery.sap.delayedCall(500, that, function () {
+          //   sap.ui
+          //     .getCore()
+          //     .byId(Path + "--idInputWorkArea")
+          //     .focus();
+          // });
         },
         /* BUSY INDICATOR*/
         showBusyIndicator: function () {
@@ -426,17 +426,17 @@ sap.ui.define(
         hideBusyIndicator: function () {
           sap.ui.core.BusyIndicator.hide();
         },
-        hidePstBusyIndicator : function() {
+        hidePstBusyIndicator: function () {
           BusyIndicator.hide();
         },
-        wait: function(ms){
-            var start = new Date().getTime();
-            var end = start;
-            while(end < start + ms) {
-              end = new Date().getTime();
-           }
+        wait: function (ms) {
+          var start = new Date().getTime();
+          var end = start;
+          while (end < start + ms) {
+            end = new Date().getTime();
+          }
         },
-        showPstBusyIndicator : function (iDuration, iDelay) {
+        showPstBusyIndicator: function (iDuration, iDelay) {
           BusyIndicator.show(iDelay);
           this.wait(5000);
           if (iDuration && iDuration > 0) {
@@ -444,8 +444,8 @@ sap.ui.define(
               clearTimeout(this._sTimeoutId);
               this._sTimeoutId = null;
             }
-    
-            this._sTimeoutId = setTimeout(function() {
+
+            this._sTimeoutId = setTimeout(function () {
               this.hidePostBusyIndicator();
             }.bind(this), iDuration);
           }
@@ -3516,6 +3516,7 @@ sap.ui.define(
               .getData().InProgressData[Tableindex].Data20;
           }
           if (EndDate === "") {
+            that.hideBusyIndicator();
             var message = that
               .getView()
               .getModel("i18n")
@@ -3525,6 +3526,7 @@ sap.ui.define(
             return;
           }
           if (Tableindex === undefined) {
+            that.hideBusyIndicator();
             var message = that
               .getView()
               .getModel("i18n")
@@ -3993,7 +3995,9 @@ sap.ui.define(
               .getData().ComponentData101;
             if (ComponentList101.length != 0) {
               for (var i = 0; i in ComponentList101; i++) {
-                Yeildline = Yeildline + parseInt(ComponentList101[i].Data06);
+                if (ComponentList101[i].key01 != '531') {
+                  Yeildline = Yeildline + parseInt(ComponentList101[i].Data06);
+                }
                 IEntry.NavWC_Component.push(ComponentList101[i]);
               }
               var CheckQty = parseInt(YeildQty);
