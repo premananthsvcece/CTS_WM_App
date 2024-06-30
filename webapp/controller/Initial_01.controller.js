@@ -182,7 +182,7 @@ sap.ui.define(
         onLoadData: function (that, Plant, SelWCGrp, Workcenter) {
           var othis = that;
           var Path = that.getView().getId();
-          othis.showBusyIndicator();
+          othis.showPostBusyIndicator();
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
           var OrderNo = sap.ui
@@ -212,7 +212,6 @@ sap.ui.define(
             null,
             function (oData, Response) {
               try {
-                othis.hideBusyIndicator();
                 var Path = othis.getView().getId();
                 // In Progress
                 var InProgressData = oData.NavWC_InProgress.results;
@@ -361,12 +360,13 @@ sap.ui.define(
                     InFutureTable.setSelectedIndex(Line);
                   }
                 }
-
+                othis.hidePstBusyIndicator();
                 // }
               } catch (e) {
                 // alert(e.message);
                 // MessageBox.error(e.message);
-                othis.hideBusyIndicator();
+                // othis.hideBusyIndicator();
+                othis.hidePstBusyIndicator();
                 MessageToast.show(e.message);
                 $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
               }
