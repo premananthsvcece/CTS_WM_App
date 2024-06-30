@@ -15,6 +15,7 @@ sap.ui.define(
     "sap/m/library",
     "sap/m/Text",
     "sap/ui/core/library",
+    "sap/ui/core/BusyIndicator",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -34,7 +35,8 @@ sap.ui.define(
     Button,
     mobileLibrary,
     Text,
-    coreLibrary
+    coreLibrary,
+    BusyIndicator
   ) {
     "use strict";
 
@@ -408,13 +410,31 @@ sap.ui.define(
           sap.ui.core.BusyIndicator.show(100);
         },
         showPostBusyIndicator: function () {
-          sap.ui.core.BusyIndicator.show();
+          this.showPstBusyIndicator(4000, 0);
         },
         hidePostBusyIndicator: function () {
-          sap.ui.core.BusyIndicator.hide();
+          this.hidePstBusyIndicator();
         },
         hideBusyIndicator: function () {
           sap.ui.core.BusyIndicator.hide();
+        },
+        hidePstBusyIndicator : function() {
+          BusyIndicator.hide();
+        },
+    
+        showPstBusyIndicator : function (iDuration, iDelay) {
+          BusyIndicator.show(iDelay);
+    
+          if (iDuration && iDuration > 0) {
+            if (this._sTimeoutId) {
+              clearTimeout(this._sTimeoutId);
+              this._sTimeoutId = null;
+            }
+    
+            this._sTimeoutId = setTimeout(function() {
+              this.hidePostBusyIndicator();
+            }.bind(this), iDuration);
+          }
         },
         onButtonPress: function () {
           var that = this;
