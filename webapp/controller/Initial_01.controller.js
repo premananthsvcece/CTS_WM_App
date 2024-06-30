@@ -3997,12 +3997,12 @@ sap.ui.define(
               .getData().ComponentData101;
             if (ComponentList101.length != 0) {
               for (var i = 0; i in ComponentList101; i++) {
-                if (ComponentList101[i].key01 != '531') {
+                if (ComponentList101[i].Key01 != '531') {
                   Yeildline = Yeildline + parseInt(ComponentList101[i].Data06);
                 }
                 IEntry.NavWC_Component.push(ComponentList101[i]);
               }
-              var CheckQty = parseInt(YeildQty);
+              var CheckQty = parseFloat(YeildQty);
               if (Yeildline != CheckQty) {
                 that.hidePostBusyIndicator();
                 var message = that
