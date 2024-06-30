@@ -183,6 +183,9 @@ sap.ui.define(
           var othis = that;
           var Path = that.getView().getId();
           othis.showPostBusyIndicator();
+          sap.ui
+              .getCore()
+              .byId(Path + "--idGO").showBusyIndicator();
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
           var OrderNo = sap.ui
@@ -373,29 +376,34 @@ sap.ui.define(
             }
           );
 
-          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
-          var oPlantModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+          sap.ui
+              .getCore()
+              .byId(Path + "--idGO").hideBusyIndicator();
 
-          oPlantModel.read("/ZshWerksSet", {
-            context: null,
-            urlParameters: null,
-            success: function (oData, oResponse) {
-              try {
-                var Path = othis.getView().getId();
-                var PlantData = oData.results;
-                var PlantModel = new sap.ui.model.json.JSONModel();
+          // var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          // var oPlantModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
-                PlantModel.setData({
-                  PlantData: PlantData,
-                });
-                var PlantTable = sap.ui.getCore().byId(Path + "--idInputPlant");
+          // oPlantModel.read("/ZshWerksSet", {
+          //   context: null,
+          //   async: false,
+          //   urlParameters: null,
+          //   success: function (oData, oResponse) {
+          //     try {
+          //       var Path = othis.getView().getId();
+          //       var PlantData = oData.results;
+          //       var PlantModel = new sap.ui.model.json.JSONModel();
 
-                PlantTable.setModel(PlantModel, "PlantModel");
-              } catch (e) {
-                alert(e.message);
-              }
-            },
-          });
+          //       PlantModel.setData({
+          //         PlantData: PlantData,
+          //       });
+          //       var PlantTable = sap.ui.getCore().byId(Path + "--idInputPlant");
+
+          //       PlantTable.setModel(PlantModel, "PlantModel");
+          //     } catch (e) {
+          //       alert(e.message);
+          //     }
+          //   },
+          // });
 
           var Path = othis.getView().getId();
           jQuery.sap.delayedCall(500, that, function () {
@@ -430,7 +438,7 @@ sap.ui.define(
         },
         showPstBusyIndicator : function (iDuration, iDelay) {
           BusyIndicator.show(iDelay);
-          this.wait(1000);
+          this.wait(5000);
           if (iDuration && iDuration > 0) {
             if (this._sTimeoutId) {
               clearTimeout(this._sTimeoutId);
