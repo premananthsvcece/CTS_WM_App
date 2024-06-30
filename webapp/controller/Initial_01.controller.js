@@ -208,7 +208,7 @@ sap.ui.define(
 
           oDataModel.create(
             "/WorkCenter_AreaOrderSet",
-            IEntry,
+            IEntry, 
             null,
             function (oData, Response) {
               try {
@@ -421,10 +421,16 @@ sap.ui.define(
         hidePstBusyIndicator : function() {
           BusyIndicator.hide();
         },
-    
+        wait: function(ms){
+            var start = new Date().getTime();
+            var end = start;
+            while(end < start + ms) {
+              end = new Date().getTime();
+           }
+        },
         showPstBusyIndicator : function (iDuration, iDelay) {
           BusyIndicator.show(iDelay);
-    
+          this.wait(1000);
           if (iDuration && iDuration > 0) {
             if (this._sTimeoutId) {
               clearTimeout(this._sTimeoutId);
@@ -3441,6 +3447,7 @@ sap.ui.define(
                 console.log(Tableindex);
               }
             }
+            that.showBusyIndicator();
 
             SelAufnr = sap.ui
               .getCore()
@@ -3525,7 +3532,6 @@ sap.ui.define(
             );
             that.getView().addDependent(that.PostActionDialog);
           }
-          that.showBusyIndicator();
           that.PostActionDialog.open();
 
           var Head = that
