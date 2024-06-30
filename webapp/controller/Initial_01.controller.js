@@ -3501,9 +3501,10 @@ sap.ui.define(
                 .byId(`${Path}--idInprogressOrderList`)
                 .getModel("InProgressModel")
                 .getData().InProgressData[Tableindex].Data11;
-                OrdQty = parseFloat(OrdQty);
-                ComQty = parseFloat(ComQty);
+              OrdQty = parseFloat(OrdQty);
+              ComQty = parseFloat(ComQty);
               QtyAvail = OrdQty - ComQty;
+              QtyAvail = parseFloat((QtyAvail).toFixed(3));
 
               if (QtyAvail < 0) {
                 QtyAvail = 0;
