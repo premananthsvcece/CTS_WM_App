@@ -407,6 +407,12 @@ sap.ui.define(
         showBusyIndicator: function () {
           sap.ui.core.BusyIndicator.show(100);
         },
+        showPostBusyIndicator: function () {
+          sap.ui.core.BusyIndicator.show();
+        },
+        hidePostBusyIndicator: function () {
+          sap.ui.core.BusyIndicator.hide();
+        },
         hideBusyIndicator: function () {
           sap.ui.core.BusyIndicator.hide();
         },
@@ -3834,7 +3840,7 @@ sap.ui.define(
           var that = this;
           var index;
           var Path = that.getView().getId();
-          that.showBusyIndicator();
+          that.showPostBusyIndicator();
 
           var YeildQty = sap.ui.getCore().byId("idPostQuantity").getValue();
           // var SetupTime = sap.ui.getCore().byId("idPostSetupTIme").getValue();
@@ -3893,7 +3899,7 @@ sap.ui.define(
               .getResourceBundle()
               .getText("Post001");
             MessageBox.error(message);
-            that.hideBusyIndicator();
+            that.hidePostBusyIndicator();
             return;
           }
 
@@ -3958,7 +3964,7 @@ sap.ui.define(
               }
               var CheckQty = parseInt(YeildQty);
               if (Yeildline != CheckQty) {
-                that.hideBusyIndicator();
+                that.hidePostBusyIndicator();
                 var message = that
                   .getView()
                   .getModel("i18n")
@@ -4006,7 +4012,7 @@ sap.ui.define(
                 var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
                 if (Qty != 0) {
                   if (IEntry.NavWC_Component[bth].Data05 === "") {
-                    that.hideBusyIndicator();
+                    that.hidePostBusyIndicator();
                     var message = that
                       .getView()
                       .getModel("i18n")
@@ -4027,7 +4033,7 @@ sap.ui.define(
             null,
             function (oData, Response) {
               try {
-                that.hideBusyIndicator();
+                that.hidePostBusyIndicator();
                 if (oData.Key04 === "E") {
                   var message = oData.Key05;
                   MessageBox.error(message);
@@ -4051,7 +4057,7 @@ sap.ui.define(
                 }
                 return;
               } catch (e) {
-                that.hideBusyIndicator();
+                that.hidePostBusyIndicator();
                 MessageToast.show(e.message);
                 $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                 that.onButtonPress();
