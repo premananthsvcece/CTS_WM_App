@@ -183,9 +183,9 @@ sap.ui.define(
           var othis = that;
           var Path = that.getView().getId();
           othis.showPostBusyIndicator();
-          sap.ui
-              .getCore()
-              .byId(Path + "--idGO").showBusyIndicator();
+          // sap.ui
+          //     .getCore()
+          //     .byId(Path + "--idGO").showBusyIndicator();
           var UrlInit = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oDataModel = new sap.ui.model.odata.ODataModel(UrlInit);
           var OrderNo = sap.ui
@@ -376,9 +376,9 @@ sap.ui.define(
             }
           );
 
-          sap.ui
-              .getCore()
-              .byId(Path + "--idGO").hideBusyIndicator();
+          // sap.ui
+          //     .getCore()
+          //     .byId(Path + "--idGO").hideBusyIndicator();
 
           // var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           // var oPlantModel = new sap.ui.model.odata.ODataModel(sUrl, true);
