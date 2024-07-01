@@ -5,9 +5,8 @@
 >
     <SelectDialog
         id="idScarpReasonDialog"
-        noDataText="No Scarp Reason Found"
-        growing="true"
-        title="Select Scarp Reason"
+        noDataText="{i18n>NoData}"
+        title="{i18n>SelScrapReason}"
         search="_onScarpReasonSearch"
         confirm="_ScarpReasonSelect"
         cancel="_ScarpReasonSelect"

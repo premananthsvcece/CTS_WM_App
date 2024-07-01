@@ -3518,12 +3518,12 @@ sap.ui.define(
                 "'",
                 {
                   context: null,
-                  async: true,
+                  async: false,
                   urlParameters: null,
                   success: function (oData, oResponse) {
                     try {
                       if (oData.results.length != 0) {
-                        var QtyAvail = oData.results[0].Data01;
+                        QtyAvail = oData.results[0].Data01;
                       } else {
                         QtyAvail = 0;
                       }
