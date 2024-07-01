@@ -3408,6 +3408,9 @@ sap.ui.define(
         onCancelScarpPress: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
+          if( sap.ui.getCore().byId(sReasonCodeId) != undefined ){
+            sap.ui.getCore().byId(sReasonCodeId).setValueState("None");
+          }
           // sap.ui
           //   .getCore()
           //   .byId(`${Path}--idInprogressOrderList`)
