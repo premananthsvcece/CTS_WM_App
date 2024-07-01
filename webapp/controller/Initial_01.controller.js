@@ -3663,7 +3663,7 @@ sap.ui.define(
                       for (var i = 0; i in ComponentData; i++) {
                         if (ComponentData[i].Data08 === "101") {
                           ComponentData[i].Data09 = false;
-                          if (ComponentData[i].Data12 === "false") {
+                          if (ComponentData[i].Data13 === "false") {
                             Visible = 'X';
                           }
                         } else {
