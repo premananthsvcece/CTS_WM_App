@@ -3494,24 +3494,56 @@ sap.ui.define(
             if (SelOprNo === '0010') {
 
               OrdQty = sap.ui
-                .getCore()
-                .byId(`${Path}--idInprogressOrderList`)
-                .getModel("InProgressModel")
-                .getData().InProgressData[Tableindex].Data06;
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data06;
 
               ComQty = sap.ui
-                .getCore()
-                .byId(`${Path}--idInprogressOrderList`)
-                .getModel("InProgressModel")
-                .getData().InProgressData[Tableindex].Data11;
-              OrdQty = parseFloat(OrdQty);
-              ComQty = parseFloat(ComQty);
-              QtyAvail = OrdQty - ComQty;
-              QtyAvail = parseFloat((QtyAvail).toFixed(3));
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data11;
 
-              if (QtyAvail < 0) {
-                QtyAvail = 0;
-              }
+              var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+              var oQtyModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+    
+              oQtyModel.read(
+                "/ValueHelpSet?$filter=Key01 eq 'QtyCalc' and Key02 eq '" +
+                OrdQty +
+                "' and Key03 eq '" +
+                ComQty +
+                "' and Key04 eq '" +
+                QtyAvail +
+                "'",
+                {
+                  context: null,
+                  async: true,
+                  urlParameters: null,
+                  success: function (oData, oResponse) {
+                    try {
+                      if (oData.results.length != 0) {
+                        var QtyAvail = oData.results[0].Data01;
+                      } else {
+                        QtyAvail = 0;
+                      }
+                    } catch (e) {
+                      that.hideBusyIndicator();
+                      MessageToast.show(e.message);
+                      $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                    }
+                  },
+                }
+              );
+
+              // OrdQty = parseFloat(OrdQty);
+              // ComQty = parseFloat(ComQty);
+              // QtyAvail = OrdQty - ComQty;
+              // QtyAvail = parseFloat((QtyAvail).toFixed(3));
+
+              // if (QtyAvail < 0) {
+              //   QtyAvail = 0;
+              // }
 
             }
             OperDispText = sap.ui
@@ -3560,7 +3592,7 @@ sap.ui.define(
           sap.ui.getCore().byId(`idSelectPostPlant`).setValue(SelPlant);
           TotTime = parseInt(TotTime);
           sap.ui.getCore().byId("idPostTotalTime").setValue(TotTime);
-          QtyAvail = parseFloat(QtyAvail);
+          // QtyAvail = parseFloat(QtyAvail);
           sap.ui.getCore().byId(`idPostQuantity`).setValue(QtyAvail);
           sap.ui.getCore().byId(`idPostConfType`).setSelectedKey('P');
 

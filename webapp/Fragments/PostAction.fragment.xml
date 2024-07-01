@@ -85,10 +85,10 @@
                                         }"
                                     />
                                 </InputListItem>
+                                <!-- type="Number" -->
                                 <InputListItem label="{i18n>PostQuan} *">
                                     <Input
                                         id="idPostQuantity"
-                                        type="Number"
                                         required="true"
                                         change="onPostQuantityChange"
                                         valueLiveUpdate="true"
