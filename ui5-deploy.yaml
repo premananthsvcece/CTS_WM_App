@@ -21,6 +21,6 @@ builder:
           name: ZPP_WORKMANAGER
           description: Work Manager Dashbaord
           package: ZFIORI_V3
-          transport: DG1K900520
+          transport: DG1K900524
         exclude:
           - /test/
