@@ -182,7 +182,19 @@ sap.ui.define(
         onLoadData: function (that, Plant, SelWCGrp, Workcenter) {
           var othis = that;
           var Path = that.getView().getId();
-          othis.showPostBusyIndicator();
+          // othis.showPostBusyIndicator();
+          if (!othis.oInfoMessageDialog) {
+            othis.oInfoMessageDialog = new Dialog({
+              type: DialogType.Message,
+              state: ValueState.Information,
+              content: new Text({ text: "Processing..." }),
+            });
+          }
+          othis.oInfoMessageDialog.open();
+          var oGlobalBusyDialog = new sap.m.BusyDialog();
+          oGlobalBusyDialog.open();
+
+
           // sap.ui
           //     .getCore()
           //     .byId(Path + "--idGO").showBusyIndicator();
@@ -363,13 +375,17 @@ sap.ui.define(
                     InFutureTable.setSelectedIndex(Line);
                   }
                 }
-                othis.hidePstBusyIndicator();
+                // othis.hidePstBusyIndicator();
+                oGlobalBusyDialog.close();
+                othis.oInfoMessageDialog.close();
                 // }
               } catch (e) {
                 // alert(e.message);
                 // MessageBox.error(e.message);
                 // othis.hideBusyIndicator();
-                othis.hidePstBusyIndicator();
+                // othis.hidePstBusyIndicator();
+                oGlobalBusyDialog.close();
+                othis.oInfoMessageDialog.close();
                 MessageToast.show(e.message);
                 $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
               }
@@ -3922,10 +3938,7 @@ sap.ui.define(
           if (!that.oInfoMessageDialog) {
             that.oInfoMessageDialog = new Dialog({
               type: DialogType.Message,
-              title: TitleText,
               state: ValueState.Information,
-              contentWidth: "25%",
-              contextHeight: "20%",
               content: new Text({ text: "Processing..." }),
             });
           }
@@ -4130,7 +4143,6 @@ sap.ui.define(
             "/WorkCenter_AreaOrderSet",
             IEntry,
             null,
-            false,
             function (oData, Response) {
               try {
                 // that.hidePostBusyIndicator();
