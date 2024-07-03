@@ -3913,7 +3913,25 @@ sap.ui.define(
           var that = this;
           var index;
           var Path = that.getView().getId();
-          that.showPostBusyIndicator();
+          // that.showPostBusyIndicator();
+          var TitleText = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("Buffer");
+          if (!that.oInfoMessageDialog) {
+            that.oInfoMessageDialog = new Dialog({
+              type: DialogType.Message,
+              title: TitleText,
+              state: ValueState.Information,
+              contentWidth: "25%",
+              contextHeight: "20%",
+              content: new Text({ text: "Processing..." }),
+            });
+          }
+          that.oInfoMessageDialog.open();
+          var oGlobalBusyDialog = new sap.m.BusyDialog();
+          oGlobalBusyDialog.open();
 
           var YeildQty = sap.ui.getCore().byId("idPostQuantity").getValue();
           // var SetupTime = sap.ui.getCore().byId("idPostSetupTIme").getValue();
@@ -3972,7 +3990,9 @@ sap.ui.define(
               .getResourceBundle()
               .getText("Post001");
             MessageBox.error(message);
-            that.hidePostBusyIndicator();
+            // that.hidePostBusyIndicator();
+            oGlobalBusyDialog.close();
+            that.oInfoMessageDialog.close();
             return;
           }
 
@@ -4039,7 +4059,9 @@ sap.ui.define(
               }
               var CheckQty = parseFloat(YeildQty);
               if (Yeildline != CheckQty) {
-                that.hidePostBusyIndicator();
+                // that.hidePostBusyIndicator();
+                oGlobalBusyDialog.close();
+                that.oInfoMessageDialog.close();
                 var message = that
                   .getView()
                   .getModel("i18n")
@@ -4087,7 +4109,9 @@ sap.ui.define(
                 var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
                 if (Qty != 0) {
                   if (IEntry.NavWC_Component[bth].Data05 === "") {
-                    that.hidePostBusyIndicator();
+                    // that.hidePostBusyIndicator();
+                    oGlobalBusyDialog.close();
+                    that.oInfoMessageDialog.close();
                     var message = that
                       .getView()
                       .getModel("i18n")
@@ -4106,9 +4130,12 @@ sap.ui.define(
             "/WorkCenter_AreaOrderSet",
             IEntry,
             null,
+            false,
             function (oData, Response) {
               try {
-                that.hidePostBusyIndicator();
+                // that.hidePostBusyIndicator();
+                oGlobalBusyDialog.close();
+                that.oInfoMessageDialog.close();
                 if (oData.Key04 === "E") {
                   var message = oData.Key05;
                   MessageBox.error(message);
@@ -4132,7 +4159,9 @@ sap.ui.define(
                 }
                 return;
               } catch (e) {
-                that.hidePostBusyIndicator();
+                // that.hidePostBusyIndicator();
+                oGlobalBusyDialog.close();
+                that.oInfoMessageDialog.close();
                 MessageToast.show(e.message);
                 $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
                 that.onButtonPress();
