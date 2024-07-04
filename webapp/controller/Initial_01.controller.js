@@ -1915,8 +1915,8 @@ sap.ui.define(
                       .getModel("i18n")
                       .getResourceBundle()
                       .getText("Start005");
-                    if (!that.oInfoMessageDialog) {
-                      that.oInfoMessageDialog = new Dialog({
+                    if (!that.oInfoMessageTextDialog) {
+                      that.oInfoMessageTextDialog = new Dialog({
                         type: DialogType.Message,
                         title: TitleText,
                         state: ValueState.Information,
@@ -1927,12 +1927,12 @@ sap.ui.define(
                           type: ButtonType.Emphasized,
                           text: "OK",
                           press: function () {
-                            that.oInfoMessageDialog.close();
+                            that.oInfoMessageTextDialog.close();
                           }.bind(that),
                         }),
                       });
                     }
-                    that.oInfoMessageDialog.open();
+                    that.oInfoMessageTextDialog.open();
 
                     // sap.ui.getCore().byId("idHeaderOrder").setText(SelAufnr);
                   } else {
