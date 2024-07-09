@@ -728,9 +728,9 @@
             type="Success"
             press="onConfirmPostPress"
         />
-    </beginButton>
+        </beginButton>
     
-      <endButton>
+        <endButton>
         <Button
             icon="sap-icon://cancel"
             class="sapUiSmallMarginBegin"
@@ -738,7 +738,7 @@
             type="Negative"
             press="onCancelPostPress"
         />    
-    </endButton>
+        </endButton>
 
 
         <!-- <footer> -->
