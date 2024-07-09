@@ -714,25 +714,51 @@
                         </IconTabFilter>
                     </items>
                 </IconTabBar>
-            </l:content>
+                
+             </l:content>
+
         </l:VerticalLayout>
-        <Bar>
-            <contentMiddle>
+
+        <footer> 
+            <Toolbar >
+              <ToolbarSpacer></ToolbarSpacer>
                 <Button
-                    icon="sap-icon://accept"
-                    class="sapUiSmallMarginBegin"
-                    text="{i18n>Save}"
-                    type="Success"
-                    press="onConfirmPostPress"
-                />
-                <Button
-                    icon="sap-icon://cancel"
-                    class="sapUiSmallMarginBegin"
-                    text="{i18n>Cancel}"
-                    type="Negative"
-                    press="onCancelPostPress"
-                />
-            </contentMiddle>
-        </Bar>
+                icon="sap-icon://accept"
+                class="sapUiSmallMarginBegin"
+                text="{i18n>Save}"
+                type="Success"
+                press="onConfirmPostPress"
+            />
+            <Button
+                icon="sap-icon://cancel"
+                class="sapUiSmallMarginBegin"
+                text="{i18n>Cancel}"
+                type="Negative"
+                press="onCancelPostPress"
+            />      
+            <ToolbarSpacer></ToolbarSpacer>  
+            </Toolbar>
+        </footer>
+        
+            <!-- <Bar>
+                <contentMiddle>
+                    <Button
+                        icon="sap-icon://accept"
+                        class="sapUiSmallMarginBegin"
+                        text="{i18n>Save}"
+                        type="Success"
+                        press="onConfirmPostPress"
+                    />
+                    <Button
+                        icon="sap-icon://cancel"
+                        class="sapUiSmallMarginBegin"
+                        text="{i18n>Cancel}"
+                        type="Negative"
+                        press="onCancelPostPress"
+                    />
+                </contentMiddle>
+            </Bar> -->
+        
+
     </Dialog>
 </c:FragmentDefinition>
