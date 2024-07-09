@@ -13,6 +13,7 @@ builder:
     - name: deploy-to-abap
       afterTask: generateCachebusterInfo
       configuration:
+        verbose: true
         target:
           url: http://us100dfi01new.cts.ctscorp.com:8000/
           client: "200"
@@ -20,6 +21,6 @@ builder:
           name: ZPP_WORKMANAGER
           description: Work Manager Dashbaord
           package: ZFIORI_V3
-          transport: DG1K900505
+          transport: DG1K900528
         exclude:
           - /test/

@@ -85,10 +85,10 @@
                                         }"
                                     />
                                 </InputListItem>
+                                <!-- type="Number" -->
                                 <InputListItem label="{i18n>PostQuan} *">
                                     <Input
                                         id="idPostQuantity"
-                                        type="Number"
                                         required="true"
                                         change="onPostQuantityChange"
                                         valueLiveUpdate="true"
@@ -231,6 +231,7 @@
                                             type="Transparent"
                                             press="onPostCompAdd101"
                                             icon="sap-icon://add"
+                                            visible="false"
                                         />
                                         <Button
                                             id="id101Copy"
@@ -255,7 +256,7 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel101>Data01}"
-                                                enabled="{ComponentModel101>Data10}"
+                                                enabled="false"
                                                 valueHelpRequest="onMaterailHelpRequest"
                                                 showValueHelp="true"
                                             />
@@ -346,7 +347,6 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel101>Data06}"
-                                                enabled="{ComponentModel101>Data09}"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
@@ -502,7 +502,7 @@
                             <uiTable:Table
                                 id="idPostComponentList561"
                                 visibleRowCount="3"
-                                visibleRowCountMode="Interactive"
+                                visibleRowCountMode="Fixed"
                                 class="sapUiContentPadding"
                                 rows="{ComponentModel561>/ComponentData561}"
                                 alternateRowColors="true"
