@@ -4066,11 +4066,13 @@ sap.ui.define(
             if (ComponentList101.length != 0) {
               for (var i = 0; i in ComponentList101; i++) {
                 if (ComponentList101[i].Key01 != '531') {
-                  Yeildline = Yeildline + parseInt(ComponentList101[i].Data06);
+                   Yeildline = Yeildline + parseInt(ComponentList101[i].Data06);
+                  // Yeildline = Yeildline + ComponentList101[i].Data06;
                 }
                 IEntry.NavWC_Component.push(ComponentList101[i]);
               }
-              var CheckQty = parseFloat(YeildQty);
+              // var CheckQty = parseFloat(YeildQty);
+              var CheckQty = parseInt(YeildQty);
               if (Yeildline != CheckQty) {
                 // that.hidePostBusyIndicator();
                 oGlobalBusyDialog.close();
