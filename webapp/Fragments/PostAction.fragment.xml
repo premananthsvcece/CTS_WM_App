@@ -728,7 +728,7 @@
         text="{i18n>Save}"
         type="Success"
         press="onConfirmPostPress"
-    />
+        />
             <Button
             icon="sap-icon://cancel"
             class="sapUiSmallMarginBegin"
@@ -737,8 +737,6 @@
             press="onCancelPostPress"
         />     
           
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
        <Button enabled="false" type="Transparent"></Button>
        <Button enabled="false" type="Transparent"></Button>
        <Button enabled="false" type="Transparent"></Button>
@@ -762,7 +760,6 @@
             press="onConfirmPostPress"
         />
         </beginButton>
-
     
         <endButton>
         <Button
