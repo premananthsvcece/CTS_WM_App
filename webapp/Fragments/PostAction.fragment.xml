@@ -720,7 +720,13 @@
         </l:VerticalLayout>
      
       <buttons >
-        
+     
+        <Button enabled="false" type="Transparent"></Button>
+        <Button enabled="false" type="Transparent"></Button>
+        <Button enabled="false" type="Transparent"></Button>
+        <Button enabled="false" type="Transparent"></Button>
+        <Button enabled="false" type="Transparent"></Button>
+        <Button enabled="false" type="Transparent"></Button>
        
         <Button
         icon="sap-icon://accept"
@@ -737,12 +743,7 @@
             press="onCancelPostPress"
         />     
           
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
+
        <Button enabled="false" type="Transparent"></Button>
        <Button enabled="false" type="Transparent"></Button>
        <Button enabled="false" type="Transparent"></Button>
