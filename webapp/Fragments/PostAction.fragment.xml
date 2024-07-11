@@ -719,7 +719,7 @@
 
         </l:VerticalLayout>
      
-      <buttons >
+      <!-- <buttons >
        
         <Button
         icon="sap-icon://accept"
@@ -736,17 +736,7 @@
             press="onCancelPostPress"
         />     
           
-        <Button enabled="false" type="Transparent"></Button>
-        <Button enabled="false" type="Transparent"></Button>
-        <Button enabled="false" type="Transparent"></Button>
-        <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
-       <Button enabled="false" type="Transparent"></Button>
-      </buttons>
+      </buttons> -->
 
         <!-- <beginButton>
             <Button
@@ -768,7 +758,7 @@
         />            
         </endButton> -->
 
-          <!-- <Bar>
+          <Bar>
                 <contentMiddle>
                     <Button
                         icon="sap-icon://accept"
@@ -785,7 +775,7 @@
                         press="onCancelPostPress"
                     />
                 </contentMiddle>
-            </Bar> -->
+            </Bar>
 
      <!-- <footer>
            <Toolbar> 
