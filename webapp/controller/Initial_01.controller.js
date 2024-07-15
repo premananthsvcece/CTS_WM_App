@@ -227,6 +227,13 @@ sap.ui.define(
             null,
             function (oData, Response) {
               try {
+
+                if (oData.Key04 === "E") {
+                  var message = oData.Key03;
+                  MessageToast.show(message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");                  
+                } 
+                // else {
                 var Path = othis.getView().getId();
                 // In Progress
                 var InProgressData = oData.NavWC_InProgress.results;
@@ -379,6 +386,7 @@ sap.ui.define(
                 oGlobalBusyDialog.close();
                 othis.oInfoMessageDialog.close();
                 // }
+              // }
               } catch (e) {
                 // alert(e.message);
                 // MessageBox.error(e.message);
@@ -388,6 +396,7 @@ sap.ui.define(
                 othis.oInfoMessageDialog.close();
                 MessageToast.show(e.message);
                 $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+
               }
             }
           );
