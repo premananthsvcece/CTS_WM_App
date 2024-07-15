@@ -3755,7 +3755,11 @@ sap.ui.define(
 
                         ComponentnList101.setModel(ComponentModel101, "ComponentModel101");
                       } else {
-                        sap.ui.getCore().byId("idPostComponentList101").setVisible(false);
+
+                        ComponentModel101.setData({
+                          ComponentData101: ComponentDataLoop101,
+                        });
+                        sap.ui.getCore().byId("idPostComponentList261").setVisible(false);
                       }
 
                       if (ComponentDataLoop261.length != 0) {
@@ -3779,7 +3783,13 @@ sap.ui.define(
 
                         ComponentnList261.setModel(ComponentModel261, "ComponentModel261");
                       } else {
+
+                        ComponentModel261.setData({
+                          ComponentData261: ComponentDataLoop261,
+                        });
+
                         sap.ui.getCore().byId("idPostComponentList261").setVisible(false);
+
                       }
 
                       if (ComponentDataLoop561.length != 0) {
@@ -3802,7 +3812,13 @@ sap.ui.define(
 
                         ComponentnList561.setModel(ComponentModel561, "ComponentModel561");
                       } else {
+
+                        ComponentModel561.setData({
+                          ComponentData561: ComponentDataLoop561,
+                        });
+                        
                         sap.ui.getCore().byId("idPostComponentList561").setVisible(false);
+
                       }
 
                     }
