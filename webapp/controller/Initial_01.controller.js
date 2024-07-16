@@ -4213,17 +4213,27 @@ sap.ui.define(
           that.PostActionDialog.close();
           var Path = that.getView().getId();
         },
+        onValueChange: function(oEvent){
+          debugger;
+           var oInput = oEvent.getSource();
+          var valu  = oInput.getValue();
+          valu = valu.replace(/[^\d.,-]/g, '');
+          oInput.setValue(valu);
+        },
+
         onPostQuantityChange: function (oEvent) {
           var that = this;
           var index;
           var Path = that.getView().getId();
           var value = sap.ui.getCore().byId(`idPostQuantity`).getValue();
-
+             
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
           var SelPlant = " ";
           var OprNo = " ";
+            
+         
 
           Tableindex = sap.ui
             .getCore()

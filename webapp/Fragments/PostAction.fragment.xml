@@ -92,6 +92,7 @@
                                         required="true"
                                         change="onPostQuantityChange"
                                         valueLiveUpdate="true"
+                                        liveChange="onValueChange"
                                         width="15rem"
                                         value="{
                                             type: 'sap.ui.model.odata.type.Decimal'
@@ -347,6 +348,7 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel101>Data06}"
+                                                liveChange="onValueChange"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
@@ -485,6 +487,7 @@
                                             <Input
                                                 value="{ComponentModel261>Data06}"
                                                 enabled="{ComponentModel261>Data09}"
+                                                liveChange="onValueChange"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
@@ -623,6 +626,7 @@
                                             <Input
                                                 value="{ComponentModel561>Data06}"
                                                 enabled="{ComponentModel>Data09}"
+                                                liveChange="onValueChange"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
