@@ -12378,14 +12378,14 @@ sap.ui.define(
                   var SupplyAreaData = oData.results;
                   if (SupplyAreaData.length != 0) {
                     for (var i = 0; i in SupplyAreaData; i++) {
-                      if (SupplyAreaData[i].Data01 = SelSupplyArea) {
+                      if (SupplyAreaData[i].Data01 === SelSupplyArea) {
                         var FillSupArea = SupplyAreaData[i].Data01;
                         break;
                       }
                     }
                     if (FillSupArea === SelSupplyArea) {
                       sap.ui.getCore().byId(FillSupplyArea).setValueState('None');
-                      sap.ui.getCore().byId(FillSupplyArea).setValue(SupplyAreaData[0].Data01);
+                      sap.ui.getCore().byId(FillSupplyArea).setValue(FillSupArea);
                     }
                     else {
                       sap.ui.getCore().byId(FillSupplyArea).setValueState('Error');
