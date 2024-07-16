@@ -234,8 +234,8 @@ sap.ui.define(
                   oData.NavWC_Future.results     = [];
                   var message = oData.Key03;
                   MessageToast.show(message);
-                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");                  
-                } 
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                }
                 // else {
                 var Path = othis.getView().getId();
                 // In Progress
@@ -389,7 +389,7 @@ sap.ui.define(
                 oGlobalBusyDialog.close();
                 othis.oInfoMessageDialog.close();
                 // }
-              // }
+                // }
               } catch (e) {
                 // alert(e.message);
                 // MessageBox.error(e.message);
@@ -2864,7 +2864,7 @@ sap.ui.define(
             OperatorNo +
             "' and Key05 eq '" +
             SelPlant +
-            "'",
+            "' and Data01 eq 'ScarpCall'",
             {
               context: null,
               async: false,
@@ -3437,7 +3437,7 @@ sap.ui.define(
         onCancelScarpPress: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
-          if( sap.ui.getCore().byId(sReasonCodeId) != undefined ){
+          if (sap.ui.getCore().byId(sReasonCodeId) != undefined) {
             sap.ui.getCore().byId(sReasonCodeId).setValueState("None");
           }
           // sap.ui
@@ -3523,20 +3523,20 @@ sap.ui.define(
             if (SelOprNo === '0010') {
 
               OrdQty = sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .getModel("InProgressModel")
-              .getData().InProgressData[Tableindex].Data06;
+                .getCore()
+                .byId(`${Path}--idInprogressOrderList`)
+                .getModel("InProgressModel")
+                .getData().InProgressData[Tableindex].Data06;
 
               ComQty = sap.ui
-              .getCore()
-              .byId(`${Path}--idInprogressOrderList`)
-              .getModel("InProgressModel")
-              .getData().InProgressData[Tableindex].Data11;
+                .getCore()
+                .byId(`${Path}--idInprogressOrderList`)
+                .getModel("InProgressModel")
+                .getData().InProgressData[Tableindex].Data11;
 
               var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
               var oQtyModel = new sap.ui.model.odata.ODataModel(sUrl, true);
-    
+
               oQtyModel.read(
                 "/ValueHelpSet?$filter=Key01 eq 'QtyCalc' and Key02 eq '" +
                 OrdQty +
@@ -3647,7 +3647,7 @@ sap.ui.define(
             OperatorNo +
             "' and Key05 eq '" +
             SelPlant +
-            "'",
+            "' and Data01 eq 'PostCall'",
             {
               context: null,
               async: true,
@@ -3772,7 +3772,7 @@ sap.ui.define(
                         ComponentModel101.setData({
                           ComponentData101: ComponentDataLoop101,
                         });
-                        sap.ui.getCore().byId("idPostComponentList261").setVisible(false);
+                        sap.ui.getCore().byId("idPostComponentList101").setVisible(false);
                       }
 
                       if (ComponentDataLoop261.length != 0) {
@@ -3829,7 +3829,7 @@ sap.ui.define(
                         ComponentModel561.setData({
                           ComponentData561: ComponentDataLoop561,
                         });
-                        
+
                         sap.ui.getCore().byId("idPostComponentList561").setVisible(false);
 
                       }
@@ -3960,10 +3960,10 @@ sap.ui.define(
           var Path = that.getView().getId();
           // that.showPostBusyIndicator();
           var TitleText = that
-                      .getView()
-                      .getModel("i18n")
-                      .getResourceBundle()
-                      .getText("Buffer");
+            .getView()
+            .getModel("i18n")
+            .getResourceBundle()
+            .getText("Buffer");
           if (!that.oInfoMessageDialog) {
             that.oInfoMessageDialog = new Dialog({
               type: DialogType.Message,
@@ -4095,7 +4095,7 @@ sap.ui.define(
             if (ComponentList101.length != 0) {
               for (var i = 0; i in ComponentList101; i++) {
                 if (ComponentList101[i].Key01 != '531') {
-                   Yeildline = Yeildline + parseInt(ComponentList101[i].Data06);
+                  Yeildline = Yeildline + parseInt(ComponentList101[i].Data06);
                   // Yeildline = Yeildline + ComponentList101[i].Data06;
                 }
                 IEntry.NavWC_Component.push(ComponentList101[i]);
@@ -4151,6 +4151,22 @@ sap.ui.define(
             for (var bth = 0; bth < IEntry.NavWC_Component.length; bth++) {
               if (IEntry.NavWC_Component[bth].Data06 != "") {
                 var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
+                if (IEntry.NavWC_Component[bth].Data06 === '101') {
+                  if (IEntry.NavWC_Component[bth].Data12 === "") {
+                    // that.hidePostBusyIndicator();
+                    oGlobalBusyDialog.close();
+                    that.oInfoMessageDialog.close();
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("DestBinChk");
+
+                    MessageToast.show(message);
+                    $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                    return;
+                  }
+                }
                 if (Qty != 0) {
                   if (IEntry.NavWC_Component[bth].Data05 === "") {
                     // that.hidePostBusyIndicator();
@@ -4224,20 +4240,17 @@ sap.ui.define(
           valu = valu.replace(/[^\d.,-]/g, '');
           oInput.setValue(valu);
         },
-
         onPostQuantityChange: function (oEvent) {
           var that = this;
           var index;
           var Path = that.getView().getId();
           var value = sap.ui.getCore().byId(`idPostQuantity`).getValue();
-             
+
           var Tableindex = "X";
           var SelAufnr = " ";
           var SelOprNo = " ";
           var SelPlant = " ";
           var OprNo = " ";
-            
-         
 
           Tableindex = sap.ui
             .getCore()
@@ -5665,6 +5678,189 @@ sap.ui.define(
                       .getText("BOM002");
                     MessageToast.show(message);
                     $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                  }
+                } catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                  // alert(e.message);
+                }
+              },
+            }
+          );
+        },
+        onSupplyAreaChange: function (oEvent) {
+          var that = this;
+          var Path = that.getView().getId();
+          var LineArray = oEvent.getSource().getParent().getCells();
+          var SelSupplyArea = oEvent.getParameter("newValue");
+          var FillSupplyArea = oEvent.getSource().sId;
+
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          if (SelPlant === null) {
+            SelPlant = "DKKV";
+          }
+          sap.ui.getCore().byId(FillSupplyArea).setValueState('None');
+          sap.ui.getCore().byId(FillSupplyArea).setValueStateText('');
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+          oModel.read("/ValueHelpSet?$filter=Key01 eq 'SupplyArea'", {
+            context: null,
+            async: false,
+            urlParameters: null,
+            success: function (oData, oResponse) {
+              try {
+                if (oData.results.length != 0) {
+                  var SupplyAreaData = oData.results;
+                  if (SupplyAreaData.length != 0) {
+                    for (var i = 0; i in SupplyAreaData; i++) {
+                      if (SupplyAreaData[i].Data01 === SelSupplyArea) {
+                        var FillSupArea = SupplyAreaData[i].Data01;
+                        break;
+                      }
+                    }
+                    if (FillSupArea === SelSupplyArea) {
+                      sap.ui.getCore().byId(FillSupplyArea).setValueState('None');
+                      sap.ui.getCore().byId(FillSupplyArea).setValue(FillSupArea);
+                    }
+                    else {
+                      sap.ui.getCore().byId(FillSupplyArea).setValueState('Error');
+                      sap.ui.getCore().byId(FillSupplyArea).setValue("");
+                      // Raise Message
+                      var message = that
+                        .getView()
+                        .getModel("i18n")
+                        .getResourceBundle()
+                        .getText("SupplyAreaChk");
+                      sap.ui.getCore().byId(FillSupplyArea).setValueStateText(message);
+                    }
+                  }
+                  that.hideBusyIndicator();
+                }
+              } catch (e) {
+                MessageToast.show(e.message);
+                $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                // alert(e.message);
+              }
+            },
+          }
+          );
+        },
+        onPostBinDetChange: function (oEvent) {
+          var that = this;
+          var Path = that.getView().getId();
+          var LineArray = oEvent.getSource().getParent().getCells();
+          var SelBin = oEvent.getParameter("newValue");
+          var FillBin = oEvent.getSource().sId;
+
+          var SelPlant = sap.ui
+            .getCore()
+            .byId(`${Path}--idInputPlant`)
+            .getValue();
+          if (SelPlant === null) {
+            SelPlant = "DKKV";
+          }
+          sap.ui.getCore().byId(FillBin).setValueState('None');
+          sap.ui.getCore().byId(FillBin).setValueStateText('');
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'Bin' and Key02 eq '" +
+            SelBin +
+            "' and Key04 eq '" +
+            SelPlant +
+            "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var BinData = oData.results;
+                    if (BinData.length != 0) {
+                      sap.ui.getCore().byId(FillBin).setValueState('None');
+                      sap.ui.getCore().byId(FillBin).setValue(BinData[0].Data01);
+                    }
+                    that.hideBusyIndicator();
+                  } else {
+                    that.hideBusyIndicator();
+                    sap.ui.getCore().byId(FillBin).setValueState('Error');
+                    sap.ui.getCore().byId(FillBin).setValue("");
+                    // Raise Message
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("BinChk");
+                    sap.ui.getCore().byId(FillBin).setValueStateText(message);
+                  }
+                } catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                  // alert(e.message);
+                }
+              },
+            }
+          );
+        },
+        onMaterailChangesPost: function (oEvent) {
+          var that = this;
+          var LineArray = oEvent.getSource().getParent().getCells();
+          var SelMaterial = oEvent.getParameter("newValue");
+          var SelectedLine = oEvent.getSource().sId;
+          var SelWerks = sap.ui.getCore().byId("idSelectPostPlant").getValue();
+          var SelLgort = "GI01";
+          var FillDescrption = LineArray[1].sId;
+          var FillUOM = LineArray[5].sId;
+          sap.ui.getCore().byId(SelectedLine).setValueState('None');
+          sap.ui.getCore().byId(SelectedLine).setValueStateText('');
+          sap.ui.getCore().byId(FillUOM).setEnabled(true);
+
+          var Path = that.getView().getId();
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'Material' and Key02 eq '" +
+            SelWerks +
+            "' and Key03 eq '" +
+            SelLgort +
+            "' and Key05 eq '" +
+            SelMaterial +
+            "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var MaterialData = oData.results;
+                    if (MaterialData.length != 0) {
+                      sap.ui.getCore().byId(SelectedLine).setValueState('None');
+                      sap.ui.getCore().byId(SelectedLine).setValue(MaterialData[0].Data01);
+                      sap.ui.getCore().byId(FillDescrption).setText(MaterialData[0].Data02);
+                      sap.ui.getCore().byId(FillUOM).setValue(MaterialData[0].Data04);
+                      sap.ui.getCore().byId(FillUOM).setEnabled(false);
+
+                    }
+                    that.hideBusyIndicator();
+                  } else {
+                    that.hideBusyIndicator();
+                    sap.ui.getCore().byId(SelectedLine).setValueState('Error');
+                    sap.ui.getCore().byId(SelectedLine).setValue("");
+                    // Raise Message
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("MatChk");
+                    sap.ui.getCore().byId(SelectedLine).setValueStateText(message);
                   }
                 } catch (e) {
                   MessageToast.show(e.message);

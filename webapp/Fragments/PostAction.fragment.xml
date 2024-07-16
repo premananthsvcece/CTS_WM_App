@@ -259,6 +259,7 @@
                                                 value="{ComponentModel101>Data01}"
                                                 enabled="false"
                                                 valueHelpRequest="onMaterailHelpRequest"
+                                                change="onMaterailChangesPost"
                                                 showValueHelp="true"
                                             />
                                         </uiTable:template>
@@ -348,7 +349,6 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel101>Data06}"
-                                                liveChange="onValueChange"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
@@ -408,6 +408,7 @@
                                                 value="{ComponentModel261>Data01}"
                                                 enabled="{ComponentModel261>Data10}"
                                                 valueHelpRequest="onMaterailHelpRequest"
+                                                change="onMaterailChangesPost"
                                                 showValueHelp="true"
                                             />
                                         </uiTable:template>
@@ -454,6 +455,7 @@
                                             <Input
                                                 value="{ComponentModel261>Data11}"
                                                 valueHelpRequest="onSupplyAreaHelpRequest"
+                                                change="onSupplyAreaChange"
                                                 showValueHelp="true"
                                             />
                                         </uiTable:template>
@@ -487,7 +489,6 @@
                                             <Input
                                                 value="{ComponentModel261>Data06}"
                                                 enabled="{ComponentModel261>Data09}"
-                                                liveChange="onValueChange"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
@@ -547,6 +548,7 @@
                                                 value="{ComponentModel561>Data01}"
                                                 enabled="{ComponentModel561>Data10}"
                                                 valueHelpRequest="onMaterailHelpRequest"
+                                                change="onMaterailChangesPost"
                                                 showValueHelp="true"
                                             />
                                         </uiTable:template>
@@ -626,7 +628,6 @@
                                             <Input
                                                 value="{ComponentModel561>Data06}"
                                                 enabled="{ComponentModel>Data09}"
-                                                liveChange="onValueChange"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
