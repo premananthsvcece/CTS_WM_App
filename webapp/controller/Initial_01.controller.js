@@ -229,6 +229,9 @@ sap.ui.define(
               try {
 
                 if (oData.Key04 === "E") {
+                  oData.NavWC_InProgress.results = [];
+                  oData.NavWC_Queue.results      = [];
+                  oData.NavWC_Future.results     = [];
                   var message = oData.Key03;
                   MessageToast.show(message);
                   $(".sapMMessageToast").addClass("sapMMessageToastDanger");                  
@@ -1248,6 +1251,7 @@ sap.ui.define(
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
         },
+
         onBatchDataDialogSearch: function (oEvent) {
           var sValue = oEvent.getParameter("value");
           var oFilter = new Filter({
@@ -4529,6 +4533,48 @@ sap.ui.define(
               }
             }
           }
+        },
+        onBatchValidation: function(oEvent){
+           debugger;
+          var that = this;
+          var oInput = oEvent.getSource();
+          var SelBatch  = oInput.getValue();
+          
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+            oModel.read(
+              "/ValueHelpSet?$filter=Key01 eq 'BatchValidation' and Key02 eq '" +
+              SelBatch + "' ",
+              {
+               context: null,
+                async: false,
+                urlParameters: null,
+                success: function (oData, oResponse) {
+                  try {
+                    debugger;
+                    if (oData.results.length === 0) {
+                      const isInvalid = "Invalid"
+                      oInput.setValueState(isInvalid ? "Error" : "None");
+
+                    //   var message = that
+                    //   .getView()
+                    //   .getModel("i18n")
+                    //   .getResourceBundle()
+                    //   .getText("BOM002");
+                    // MessageToast.show(message);
+
+                    } 
+                  }
+                   catch (e) {
+                    MessageToast.show(e.message);
+                    $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                    // alert(e.message);
+                  }
+                }
+
+             });
+
         },
 
         onBatchHelpRequest: function (oEvent) {
