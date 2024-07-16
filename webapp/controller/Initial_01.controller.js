@@ -4234,7 +4234,7 @@ sap.ui.define(
           var Path = that.getView().getId();
         },
         onValueChange: function(oEvent){
-          debugger;
+         
            var oInput = oEvent.getSource();
           var valu  = oInput.getValue();
           valu = valu.replace(/[^\d.,-]/g, '');
@@ -4548,45 +4548,109 @@ sap.ui.define(
           }
         },
         onBatchValidation: function(oEvent){
-           debugger;
-          var that = this;
-          var oInput = oEvent.getSource();
-          var SelBatch  = oInput.getValue();
-          
-          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+
+           var that = this;
+           var sId = oEvent.getParameter("id");
+           var TableDetail = oEvent.getSource().getParent().sId;
+           var LineArray = oEvent.getSource().getParent().getCells();
+           var SelectedLine = oEvent.getSource().sId;
+           var SelMatnr = " ";
+           var SelWerks = sap.ui.getCore().byId("idSelectPostPlant").getValue();
+           var SelLgort = "GI01";
+           var SelBatch = oEvent.getParameter("newValue");
+          //  var SelClabs = " ";
+          //  var SelDesc = " ";
+
+          //  if (LineArray.length != 0) {
+          //    SelMatnr = LineArray[0].getProperty("value");
+          //    SelDesc = LineArray[1].getProperty("text");
+          //    SelClabs = LineArray[5].getProperty("value");
+             
+          //  }
+           
+           sap.ui.getCore().byId(SelectedLine).setValueState('None');
+
+           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
-            oModel.read(
-              "/ValueHelpSet?$filter=Key01 eq 'BatchValidation' and Key02 eq '" +
-              SelBatch + "' ",
-              {
-               context: null,
-                async: false,
-                urlParameters: null,
-                success: function (oData, oResponse) {
-                  try {
-                    debugger;
-                    if (oData.results.length === 0) {
-                      const isInvalid = "Invalid"
-                      oInput.setValueState(isInvalid ? "Error" : "None");
-
-                    //   var message = that
-                    //   .getView()
-                    //   .getModel("i18n")
-                    //   .getResourceBundle()
-                    //   .getText("BOM002");
-                    // MessageToast.show(message);
-
-                    } 
+           oModel.read(
+               "/ValueHelpSet?$filter=Key01 eq 'BatchValidation' and Key02 eq '" +
+               SelBatch + "' ",
+               {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                 
+                  if (oData.results.length != 0) {
+                    var BatchData = oData.results;
+                    sap.ui.getCore().byId(SelectedLine).setValueState('None');
+                    sap.ui.getCore().byId(SelectedLine).setValue(BatchData[0].Data04);
+                    that.hideBusyIndicator();
                   }
-                   catch (e) {
-                    MessageToast.show(e.message);
-                    $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
-                    // alert(e.message);
+
+                  else {
+                    that.hideBusyIndicator();
+                    sap.ui.getCore().byId(SelectedLine).setValueState('Error');
+                    sap.ui.getCore().byId(SelectedLine).setValue("");
+
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("BatChk");
+                    sap.ui.getCore().byId(SelectedLine).setValueStateText(message);
+
                   }
+
+                }
+                catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                  // alert(e.message);
                 }
 
-             });
+              }
+
+            }
+          )
+
+          // var that = this;
+          // var oInput = oEvent.getSource();
+          // var SelBatch  = oInput.getValue();
+
+          //   oModel.read(
+          //     "/ValueHelpSet?$filter=Key01 eq 'BatchValidation' and Key02 eq '" +
+          //     SelBatch + "' ",
+          //     {
+          //      context: null,
+          //       async: false,
+          //       urlParameters: null,
+          //       success: function (oData, oResponse) {
+          //         try {
+          //           
+          //           if (oData.results.length === 0) {
+          //             const isInvalid = "Invalid"
+          //             oInput.setValueState(isInvalid ? "Error" : "None");
+
+          //           //   var message = that
+          //           //   .getView()
+          //           //   .getModel("i18n")
+          //           //   .getResourceBundle()
+          //           //   .getText("BOM002");
+          //           // MessageToast.show(message);
+
+          //           } 
+          //         }
+          //          catch (e) {
+          //           MessageToast.show(e.message);
+          //           $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+          //           // alert(e.message);
+          //         }
+          //       }
+
+          //    });
 
         },
 
