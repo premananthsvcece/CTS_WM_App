@@ -3462,6 +3462,7 @@ sap.ui.define(
           var OperDispText = " ";
           var OrdQty = " ";
           var ComQty = " ";
+          var Firstline = " ";
           // var SetupTIme = " ";
 
           var SelPlant = sap.ui
@@ -3520,7 +3521,13 @@ sap.ui.define(
               .getModel("InProgressModel")
               .getData().InProgressData[Tableindex].Data10;
 
-            if (SelOprNo === '0010') {
+            Firstline = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Key05;
+
+            if (Firstline === '00000001') {
 
               OrdQty = sap.ui
                 .getCore()
@@ -4151,7 +4158,7 @@ sap.ui.define(
             for (var bth = 0; bth < IEntry.NavWC_Component.length; bth++) {
               if (IEntry.NavWC_Component[bth].Data06 != "") {
                 var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
-                if (IEntry.NavWC_Component[bth].Data06 === '101') {
+                if (IEntry.NavWC_Component[bth].Data08 === '101') {
                   if (IEntry.NavWC_Component[bth].Data12 === "") {
                     // that.hidePostBusyIndicator();
                     oGlobalBusyDialog.close();
