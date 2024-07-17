@@ -5358,6 +5358,11 @@ sap.ui.define(
           var Path = that.getView().getId();
           var sId = oEvent.getParameter("id");
           var TableDetail = oEvent.getSource().getParent().sId;
+          var FillBin = oEvent.getSource().sId;
+
+          sap.ui.getCore().byId(FillBin).setValueState('None');
+          sap.ui.getCore().byId(FillBin).setValueStateText('');
+
           TableBinGlobalId = TableDetail;
           sBinSelLineId = sId;
 
