@@ -230,8 +230,8 @@ sap.ui.define(
 
                 if (oData.Key04 === "E") {
                   oData.NavWC_InProgress.results = [];
-                  oData.NavWC_Queue.results      = [];
-                  oData.NavWC_Future.results     = [];
+                  oData.NavWC_Queue.results = [];
+                  oData.NavWC_Future.results = [];
                   var message = oData.Key03;
                   MessageToast.show(message);
                   $(".sapMMessageToast").addClass("sapMMessageToastDanger");
@@ -4158,23 +4158,24 @@ sap.ui.define(
             for (var bth = 0; bth < IEntry.NavWC_Component.length; bth++) {
               if (IEntry.NavWC_Component[bth].Data06 != "") {
                 var Qty = parseFloat(IEntry.NavWC_Component[bth].Data06);
-                if (IEntry.NavWC_Component[bth].Data08 === '101') {
-                  if (IEntry.NavWC_Component[bth].Data12 === "") {
-                    // that.hidePostBusyIndicator();
-                    oGlobalBusyDialog.close();
-                    that.oInfoMessageDialog.close();
-                    var message = that
-                      .getView()
-                      .getModel("i18n")
-                      .getResourceBundle()
-                      .getText("DestBinChk");
-
-                    MessageToast.show(message);
-                    $(".sapMMessageToast").addClass("sapMMessageToastDanger");
-                    return;
-                  }
-                }
                 if (Qty != 0) {
+                  if (IEntry.NavWC_Component[bth].Data08 === '101') {
+                    if (IEntry.NavWC_Component[bth].Data12 === "") {
+                      // that.hidePostBusyIndicator();
+                      oGlobalBusyDialog.close();
+                      that.oInfoMessageDialog.close();
+                      var message = that
+                        .getView()
+                        .getModel("i18n")
+                        .getResourceBundle()
+                        .getText("DestBinChk");
+
+                      MessageToast.show(message);
+                      $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                      return;
+                    }
+                  }
+
                   if (IEntry.NavWC_Component[bth].Data05 === "") {
                     // that.hidePostBusyIndicator();
                     oGlobalBusyDialog.close();
@@ -4240,10 +4241,10 @@ sap.ui.define(
           that.PostActionDialog.close();
           var Path = that.getView().getId();
         },
-        onValueChange: function(oEvent){
-         
-           var oInput = oEvent.getSource();
-          var valu  = oInput.getValue();
+        onValueChange: function (oEvent) {
+
+          var oInput = oEvent.getSource();
+          var valu = oInput.getValue();
           valu = valu.replace(/[^\d.,-]/g, '');
           oInput.setValue(valu);
         },
@@ -4554,17 +4555,17 @@ sap.ui.define(
             }
           }
         },
-        onBatchValidation: function(oEvent){
+        onBatchValidation: function (oEvent) {
 
-           var that = this;
-           var sId = oEvent.getParameter("id");
-           var TableDetail = oEvent.getSource().getParent().sId;
-           var LineArray = oEvent.getSource().getParent().getCells();
-           var SelectedLine = oEvent.getSource().sId;
-           var SelMatnr = " ";
-           var SelWerks = sap.ui.getCore().byId("idSelectPostPlant").getValue();
-           var SelLgort = "GI01";
-           var SelBatch = oEvent.getParameter("newValue");
+          var that = this;
+          var sId = oEvent.getParameter("id");
+          var TableDetail = oEvent.getSource().getParent().sId;
+          var LineArray = oEvent.getSource().getParent().getCells();
+          var SelectedLine = oEvent.getSource().sId;
+          var SelMatnr = " ";
+          var SelWerks = sap.ui.getCore().byId("idSelectPostPlant").getValue();
+          var SelLgort = "GI01";
+          var SelBatch = oEvent.getParameter("newValue");
           //  var SelClabs = " ";
           //  var SelDesc = " ";
 
@@ -4572,24 +4573,24 @@ sap.ui.define(
           //    SelMatnr = LineArray[0].getProperty("value");
           //    SelDesc = LineArray[1].getProperty("text");
           //    SelClabs = LineArray[5].getProperty("value");
-             
-          //  }
-           
-           sap.ui.getCore().byId(SelectedLine).setValueState('None');
 
-           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          //  }
+
+          sap.ui.getCore().byId(SelectedLine).setValueState('None');
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 
-           oModel.read(
-               "/ValueHelpSet?$filter=Key01 eq 'BatchValidation' and Key02 eq '" +
-               SelBatch + "' ",
-               {
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'BatchValidation' and Key02 eq '" +
+            SelBatch + "' ",
+            {
               context: null,
               async: false,
               urlParameters: null,
               success: function (oData, oResponse) {
                 try {
-                 
+
                   if (oData.results.length != 0) {
                     var BatchData = oData.results;
                     sap.ui.getCore().byId(SelectedLine).setValueState('None');
