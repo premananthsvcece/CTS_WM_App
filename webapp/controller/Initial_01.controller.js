@@ -60,6 +60,7 @@ sap.ui.define(
     var TableMvtGlobalId = "";
     var TableSAGlobalId = "";
     var TableBinGlobalId = "";
+    var TableUOMGlobalId = "";
 
     return Controller.extend(
       "sap.pp.wcare.wmd.workmanagerapp.controller.Initial_01",
@@ -2839,6 +2840,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.ScrapActionDialog);
+          } else {
+            if (that.ScrapActionDialog.isDestroyed() === true) {
+
+              that.ScrapActionDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.ScarpAction",
+                that
+              );
+              that.getView().addDependent(that.ScrapActionDialog);
+
+            }
           }
           var message = that
             .getView()
@@ -3434,6 +3445,9 @@ sap.ui.define(
           //   }
           // );
         },
+        onAfterCloseScarpPress: function () {
+          this.ScrapActionDialog.destroy(true);
+        },
         onCancelScarpPress: function (oEvent) {
           var that = this;
           var Path = that.getView().getId();
@@ -3614,6 +3628,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.PostActionDialog);
+          } else {
+            if (that.PostActionDialog.isDestroyed() === true) {
+
+              that.PostActionDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.PostAction",
+                that
+              );
+              that.getView().addDependent(that.PostActionDialog);
+
+            }
           }
           that.PostActionDialog.open();
 
@@ -3742,8 +3766,10 @@ sap.ui.define(
                         }
                         if (ComponentData[i].Data10 === "false") {
                           ComponentData[i].Data10 = false;
+                          ComponentData[i].Data15 = false;
                         } else {
                           ComponentData[i].Data10 = true;
+                          ComponentData[i].Data15 = true;
                         }
                         if (ComponentData[i].Data08 === '101') {
                           ComponentDataLoop101.push(ComponentData[i]);
@@ -4236,6 +4262,9 @@ sap.ui.define(
             }
           );
         },
+        onAfterClosePostPress: function () {
+          this.PostActionDialog.destroy(true);
+        },
         onCancelPostPress: function () {
           var that = this;
           that.PostActionDialog.close();
@@ -4389,8 +4418,10 @@ sap.ui.define(
                     }
                     if (ComponentData[i].Data10 === "false") {
                       ComponentData[i].Data10 = false;
+                      ComponentData[i].Data15 = false;
                     } else {
                       ComponentData[i].Data10 = true;
+                      ComponentData[i].Data15 = true;
                     }
                     if (ComponentData[i].Data08 === "101") {
                       ComponentDataLoop101.push(ComponentData[i]);
@@ -4844,6 +4875,9 @@ sap.ui.define(
                 .setData({ ComponentData561: ComponentData });
             }
           }
+        },
+        onUOMInputClose: function(){
+          return;
         },
         onBatchInputClose: function () {
           // this.BatchHelpDialog.close();
@@ -5885,6 +5919,140 @@ sap.ui.define(
             }
           );
         },
+        onUOMHelpPostRequest: function (oEvent) {
+          var that = this;
+          // var sId = oEvent.getParameter("id");
+          var TableDetail = oEvent.getSource().getParent().sId;
+          var LineArray = oEvent.getSource().getParent().getCells();
+          var SelMatnr = " ";
+          if (LineArray.length != 0) {
+            SelMatnr = LineArray[0].getProperty("value");
+          }
+          var UOMValue = oEvent.getParameter("newValue");
+          var Path = that.getView().getId();
+
+          if (!that.UOMHelpDialog) {
+            that.UOMHelpDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.UOMHelpDialog",
+              that
+            );
+            that.getView().addDependent(that.UOMHelpDialog);
+          }
+          that.showBusyIndicator();
+          TableUOMGlobalId = TableDetail;
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'UOM' and Key02 eq '" +
+            UOMValue +
+            "' and Key03 eq '" +
+            SelMatnr +
+            "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var UOMData = oData.results;
+                    if (UOMData.length != 0) {
+                      var UOMModel = new sap.ui.model.json.JSONModel();
+
+                      UOMModel.setData({
+                        UOMData: UOMData,
+                      });
+                      var UOMList = sap.ui
+                        .getCore()
+                        .byId("idUOMDialog");
+
+                      UOMList.setModel(UOMModel, "UOMModel");
+                    }
+                    that.hideBusyIndicator();
+                    that.UOMHelpDialog.open();
+                  } else {
+                    that.hideBusyIndicator();
+                    // Raise Message
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("BOM002");
+                    MessageToast.show(message);
+                    $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                  }
+                } catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                  // alert(e.message);
+                }
+              },
+            }
+          );
+        },
+        onUOMPostValidation: function (oEvent) {
+          var that = this;
+          var LineArray = oEvent.getSource().getParent().getCells();
+          var SelUOM = oEvent.getParameter("newValue");
+          var SelectedLine = oEvent.getSource().sId;
+          var SelWerks = sap.ui.getCore().byId("idSelectPostPlant").getValue();
+          var SelMatnr = " ";
+          if (LineArray.length != 0) {
+            SelMatnr = LineArray[0].getProperty("value");
+          }
+          sap.ui.getCore().byId(SelectedLine).setValueState('None');
+          sap.ui.getCore().byId(SelectedLine).setValueStateText('');
+          sap.ui.getCore().byId(SelectedLine).setEnabled(true);
+
+          var Path = that.getView().getId();
+
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'UOM' and Key02 eq '" +
+            UOMValue +
+            "' and Key03 eq '" +
+            SelMatnr +
+            "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  if (oData.results.length != 0) {
+                    var UOMData = oData.results;
+                    if (UOMData.length != 0) {
+                      sap.ui.getCore().byId(SelectedLine).setValueState('None');
+                      sap.ui.getCore().byId(SelectedLine).setValue(UOMData[0].Data01);
+                      sap.ui.getCore().byId(SelectedLine).setEnabled(true);
+
+                    }
+                    that.hideBusyIndicator();
+                  } else {
+                    that.hideBusyIndicator();
+                    sap.ui.getCore().byId(SelectedLine).setValueState('Error');
+                    sap.ui.getCore().byId(SelectedLine).setValue("");
+                    // Raise Message
+                    var message = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle()
+                      .getText("MatChk");
+                    sap.ui.getCore().byId(SelectedLine).setValueStateText(message);
+                  }
+                } catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                  // alert(e.message);
+                }
+              },
+            }
+          );
+        },
         onMaterailChangesPost: function (oEvent) {
           var that = this;
           var LineArray = oEvent.getSource().getParent().getCells();
@@ -5892,11 +6060,13 @@ sap.ui.define(
           var SelectedLine = oEvent.getSource().sId;
           var SelWerks = sap.ui.getCore().byId("idSelectPostPlant").getValue();
           var SelLgort = "GI01";
-          var FillDescrption = LineArray[1].sId;
-          var FillUOM = LineArray[5].sId;
-          sap.ui.getCore().byId(SelectedLine).setValueState('None');
-          sap.ui.getCore().byId(SelectedLine).setValueStateText('');
-          sap.ui.getCore().byId(FillUOM).setEnabled(true);
+          if (LineArray.length != 0) {
+            var FillDescrption = LineArray[1].sId;
+            var FillUOM = LineArray[5].sId;
+            sap.ui.getCore().byId(SelectedLine).setValueState('None');
+            sap.ui.getCore().byId(SelectedLine).setValueStateText('');
+            sap.ui.getCore().byId(FillUOM).setEnabled(true);
+          }
 
           var Path = that.getView().getId();
 
@@ -6166,7 +6336,17 @@ sap.ui.define(
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
         },
-
+        onUOMDataDialogSearch : function(oEvent){
+          var sValue = oEvent.getParameter("value");
+          var oFilter = new Filter({
+            filters: [
+              new Filter("Data01", FilterOperator.Contains, sValue),
+              new Filter("Data02", FilterOperator.Contains, sValue),
+            ],
+          });
+          var oBinding = oEvent.getParameter("itemsBinding");
+          oBinding.filter([oFilter]);
+        },
         onMovementDataDialogSearch: function (oEvent) {
           var sValue = oEvent.getParameter("value");
           var oFilter = new Filter({
@@ -6193,6 +6373,79 @@ sap.ui.define(
               .setValue(Material);
 
             that.onButtonPress();
+          }
+        },
+        onUOMInputChange: function(oEvent){
+          var that = this;
+          if (oEvent.getParameters().selectedItems != undefined) {
+            var UOM = oEvent
+              .getParameters()
+              .selectedItem.getCells()[0]
+              .getTitle();
+
+            // TableUOMGlobalId
+            var Array = TableUOMGlobalId.split("-");
+            if (Array.length != 0) {
+              var TableUpdateId = Array[0];
+            }
+            if (TableUpdateId === "idPostComponentList101") {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList101")
+                .getModel("ComponentModel101")
+                .getData().ComponentData101;
+
+              for (var ind = 0; ind < ComponentTable.length; ind++) {
+                if (ComponentTable[ind].Data07 === " ") {
+                  ComponentTable[ind].Data07 = UOM;
+                  ComponentTable[ind].Data15 = true;
+                }
+              }
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList101")
+                .getModel("ComponentModel101")
+                .setData({ ComponentData101: ComponentTable });
+            }
+            if (TableUpdateId === "idPostComponentList261") {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList261")
+                .getModel("ComponentModel261")
+                .getData().ComponentData261;
+
+              for (var ind = 0; ind < ComponentTable.length; ind++) {
+                if (ComponentTable[ind].Data07 === " ") {
+                  ComponentTable[ind].Data07 = UOM;
+                  ComponentTable[ind].Data15 = true;
+                }
+              }
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList261")
+                .getModel("ComponentModel261")
+                .setData({ ComponentData261: ComponentTable });
+            }
+            if (TableUpdateId === "idPostComponentList561") {
+              var ComponentTable = sap.ui
+                .getCore()
+                .byId("idPostComponentList561")
+                .getModel("ComponentModel561")
+                .getData().ComponentData561;
+
+              for (var ind = 0; ind < ComponentTable.length; ind++) {
+                if (ComponentTable[ind].Data07 === " ") {
+                  ComponentTable[ind].Data07 = UOM;
+                  ComponentTable[ind].Data15 = true;
+                }
+              }
+              sap.ui
+                .getCore()
+                .byId("idPostComponentList561")
+                .getModel("ComponentModel561")
+                .setData({ ComponentData561: ComponentTable });
+            }
+
           }
         },
         onMaterialInputChange: function (oEvent) {

@@ -11,6 +11,7 @@
         id="idDialogPost"
         title="{i18n>PostAction}"
         contentWidth="75%"
+        afterClose="onAfterClosePostPress"
     >
         <l:VerticalLayout
             id="idVerticalLayoutPost"
@@ -358,12 +359,16 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel101>Data07}"
-                                                enabled="{ComponentModel101>Data10}"
+                                                valueHelpRequest="onUOMHelpPostRequest"
+                                                showValueHelp="true"
+                                                change="onUOMPostValidation"
+                                                enabled="{ComponentModel101>Data15}"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
                                 </uiTable:columns>
                             </uiTable:Table>
+                            <!-- enabled="{ComponentModel101>Data10}" -->
                             <uiTable:Table
                                 id="idPostComponentList261"
                                 visibleRowCount="3"
@@ -499,7 +504,10 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel261>Data07}"
-                                                enabled="{ComponentModel261>Data10}"
+                                                valueHelpRequest="onUOMHelpPostRequest"
+                                                showValueHelp="true"
+                                                change="onUOMPostValidation"
+                                                enabled="{ComponentModel261>Data15}"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>
@@ -639,7 +647,10 @@
                                         <uiTable:template>
                                             <Input
                                                 value="{ComponentModel561>Data07}"
-                                                enabled="{ComponentModel561>Data10}"
+                                                valueHelpRequest="onUOMHelpPostRequest"
+                                                showValueHelp="true"
+                                                change="onUOMPostValidation"
+                                                enabled="{ComponentModel561>Data15}"
                                             />
                                         </uiTable:template>
                                     </uiTable:Column>

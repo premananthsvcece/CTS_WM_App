@@ -1,0 +1,38 @@
+<c:FragmentDefinition
+    id="UOMOutput"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <TableSelectDialog
+        id="idUOMDialog"
+        noDataText="No Batch Found"
+        growing="true"
+        title="Display UOM"
+        search="onUOMDataDialogSearch"
+        liveChange="onUOMDataDialogSearch"
+        cancel="onUOMInputClose"
+        confirm="onUOMInputChange"
+        items="{UOMModel>/UOMData}"
+        contentWidth="40%"
+        contentHeight="auto"
+    >
+        <columns>
+            <Column width="auto">
+                <header>
+                    <Text text="{i18n>UOM}" />
+                </header>
+            </Column>
+            <Column demandPopin="true">
+                <header>
+                    <Text text="{i18n>Description}" />
+                </header>
+            </Column>
+        </columns>
+        <ColumnListItem vAlign="Middle">
+            <cells>
+                <ObjectIdentifier title="{UOMModel>Data01}" />
+                <ObjectIdentifier title="{UOMModel>Data02}" />
+            </cells>
+        </ColumnListItem>
+    </TableSelectDialog>
+</c:FragmentDefinition>
