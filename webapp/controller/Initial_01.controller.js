@@ -5618,7 +5618,7 @@ sap.ui.define(
             Data12: "",
             Data13: "",
             Data14: "",
-            Data15: "",
+            Data15: true,
             Data16: "",
             Data17: "",
             Data18: "",
@@ -5663,7 +5663,7 @@ sap.ui.define(
             Data12: "",
             Data13: "",
             Data14: "",
-            Data15: "",
+            Data15: true,
             Data16: "",
             Data17: "",
             Data18: "",
@@ -5708,7 +5708,7 @@ sap.ui.define(
             Data12: "",
             Data13: "",
             Data14: "",
-            Data15: "",
+            Data15: true,
             Data16: "",
             Data17: "",
             Data18: "",
@@ -5925,6 +5925,7 @@ sap.ui.define(
           var TableDetail = oEvent.getSource().getParent().sId;
           var LineArray = oEvent.getSource().getParent().getCells();
           var SelMatnr = " ";
+          var UOMValue = " ";
           if (LineArray.length != 0) {
             SelMatnr = LineArray[0].getProperty("value");
           }
@@ -6013,7 +6014,7 @@ sap.ui.define(
 
           oModel.read(
             "/ValueHelpSet?$filter=Key01 eq 'UOM' and Key02 eq '" +
-            UOMValue +
+            SelUOM +
             "' and Key03 eq '" +
             SelMatnr +
             "'",
@@ -6041,7 +6042,7 @@ sap.ui.define(
                       .getView()
                       .getModel("i18n")
                       .getResourceBundle()
-                      .getText("MatChk");
+                      .getText("UOMChk");
                     sap.ui.getCore().byId(SelectedLine).setValueStateText(message);
                   }
                 } catch (e) {
@@ -6093,7 +6094,8 @@ sap.ui.define(
                       sap.ui.getCore().byId(SelectedLine).setValue(MaterialData[0].Data01);
                       sap.ui.getCore().byId(FillDescrption).setText(MaterialData[0].Data02);
                       sap.ui.getCore().byId(FillUOM).setValue(MaterialData[0].Data04);
-                      sap.ui.getCore().byId(FillUOM).setEnabled(false);
+                      sap.ui.getCore().byId(FillUOM).setEnabled(true);
+                      sap.ui.getCore().byId(SelectedLine).setEnabled(false);
 
                     }
                     that.hideBusyIndicator();
