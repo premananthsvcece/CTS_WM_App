@@ -57,3 +57,9 @@ html.sap-desktop .sapUiBody :focus {
 .sapMInputBaseInner {
     background: rgb(230, 215, 215);
   }
+
+/* .sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild, */
+#__spacer11.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild{
+    flex: none;
+    width: 45%;
+}
