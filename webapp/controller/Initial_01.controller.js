@@ -4803,11 +4803,11 @@ sap.ui.define(
               .getText();
             var Fid = "";
             Fid = sap.ui.getCore().byId(TableBatchGlobalId).getCells()[3].sId;
-            if( Fid != ""){
-            if( Fid != undefined ){
-              sap.ui.getCore().byId(Fid).setValueState('None');
-              sap.ui.getCore().byId(Fid).setValueStateText('');
-            } 
+            if (Fid != "") {
+              if (Fid != undefined) {
+                sap.ui.getCore().byId(Fid).setValueState('None');
+                sap.ui.getCore().byId(Fid).setValueStateText('');
+              }
             }
 
 
@@ -4885,7 +4885,7 @@ sap.ui.define(
             }
           }
         },
-        onUOMInputClose: function(){
+        onUOMInputClose: function () {
           return;
         },
         onBatchInputClose: function () {
@@ -6347,7 +6347,7 @@ sap.ui.define(
           var oBinding = oEvent.getParameter("itemsBinding");
           oBinding.filter([oFilter]);
         },
-        onUOMDataDialogSearch : function(oEvent){
+        onUOMDataDialogSearch: function (oEvent) {
           var sValue = oEvent.getParameter("value");
           var oFilter = new Filter({
             filters: [
@@ -6386,7 +6386,7 @@ sap.ui.define(
             that.onButtonPress();
           }
         },
-        onUOMInputChange: function(oEvent){
+        onUOMInputChange: function (oEvent) {
           var that = this;
           if (oEvent.getParameters().selectedItems != undefined) {
             var UOM = oEvent
@@ -6592,6 +6592,15 @@ sap.ui.define(
                 .byId(sPrdSupAreaId)
                 .getParent().oBindingContexts.ComponentModel561.sPath;
             }
+            var Fid = "";
+             
+            if (Fid != "") {
+              if (Fid != undefined) {
+                sap.ui.getCore().byId(Fid).setValueState('None');
+                sap.ui.getCore().byId(Fid).setValueStateText('');
+              }
+            }
+
             var HelpPrdSupAreaArray = HelpPrdSupAreaPath.split("/");
             var HelpPrdSupAreaUpdate = parseInt(HelpPrdSupAreaArray[2]);
 
