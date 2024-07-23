@@ -4801,6 +4801,15 @@ sap.ui.define(
               .getParameters()
               .selectedItem.getCells()[2]
               .getText();
+            var Fid = "";
+            Fid = sap.ui.getCore().byId(TableBatchGlobalId).getCells()[3].sId;
+            if( Fid != ""){
+            if( Fid != undefined ){
+              sap.ui.getCore().byId(Fid).setValueState('None');
+              sap.ui.getCore().byId(Fid).setValueStateText('');
+            } 
+            }
+
 
             var SelTable = TableBatchGlobalId.split("-");
             if (SelTable.length != 0) {

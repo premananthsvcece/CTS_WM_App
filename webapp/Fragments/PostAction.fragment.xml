@@ -195,7 +195,9 @@
                                     <uiTable:Column width="50%">
                                         <Label text="{i18n>Description}" />
                                         <uiTable:template>
-                                            <Text text="{PostScarpModel>Data07}" />
+                                            <Text
+                                                text="{PostScarpModel>Data07}"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column width="20%">
@@ -269,7 +271,9 @@
                                     <uiTable:Column width="10%">
                                         <Label text="{i18n>ComponentDescr}" />
                                         <uiTable:template>
-                                            <Text text="{ComponentModel101>Data02}" />
+                                            <Text
+                                                text="{ComponentModel101>Data02}"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column
@@ -350,7 +354,9 @@
                                     <uiTable:Column width="12%">
                                         <Label text="{i18n>RequriedQuan} *" />
                                         <uiTable:template>
-                                            <Input value="{ComponentModel101>Data06}" />
+                                            <Input
+                                                value="{ComponentModel101>Data06}"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column width="5%">
@@ -421,7 +427,9 @@
                                     <uiTable:Column width="10%">
                                         <Label text="{i18n>ComponentDescr}" />
                                         <uiTable:template>
-                                            <Text text="{ComponentModel261>Data02}" />
+                                            <Text
+                                                text="{ComponentModel261>Data02}"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column
@@ -565,7 +573,9 @@
                                     <uiTable:Column width="10%">
                                         <Label text="{i18n>ComponentDescr}" />
                                         <uiTable:template>
-                                            <Text text="{ComponentModel561>Data02}" />
+                                            <Text
+                                                text="{ComponentModel561>Data02}"
+                                            />
                                         </uiTable:template>
                                     </uiTable:Column>
                                     <uiTable:Column
@@ -699,8 +709,12 @@
                                 <items>
                                     <ColumnListItem vAlign="Middle">
                                         <cells>
-                                            <ObjectIdentifier title="{ActivityModel>Data01}" />
-                                            <ObjectIdentifier title="{ActivityModel>Data02}" />
+                                            <ObjectIdentifier
+                                                title="{ActivityModel>Data01}"
+                                            />
+                                            <ObjectIdentifier
+                                                title="{ActivityModel>Data02}"
+                                            />
                                             <DatePicker
                                                 value="{ActivityModel>Data03}"
                                                 displayFormat="dd/MM/yy"
@@ -734,44 +748,25 @@
                 </IconTabBar>
             </l:content>
         </l:VerticalLayout>
-        <!-- <footer>
-           <Toolbar> 
-           <ToolbarSpacer ></ToolbarSpacer>
-           <Button
-           icon="sap-icon://accept"
-           class="sapUiSmallMarginBegin"
-           text="{i18n>Save}"
-           type="Success"
-           press="onConfirmPostPress"
-       />
-       <Button
-           icon="sap-icon://cancel"
-           class="sapUiSmallMarginBegin"
-           text="{i18n>Cancel}"
-           type="Negative"
-           press="onCancelPostPress"
-       />    
-           </Toolbar> -->
-        <!-- </footer> -->
+        <beginButton >
+            <Button
+                id="idPostSaveBtn"
+                icon="sap-icon://accept"
+                class="sapUiSmallMarginBegin"
+                text="{i18n>Save}"
+                type="Success"
+                press="onConfirmPostPress"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                id="idPostCancelBtn"
+                icon="sap-icon://cancel"
+                class="sapUiSmallMarginBegin"
+                text="{i18n>Cancel}"
+                type="Negative"
+                press="onCancelPostPress"
+            />
+        </endButton>
     </Dialog>
-    <form:Form>
-        <Bar>
-            <contentMiddle>
-                <Button
-                    icon="sap-icon://accept"
-                    class="sapUiSmallMarginBegin"
-                    text="{i18n>Save}"
-                    type="Success"
-                    press="onConfirmPostPress"
-                />
-                <Button
-                    icon="sap-icon://cancel"
-                    class="sapUiSmallMarginBegin"
-                    text="{i18n>Cancel}"
-                    type="Negative"
-                    press="onCancelPostPress"
-                />
-            </contentMiddle>
-        </Bar>
-    </form:Form>
 </c:FragmentDefinition>
