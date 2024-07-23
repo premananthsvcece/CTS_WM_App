@@ -6593,7 +6593,7 @@ sap.ui.define(
                 .getParent().oBindingContexts.ComponentModel561.sPath;
             }
             var Fid = "";
-             
+            Fid = sap.ui.getCore().byId(TableSAGlobalId).getCells()[2].sId;
             if (Fid != "") {
               if (Fid != undefined) {
                 sap.ui.getCore().byId(Fid).setValueState('None');
