@@ -756,24 +756,26 @@
                 </l:content>
             </l:VerticalLayout>
         </content>
-        <buttons>
-            <Button
-                id="idPostSaveBtn"
-                icon="sap-icon://accept"
-                class="sapUiSmallMarginBegin"
-                text="{i18n>Save}"
-                type="Success"
-                press="onConfirmPostPress"
-            />
+        <Bar>
+            <contentMiddle>
+                <Button
+                    id="idPostSaveBtn"
+                    icon="sap-icon://accept"
+                    class="sapUiSmallMarginBegin"
+                    text="{i18n>Save}"
+                    type="Success"
+                    press="onConfirmPostPress"
+                />
 
-            <Button
-                id="idPostCancelBtn"
-                icon="sap-icon://cancel"
-                class="sapUiSmallMarginBegin"
-                text="{i18n>Cancel}"
-                type="Negative"
-                press="onCancelPostPress"
-            />
-        </buttons>
+                <Button
+                    id="idPostCancelBtn"
+                    icon="sap-icon://cancel"
+                    class="sapUiSmallMarginBegin"
+                    text="{i18n>Cancel}"
+                    type="Negative"
+                    press="onCancelPostPress"
+                />
+            </contentMiddle>
+        </Bar>
     </Dialog>
 </c:FragmentDefinition>
