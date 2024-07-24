@@ -59,7 +59,24 @@ html.sap-desktop .sapUiBody :focus {
   }
 
 /* .sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild, */
-#__spacer11.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild{
+#__spacer11.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer16.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer21.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer26.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer31.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer36.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer41.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer46.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer51.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer56.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer61.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer66.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer71.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer76.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer81.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer86.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer91.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild,
+#__spacer96.sapMTBSpacer.sapMTBSpacerFlex.sapMBarChild{
     flex: none;
     width: 45%;
 }
