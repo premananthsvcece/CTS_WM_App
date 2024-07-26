@@ -3604,13 +3604,14 @@ sap.ui.define(
           }
           if (EndDate === "") {
             that.hideBusyIndicator();
-            var message = that
-              .getView()
-              .getModel("i18n")
-              .getResourceBundle()
-              .getText("Post002");
-            MessageBox.error(message);
-            return;
+            that.onStopPressed();
+            // var message = that
+            //   .getView()
+            //   .getModel("i18n")
+            //   .getResourceBundle()
+            //   .getText("Post002");
+            // MessageBox.error(message);
+            // return;
           }
           if (Tableindex === undefined) {
             that.hideBusyIndicator();
