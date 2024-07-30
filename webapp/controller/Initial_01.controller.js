@@ -1344,7 +1344,165 @@ sap.ui.define(
             this.onButtonPress();
           }
         },
+        onPalLabelPressed: function (oEvent) {
+          // Navigation to Open File from FTP FIle path
+          var that = this;
+          var index;
+          var Path = that.getView().getId();
+          var TabsArray = sap.ui
+            .getCore()
+            .byId(`${Path}--ObjectPageLayout`)
+            .getSections(); // All Tab Details
+          var TabSelect = sap.ui
+            .getCore()
+            .byId(`${Path}--ObjectPageLayout`)
+            .getSelectedSection(); // Selected Tab Details
+          for (var i = 0; i < TabsArray.length; i++) {
+            if (TabSelect === TabsArray[i].sId) {
+              index = i; // Getting Selected Tab validating Id
+              break;
+            }
+          }
+          var Tableindex = "X";
+          var SelMatnr = " ";
+          var SelAufnr = " ";
+          Tableindex = sap.ui
+            .getCore()
+            .byId(`${Path}--idInprogressOrderList`)
+            .getSelectedIndices()[0];
+          // Get Material
+          if (Tableindex != undefined) {
+            var aIndices = this.getView()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getBinding("rows").aIndices;
+            for (var loop = 0; loop in aIndices; loop++) {
+              if (loop === Tableindex) {
+                Tableindex = aIndices[loop];
+                break;
+                console.log(Tableindex);
+              }
+            }
 
+            sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .clearSelection();
+            index = 0;
+            // SelMatnr = sap.ui
+            //   .getCore()
+            //   .byId(`${Path}--idInprogressOrderList`)._aRowClones[Tableindex].getCells()[4].getText();
+            SelAufnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data02;
+
+            SelMatnr = sap.ui
+              .getCore()
+              .byId(`${Path}--idInprogressOrderList`)
+              .getModel("InProgressModel")
+              .getData().InProgressData[Tableindex].Data03;
+          }
+          if (Tableindex === undefined) {
+            var aIndices = this.getView()
+              .byId(`${Path}--idQueueOrderList`)
+              .getBinding("rows").aIndices;
+            for (var loop = 0; loop in aIndices; loop++) {
+              if (loop === Tableindex) {
+                Tableindex = aIndices[loop];
+                break;
+                console.log(Tableindex);
+              }
+            }
+
+            Tableindex = sap.ui
+              .getCore()
+              .byId(`${Path}--idQueueOrderList`)
+              .getSelectedIndices()[0];
+            // Get Material
+            if (Tableindex != undefined) {
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .clearSelection();
+              index = 1;
+              SelAufnr = sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .getModel("InQueueModel")
+                .getData().InQueueData[Tableindex].Data02;
+
+              SelMatnr = sap.ui
+                .getCore()
+                .byId(`${Path}--idQueueOrderList`)
+                .getModel("InQueueModel")
+                .getData().InQueueData[Tableindex].Data03;
+            }
+          }
+          if (Tableindex === undefined) {
+            var aIndices = this.getView()
+              .byId(`${Path}--idFutureOrderList`)
+              .getBinding("rows").aIndices;
+            for (var loop = 0; loop in aIndices; loop++) {
+              if (loop === Tableindex) {
+                Tableindex = aIndices[loop];
+                break;
+                console.log(Tableindex);
+              }
+            }
+
+            Tableindex = sap.ui
+              .getCore()
+              .byId(`${Path}--idFutureOrderList`)
+              .getSelectedIndices()[0];
+            // Get Material
+            if (Tableindex != undefined) {
+              sap.ui
+                .getCore()
+                .byId(`${Path}--idFutureOrderList`)
+                .clearSelection();
+              index = 2;
+              SelAufnr = sap.ui
+                .getCore()
+                .byId(`${Path}--idFutureOrderList`)
+                .getModel("InFutureModel")
+                .getData().InFutureData[Tableindex].Data02;
+
+              SelMatnr = sap.ui
+                .getCore()
+                .byId(`${Path}--idFutureOrderList`)
+                .getModel("InFutureModel")
+                .getData().InFutureData[Tableindex].Data03;
+            }
+          }
+          if (Tableindex === undefined) {
+            // Raise Message
+            var message = that
+              .getView()
+              .getModel("i18n")
+              .getResourceBundle()
+              .getText("Drawing001");
+            MessageBox.information(message);
+            return;
+          }
+
+          if (!that.LabelPrintDialog) {
+            that.LabelPrintDialog = sap.ui.xmlfragment(
+              "sap.pp.wcare.wmd.workmanagerapp.Fragments.LabelPrint",
+              that
+            );
+            that.getView().addDependent(that.LabelPrintDialog);
+          }
+
+          sap.ui.getCore().byId("idLabelOrderNo").setValue(SelAufnr);
+          sap.ui.getCore().byId("idLabelType").setSelectedKey('001');
+          sap.ui.getCore().byId("idLabelTapeBatch").setValue("");
+          sap.ui.getCore().byId("id01LabelTapeBatch").setVisible(false);
+          sap.ui.getCore().byId("idLabelQuantity").setValue("");
+          sap.ui.getCore().byId("id02LabelQuantity").setVisible(false);
+          that.LabelPrintDialog.open();
+
+        },
         onDrawingPressed: function (oEvent) {
           // Navigation to Open File from FTP FIle path
           var that = this;
@@ -2404,6 +2562,64 @@ sap.ui.define(
             }
           );
         },
+        onLabelSelectChange: function (oEvent) {
+          var SelKey = oEvent.getParameters().selectedItem.getKey();
+          if (SelKey === "002") {
+            sap.ui.getCore().byId("id01LabelTapeBatch").setVisible(true);
+            sap.ui.getCore().byId("id02LabelQuantity").setVisible(true);
+          } else {
+            sap.ui.getCore().byId("id01LabelTapeBatch").setVisible(false);
+            sap.ui.getCore().byId("id02LabelQuantity").setVisible(false);
+          }
+        },
+        onConfirmLabelPress: function () {
+          var that = this;
+          var OrderNo = sap.ui.getCore().byId("idLabelOrderNo").getValue();
+          var LabelCnt = sap.ui.getCore().byId("idLabelCount").getValue();
+          var LabelType = sap.ui.getCore().byId("idLabelType").getSelectedKey();
+          var TapeBatch = sap.ui.getCore().byId("idLabelTapeBatch").getValue();
+          var Quantity = sap.ui.getCore().byId("idLabelQuantity").getValue();
+
+          that.LabelPrintDialog.close();
+          // Get the path to the Windows shared folder
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'LabelPrint' and Key02 eq '" +
+            OrderNo +
+            "' and Key03 eq '" +
+            LabelCnt +
+            "' and Key04 eq '" +
+            LabelType +
+            "' and Key05 eq '" +
+            TapeBatch +
+            "' and Data01 eq '" +
+            Quantity +
+            "'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  // Raise Message
+                  var message = that
+                    .getView()
+                    .getModel("i18n")
+                    .getResourceBundle()
+                    .getText("OutputSuccess");
+                  MessageToast.show(message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastSuccess");
+                } catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                }
+              },
+            }
+          );
+
+        },
         onConfirmStopPress: function () {
           var that = this;
           var index;
@@ -2531,6 +2747,11 @@ sap.ui.define(
               }
             }
           );
+        },
+        onCancelLabelPress: function () {
+          var that = this;
+          that.LabelPrintDialog.close();
+          return;
         },
         onCancelStopPress: function () {
           var that = this;

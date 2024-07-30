@@ -138,7 +138,6 @@
                         icon="sap-icon://print"
                         type="Emphasized"
                         press="onPalLabelPressed"
-                        visible="false"
                     />
                     <ToolbarSeparator />
                     <Button
@@ -185,15 +184,18 @@
                         text="{i18n>WorkArea}"
                         labelFor="idInputWorkArea"
                     />
-                    <MultiInput
-                        id="idInputWorkArea"
-                        showValueHelp="true"
-                        width="75%"
-                        autocomplete="true"
-                        valueLiveUpdate="false"
-                        change="onidInputWorkAreaLiveChange"
-                        valueHelpRequest="_onWorkAreaHelp" 
-                    />
+                    <HBox>
+                        <MultiInput
+                            id="idInputWorkArea"
+                            showValueHelp="true"
+                            width="75%"
+                            autocomplete="true"
+                            valueLiveUpdate="false"
+                            change="onidInputWorkAreaLiveChange"
+                            valueHelpRequest="_onWorkAreaHelp"
+                            showClearIcon="true"
+                        />
+                    </HBox>
                 </VBox>
                 <VBox>
                     <Label
@@ -209,6 +211,7 @@
                         valueLiveUpdate="false"
                         change="onidInputWorkCenterLiveChange"
                         valueHelpRequest="_onWorkCenterHelp"
+                        showClearIcon="true"
                     />
                 </VBox>
                 <VBox>
@@ -224,6 +227,7 @@
                         valueLiveUpdate="false"
                         change="onidInputProdOrdNoLiveChange"
                         valueHelpRequest="_onProdOrdNoHelp"
+                        showClearIcon="true"
                     />
                 </VBox>
                 <VBox>
@@ -239,9 +243,9 @@
                         valueLiveUpdate="false"
                         change="onidInputComponentSelLiveChange"
                         valueHelpRequest="_onComponentSelHelp"
+                        showClearIcon="true"
                     />
                 </VBox>
-
                 <VBox>
                     <ndc:BarcodeScannerButton
                         id="sampleBarcodeScannerButton"
@@ -934,9 +938,7 @@
                                             text="{i18n>PlanStartDate}"
                                         />
                                         <Table:template>
-                                            <Text
-                                                text="{InQueueModel>Data08}"
-                                            />
+                                            <Text text="{InQueueModel>Data08}" />
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
@@ -959,7 +961,6 @@
                                             />
                                         </Table:template>
                                     </Table:Column>
-
                                     <Table:Column
                                         id="_IDGenColumn22"
                                         width="8rem"
@@ -1256,9 +1257,7 @@
                                             text="{i18n>PlanStartDate}"
                                         />
                                         <Table:template>
-                                            <Text
-                                                text="{InFutureModel>Data08}"
-                                            />
+                                            <Text text="{InFutureModel>Data08}" />
                                         </Table:template>
                                     </Table:Column>
                                     <Table:Column
@@ -1281,7 +1280,6 @@
                                             />
                                         </Table:template>
                                     </Table:Column>
-
                                     <Table:Column
                                         id="_IDGenColumn35"
                                         width="10rem"

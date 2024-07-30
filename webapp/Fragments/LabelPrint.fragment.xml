@@ -1,0 +1,104 @@
+<c:FragmentDefinition
+    id="idSLabelPrintAction"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:sf="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="idDialogLabelPrint"
+        title="{i18n>StopAction}"
+    >
+        <l:VerticalLayout
+            id="idVerticalLayoutStop"
+            class="sapUiContentPadding"
+            width="100%"
+        >
+            <l:content>
+                <List
+                    id="idLabelPrintList"
+                    class="sapUiContentPadding"
+                    showSeparators="None"
+                >
+                    <InputListItem label="{i18n>ProdOrdNo}">
+                        <Input
+                            id="idLabelOrderNo"
+                            placeholder="Order No"
+                            type="Text"
+                            enabled="false"
+                            width="15rem"
+                        />
+                    </InputListItem>
+                    <InputListItem label="{i18n>NoOfLabel}">
+                        <Input
+                            id="idLabelCount"
+                            placeholder="Order No"
+                            type="Number"
+                            width="15rem"
+                            value="1"
+                        />
+                    </InputListItem>
+                    <InputListItem label="{i18n>LabelType}">
+                        <Select
+                            id="idLabelType"
+                            required="false"
+                            change="onLabelSelectChange"
+                            width="15rem"
+                        >
+                            <items>
+                                <c:Item
+                                    key="001"
+                                    text="{i18n>Powder}"
+                                />
+                                <c:Item
+                                    key="002"
+                                    text="{i18n>FinalInspection}"
+                                />
+                                <c:Item
+                                    key="003"
+                                    text="{i18n>ML}"
+                                />
+                                <c:Item
+                                    key="004"
+                                    text="{i18n>SML}"
+                                />
+                            </items>
+                        </Select>
+                    </InputListItem>
+                    <InputListItem id="id01LabelTapeBatch" label="{i18n>TapeBatch}" visible="false">
+                        <Input
+                            id="idLabelTapeBatch"
+                            width="15rem"
+                            
+                        />
+                    </InputListItem>
+                    <InputListItem id="id02LabelQuantity" label="{i18n>RequriedQuan}" visible="false">
+                        <Input
+                            id="idLabelQuantity"
+                            width="15rem"
+                        />
+                    </InputListItem>
+                </List>
+            </l:content>
+        </l:VerticalLayout>
+        <Bar>
+            <contentMiddle>
+                <Button
+                    icon="sap-icon://accept"
+                    type="Success"
+                    class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                    text="{i18n>Confirm}"
+                    press="onConfirmLabelPress"
+                />
+                <Button
+                    icon="sap-icon://cancel"
+                    class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
+                    text="{i18n>Cancel}"
+                    type="Negative"
+                    press="onCancelLabelPress"
+                />
+            </contentMiddle>
+        </Bar>
+    </Dialog>
+</c:FragmentDefinition>
