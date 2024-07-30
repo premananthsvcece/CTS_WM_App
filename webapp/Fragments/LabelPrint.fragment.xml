@@ -48,19 +48,19 @@
                         >
                             <items>
                                 <c:Item
-                                    key="001"
+                                    key="1"
                                     text="{i18n>Powder}"
                                 />
                                 <c:Item
-                                    key="002"
+                                    key="2"
                                     text="{i18n>FinalInspection}"
                                 />
                                 <c:Item
-                                    key="003"
+                                    key="3"
                                     text="{i18n>ML}"
                                 />
                                 <c:Item
-                                    key="004"
+                                    key="4"
                                     text="{i18n>SML}"
                                 />
                             </items>

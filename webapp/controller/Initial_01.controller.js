@@ -1495,7 +1495,7 @@ sap.ui.define(
           }
 
           sap.ui.getCore().byId("idLabelOrderNo").setValue(SelAufnr);
-          sap.ui.getCore().byId("idLabelType").setSelectedKey('001');
+          sap.ui.getCore().byId("idLabelType").setSelectedKey('1');
           sap.ui.getCore().byId("idLabelTapeBatch").setValue("");
           sap.ui.getCore().byId("id01LabelTapeBatch").setVisible(false);
           sap.ui.getCore().byId("idLabelQuantity").setValue("");
@@ -2564,7 +2564,7 @@ sap.ui.define(
         },
         onLabelSelectChange: function (oEvent) {
           var SelKey = oEvent.getParameters().selectedItem.getKey();
-          if (SelKey === "002") {
+          if (SelKey === "2") {
             sap.ui.getCore().byId("id01LabelTapeBatch").setVisible(true);
             sap.ui.getCore().byId("id02LabelQuantity").setVisible(true);
           } else {
