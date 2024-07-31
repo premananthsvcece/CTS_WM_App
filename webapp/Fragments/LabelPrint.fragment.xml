@@ -8,7 +8,7 @@
 >
     <Dialog
         id="idDialogLabelPrint"
-        title="{i18n>StopAction}"
+        title="{i18n>LabelPrint}"
     >
         <l:VerticalLayout
             id="idVerticalLayoutStop"
@@ -33,7 +33,7 @@
                     <InputListItem label="{i18n>NoOfLabel}">
                         <Input
                             id="idLabelCount"
-                            placeholder="Order No"
+                            placeholder="{i18n>NoOfLabel}"
                             type="Number"
                             width="15rem"
                             value="1"
@@ -73,10 +73,19 @@
                             
                         />
                     </InputListItem>
-                    <InputListItem id="id02LabelQuantity" label="{i18n>RequriedQuan}" visible="false">
+                    <InputListItem id="id02LabelQuantity" label="{i18n>InspectionDate}" visible="false">
                         <Input
                             id="idLabelQuantity"
+                            type="Number"
                             width="15rem"
+                        />
+                    </InputListItem>
+                    <InputListItem id="id03LabelInspectionDate" label="{i18n>InspectionDate}" visible="false">
+                        <DatePicker
+                            id="idLabelInspectionDate"
+                            width="15rem"
+                            displayFormat="dd/MM/yyyy"
+                            valueFormat="yyyyMMdd"
                         />
                     </InputListItem>
                 </List>
@@ -88,7 +97,7 @@
                     icon="sap-icon://accept"
                     type="Success"
                     class="sapUiSizeCompact sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"
-                    text="{i18n>Confirm}"
+                    text="{i18n>Print}"
                     press="onConfirmLabelPress"
                 />
                 <Button

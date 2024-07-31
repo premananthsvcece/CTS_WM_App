@@ -1497,9 +1497,12 @@ sap.ui.define(
           sap.ui.getCore().byId("idLabelOrderNo").setValue(SelAufnr);
           sap.ui.getCore().byId("idLabelType").setSelectedKey('1');
           sap.ui.getCore().byId("idLabelTapeBatch").setValue("");
+          sap.ui.getCore().byId("idLabelCount").setValue(1);
           sap.ui.getCore().byId("id01LabelTapeBatch").setVisible(false);
           sap.ui.getCore().byId("idLabelQuantity").setValue("");
+          sap.ui.getCore().byId("idLabelInspectionDate").setValue("");
           sap.ui.getCore().byId("id02LabelQuantity").setVisible(false);
+          sap.ui.getCore().byId("id03LabelInspectionDate").setVisible(false);
           that.LabelPrintDialog.open();
 
         },
@@ -2567,9 +2570,11 @@ sap.ui.define(
           if (SelKey === "2") {
             sap.ui.getCore().byId("id01LabelTapeBatch").setVisible(true);
             sap.ui.getCore().byId("id02LabelQuantity").setVisible(true);
+            sap.ui.getCore().byId("id03LabelInspectionDate").setVisible(true);
           } else {
             sap.ui.getCore().byId("id01LabelTapeBatch").setVisible(false);
             sap.ui.getCore().byId("id02LabelQuantity").setVisible(false);
+            sap.ui.getCore().byId("id03LabelInspectionDate").setVisible(false);
           }
         },
         onConfirmLabelPress: function () {
@@ -2579,6 +2584,7 @@ sap.ui.define(
           var LabelType = sap.ui.getCore().byId("idLabelType").getSelectedKey();
           var TapeBatch = sap.ui.getCore().byId("idLabelTapeBatch").getValue();
           var Quantity = sap.ui.getCore().byId("idLabelQuantity").getValue();
+          var InspectionDate = sap.ui.getCore().byId("idLabelInspectionDate").getValue();
 
           that.LabelPrintDialog.close();
           // Get the path to the Windows shared folder
@@ -2596,6 +2602,8 @@ sap.ui.define(
             TapeBatch +
             "' and Data01 eq '" +
             Quantity +
+            "' and Data02 eq '" +
+            InspectionDate +
             "'",
             {
               context: null,
