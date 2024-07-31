@@ -73,7 +73,7 @@
                             
                         />
                     </InputListItem>
-                    <InputListItem id="id02LabelQuantity" label="{i18n>InspectionDate}" visible="false">
+                    <InputListItem id="id02LabelQuantity" label="{i18n>RequriedQuan}" visible="false">
                         <Input
                             id="idLabelQuantity"
                             type="Number"
