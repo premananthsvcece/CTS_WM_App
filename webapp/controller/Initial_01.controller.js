@@ -1494,6 +1494,31 @@ sap.ui.define(
             that.getView().addDependent(that.LabelPrintDialog);
           }
 
+          var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
+          var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+          var Printer = "";
+          oModel.read(
+            "/ValueHelpSet?$filter=Key01 eq 'DefPrinter'",
+            {
+              context: null,
+              async: false,
+              urlParameters: null,
+              success: function (oData, oResponse) {
+                try {
+                  // Raise Message
+                  if(oData.length != 0){
+                    Printer = oData[0].Data01;
+                  }
+                } catch (e) {
+                  MessageToast.show(e.message);
+                  $(".sapMMessageToast").addClass("sapMMessageToastDanger");
+                }
+              },
+            }
+          );
+          if( Printer === ""){
+            Printer = "LP01";
+          }
           sap.ui.getCore().byId("idLabelOrderNo").setValue(SelAufnr);
           sap.ui.getCore().byId("idLabelType").setSelectedKey('1');
           sap.ui.getCore().byId("idLabelTapeBatch").setValue("");
@@ -1501,6 +1526,7 @@ sap.ui.define(
           sap.ui.getCore().byId("id01LabelTapeBatch").setVisible(false);
           sap.ui.getCore().byId("idLabelQuantity").setValue("");
           sap.ui.getCore().byId("idLabelInspectionDate").setValue("");
+          sap.ui.getCore().byId("idLabelPrinter").setValue(Printer);
           sap.ui.getCore().byId("id02LabelQuantity").setVisible(false);
           sap.ui.getCore().byId("id03LabelInspectionDate").setVisible(false);
           that.LabelPrintDialog.open();
@@ -2585,6 +2611,7 @@ sap.ui.define(
           var TapeBatch = sap.ui.getCore().byId("idLabelTapeBatch").getValue();
           var Quantity = sap.ui.getCore().byId("idLabelQuantity").getValue();
           var InspectionDate = sap.ui.getCore().byId("idLabelInspectionDate").getValue();
+          var Printer = sap.ui.getCore().byId("idLabelPrinter").getValue();
 
           that.LabelPrintDialog.close();
           // Get the path to the Windows shared folder
@@ -2604,6 +2631,8 @@ sap.ui.define(
             Quantity +
             "' and Data02 eq '" +
             InspectionDate +
+            "' and Data03 eq '" +
+            Printer +
             "'",
             {
               context: null,

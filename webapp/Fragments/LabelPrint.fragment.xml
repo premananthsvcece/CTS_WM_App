@@ -39,6 +39,12 @@
                             value="1"
                         />
                     </InputListItem>
+                    <InputListItem label="{i18n>Printer}">
+                        <Input
+                            id="idLabelPrinter"
+                            width="15rem"
+                        />
+                    </InputListItem>
                     <InputListItem label="{i18n>LabelType}">
                         <Select
                             id="idLabelType"
