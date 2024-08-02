@@ -1506,8 +1506,8 @@ sap.ui.define(
               success: function (oData, oResponse) {
                 try {
                   // Raise Message
-                  if(oData.length != 0){
-                    Printer = oData[0].Data01;
+                  if(oData.results.length != 0){
+                    Printer = oData.results[0].Data01;
                   }
                 } catch (e) {
                   MessageToast.show(e.message);
