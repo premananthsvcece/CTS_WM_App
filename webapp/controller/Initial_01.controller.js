@@ -513,6 +513,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.PlantDialog);
+          }else {
+            if (that.PlantDialog.isDestroyed() === true) {
+
+              that.PlantDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpPlant",
+                that
+              );
+              that.getView().addDependent(that.PlantDialog);
+
+            }
           }
           // open value help dialog
           that.PlantDialog.open();
@@ -586,6 +596,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.WCDialog);
+          }else {
+            if (that.WCDialog.isDestroyed() === true) {
+
+              that.WCDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpWorkCenter",
+                that
+              );
+              that.getView().addDependent(that.WCDialog);
+
+            }
           }
           // open value help dialog
           that.WCDialog.open();
@@ -655,6 +675,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.OrderDialog);
+          }else {
+            if (that.OrderDialog.isDestroyed() === true) {
+
+              that.OrderDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpOrder",
+                that
+              );
+              that.getView().addDependent(that.OrderDialog);
+
+            }
           }
           // open value help dialog
           that.OrderDialog.open();
@@ -709,6 +739,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.WAreaDialog);
+          }else {
+            if (that.WAreaDialog.isDestroyed() === true) {
+
+              that.WAreaDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpWorkArea",
+                that
+              );
+              that.getView().addDependent(that.WAreaDialog);
+
+            }
           }
           // open value help dialog
           that.WAreaDialog.open();
@@ -920,6 +960,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.BOMDialog);
+          }else {
+            if (that.BOMDialog.isDestroyed() === true) {
+
+              that.BOMDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.BOM",
+                that
+              );
+              that.getView().addDependent(that.BOMDialog);
+
+            }
           }
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -1157,6 +1207,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.RouteDialog);
+          }else {
+            if (that.RouteDialog.isDestroyed() === true) {
+
+              that.RouteDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.Routing",
+                that
+              );
+              that.getView().addDependent(that.RouteDialog);
+
+            }
           }
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
@@ -1492,8 +1552,17 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.LabelPrintDialog);
-          }
+          }else {
+            if (that.LabelPrintDialog.isDestroyed() === true) {
 
+              that.LabelPrintDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.LabelPrint",
+                that
+              );
+              that.getView().addDependent(that.LabelPrintDialog);
+
+            }
+          }
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
           var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
           var Printer = "";
@@ -1506,7 +1575,7 @@ sap.ui.define(
               success: function (oData, oResponse) {
                 try {
                   // Raise Message
-                  if(oData.results.length != 0){
+                  if (oData.results.length != 0) {
                     Printer = oData.results[0].Data01;
                   }
                 } catch (e) {
@@ -1516,7 +1585,7 @@ sap.ui.define(
               },
             }
           );
-          if( Printer === ""){
+          if (Printer === "") {
             Printer = "LP01";
           }
           sap.ui.getCore().byId("idLabelOrderNo").setValue(SelAufnr);
@@ -1810,6 +1879,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.StartDialog);
+          }else {
+            if (that.StartDialog.isDestroyed() === true) {
+
+              that.StartDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.StartAction",
+                that
+              );
+              that.getView().addDependent(that.StartDialog);
+
+            }
           }
 
           // open value help dialog
@@ -1923,6 +2002,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.StartDialog);
+          }else {
+            if (that.StartDialog.isDestroyed() === true) {
+
+              that.StartDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.StartAction",
+                that
+              );
+              that.getView().addDependent(that.StartDialog);
+
+            }
           }
 
           // open value help dialog
@@ -2499,6 +2588,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.StopDialog);
+          }else {
+            if (that.StopDialog.isDestroyed() === true) {
+
+              that.StopDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.StopAction",
+                that
+              );
+              that.getView().addDependent(that.StopDialog);
+
+            }
           }
 
           // open value help dialog
@@ -2944,6 +3043,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.TextBoxDialog);
+          }else {
+            if (that.TextBoxDialog.isDestroyed() === true) {
+
+              that.TextBoxDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.TextBox",
+                that
+              );
+              that.getView().addDependent(that.TextBoxDialog);
+
+            }
           }
 
           var sUrl = "/sap/opu/odata/sap/ZPP_WORKMANAGER_APP_SRV/";
@@ -3192,6 +3301,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.ScarpReasonDialog);
+          } else {
+            if (that.ScarpReasonDialog.isDestroyed() === true) {
+
+              that.ScarpReasonDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpPostScarpReason",
+                that
+              );
+              that.getView().addDependent(that.ScarpReasonDialog);
+
+            }
           }
           // open value help dialog
           that.ScarpReasonDialog.open();
@@ -3247,6 +3366,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.ScarpReasonDialog);
+          } else {
+            if (that.ScarpReasonDialog.isDestroyed() === true) {
+
+              that.ScarpReasonDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpScarpReason",
+                that
+              );
+              that.getView().addDependent(that.ScarpReasonDialog);
+
+            }
           }
           // open value help dialog
           that.ScarpReasonDialog.open();
@@ -4978,6 +5107,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.BatchHelpDialog);
+          } else {
+            if (that.BatchHelpDialog.isDestroyed() === true) {
+
+              that.BatchHelpDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.BatchHelpDialog",
+                that
+              );
+              that.getView().addDependent(that.BatchHelpDialog);
+
+            }
           }
           that.showBusyIndicator();
 
@@ -5683,6 +5822,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.WCDialog);
+          } else {
+            if (that.BinDialog.isDestroyed() === true) {
+
+              that.BinDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpBin",
+                that
+              );
+              that.getView().addDependent(that.BinDialog);
+
+            }
           }
           // open value help dialog
           that.BinDialog.open();
@@ -6013,6 +6162,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.MaterialHelpDialog);
+          } else {
+            if (that.MaterialHelpDialog.isDestroyed() === true) {
+
+              that.MaterialHelpDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpMaterialDialog",
+                that
+              );
+              that.getView().addDependent(that.MaterialHelpDialog);
+
+            }
           }
           that.showBusyIndicator();
 
@@ -6206,6 +6365,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.UOMHelpDialog);
+          } else {
+            if (that.UOMHelpDialog.isDestroyed() === true) {
+
+              that.UOMHelpDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.UOMHelpDialog",
+                that
+              );
+              that.getView().addDependent(that.UOMHelpDialog);
+
+            }
           }
           that.showBusyIndicator();
           TableUOMGlobalId = TableDetail;
@@ -6404,6 +6573,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.MaterialHelpDialog);
+          } else {
+            if (that.MaterialHelpDialog.isDestroyed() === true) {
+
+              that.MaterialHelpDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.MaterialHelpDialog",
+                that
+              );
+              that.getView().addDependent(that.MaterialHelpDialog);
+
+            }
           }
           that.showBusyIndicator();
           TableMatGlobalId = TableDetail;
@@ -6481,6 +6660,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.MovementHelpDialog);
+          } else {
+            if (that.MovementHelpDialog.isDestroyed() === true) {
+
+              that.MovementHelpDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.MovementHelpDialog",
+                that
+              );
+              that.getView().addDependent(that.MovementHelpDialog);
+
+            }
           }
           that.showBusyIndicator();
           sMovementId = sId;
@@ -6542,6 +6731,16 @@ sap.ui.define(
               that
             );
             that.getView().addDependent(that.ProdSuppAreaDialog);
+          }else {
+            if (that.ProdSuppAreaDialog.isDestroyed() === true) {
+
+              that.ProdSuppAreaDialog = sap.ui.xmlfragment(
+                "sap.pp.wcare.wmd.workmanagerapp.Fragments.HelpProdSuppAreaDialog",
+                that
+              );
+              that.getView().addDependent(that.ProdSuppAreaDialog);
+
+            }
           }
           that.showBusyIndicator();
           sPrdSupAreaId = sId;

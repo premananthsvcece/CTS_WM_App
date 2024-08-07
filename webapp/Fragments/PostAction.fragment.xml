@@ -338,9 +338,6 @@
                                             <uiTable:template>
                                                 <Input
                                                     value="{ComponentModel101>Data05}"
-                                                    valueHelpRequest="onBatchHelpRequest"
-                                                    showValueHelp="true"
-                                                    change="onBatchValidation"
                                                 />
                                             </uiTable:template>
                                         </uiTable:Column>
